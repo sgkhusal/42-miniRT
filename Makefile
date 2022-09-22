@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/09/22 17:35:25 by sguilher         ###   ########.fr        #
+#    Updated: 2022/09/22 19:19:13 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,11 @@ MLXFLAGS =	-lm -lXext -lX11
 RM =		-rm -f
 RM_DIR =	rm -rf
 
+# colors
+YELLOW	=	\033[1;33m
+GREEN	=	\033[1;32m
+RESET	=	\033[0m
+
 # **************************************************************************** #
 # rules
 
@@ -47,25 +52,25 @@ $(OBJS_DIR)/%.o:	%.c $(HEADERS)
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
-	@echo "\033[1;32m"
+	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "           miniRT created"
 	@echo "************************************"
-	@echo "\033[0m"
+	@echo "$(RESET)"
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 $(LIBFT):
-	@echo "\033[1;33mmaking libft....\033[0m"
+	@echo "$(YELLOW)making libft....$(RESET)"
 	$(MAKE) --no-print-directory -C $(LIBFT_PATH)
-	@echo "\033[1;33mlibft.a created\033[0m"
+	@echo "$(YELLOW)libft.a created$(RESET)"
 	@echo "------------------------------------------------------------------"
 
 $(MLX):
-	@echo "\033[1;33mmaking minilibx....\033[0m"
+	@echo "$(YELLOW)making minilibx....$(RESET)"
 	$(MAKE) --no-print-directory -C $(MLX_PATH)
-	@echo "\033[1;33mlibmlx.a created\033[0m"
+	@echo "$(YELLOW)libmlx.a created$(RESET)"
 	@echo "------------------------------------------------------------------"
 
 clean:
