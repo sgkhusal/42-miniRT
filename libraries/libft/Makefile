@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 02:08:39 by sguilher          #+#    #+#              #
-#    Updated: 2022/09/22 15:53:03 by sguilher         ###   ########.fr        #
+#    Updated: 2022/09/22 16:32:20 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,10 +65,9 @@ $(OBJ_PATH)/%.o:	$(GNL_PATH)/%.c $(HEADER)
 $(NAME):	$(OBJS) $(OBJS_GNL)
 	ar rc $@ $(OBJS) $(OBJS_GNL)
 	ranlib $@
-	@echo "\033[1;33mlibft.a created\033[0m"
 
 clean:
-	@$(RM_DIR) $(OBJ_PATH)
+	$(RM_DIR) $(OBJ_PATH)
 
 fclean:		clean
 	$(RM) $(NAME)

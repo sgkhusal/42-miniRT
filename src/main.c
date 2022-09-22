@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/09/22 15:38:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/09/22 17:00:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	main(int argc, char *argv[])
 {
+	t_mlx	mlx;
+
 	if (argc != 2)
 	{
 		printf("Error\n");
@@ -21,4 +23,22 @@ int	main(int argc, char *argv[])
 	}
 	else
 		printf("file name = %s\n", argv[1]);
+	mlx.ptr = NULL;
+	mlx.ptr = mlx_init();
+	if (mlx.ptr == NULL)
+	{
+		printf("Mlx init error");
+		exit(EXIT_FAILURE);
+	}
+	mlx.width = 500;
+	mlx.height = 500;
+	mlx.window = mlx_new_window(mlx.ptr, mlx.width, mlx.height, "miniRT");
+	if (mlx.window == NULL)
+	{
+		printf("Mlx window error");
+		free(mlx.ptr);
+		exit(EXIT_FAILURE);
+	}
+	mlx_loop(mlx.ptr);
+	return (0);
 }
