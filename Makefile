@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/03 21:19:11 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/03 22:19:00 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c handle_input.c mlx_utils.c colors.c
+SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		minirt.h

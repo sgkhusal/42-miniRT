@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 21:39:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:13:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	coloring_image(t_image *img, t_mlx *mlx)
 
 	x = 0;
 	y = 0;
-	color = 0x0000FF;
+	color = 0x000000;
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
@@ -36,6 +36,7 @@ void	coloring_image(t_image *img, t_mlx *mlx)
 			put_pixel_color(img, x, y, color);
 			x++;
 		}
+		color++;
 		x = 0;
 		y++;
 	}
@@ -44,17 +45,16 @@ void	coloring_image(t_image *img, t_mlx *mlx)
 int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
-	t_image	img;
 
 	// handle_input - check if is valid input and transform_input
 	handle_input(argc, &argv[1]);
 	create_mlx_window(&mlx);
-	create_mlx_image(&img, &mlx);
+	create_mlx_image(&mlx.img, &mlx);
 	// ray tracing algorithm
 	// mlx plot and mlx hook
-	coloring_image(&img, &mlx);
-	put_pixel_color(&img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
-	mlx_put_image_to_window(mlx.ptr, mlx.window, img.ptr, 0, 0);
+	coloring_image(&mlx.img, &mlx);
+	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
+	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	mlx_loop(mlx.ptr);
 	return (0);
 }
