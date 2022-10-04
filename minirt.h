@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 00:04:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:23:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ typedef union u_color
 	int		color;
 	char	rgb[4];
 }				t_color;
+
+/**
+ * @param x x axis value (right)
+ * @param y y axis value (up)
+ * @param z z axis value (out of screen)
+ * @param w type (1 = point, 0 = vector)
+ */
+typedef struct s_tuple
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w;
+}				t_tuple;
 
 // input
 void	handle_input(int argc, char *input[]);
