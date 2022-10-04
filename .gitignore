@@ -8,3 +8,7 @@ obj
 # Executables
 *.out
 miniRT
+
+
+# othes
+*.vscode

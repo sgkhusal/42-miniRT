@@ -6,42 +6,75 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/09/22 19:08:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:13:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	put_pixel_color(t_image *img, int x, int y, int color)
+{
+	char	*pixel;
+
+	pixel = img->addr + (y * img->line_size + x * (img->bpp / 8));
+	*(unsigned int *)pixel = color;
+}
+
+void	coloring_image(t_image *img, t_mlx *mlx)
+{
+	unsigned int	color;
+	int				x;
+	int				y;
+
+	x = 0;
+	y = 0;
+	color = 0x000000;
+	while (y < mlx->height)
+	{
+		while (x < mlx->width)
+		{
+			put_pixel_color(img, x, y, color);
+			x++;
+		}
+		color++;
+		x = 0;
+		y++;
+	}
+}
+
+void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
+{
+	double	teta;
+	double	x;
+	double	y;
+	int		color;
+
+	color = rgb_to_int(0, 255, 0);
+	teta = 0;
+	while (teta < 360)
+	{
+		x = center_x + radius * cos(teta);
+		y = center_y + radius * sin(teta);
+		put_pixel_color(&mlx->img, x, y, color);
+		teta += 0.1;
+	}
+}
 
 int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
 
 	// handle_input - check if is valid input and transform_input
-	if (argc != 2)
-	{
-		printf("Error\n");
-		exit(EXIT_FAILURE);
-	}
-	else
-		printf("file name = %s\n", argv[1]);
+	handle_input(argc, &argv[1]);
+	create_mlx_window(&mlx);
+	create_mlx_image(&mlx.img, &mlx);
 	// ray tracing algorithm
 	// mlx plot and mlx hook
-	mlx.ptr = NULL;
-	mlx.ptr = mlx_init();
-	if (mlx.ptr == NULL)
-	{
-		printf("Mlx init error");
-		exit(EXIT_FAILURE);
-	}
-	mlx.width = 500;
-	mlx.height = 500;
-	mlx.window = mlx_new_window(mlx.ptr, mlx.width, mlx.height, "miniRT");
-	if (mlx.window == NULL)
-	{
-		printf("Mlx window error");
-		free(mlx.ptr);
-		exit(EXIT_FAILURE);
-	}
+	coloring_image(&mlx.img, &mlx);
+	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
+	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2);
+	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
+	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);
 }
