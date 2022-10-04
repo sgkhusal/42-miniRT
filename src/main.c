@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 00:13:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:55:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 	}
 }
 
+void	sphere_test()
+{
+	t_intersection	*intersection;
+	t_sphere	*sphere;
+	t_ray		*ray;
+
+	sphere = create_sphere(create_point(WIDTH / 2, HEIGHT / 2, 0), 1, create_color(1, 1, 1));
+	ray = create_ray(create_point(0, 0, 0), create_vector(1, 1, 0));
+	intersection = sphere_intersection(ray, sphere);
+	printf("count: %d\nt1: %f\nt2: %f\n", intersection->count, intersection->t1,
+		intersection->t2);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
@@ -75,6 +88,7 @@ int	main(int argc, char *argv[])
 	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2);
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	set_mlx_hooks(&mlx);
+	sphere_test();
 	mlx_loop(mlx.ptr);
 	return (0);
 }

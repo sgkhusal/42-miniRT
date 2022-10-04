@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 15:32:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:55:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ray	*create_ray(t_tuple *origin, t_tuple *direction)
 // To find the position, you multiply the ray’s direction by distance to find the total
 // distance traveled, and then add that to the ray’s origin.
 // equivalent a S = So + V * t
-t_tuple	*position(t_ray *ray, double distance)
+t_tuple	*ray_position(t_ray *ray, double distance)
 {
 	t_tuple	*position;
 	t_tuple	initial_position;

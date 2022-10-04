@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:51:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 15:34:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:56:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_tuple	*add_tuples(t_tuple tuple1, t_tuple tuple2)
 	return (sum);
 }
 
-/* t_tuple	*subtract_tuples(t_tuple tuple1, t_tuple tuple2)
+t_tuple	*subtract_tuples(t_tuple tuple1, t_tuple tuple2)
 {
 	t_tuple	*sub;
 	double	x;
@@ -42,7 +42,7 @@ t_tuple	*add_tuples(t_tuple tuple1, t_tuple tuple2)
 	w = tuple1.w - tuple2.w;
 	sub = create_tuple(x, y, z, w);
 	return (sub);
-} */
+}
 
 /* t_tuple	*negative_tuple(t_tuple tuple)
 {
@@ -74,4 +74,15 @@ t_tuple	*multiply_tuple_by_scalar(t_tuple tuple, double scalar)
 	w = tuple.w * scalar;
 	product = create_tuple(x, y, z, w);
 	return (product);
+}
+
+double	scalar_product(t_tuple tuple1, t_tuple tuple2)
+{
+	double	scalar;
+
+	scalar = tuple1.x * tuple2.x
+		+ tuple1.y * tuple2.y
+		+ tuple1.z * tuple2.z
+		+ tuple1.w * tuple2.w;
+	return (scalar);
 }
