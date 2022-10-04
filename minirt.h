@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 19:04:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:40:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdio.h> // printf
 
 # define HEIGHT 1000
-# define WIDTH 500
+# define WIDTH 1000
 
 typedef struct s_image
 {
@@ -35,7 +35,6 @@ typedef struct s_mlx
 	void	*window;
 	int		width;
 	int		height;
-	t_image	img;
 }				t_mlx;
 
 typedef union u_color
@@ -44,6 +43,15 @@ typedef union u_color
 	char	rgb[4];
 }				t_color;
 
+
+// input
 void	handle_input(int argc, char *input[]);
+
+// mlx
+void	create_mlx_window(t_mlx *mlx);
+void	create_mlx_image(t_image *img, t_mlx *mlx);
+
+// colors
+int		rgb_to_int(short int red, short int green, short int blue);
 
 #endif

@@ -6,57 +6,55 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 19:04:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:39:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	create_mlx_window(t_mlx *mlx)
+void	put_pixel_color(t_image *img, int x, int y, int color)
 {
-	mlx->ptr = NULL;
-	mlx->ptr = mlx_init();
-	if (mlx->ptr == NULL)
-	{
-		printf("Error\nmlx_init error\n");
-		exit(EXIT_FAILURE);
-	}
-	mlx->width = 500;
-	mlx->height = 500;
-	mlx->window = mlx_new_window(mlx->ptr, mlx->width, mlx->height, "miniRT");
-	if (mlx->window == NULL)
-	{
-		printf("Error\nmlx_new_window error\n");
-		free(mlx->ptr);
-		exit(EXIT_FAILURE);
-	}
+	char	*pixel;
+
+	pixel = img->addr + (y * img->line_size + x * (img->bpp / 8));
+	*(unsigned int *)pixel = color;
 }
 
-void	create_mlx_image(t_mlx *mlx)
+void	coloring_image(t_image *img, t_mlx *mlx)
 {
-	mlx->img.ptr = mlx_new_image(mlx->ptr, mlx->width, mlx->height);
-	if (mlx->img.ptr == NULL)
+	unsigned int	color;
+	int				x;
+	int				y;
+
+	x = 0;
+	y = 0;
+	color = 0x0000FF;
+	while (y < mlx->height)
 	{
-		printf("Error\nmlx error creating mlx->img.ptr\n");
-		free(mlx->window);
-		free(mlx->ptr);
-		exit(EXIT_FAILURE);
+		while (x < mlx->width)
+		{
+			put_pixel_color(img, x, y, color);
+			x++;
+		}
+		x = 0;
+		y++;
 	}
-	mlx->img.addr = mlx_get_data_addr(mlx->img.ptr, &mlx->img.bpp,
-			&mlx->img.line_size, &mlx->img.endian);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
+	t_image	img;
 
 	// handle_input - check if is valid input and transform_input
 	handle_input(argc, &argv[1]);
 	create_mlx_window(&mlx);
-	create_mlx_image(&mlx);
+	create_mlx_image(&img, &mlx);
 	// ray tracing algorithm
 	// mlx plot and mlx hook
-	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
+	coloring_image(&img, &mlx);
+	put_pixel_color(&img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
+	mlx_put_image_to_window(mlx.ptr, mlx.window, img.ptr, 0, 0);
 	mlx_loop(mlx.ptr);
 	return (0);
 }
