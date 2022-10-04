@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/04 12:25:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:26:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tuple	*create_tuple(double x, double y, double z, double w)
 
 	tuple = malloc(sizeof(t_tuple));
 	if (!tuple)
-		return (NULL);
+		minirt_malloc_error("create_tuple");
 	tuple->x = x;
 	tuple->y = y;
 	tuple->z = z;

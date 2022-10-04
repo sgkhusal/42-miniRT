@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 23:14:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 15:28:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ int	minirt_error(t_mlx *mlx, char *msg)
 {
 	printf("Error\n%s\n", msg);
 	clean_minirt(mlx);
+	exit(EXIT_FAILURE);
+}
+
+void	minirt_malloc_error(char *function)
+{
+	printf("Error\nmalloc failed at %s function\n", function);
 	exit(EXIT_FAILURE);
 }
