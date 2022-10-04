@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 22:13:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:25:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char *argv[])
 	coloring_image(&mlx.img, &mlx);
 	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
+	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);
 }
