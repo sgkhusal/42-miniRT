@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 23:39:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:04:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "./libraries/libft/libft.h"
 # include <stdio.h> // printf
+# include <math.h>
 
 # include "mlx_utils.h"
 

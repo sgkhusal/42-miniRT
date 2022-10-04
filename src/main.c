@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 23:25:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:13:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,24 @@ void	coloring_image(t_image *img, t_mlx *mlx)
 	}
 }
 
+void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
+{
+	double	teta;
+	double	x;
+	double	y;
+	int		color;
+
+	color = rgb_to_int(0, 255, 0);
+	teta = 0;
+	while (teta < 360)
+	{
+		x = center_x + radius * cos(teta);
+		y = center_y + radius * sin(teta);
+		put_pixel_color(&mlx->img, x, y, color);
+		teta += 0.1;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
@@ -54,6 +72,7 @@ int	main(int argc, char *argv[])
 	// mlx plot and mlx hook
 	coloring_image(&mlx.img, &mlx);
 	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
+	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2);
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
