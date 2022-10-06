@@ -8,7 +8,7 @@ obj
 # Executables
 *.out
 miniRT
-
+run_unit_tests
 
 # othes
 *.vscode
