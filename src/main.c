@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:21:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:24:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,20 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 
 void	sphere_test(void)
 {
-	//t_intersection	*intersection;
+	t_intersection	intersection;
 	t_sphere	*sphere;
 	t_ray		ray;
-	t_point		center_sphere;
 
-	center_sphere = create_point(50, 50, 0);
-	sphere = create_sphere(center_sphere, 1, *create_color(255, 255, 255));
-	printf("center_sphere: %f, %f, %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
+	sphere = create_sphere(set_point(0, 0, 0), 1, *create_color(255, 0, 0));
+	ray = set_ray(set_point(0, 2, -5), set_vector(0, 0, 1));
+	/* printf("center_sphere: %f, %f, %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
 	printf("radius: %f\n", sphere->radius);
 	printf("color: %X\n", sphere->color.color);
-	t_point origin;
-	origin = create_point(0, 0, 0);
-	t_vector direction;
-	direction = create_vector(1, 1, 0);
-	ray = create_ray(origin, direction);
 	printf("ray origin: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
-	printf("ray direction: %f, %f, %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
-	/* intersection = sphere_intersection(ray, sphere);
-	printf("count: %d\nt1: %f\nt2: %f\n", intersection->count, intersection->t1,
-		intersection->t2); */
+	printf("ray direction: %f, %f, %f\n", ray.direction.x, ray.direction.y, ray.direction.z); */
+	intersection = sphere_intersection(ray, *sphere);
+	printf("count: %d\nt1: %f\nt2: %f\n", intersection.count, intersection.t1,
+		intersection.t2);
 	free(sphere);
 }
 

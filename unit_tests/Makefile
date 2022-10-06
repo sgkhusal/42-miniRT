@@ -6,11 +6,11 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/06 00:24:35 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/06 11:46:30 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			unit_test
+NAME =			unit_tests
 MINIRT =		minirt
 MINIRT_PATH =	../
 

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:43:31 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:18:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ void	points_and_vectors_tests(void)
 	t_point		expected;
 
 	printf(YELLOW "Points and vectors tests: \n" END);
-	point = create_point(3, -2, 5);
-	vector = create_vector (-2, 3, 1);
-	expected = create_point(1, 1, 6);
+	point = set_point(3, -2, 5);
+	vector = set_vector (-2, 3, 1);
+	expected = set_point(1, 1, 6);
 	add_point_and_vector_test(vector, point, expected);
-	expected = create_point(5, -5, 4);
+	expected = set_point(5, -5, 4);
 	subtract_point_and_vector_test(vector, point, expected);
-	point = create_point(3, 2, 1);
-	vector = create_vector (5, 6, 7);
-	expected = create_point(8, 8, 8);
+	point = set_point(3, 2, 1);
+	vector = set_vector (5, 6, 7);
+	expected = set_point(8, 8, 8);
 	add_point_and_vector_test(vector, point, expected);
-	expected = create_point(-2, -4, -6);
+	expected = set_point(-2, -4, -6);
 	subtract_point_and_vector_test(vector, point, expected);
 }

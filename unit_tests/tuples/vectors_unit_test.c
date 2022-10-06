@@ -6,18 +6,18 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:43:34 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:19:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	create_vector_test(double x, double y, double z, int n)
+void	set_vector_test(double x, double y, double z, int n)
 {
 	t_vector	vector;
 
-	printf(GREY "create_vector_test %d: ", n);
-	vector = create_vector(x, y, z);
+	printf(GREY "set_vector_test %d: ", n);
+	vector = set_vector(x, y, z);
 	if (vector.x == x && vector.y == y && vector.z == z && vector.w == 0)
 		printf(GREEN "OK" END "\n");
 	else
@@ -31,7 +31,7 @@ void	vector_length_test(double x, double y, double z, double expected)
 	static int	n = 1;
 
 	printf(GREY "vector_length_test %d: ", n);
-	vector = create_vector(x, y, z);
+	vector = set_vector(x, y, z);
 	length = vector_length(vector);
 	if (length == expected)
 		printf(GREEN "OK" END "\n");
@@ -50,8 +50,8 @@ void	normalize_vector_test(double x, double y, double z,
 	static int	n = 1;
 
 	printf(GREY "normalize_vector_test %d: ", n);
-	vector = create_vector(x, y, z);
-	expected = create_vector(expected_x, expected_y, expected_z);
+	vector = set_vector(x, y, z);
+	expected = set_vector(expected_x, expected_y, expected_z);
 	result = normalize_vector(vector);
 	length = vector_length(result);
 	if (length - 1 > -0.00001 && length - 1 < 0.00001
@@ -68,8 +68,8 @@ void	normalize_vector_test(double x, double y, double z,
 void	vectors_tests(void)
 {
 	printf(YELLOW "Vectors tests: \n" END);
-	create_vector_test(4.3, -4.2, 3.1, 1);
-	create_vector_test(4, -4, 3, 1);
+	set_vector_test(4.3, -4.2, 3.1, 1);
+	set_vector_test(4, -4, 3, 1);
 	vector_length_test(1, 0, 0, 1);
 	vector_length_test(0, 1, 0, 1);
 	vector_length_test(0, 0, 1, 1);

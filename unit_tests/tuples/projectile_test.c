@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:42:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:16:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	projectile_test(void)
 	int				i;
 
 	printf(YELLOW "Projectile test: \n" END);
-	env.gravity = create_vector(0, -0.1, 0);
-	env.wind = create_vector(-0.01, 0, 0);
-	p.position = create_point(0, 1, 0);
-	p.velocity = create_vector(1, 1, 0);
+	env.gravity = set_vector(0, -0.1, 0);
+	env.wind = set_vector(-0.01, 0, 0);
+	p.position = set_point(0, 1, 0);
+	p.velocity = set_vector(1, 1, 0);
 	p.velocity = normalize_vector(p.velocity);
 	printf(GREY "Velocity: [%f, %f, %f]\n" END, p.velocity.x, p.velocity.y,
 		p.velocity.z);

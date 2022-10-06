@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:51:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 22:00:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:55:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_point	add_point_and_vector(t_point point, t_vector vector)
 	x = point.x + vector.x;
 	y = point.y + vector.y;
 	z = point.z + vector.z;
-	sum = create_point(x, y, z);
+	sum = set_point(x, y, z);
 	return (sum);
 }
 
@@ -36,6 +36,6 @@ t_point	subtract_point_and_vector(t_point point, t_vector vector)
 	x = point.x - vector.x;
 	y = point.y - vector.y;
 	z = point.z - vector.z;
-	sub = create_point(x, y, z);
+	sub = set_point(x, y, z);
 	return (sub);
 }

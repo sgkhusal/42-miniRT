@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:59:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:22:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_vector	add_vectors(t_vector a, t_vector b)
 	x = a.x + b.x;
 	y = a.y + b.y;
 	z = a.z + b.z;
-	sum = create_vector(x, y, z);
+	sum = set_vector(x, y, z);
 	return (sum);
 }
 
@@ -36,7 +36,7 @@ t_vector	subtract_vectors(t_vector a, t_vector b)
 	x = a.x - b.x;
 	y = a.y - b.y;
 	z = a.z - b.z;
-	sub = create_vector(x, y, z);
+	sub = set_vector(x, y, z);
 	return (sub);
 }
 
@@ -50,7 +50,7 @@ t_vector	multiply_vector_by_scalar(t_vector vector, double scalar)
 	x = vector.x * scalar;
 	y = vector.y * scalar;
 	z = vector.z * scalar;
-	product = create_vector(x, y, z);
+	product = set_vector(x, y, z);
 	return (product);
 }
 
@@ -73,5 +73,5 @@ t_vector	cross_product(t_vector a, t_vector b)
 	x = a.y * b.z - a.z * b.y;
 	y = a.z * b.x - a.x * b.z;
 	z = a.x * b.y - a.y * b.x;
-	return (create_vector(x, y, z));
+	return (set_vector(x, y, z));
 }

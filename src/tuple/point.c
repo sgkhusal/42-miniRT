@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:45:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:23:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 12:26:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_point	create_point(double x, double y, double z)
+t_point	set_point(double x, double y, double z)
 {
 	t_point	point;
 
@@ -33,6 +33,6 @@ t_vector	subtract_points(t_point a, t_point b)
 	x = a.x - b.x;
 	y = a.y - b.y;
 	z = a.z - b.z;
-	sub = create_vector(x, y, z);
+	sub = set_vector(x, y, z);
 	return (sub);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:00:27 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 00:19:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	scalar_product_test_cases(void)
 	t_vector	b;
 	double		expected;
 
-	a = create_vector(3, -2, 5);
-	b = create_vector(-2, 3, 1);
+	a = set_vector(3, -2, 5);
+	b = set_vector(-2, 3, 1);
 	expected = -7;
 	scalar_product_test(a, b, expected);
-	a = create_vector(1, 2, 3);
-	b = create_vector(2, 3, 4);
+	a = set_vector(1, 2, 3);
+	b = set_vector(2, 3, 4);
 	expected = 20;
 	scalar_product_test(a, b, expected);
 }
@@ -63,10 +63,10 @@ void	cross_product_test_cases(void)
 	t_vector	b;
 	t_vector	expected;
 
-	a = create_vector(1, 2, 3);
-	b = create_vector(2, 3, 4);
-	expected = create_vector(-1, 2, -1);
+	a = set_vector(1, 2, 3);
+	b = set_vector(2, 3, 4);
+	expected = set_vector(-1, 2, -1);
 	cross_product_test(a, b, expected);
-	expected = create_vector(1, -2, 1);
+	expected = set_vector(1, -2, 1);
 	cross_product_test(b, a, expected);
 }
