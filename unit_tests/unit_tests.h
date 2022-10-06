@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 20:38:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 00:13:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ typedef struct s_environment
 	t_vector	wind;
 }	t_environment;
 
-void	points_tests();
-void	vectors_tests();
-void	operations_vectors_test_cases();
-void	scalar_product_test_cases();
-void	cross_product_test_cases();
-void	points_and_vectors_tests();
-void	projectile_test();
+void	points_tests(void);
+void	vectors_tests(void);
+void	operations_vectors_test_cases(void);
+void	scalar_product_test_cases(void);
+void	cross_product_test_cases(void);
+void	points_and_vectors_tests(void);
+void	projectile_test(void);
 void	ray_tests(void);
 
 #endif

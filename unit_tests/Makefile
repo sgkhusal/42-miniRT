@@ -6,11 +6,11 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/05 21:42:06 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/06 00:24:35 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			run_unit_tests
+NAME =			unit_test
 MINIRT =		minirt
 MINIRT_PATH =	../
 
@@ -22,19 +22,21 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			$(MINIRT_SRCS) main.c \
+SRCS =			main.c \
 				points_unit_test.c \
 				vectors_unit_test.c \
 				vector_operations_unit_test1.c \
 				vector_operations_unit_test2.c \
 				points_and_vectors_unit_test.c \
 				projectile_test.c \
-				ray_unit_test.c
-MINIRT_SRCS =	tuple.c tuple_operations.c utils.c ray.c
+				ray_unit_test.c \
+				$(MINIRT_SRCS)
+MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
+				vector_and_point_operations.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests
-VPATH	=		./ ../src tupples
+VPATH	=		../src tuples ../src/tuple
 INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 # compilation
