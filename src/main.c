@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 22:22:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 00:21:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 	}
 }
 
-void	sphere_test()
+void	sphere_test(void)
 {
 	//t_intersection	*intersection;
 	t_sphere	*sphere;

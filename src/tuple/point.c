@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:45:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 22:01:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 00:23:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_point	create_point(double x, double y, double z)
 t_vector	subtract_points(t_point a, t_point b)
 {
 	t_vector	sub;
-	double	x;
-	double	y;
-	double	z;
+	double		x;
+	double		y;
+	double		z;
 
 	x = a.x - b.x;
 	y = a.y - b.y;

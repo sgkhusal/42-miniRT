@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:59:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 22:01:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 00:22:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 t_vector	add_vectors(t_vector a, t_vector b)
 {
 	t_vector	sum;
-	double	x;
-	double	y;
-	double	z;
+	double		x;
+	double		y;
+	double		z;
 
 	x = a.x + b.x;
 	y = a.y + b.y;
@@ -29,9 +29,9 @@ t_vector	add_vectors(t_vector a, t_vector b)
 t_vector	subtract_vectors(t_vector a, t_vector b)
 {
 	t_vector	sub;
-	double	x;
-	double	y;
-	double	z;
+	double		x;
+	double		y;
+	double		z;
 
 	x = a.x - b.x;
 	y = a.y - b.y;
@@ -43,9 +43,9 @@ t_vector	subtract_vectors(t_vector a, t_vector b)
 t_vector	multiply_vector_by_scalar(t_vector vector, double scalar)
 {
 	t_vector	product;
-	double	x;
-	double	y;
-	double	z;
+	double		x;
+	double		y;
+	double		z;
 
 	x = vector.x * scalar;
 	y = vector.y * scalar;

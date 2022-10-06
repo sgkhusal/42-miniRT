@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/05 22:22:14 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/05 22:53:17 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 
 SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c $(TUPLES)
-TUPLES =		point.c vector.c vector_and_point_operations.c\
+TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
