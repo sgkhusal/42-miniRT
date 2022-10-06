@@ -6,33 +6,42 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/05 22:53:17 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/06 11:46:30 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			miniRT
+NAME =			unit_tests
+MINIRT =		minirt
+MINIRT_PATH =	../
 
 # **************************************************************************** #
-LIBFT_PATH =	./libraries/libft
+LIBFT_PATH =	../libraries/libft
 LIBFT =			$(LIBFT_PATH)/libft.a
-MLX_PATH =		./libraries/minilibx_linux
+MLX_PATH =		../libraries/minilibx_linux
 MLX		 =		$(MLX_PATH)/libmlx.a
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
-				sphere.c $(TUPLES)
-TUPLES =		point.c vector.c vector_and_point_operations.c \
-				vector_operations.c
+SRCS =			main.c \
+				points_unit_test.c \
+				vectors_unit_test.c \
+				vector_operations_unit_test1.c \
+				vector_operations_unit_test2.c \
+				points_and_vectors_unit_test.c \
+				projectile_test.c \
+				ray_unit_test.c \
+				$(MINIRT_SRCS)
+MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
+				vector_and_point_operations.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
-HEADERS	=		minirt.h
-VPATH	=		src src/tuple
-INCLUDE	=		-I ./ -I ./includes -I $(LIBFT_PATH) -I $(MLX_PATH)
+HEADERS	=		unit_tests
+VPATH	=		../src tuples ../src/tuple
+INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 # compilation
 CC =		gcc
-CFLAGS =	-Wall -Werror -Wextra -g -O3 #-fsanitize=leak
+CFLAGS =	-Werror -Wextra -g -O3 #-fsanitize=leak
 MLXFLAGS =	-lm -lXext -lX11
 
 # clean
@@ -49,41 +58,33 @@ RESET	=	\033[0m
 
 all:	$(NAME)
 
-$(OBJS_DIR)/%.o:	%.c $(HEADERS)
-	@mkdir -p $(OBJS_DIR)
+$(OBJS_DIR)/%.o:	%.c $(HEADERS) $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-$(NAME):	$(LIBFT) $(MLX) $(OBJS)
+$(NAME):	$(MINIRT) $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"
-	@echo "           miniRT created"
+	@echo "         unit_tests created"
 	@echo "************************************"
 	@echo "$(RESET)"
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
-$(LIBFT):
-	@echo "$(YELLOW)making libft....$(RESET)"
-	$(MAKE) --no-print-directory -C $(LIBFT_PATH)
-	@echo "$(YELLOW)libft.a created$(RESET)"
-	@echo "------------------------------------------------------------------"
-
-$(MLX):
-	@echo "$(YELLOW)making minilibx....$(RESET)"
-	$(MAKE) --no-print-directory -C $(MLX_PATH)
-	@echo "$(YELLOW)libmlx.a created$(RESET)"
+$(MINIRT):
+	@echo "$(YELLOW)making minirt....$(RESET)"
+	$(MAKE) --no-print-directory -C $(MINIRT_PATH)
+	@echo "$(YELLOW)minirt created$(RESET)"
 	@echo "------------------------------------------------------------------"
 
 clean:
 		$(RM_DIR) $(OBJS_DIR)
-		@$(MAKE) -C $(LIBFT_PATH) clean
-		@$(MAKE) -C $(MLX_PATH) clean
+		@$(MAKE) -C $(MINIRT_PATH) clean
 
 fclean:		clean
 		$(RM) $(NAME)
-		@$(MAKE) -C $(LIBFT_PATH) fclean
+		@$(MAKE) -C $(MINIRT_PATH) fclean
 
 re:			fclean all
 
