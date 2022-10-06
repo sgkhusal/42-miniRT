@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 14:41:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:22:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,26 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 
 void	sphere_test()
 {
-	t_intersection	*intersection;
+	//t_intersection	*intersection;
 	t_sphere	*sphere;
-	t_ray		*ray;
+	t_ray		ray;
+	t_point		center_sphere;
 
-	t_point center_sphere;
-	set_point(&center_sphere, WIDTH / 2, HEIGHT / 2, 0);
+	center_sphere = create_point(50, 50, 0);
 	sphere = create_sphere(center_sphere, 1, *create_color(255, 255, 255));
-	/* printf("center_sphere: %f, %f, %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
+	printf("center_sphere: %f, %f, %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
 	printf("radius: %f\n", sphere->radius);
-	printf("color: %X\n", sphere->color.color); */
+	printf("color: %X\n", sphere->color.color);
 	t_point origin;
-	set_point(&origin, 0, 0, 0);
+	origin = create_point(0, 0, 0);
 	t_vector direction;
-	set_vector(&direction, 1, 0, 0);
+	direction = create_vector(1, 1, 0);
 	ray = create_ray(origin, direction);
-	/* printf("origin: %f, %f, %f\n", ray->origin.x, ray->origin.y, ray->origin.z);
-	printf("direction: %f, %f, %f\n", ray->direction.x, ray->direction.y, ray->direction.z); */
-	intersection = sphere_intersection(ray, sphere);
+	printf("ray origin: %f, %f, %f\n", ray.origin.x, ray.origin.y, ray.origin.z);
+	printf("ray direction: %f, %f, %f\n", ray.direction.x, ray.direction.y, ray.direction.z);
+	/* intersection = sphere_intersection(ray, sphere);
 	printf("count: %d\nt1: %f\nt2: %f\n", intersection->count, intersection->t1,
-		intersection->t2);
+		intersection->t2); */
 	free(sphere);
 }
 

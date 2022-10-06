@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/05 16:00:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:11:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 /* t = scalar_product(centro da esfera - ray_origin, ray_direction);
 y = length(centro da esfera - position(ray_origin + t * ray_direction));
 */
-
 t_sphere	*create_sphere(t_point center, double radius, t_color color)
 {
 	t_sphere	*sphere;
@@ -39,7 +38,7 @@ t_sphere	*create_sphere(t_point center, double radius, t_color color)
  * @param projected_vector vector from ray origin to sphere's projected center.
  * @return t_intersection the t_interction struct.
  */
-t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere)
+/* t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere)
 {
 	t_intersection	*intersection;
 	double			projected_center;
@@ -73,4 +72,4 @@ t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere)
 	intersection->t2 = projected_center + x_sphere;
 	intersection->count = 2;
 	return (intersection);
-}
+} */

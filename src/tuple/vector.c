@@ -1,52 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple.c                                            :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/05 15:59:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:01:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	set_point(t_point *point, double x, double y, double z)
+t_vector	create_vector(double x, double y, double z)
 {
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	point->w = 1.0; // verificar se precisa
-}
+	t_vector	vector;
 
-t_point	*create_point(double x, double y, double z)
-{
-	t_point	*point;
-
-	point = malloc(sizeof(t_point));
-	if (!point)
-		minirt_malloc_error("create_point");
-	set_point(point, x, y, z);
-	return (point);
-}
-
-void	set_vector(t_vector *vector, double x, double y, double z)
-{
-	vector->x = x;
-	vector->y = y;
-	vector->z = z;
-	vector->w = 0.0; // verificar se precisa
-}
-
-t_vector	*create_vector(double x, double y, double z)
-{
-	t_vector	*vector;
-
-	vector = malloc(sizeof(t_vector));
-	if (!vector)
-		minirt_malloc_error("create_vector");
-	set_vector(vector, x, y, z);
+	vector.x = x;
+	vector.y = y;
+	vector.z = z;
+	vector.w = 0.0; // verificar se precisa
 	return (vector);
 }
 
@@ -62,4 +35,23 @@ double	vector_length(t_vector vector)
 
 	length = sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
 	return (length);
+}
+
+t_vector	normalize_vector(t_vector vector)
+{
+	double	length;
+	double	x;
+	double	y;
+	double	z;
+
+	length = vector_length(vector);
+	x = vector.x / length;
+	y = vector.y / length;
+	z = vector.z / length;
+	return (create_vector(x, y, z));
+}
+
+t_vector	negative_vector(t_vector vector)
+{
+	return (create_vector(-vector.x, -vector.y, -vector.z));
 }

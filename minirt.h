@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 21:43:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:11:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,29 +81,27 @@ int		rgb_to_int(short int red, short int green, short int blue);
 t_color	*create_color(short int red, short int green, short int blue);
 
 // tuples
-t_point		*create_point(double x, double y, double z);
-void		set_point(t_point *point, double x, double y, double z);
-t_vector	*create_vector(double x, double y, double z);
-void		set_vector(t_vector *vector, double x, double y, double z);
+t_point		create_point(double x, double y, double z);
+t_vector	create_vector(double x, double y, double z);
 double		vector_length(t_vector vector);
-t_vector	*add_vectors(t_vector a, t_vector b);
-t_point		*add_point_and_vector(t_point point, t_vector vector);
-t_vector	*subtract_vectors(t_vector a, t_vector b);
-t_vector	*subtract_points(t_point a, t_point b);
-t_point		*subtract_point_and_vector(t_point point, t_vector vector);
-t_vector	*multiply_vector_by_scalar(t_vector vector, double scalar);
-t_vector	*normalize_vector(t_vector vector);
+t_vector	add_vectors(t_vector a, t_vector b);
+t_vector	subtract_vectors(t_vector a, t_vector b);
+t_vector	subtract_points(t_point a, t_point b);
+t_point		add_point_and_vector(t_point point, t_vector vector);
+t_point		subtract_point_and_vector(t_point point, t_vector vector);
+t_vector	negative_vector(t_vector vector);
+t_vector	multiply_vector_by_scalar(t_vector vector, double scalar);
+t_vector	normalize_vector(t_vector vector);
 double		scalar_product(t_vector a, t_vector b);
-t_vector	*cross_product(t_vector a, t_vector b);
+t_vector	cross_product(t_vector a, t_vector b);
 
 // rays
-t_ray	*create_ray(t_point origin, t_vector direction);
-void	set_ray(t_ray *ray, t_point origin, t_vector direction);
-t_point	*ray_position(t_ray ray, double distance);
+t_ray	create_ray(t_point origin, t_vector direction);
+t_point	ray_position(t_ray ray, double distance);
 
 //elements
 t_sphere	*create_sphere(t_point center, double radius, t_color color);
-t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere);
+//t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere);
 
 // close
 int		close_minirt(t_mlx *mlx);
