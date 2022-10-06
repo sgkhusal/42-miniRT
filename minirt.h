@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 18:56:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 21:43:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,31 @@ typedef union u_color
  * @param z z axis value (out of screen)
  * @param w type (1 = point, 0 = vector)
  */
-typedef struct s_tuple
+typedef struct s_vector
 {
 	double	x;
 	double	y;
 	double	z;
-	double	w;
-}				t_tuple;
+	double	w; // TODO: verificar se será necessário
+}				t_vector;
+
+typedef struct s_point
+{
+	double	x;
+	double	y;
+	double	z;
+	double	w; // TODO: verificar se será necessário
+}				t_point;
 
 typedef struct s_ray
 {
-	t_tuple	*origin;
-	t_tuple	*direction;
+	t_point		origin;
+	t_vector	direction;
 }				t_ray;
 
 typedef struct s_sphere
 {
-	t_tuple	*center;
+	t_point	center;
 	double	radius;
 	t_color	color;
 }				t_sphere;
@@ -73,20 +81,29 @@ int		rgb_to_int(short int red, short int green, short int blue);
 t_color	*create_color(short int red, short int green, short int blue);
 
 // tuples
-t_tuple	*create_tuple(double x, double y, double z, double w);
-t_tuple	*create_point(double x, double y, double z);
-t_sphere	*create_sphere(t_tuple *center, double radius, t_color *color);
-t_tuple	*create_vector(double x, double y, double z);
-t_tuple	*add_tuples(t_tuple tuple1, t_tuple tuple2);
-t_tuple	*multiply_tuple_by_scalar(t_tuple tuple, double scalar);
-t_tuple	*subtract_tuples(t_tuple tuple1, t_tuple tuple2);
-double	tuple_length(t_tuple *tuple);
-t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere);
-double	scalar_product(t_tuple tuple1, t_tuple tuple2);
+t_point		*create_point(double x, double y, double z);
+void		set_point(t_point *point, double x, double y, double z);
+t_vector	*create_vector(double x, double y, double z);
+void		set_vector(t_vector *vector, double x, double y, double z);
+double		vector_length(t_vector vector);
+t_vector	*add_vectors(t_vector a, t_vector b);
+t_point		*add_point_and_vector(t_point point, t_vector vector);
+t_vector	*subtract_vectors(t_vector a, t_vector b);
+t_vector	*subtract_points(t_point a, t_point b);
+t_point		*subtract_point_and_vector(t_point point, t_vector vector);
+t_vector	*multiply_vector_by_scalar(t_vector vector, double scalar);
+t_vector	*normalize_vector(t_vector vector);
+double		scalar_product(t_vector a, t_vector b);
+t_vector	*cross_product(t_vector a, t_vector b);
 
 // rays
-t_ray	*create_ray(t_tuple *origin, t_tuple *direction);
-t_tuple	*ray_position(t_ray *ray, double distance);
+t_ray	*create_ray(t_point origin, t_vector direction);
+void	set_ray(t_ray *ray, t_point origin, t_vector direction);
+t_point	*ray_position(t_ray ray, double distance);
+
+//elements
+t_sphere	*create_sphere(t_point center, double radius, t_color color);
+t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere);
 
 // close
 int		close_minirt(t_mlx *mlx);

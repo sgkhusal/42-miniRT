@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/04 19:00:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:00:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 y = length(centro da esfera - position(ray_origin + t * ray_direction));
 */
 
-t_sphere	*create_sphere(t_tuple *center, double radius, t_color *color)
+t_sphere	*create_sphere(t_point center, double radius, t_color color)
 {
 	t_sphere	*sphere;
 
@@ -26,8 +26,7 @@ t_sphere	*create_sphere(t_tuple *center, double radius, t_color *color)
 		minirt_malloc_error("create_sphere");
 	sphere->center = center;
 	sphere->radius = radius;
-	sphere->color = *color;
-	free(color);
+	sphere->color = color;
 	return (sphere);
 }
 
@@ -44,18 +43,24 @@ t_intersection	*sphere_intersection(t_ray *ray, t_sphere *sphere)
 {
 	t_intersection	*intersection;
 	double			projected_center;
-	t_tuple			*projected_vector;
+	t_point			*projected_vector;
 	double			x_sphere;
 	double			y_sphere;
 
+	printf("center_sphere: %f, %f, %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
+	printf("radius: %f\n", sphere->radius);
+	printf("color: %X\n", sphere->color.color);
+	printf("origin: %f, %f, %f\n", ray->origin.x, ray->origin.y, ray->origin.z);
+	printf("direction: %f, %f, %f\n", ray->direction.x, ray->direction.y, ray->direction.z);
 	intersection = malloc(sizeof(t_intersection));
 	if (!intersection)
 		minirt_malloc_error("create_intersection");
-	projected_center = scalar_product(*(subtract_tuples(*sphere->center,
-		*ray->origin)), *ray->direction);
+	t_vector *sub = subtract_points(sphere->center, ray->origin);
+	printf("sub: %f, %f, %f\n", sub->x, sub->y, sub->z);
+	projected_center = scalar_product(*sub, ray->direction);
 	printf("projected_center: %f\n", projected_center);
-	projected_vector = ray_position(ray, projected_center);
-	y_sphere = tuple_length(subtract_tuples(*sphere->center,
+	projected_vector = ray_position(*ray, projected_center);
+	y_sphere = vector_length(*subtract_points(sphere->center,
 		*projected_vector));
 	if (y_sphere > sphere->radius)
 	{

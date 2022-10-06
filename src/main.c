@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:58:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 18:55:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:41:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,23 @@ void	sphere_test()
 	t_sphere	*sphere;
 	t_ray		*ray;
 
-	sphere = create_sphere(create_point(WIDTH / 2, HEIGHT / 2, 0), 1, create_color(1, 1, 1));
-	ray = create_ray(create_point(0, 0, 0), create_vector(1, 1, 0));
+	t_point center_sphere;
+	set_point(&center_sphere, WIDTH / 2, HEIGHT / 2, 0);
+	sphere = create_sphere(center_sphere, 1, *create_color(255, 255, 255));
+	/* printf("center_sphere: %f, %f, %f\n", sphere->center.x, sphere->center.y, sphere->center.z);
+	printf("radius: %f\n", sphere->radius);
+	printf("color: %X\n", sphere->color.color); */
+	t_point origin;
+	set_point(&origin, 0, 0, 0);
+	t_vector direction;
+	set_vector(&direction, 1, 0, 0);
+	ray = create_ray(origin, direction);
+	/* printf("origin: %f, %f, %f\n", ray->origin.x, ray->origin.y, ray->origin.z);
+	printf("direction: %f, %f, %f\n", ray->direction.x, ray->direction.y, ray->direction.z); */
 	intersection = sphere_intersection(ray, sphere);
 	printf("count: %d\nt1: %f\nt2: %f\n", intersection->count, intersection->t1,
 		intersection->t2);
+	free(sphere);
 }
 
 int	main(int argc, char *argv[])
