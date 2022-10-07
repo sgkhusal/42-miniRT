@@ -20,5 +20,6 @@ int	main(void)
 	projectile_test();
 	ray_tests();
 	sphere_tests();
+	multiply_matrix_test();
 	return (0);
 }

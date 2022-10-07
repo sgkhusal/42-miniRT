@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unit_tests.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 16:05:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/07 15:26:50 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	scalar_product_test_cases(void);
 void	cross_product_test_cases(void);
 void	points_and_vectors_tests(void);
 void	projectile_test(void);
+
+void	multiply_matrix_test(void);
+
 void	ray_tests(void);
 void	set_sphere_test(void);
 void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int count,
