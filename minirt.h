@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 11:56:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:28:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <math.h>
 
 # include "mlx_utils.h"
+
+enum e_types
+{
+	SPHERE,
+	PLANE,
+	CYLINDER
+};
 
 typedef union u_color
 {
@@ -65,20 +72,38 @@ typedef struct s_sphere
  * @param t2 the distance from the ray origin to the second intersection
  * @param count the number of intersections. If there's only one intersection,
  * count = 2 and t2 = t1 and if there are no intersections, count = 0.
+ * se hit < 0, a interseção é atrás da câmera
+ * se hit = 0, a interseção é na câmera
+ * se hit > 0, a interseção é na frente da câmera
+ * a intersecção visível é a menor intersecção positiva
  */
+
 typedef struct s_intersection
 {
-	double	t1;
-	double	t2;
-	int 	count;
+	double					t1;
+	double					t2;
+	int						type;
+	double					hit; // a intersecção visível
+	struct s_intersection	*next;
 }				t_intersection;
+
+typedef struct intersection_list
+{
+	t_intersection	*intersection;
+	int		count;
+}				t_intersection_list;
+
+typedef struct s_rt
+{
+	t_intersection_list	*intersections;
+}				t_rt;
 
 // input
 void	handle_input(int argc, char *input[]);
 
 // colors
 int		rgb_to_int(short int red, short int green, short int blue);
-t_color	*create_color(short int red, short int green, short int blue);
+t_color	set_color(short int red, short int green, short int blue);
 
 // tuples
 t_point		set_point(double x, double y, double z);
@@ -96,12 +121,13 @@ double		scalar_product(t_vector a, t_vector b);
 t_vector	cross_product(t_vector a, t_vector b);
 
 // rays
-t_ray	set_ray(t_point origin, t_vector direction);
-t_point	ray_position(t_ray ray, double distance);
+t_ray		set_ray(t_point origin, t_vector direction);
+t_point		ray_position(t_ray ray, double distance);
 
 //elements
-t_sphere	*create_sphere(t_point center, double radius, t_color color);
-t_intersection	sphere_intersection(t_ray ray, t_sphere sphere);
+t_sphere		*create_sphere(t_point center, double radius, t_color color);
+t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere);
+double			get_hit(double t1, double t2);
 
 // close
 int		close_minirt(t_mlx *mlx);
