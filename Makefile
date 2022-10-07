@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/07 15:36:09 by elraira-         ###   ########.fr        #
+#    Updated: 2022/10/07 16:22:35 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-202sguilhsguilh8sguilhNAME =			miniRT
+NAME =			miniRT
 
 # **************************************************************************** #
 LIBFT_PATH =	./libraries/libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unit_tests.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/07 15:26:50 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/10/07 17:47:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	points_and_vectors_tests(void);
 void	projectile_test(void);
 
 void	multiply_matrix_test(void);
+void	multiply_by_vector_test(void);
+void	multiply_by_point_test(void);
+void	multiply_matrix_by_identity_test(void);
 
 void	ray_tests(void);
 void	set_sphere_test(void);
