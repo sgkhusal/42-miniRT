@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:43:34 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:07:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	normalize_vector_test(double x, double y, double z,
 	expected = set_vector(expected_x, expected_y, expected_z);
 	result = normalize_vector(vector);
 	length = vector_length(result);
-	if (length - 1 > -0.00001 && length - 1 < 0.00001
-		&& result.x - expected.x > -0.00001 && result.x - expected.x < 0.00001
-		&& result.y - expected.y > -0.00001 && result.y - expected.y < 0.00001
-		&& result.z - expected.z > -0.00001 && result.z - expected.z < 0.00001
+	if (check_double_values(length, 1)
+		&& check_double_values(result.x, expected.x)
+		&& check_double_values(result.y, expected.y)
+		&& check_double_values(result.z, expected.z)
 		&& result.w == 0)
 		printf(GREEN "OK" END "\n");
 	else
