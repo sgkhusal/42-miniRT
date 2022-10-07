@@ -70,7 +70,7 @@ typedef struct s_sphere
 
 typedef struct s_matrix
 {
-	double	matrix[][];
+	double	**matrix;
 	int		size;
 
 }				t_matrix;
@@ -151,5 +151,7 @@ void			print_matrix(t_matrix m);
 t_matrix		identity_matrix(int size);
 bool			check_equal_matrices(t_matrix m1, t_matrix m2);
 t_matrix 		multiply_matrix(t_matrix m1, t_matrix m2);
+t_vector		multiply_matrix_by_vector(t_matrix m, t_vector v);
+t_point			multiply_matrix_by_point(t_matrix m, t_point p);
 
 #endif
