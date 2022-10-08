@@ -24,7 +24,8 @@ SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c $(TUPLES) $(MATRICES)
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
-MATRICES =		matrix.c matrix_multiply.c matrix_operations.c matrix_inverse.c
+MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
+				matrix_inverse.c matrix_transform.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		minirt.h

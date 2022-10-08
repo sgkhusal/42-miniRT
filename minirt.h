@@ -160,5 +160,10 @@ double			get_matrix_determinant(t_matrix m);
 double			get_matrix_cofactor(t_matrix m, int row, int column);
 bool			is_invertible(t_matrix matrix);
 t_matrix		get_matrix_inverse(t_matrix m);
+t_matrix		translation_matrix(double x, double y, double z);
+t_matrix		scaling_matrix(double x, double y, double z);
+t_matrix		rotation_x(double radians);
+t_matrix		rotation_y(double radians);
+t_matrix		rotation_z(double radians);
 
 #endif
