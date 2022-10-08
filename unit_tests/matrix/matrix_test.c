@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:09:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:31:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:51:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	matrix_tests(void)
 	scaling_test();
 	rotation_test();
 	shearing_test_cases();
+	chaining_test();
 }
