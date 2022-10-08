@@ -3,17 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 12:21:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:51:59 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-//Each ray created by your ray tracer will have a starting point called the
-//origin, and a vector called the direction which says where it points.
+/**
+ * @brief Each ray created by the ray tracer will have a starting point called
+ * the origin, and a vector called the direction which says where it points to.
+ * The direction vector needs to be normalized so that the ray can be used to
+ * calculate the intersection with the objects.
+ *
+ * @param origin The origin of the ray.
+ * @param direction The direction of the ray.
+ * @return t_ray The t_ray struct containinf the point of the origin and the
+ * normalized direction vector.
+ */
 t_ray	set_ray(t_point origin, t_vector direction)
 {
 	t_ray	ray;

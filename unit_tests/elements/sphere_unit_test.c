@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:29:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 16:05:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/07 16:33:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ void	set_sphere_test(void)
 		printf(RED "KO" END "\n");
 }
 
-void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int count,
+void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int hit,
 					double t1, double t2)
 {
-	t_intersection	intersections;
+	t_intersection	*intersections;
 	static int		n = 1;
 
 	printf(GREY "sphere intersection test %d: " END, n);
 	intersections = sphere_intersection(ray, *sphere);
-	if (intersections.count == count
-		&& check_double_values(intersections.t1, t1)
-		&& check_double_values(intersections.t2, t2))
+	if (intersections->hit == hit
+		&& check_double_values(intersections->t1, t1)
+		&& check_double_values(intersections->t2, t2))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");

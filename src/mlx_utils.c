@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 21:17:34 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/03 23:24:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:49:55 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ int	put_image_again(t_mlx *mlx)
 	return (0);
 }
 
+/**
+ * @brief Will handle the escape key press event.
+ *
+ * @param key The key that was pressed.
+ * @param mlx The mlx struct.
+ * @return int will close the window if the escape key was pressed. Returns 0
+ * otherwise.
+ */
 static int	key_press(int key, t_mlx *mlx)
 {
 	if (key == ESCAPE)

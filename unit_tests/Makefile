@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/06 16:05:34 by sguilher         ###   ########.fr        #
+#    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
+#    Updated: 2022/10/08 16:52:38 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			unit_tests
+NAME =			tests
 MINIRT =		minirt
 MINIRT_PATH =	../
 
@@ -32,14 +32,27 @@ SRCS =			main.c \
 				projectile_test.c \
 				ray_unit_test.c \
 				sphere_unit_test.c \
+				matrix_test.c \
+				multiply_test.c \
+				submatrix_test.c \
+				determinant_test.c \
+				cofactor_test.c \
+				inverse_test.c \
+				translation_test.c \
+				scaling_test.c \
+				rotation_test.c \
+				shearing_test.c \
+				chaining_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
-				vector_and_point_operations.c sphere.c colors.c
+				vector_and_point_operations.c sphere.c colors.c matrix.c \
+				matrix_multiply.c matrix_operations.c matrix_inverse.c \
+				matrix_transform.c matrix_rotation.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
-VPATH_MINIRT =	../src/ ../src/tuple
-VPATH	=		$(VPATH_MINIRT) tuples elements ray
+VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix
+VPATH	=		$(VPATH_MINIRT) tuples elements ray matrix
 INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 # compilation

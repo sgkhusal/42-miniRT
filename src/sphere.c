@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/07 11:27:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:48:03 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Will create a new sphere by allocating memory and setting the given
+ * values to the struct.
+ *
+ * @param center The center point of the sphere.
+ * @param radius The radius of the sphere.
+ * @param color The color of the sphere.
+ * @return t_sphere* The created sphere.
+ */
 t_sphere	*create_sphere(t_point center, double radius, t_color color)
 {
 	t_sphere	*sphere;
@@ -26,7 +35,7 @@ t_sphere	*create_sphere(t_point center, double radius, t_color color)
 }
 
 /**
- * @brief
+ * @brief Gets the intersections between a ray and a sphere.
  *
  * @param ray is the ray that will intersect the sphere.
  * @param sphere is the sphere that will be intersected by the ray.
@@ -60,6 +69,14 @@ t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere)
 	return (intersection);
 }
 
+/**
+ * @brief The hit will be the closest intersection point with a t
+ * greater than 0.
+ *
+ * @param t1 is the first intersection point.
+ * @param t2 is the second intersection point.
+ * @return double the hit.
+ */
 double	get_hit(double t1, double t2)
 {
 	if (t1 < 0 && t2 < 0)
@@ -72,6 +89,3 @@ double	get_hit(double t1, double t2)
 		return (t1);
 	return (t2);
 }
-
-// The hit will be the closest intersection point with a t greater than 0.
-
