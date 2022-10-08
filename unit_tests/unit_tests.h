@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 11:14:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/08 12:35:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void	submatrix_test_cases(void);
 void	submatrix_test(t_matrix m, int row, int column, t_matrix expected);
 void	cofactor_test_cases(void);
 void	cofactor_test(t_matrix m, int row, int column, double expected);
+void	invertible_test(t_matrix matrix, bool expected);
+void	inverse_matrix_test_cases(void);
+void	inverse_matrix_ultimate_test(void);
 
 void	ray_tests(void);
 void	set_sphere_test(void);

@@ -14,7 +14,7 @@
 
 void	determinant_test(t_matrix matrix, double expected)
 {
-	double	result;
+	double		result;
 	static int	n = 1;
 
 	printf(GREY "determinant_test %d: ", n);
@@ -26,11 +26,27 @@ void	determinant_test(t_matrix matrix, double expected)
 	n++;
 }
 
+void	invertible_test(t_matrix matrix, bool expected)
+{
+	bool		result;
+	static int	n = 1;
+
+	printf(GREY "invertible_test %d: ", n);
+	result = get_matrix_determinant(matrix);
+	if (expected == result)
+		printf(GREEN "OK" END "\n");
+	else
+		printf(RED "KO" END "\n");
+	n++;
+}
+
 void	determinant_test_cases()
 {
 	t_matrix	m1;
 	t_matrix	m2;
 	t_matrix	m3;
+	t_matrix	m4;
+	t_matrix	non_invertible;
 
 	m1 = create_matrix(2);
 	m1.matrix[0][0] = 1;
@@ -72,5 +88,47 @@ void	determinant_test_cases()
 	m3.matrix[3][3] = -9;
 	determinant_test(m3, -4071);
 	free_matrix(m3);
+
+	m4 = create_matrix(4);
+	m4.matrix[0][0] = 6;
+	m4.matrix[0][1] = 4;
+	m4.matrix[0][2] = 4;
+	m4.matrix[0][3] = 4;
+	m4.matrix[1][0] = 5;
+	m4.matrix[1][1] = 5;
+	m4.matrix[1][2] = 7;
+	m4.matrix[1][3] = 6;
+	m4.matrix[2][0] = 4;
+	m4.matrix[2][1] = -9;
+	m4.matrix[2][2] = 3;
+	m4.matrix[2][3] = -7;
+	m4.matrix[3][0] = 9;
+	m4.matrix[3][1] = 1;
+	m4.matrix[3][2] = 7;
+	m4.matrix[3][3] = -6;
+	determinant_test(m4, -2120);
+	invertible_test(m4, true);
+	free_matrix(m4);
+
+	non_invertible = create_matrix(4);
+	non_invertible.matrix[0][0] = -4;
+	non_invertible.matrix[0][1] = 2;
+	non_invertible.matrix[0][2] = -2;
+	non_invertible.matrix[0][3] = -3;
+	non_invertible.matrix[1][0] = 9;
+	non_invertible.matrix[1][1] = 6;
+	non_invertible.matrix[1][2] = 2;
+	non_invertible.matrix[1][3] = 6;
+	non_invertible.matrix[2][0] = 0;
+	non_invertible.matrix[2][1] = -5;
+	non_invertible.matrix[2][2] = 1;
+	non_invertible.matrix[2][3] = -5;
+	non_invertible.matrix[3][0] = 0;
+	non_invertible.matrix[3][1] = 0;
+	non_invertible.matrix[3][2] = 0;
+	non_invertible.matrix[3][3] = 0;
+	determinant_test(non_invertible, 0);
+	invertible_test(non_invertible, false);
+	free_matrix(non_invertible);
 }
 

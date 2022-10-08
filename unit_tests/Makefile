@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/08 10:45:30 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/08 12:00:26 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,11 @@ SRCS =			main.c \
 				submatrix_test.c \
 				determinant_test.c \
 				cofactor_test.c \
+				inverse_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
-				matrix_multiply.c matrix_operations.c
+				matrix_multiply.c matrix_operations.c matrix_inverse.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
