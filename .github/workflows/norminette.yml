@@ -23,7 +23,7 @@ jobs:
       - name: Run norminette
         run: |
           LOGS=$(mktemp)
-          norminette $(find -regex '.*/.*\.\(c\|h\)$' -not -path '*/test/*') | tee $LOGS
+          norminette $(find -regex '.*/.*\.\(c\|h\)$' -not -path '*/test/*' '*/unit_test/*' '*/minilibx_linux/*') | tee $LOGS
           echo "ERRORS=$(grep -E 'Error|Warning|KO!' $LOGS | wc -l)" >> $GITHUB_ENV
       - name: Checks norminette linter result
         run: |
