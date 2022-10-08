@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:05:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:32:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	inverse_matrix_ultimate_test(void);
 void	translation_test(void);
 void	scaling_test(void);
 void	rotation_test(void);
+void	shearing_test_cases(void);
 
 void	ray_tests(void);
 void	set_sphere_test(void);
