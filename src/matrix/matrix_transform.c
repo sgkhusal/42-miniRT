@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:29:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 15:26:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/08 16:17:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,40 +34,16 @@ t_matrix	scaling_matrix(double x, double y, double z)
 	return (scaling);
 }
 
-/* The rotation will appear to be clockwise around the corresponding axis when
-viewed along that axis, toward the negative end. */
-t_matrix	rotation_x(double radians)
+t_matrix	shearing_matrix(t_shearing s)
 {
-	t_matrix	rotation;
+	t_matrix	shearing;
 
-	rotation = identity_matrix(4);
-	rotation.matrix[1][1] = cos(radians);
-	rotation.matrix[1][2] = -sin(radians);
-	rotation.matrix[2][1] = sin(radians);
-	rotation.matrix[2][2] = cos(radians);
-	return (rotation);
-}
-
-t_matrix	rotation_y(double radians)
-{
-	t_matrix	rotation;
-
-	rotation = identity_matrix(4);
-	rotation.matrix[0][0] = cos(radians);
-	rotation.matrix[0][2] = sin(radians);
-	rotation.matrix[2][0] = -sin(radians);
-	rotation.matrix[2][2] = cos(radians);
-	return (rotation);
-}
-
-t_matrix	rotation_z(double radians)
-{
-	t_matrix	rotation;
-
-	rotation = identity_matrix(4);
-	rotation.matrix[0][0] = cos(radians);
-	rotation.matrix[0][1] = -sin(radians);
-	rotation.matrix[1][0] = sin(radians);
-	rotation.matrix[1][1] = cos(radians);
-	return (rotation);
+	shearing = identity_matrix(4);
+	shearing.matrix[0][1] = s.x_y;
+	shearing.matrix[0][2] = s.x_z;
+	shearing.matrix[1][0] = s.y_x;
+	shearing.matrix[1][2] = s.y_z;
+	shearing.matrix[2][0] = s.z_x;
+	shearing.matrix[2][1] = s.z_y;
+	return (shearing);
 }

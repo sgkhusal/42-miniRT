@@ -75,6 +75,16 @@ typedef struct s_matrix
 
 }				t_matrix;
 
+typedef struct s_shearing
+{
+	double	x_y;
+	double	x_z;
+	double	y_x;
+	double	y_z;
+	double	z_x;
+	double	z_y;
+}				t_shearing;
+
 /**
  * @param t1 the distance from the ray origin to the first intersection
  * @param t2 the distance from the ray origin to the second intersection
@@ -165,5 +175,6 @@ t_matrix		scaling_matrix(double x, double y, double z);
 t_matrix		rotation_x(double radians);
 t_matrix		rotation_y(double radians);
 t_matrix		rotation_z(double radians);
+t_matrix		shearing_matrix(t_shearing s);
 
 #endif
