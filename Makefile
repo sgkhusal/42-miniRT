@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/07 17:54:20 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/07 19:24:28 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 # INPUTS
 
 SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
-				sphere.c $(TUPLES) $(MATRIX)
+				sphere.c $(TUPLES) $(MATRICES)
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   matrix_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 10:32:30 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/08 10:29:03 by sguilher          #+#    #+#             */
+/*   Updated: 2022/10/08 11:14:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-int	main(void)
+void	matrix_tests(void)
 {
-	points_tests();
-	vectors_tests();
-	points_and_vectors_tests();
-	projectile_test();
-	ray_tests();
-	//sphere_tests();
-	matrix_tests();
-	return (0);
+	printf(YELLOW "Matrix tests: \n" END);
+	all_matrix_multiply_tests();
+	determinant_test_cases();
+	submatrix_test_cases();
+	cofactor_test_cases();
 }

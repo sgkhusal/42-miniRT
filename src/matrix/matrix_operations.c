@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elrailra-aira- <lraira-a-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/07 18:46:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:02:16 by lraira-a-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,42 +41,75 @@ t_matrix	matrix_transpose(t_matrix matrix)
 	return (res);
 }
 
-t_matrix	get_submatrix(t_matrix m, int column)
+/**
+ * @brief A submatrix is what is left when you delete a single row and column
+ * from a matrix.
+ *
+ * @param m The matrix from which a submatrix will be created.
+ * @param row The row to be deleted in the matrix.
+ * @param column The column to be deleted in the matrix.
+ * @return t_matrix The created submatrix.
+ */
+t_matrix	get_submatrix(t_matrix m, int row, int column)
 {
 	t_matrix submatrix;
 	int i;
 	int j;
 	int k;
+	int	l;
 
 	submatrix = create_matrix(m.size - 1);
-	i = 1;
-	while (i < submatrix.size)
+	i = -1;
+	k = 0;
+	while (++i < submatrix.size)
 	{
 		j = 0;
-		k = 0;
+		l = 0;
+		if (k == row)
+			k++;
 		while (j < submatrix.size)
 		{
-			if (k != column)
-			{
-				submatrix.matrix[i - 1][j] = m.matrix[i][k];
-				j++;
-			}
-			k++;
+			if (l == column)
+				l++;
+			submatrix.matrix[i][j] = m.matrix[k][l];
+			j++;
+			l++;
 		}
-		i++;
+		k++;
 	}
 	return (submatrix);
 }
 
-double	get_matrix_minor(t_matrix m, int column)
+/**
+ * @brief The minor is the determinant of the submatrix.
+ *
+ * @param m The matrix from which the submatrix wil be obtained.
+ * @return double The minor of the submatrix.
+ */
+double	get_matrix_minor(t_matrix m, int row, int column)
 {
-	t_matrix submatrix;
+	t_matrix	submatrix;
 
-	submatrix = get_submatrix(m, column);
-	if (column / 2 == 0)
-		return (get_matrix_determinant(submatrix));
+	submatrix = get_submatrix(m, row, column);
+	return(get_matrix_determinant(submatrix));
+}
+
+/**
+ * @brief Cofactors are are minors that have (possibly) had their sign changed.
+ * If row + column is an odd number, then minor is negated. Otherwise, it is
+ * returned as is.
+ * @param m The matrix from which the cofactor will be obtained.
+ * @return double The cofactor of the minor.
+ */
+double	get_matrix_cofactor(t_matrix m, int row, int column)
+{
+	double minor;
+
+	minor = get_matrix_minor(m, row, column);
+	if ((column + row) % 2 == 0)
+		return (minor);
 	else
-		return (-get_matrix_determinant(submatrix));
+		return ((-1) * minor);
 }
 
 double	get_matrix_determinant(t_matrix m)
@@ -93,16 +126,9 @@ double	get_matrix_determinant(t_matrix m)
 		i = 0;
 		while (i < m.size)
 		{
-			det += m.matrix[0][i] * get_matrix_minor(m, i);
+			det += m.matrix[0][i] * get_matrix_cofactor(m, 0, i);
 			i++;
 		}
 	}
 	return (det);
 }
-
-/*
-A submatrix is what is left when you delete a single row and column from
-a matrix.
-The minor of an element at row i and column j is the determinant of the
-sub- matrix at (i,j).
-Cofactors are are minors that have (possibly) had their sign changed.*/

@@ -153,5 +153,10 @@ bool			check_equal_matrices(t_matrix m1, t_matrix m2);
 t_matrix 		multiply_matrix(t_matrix m1, t_matrix m2);
 t_vector		multiply_matrix_by_vector(t_matrix m, t_vector v);
 t_point			multiply_matrix_by_point(t_matrix m, t_point p);
+t_matrix		matrix_transpose(t_matrix matrix);
+t_matrix		get_submatrix(t_matrix m, int row, int column);
+double			get_matrix_minor(t_matrix m, int row, int column);
+double			get_matrix_determinant(t_matrix m);
+double			get_matrix_cofactor(t_matrix m, int row, int column);
 
 #endif
