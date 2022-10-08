@@ -158,5 +158,7 @@ t_matrix		get_submatrix(t_matrix m, int row, int column);
 double			get_matrix_minor(t_matrix m, int row, int column);
 double			get_matrix_determinant(t_matrix m);
 double			get_matrix_cofactor(t_matrix m, int row, int column);
+bool			is_invertible(t_matrix matrix);
+t_matrix		get_matrix_inverse(t_matrix m);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:29:03 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 11:14:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/08 12:34:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,6 @@ void	matrix_tests(void)
 	determinant_test_cases();
 	submatrix_test_cases();
 	cofactor_test_cases();
+	inverse_matrix_test_cases();
+	inverse_matrix_ultimate_test();
 }

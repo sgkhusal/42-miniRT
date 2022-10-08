@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by coder             #+#    #+#              #
-#    Updated: 2022/10/07 19:24:28 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/08 11:51:591 by elraira-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c $(TUPLES) $(MATRICES)
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
-MATRICES =		matrix.c matrix_multiply.c matrix_operations.c
+MATRICES =		matrix.c matrix_multiply.c matrix_operations.c matrix_inverse.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		minirt.h
