@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_tests.c                                     :+:      :+:    :+:   */
+/*   multiply_test.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:25:32 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/07 15:27:509 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/10/08 10:45:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,4 +194,12 @@ void	multiply_matrix_by_identity_test(void)
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(m);
+}
+
+void	all_matrix_multiply_tests(void)
+{
+	multiply_matrix_test();
+	multiply_by_vector_test();
+	multiply_by_point_test();
+	multiply_matrix_by_identity_test();
 }
