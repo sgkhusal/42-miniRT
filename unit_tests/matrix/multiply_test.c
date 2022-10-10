@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:25:32 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 15:31:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:37:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ void	multiply_matrix_by_identity_test(void)
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(m);
+	free_matrix(res);
 }
 
 void	all_matrix_multiply_tests(void)

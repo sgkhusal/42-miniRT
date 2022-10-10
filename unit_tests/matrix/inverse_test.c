@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:35:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:47:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	inverse_matrix_test(t_matrix m, t_matrix expected)
 		i++;
 	}
 	printf(GREEN "OK" END "\n");
+	free_matrix(result);
 	n++;
 }
 
@@ -105,6 +106,11 @@ void	inverse_matrix_ultimate_test(void)
 		i++;
 	}
 	printf(GREEN "OK" END "\n");
+	free_matrix(a);
+	free_matrix(b);
+	free_matrix(c);
+	free_matrix(d);
+	free_matrix(b_inverse);
 }
 
 void	inverse_matrix_test_cases(void)

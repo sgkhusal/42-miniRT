@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 15:21:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 17:11:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:51:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	rotation_x_test1(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_matrix(rotation);
 	printf(GREY "rotation_x_test 2: " END);
 	rotation = rotation_x_matrix(M_PI / 2);
 	res = multiply_matrix_by_point(rotation, p);
@@ -79,6 +80,7 @@ void	rotation_y_test(void)
 	else
 		printf(RED "KO" END "\n");
 	printf(GREY "rotation_y_test 2: " END);
+	free_matrix(rotation);
 	point = set_point(0, 0, 1);
 	rotation = rotation_y_matrix(M_PI / 2);
 	point = multiply_matrix_by_point(rotation, point);
@@ -87,6 +89,7 @@ void	rotation_y_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_matrix(rotation);
 }
 
 void	rotation_z_test(void)
@@ -105,6 +108,7 @@ void	rotation_z_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_matrix(rotation);
 	printf(GREY "rotation_z_test 2: " END);
 	point = set_point(0, 1, 0);
 	rotation = rotation_z_matrix(M_PI / 2);
@@ -114,6 +118,7 @@ void	rotation_z_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_matrix(rotation);
 }
 
 void	rotation_test(void)

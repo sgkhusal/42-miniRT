@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 16:39:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:40:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,12 @@ t_matrix	get_submatrix(t_matrix m, int row, int column)
 double	get_minor(t_matrix m, int row, int column)
 {
 	t_matrix	submatrix;
+	double		minor;
 
 	submatrix = get_submatrix(m, row, column);
-	return (get_determinant(submatrix));
+	minor = get_determinant(submatrix);
+	free_matrix(submatrix);
+	return (minor);
 }
 
 /**

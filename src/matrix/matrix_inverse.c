@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:33:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:40:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:46:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_matrix	inverse_matrix(t_matrix m)
 		return (identity_matrix(m.size));
 	cofactor = cofactor_matrix(m);
 	inverse = transposed_matrix(cofactor);
+	free_matrix(cofactor);
 	i = 0;
 	while (i < inverse.size)
 	{

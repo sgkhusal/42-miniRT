@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:42:03 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:16:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 20:55:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	scenario2(void)
 	t_matrix	scaling;
 	t_matrix	translation;
 	t_matrix	m1;
+	t_matrix	m2;
 
 	printf(GREY "chaining_scenario_2_test: " END);
-	m1 = create_matrix(4);
 	point = set_point(1, 0, 1);
 	rotation = rotation_x_matrix(M_PI / 2);
 	scaling = scaling_matrix(5, 5, 5);
 	translation = translation_matrix(10, 5, 7);
 	m1 = multiply_matrix(translation, scaling);
-	m1 = multiply_matrix(m1, rotation);
-	result = multiply_matrix_by_point(m1, point);
+	m2 = multiply_matrix(m1, rotation);
+	result = multiply_matrix_by_point(m2, point);
 	if (check_double_values(result.x, 15)
 		&& check_double_values(result.y, 0)
 		&& check_double_values(result.z, 7)
@@ -66,6 +66,7 @@ void	scenario2(void)
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(m1);
+	free_matrix(m2);
 	free_matrix(rotation);
 	free_matrix(scaling);
 	free_matrix(translation);
