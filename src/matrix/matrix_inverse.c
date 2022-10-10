@@ -12,21 +12,6 @@
 
 #include "minirt.h"
 
-/**
- * @brief Checks whether the matrix can be inverted or not depending on its
- * determinant value
- *
- * @param matrix the matrix to be checked whether it can be inverted or not
- * @return true if the matrix can be inverted
- * @return false if the matrix can not be inverted
- */
-bool	is_invertible(t_matrix matrix)
-{
-	if (get_determinant(matrix) != 0)
-		return (true);
-	return (false);
-}
-
 static t_matrix	cofactor_matrix(t_matrix m)
 {
 	t_matrix	cofactor;

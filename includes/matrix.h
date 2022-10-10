@@ -47,7 +47,6 @@ double			get_determinant(t_matrix m);
 t_matrix		get_submatrix(t_matrix m, int row, int column);
 double			get_minor(t_matrix m, int row, int column);
 double			get_cofactor(t_matrix m, int row, int column);
-bool			is_invertible(t_matrix matrix);
 t_matrix		inverse_matrix(t_matrix m);
 
 // transformations
