@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:33:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:35:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	inverse_matrix_test(t_matrix m, t_matrix expected)
 	int			j;
 
 	printf(GREY "inverse_matrix_test %d: " END, n);
-	result = get_matrix_inverse(m);
+	result = inverse_matrix(m);
 	i = 0;
 	while (i < m.size)
 	{
@@ -87,7 +87,7 @@ void	inverse_matrix_ultimate_test(void)
 	b.matrix[3][2] = 0;
 	b.matrix[3][3] = 5;
 	c = multiply_matrix(a, b);
-	b_inverse = get_matrix_inverse(b);
+	b_inverse = inverse_matrix(b);
 	d = multiply_matrix(c, b_inverse);
 	i = 0;
 	while (i < d.size)

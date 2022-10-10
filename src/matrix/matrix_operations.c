@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 15:52:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:39:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,25 @@
  * @param matrix The matrix to be transposed.
  * @return t_matrix The transposed matrix.
  */
-t_matrix	matrix_transpose(t_matrix matrix)
+t_matrix	transposed_matrix(t_matrix matrix)
 {
-	t_matrix	res;
+	t_matrix	transposed;
 	int			i;
 	int			j;
 
-	res = create_matrix(matrix.size);
+	transposed = create_matrix(matrix.size);
 	i = 0;
 	while (i < matrix.size)
 	{
 		j = 0;
 		while (j < matrix.size)
 		{
-			res.matrix[i][j] = matrix.matrix[j][i];
+			transposed.matrix[i][j] = matrix.matrix[j][i];
 			j++;
 		}
 		i++;
 	}
-	return (res);
+	return (transposed);
 }
 
 /**
@@ -85,12 +85,12 @@ t_matrix	get_submatrix(t_matrix m, int row, int column)
  * @param m The matrix from which the submatrix wil be obtained.
  * @return double The minor of the submatrix.
  */
-double	get_matrix_minor(t_matrix m, int row, int column)
+double	get_minor(t_matrix m, int row, int column)
 {
 	t_matrix	submatrix;
 
 	submatrix = get_submatrix(m, row, column);
-	return (get_matrix_determinant(submatrix));
+	return (get_determinant(submatrix));
 }
 
 /**
@@ -100,18 +100,18 @@ double	get_matrix_minor(t_matrix m, int row, int column)
  * @param m The matrix from which the cofactor will be obtained.
  * @return double The cofactor of the minor.
  */
-double	get_matrix_cofactor(t_matrix m, int row, int column)
+double	get_cofactor(t_matrix m, int row, int column)
 {
 	double	minor;
 
-	minor = get_matrix_minor(m, row, column);
+	minor = get_minor(m, row, column);
 	if ((column + row) % 2 == 0)
 		return (minor);
 	else
 		return ((-1) * minor);
 }
 
-double	get_matrix_determinant(t_matrix m)
+double	get_determinant(t_matrix m)
 {
 	double	det;
 	int		i;
@@ -125,7 +125,7 @@ double	get_matrix_determinant(t_matrix m)
 		i = 0;
 		while (i < m.size)
 		{
-			det += m.matrix[0][i] * get_matrix_cofactor(m, 0, i);
+			det += m.matrix[0][i] * get_cofactor(m, 0, i);
 			i++;
 		}
 	}

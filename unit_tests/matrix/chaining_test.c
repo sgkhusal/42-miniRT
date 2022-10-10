@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:42:03 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:29:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:16:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	scenario1(void)
 
 	printf(GREY "chaining_scenario_1_test: " END);
 	p = set_point(1, 0, 1);
-	rotation = rotation_x(M_PI / 2);
+	rotation = rotation_x_matrix(M_PI / 2);
 	scaling = scaling_matrix(5, 5, 5);
 	translation = translation_matrix(10, 5, 7);
 	result = multiply_matrix_by_point(rotation, p);
@@ -52,7 +52,7 @@ void	scenario2(void)
 	printf(GREY "chaining_scenario_2_test: " END);
 	m1 = create_matrix(4);
 	point = set_point(1, 0, 1);
-	rotation = rotation_x(M_PI / 2);
+	rotation = rotation_x_matrix(M_PI / 2);
 	scaling = scaling_matrix(5, 5, 5);
 	translation = translation_matrix(10, 5, 7);
 	m1 = multiply_matrix(translation, scaling);

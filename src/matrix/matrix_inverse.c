@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:33:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:38:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:40:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
  */
 bool	is_invertible(t_matrix matrix)
 {
-	if (get_matrix_determinant(matrix) != 0)
+	if (get_determinant(matrix) != 0)
 		return (true);
 	return (false);
 }
 
-t_matrix	get_cofactor_matrix(t_matrix m)
+static t_matrix	cofactor_matrix(t_matrix m)
 {
 	t_matrix	cofactor;
 	int			i;
@@ -39,7 +39,7 @@ t_matrix	get_cofactor_matrix(t_matrix m)
 	{
 		j = -1;
 		while (++j < m.size)
-			cofactor.matrix[i][j] = get_matrix_cofactor(m, i, j);
+			cofactor.matrix[i][j] = get_cofactor(m, i, j);
 	}
 	return (cofactor);
 }
@@ -48,7 +48,7 @@ t_matrix	get_cofactor_matrix(t_matrix m)
  * If matrix is not invertible, this function will return an identity matrix
  * (for future purposes) > talvez rever no futuro
  */
-t_matrix	get_matrix_inverse(t_matrix m)
+t_matrix	inverse_matrix(t_matrix m)
 {
 	t_matrix	cofactor;
 	t_matrix	inverse;
@@ -56,11 +56,11 @@ t_matrix	get_matrix_inverse(t_matrix m)
 	int			i;
 	int			j;
 
-	if (!is_invertible(m))
+	determinant = get_determinant(m);
+	if (determinant == 0)
 		return (identity_matrix(m.size));
-	cofactor = get_cofactor_matrix(m);
-	inverse = matrix_transpose(cofactor);
-	determinant = get_matrix_determinant(m);
+	cofactor = cofactor_matrix(m);
+	inverse = transposed_matrix(cofactor);
 	i = 0;
 	while (i < inverse.size)
 	{

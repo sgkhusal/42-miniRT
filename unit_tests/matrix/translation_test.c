@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:41:06 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:22:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:41:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	translation_test2(void)
 	t_point		res;
 
 	t = translation_matrix(5, -3, 2);
-	inverse = get_matrix_inverse(t);
+	inverse = inverse_matrix(t);
 	p = set_point(-3, 4, 5);
 	printf(GREY "translation_test 2: " END);
 	res = multiply_matrix_by_point(inverse, p);

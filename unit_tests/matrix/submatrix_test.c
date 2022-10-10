@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:26:32 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:28:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:13:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	submatrix_test(t_matrix m, int row, int column, t_matrix expected)
 	t_matrix	sub;
 	static int	n = 1;
 
-	printf(GREY "submatrix test %d: ", n);
+	printf(GREY "submatrix_test %d: ", n);
 	sub = get_submatrix(m, row, column);
 	if (check_equal_matrices(sub, expected))
 		printf(GREEN "OK" END "\n");

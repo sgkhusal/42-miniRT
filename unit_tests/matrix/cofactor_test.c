@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:26:49 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:23:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:33:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	cofactor_test(t_matrix m, int row, int column, double expected)
 	static int	n = 1;
 
 	printf(GREY "cofactor_test %d: ", n);
-	result = get_matrix_cofactor(m, row, column);
+	result = get_cofactor(m, row, column);
 	if (fabs(expected - result) < 0.0001)
 		printf(GREEN "OK" END "\n");
 	else

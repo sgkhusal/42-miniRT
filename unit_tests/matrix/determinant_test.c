@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:25:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:27:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:32:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	determinant_test(t_matrix matrix, double expected)
 	static int	n = 1;
 
 	printf(GREY "determinant_test %d: ", n);
-	result = get_matrix_determinant(matrix);
+	result = get_determinant(matrix);
 	if (fabs(expected - result) < 0.0001)
 		printf(GREEN "OK" END "\n");
 	else
@@ -32,7 +32,7 @@ void	invertible_test(t_matrix matrix, bool expected)
 	static int	n = 1;
 
 	printf(GREY "invertible_test %d: ", n);
-	result = get_matrix_determinant(matrix);
+	result = get_determinant(matrix);
 	if (expected == result)
 		printf(GREEN "OK" END "\n");
 	else

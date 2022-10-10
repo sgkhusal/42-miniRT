@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/08 16:15:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:00:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* The rotation will appear to be clockwise around the corresponding axis when
 viewed along that axis, toward the negative end. */
-t_matrix	rotation_x(double radians)
+t_matrix	rotation_x_matrix(double radians)
 {
 	t_matrix	rotation;
 
@@ -26,7 +26,7 @@ t_matrix	rotation_x(double radians)
 	return (rotation);
 }
 
-t_matrix	rotation_y(double radians)
+t_matrix	rotation_y_matrix(double radians)
 {
 	t_matrix	rotation;
 
@@ -38,7 +38,7 @@ t_matrix	rotation_y(double radians)
 	return (rotation);
 }
 
-t_matrix	rotation_z(double radians)
+t_matrix	rotation_z_matrix(double radians)
 {
 	t_matrix	rotation;
 

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:16:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 17:07:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(void)
 	points_tests();
 	vectors_tests();
 	points_and_vectors_tests();
-	projectile_test();
+	//projectile_test();
 	matrix_tests();
 	ray_tests();
 	//sphere_tests();
