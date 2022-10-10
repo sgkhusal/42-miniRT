@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 11:33:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:37:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_color	set_color(short int red, short int green, short int blue)
 	return (color);
 }
 
-t_vector multiply_colors(t_vector a, t_vector b)
+t_vector	multiply_colors(t_vector a, t_vector b)
 {
 	t_vector	color;
 

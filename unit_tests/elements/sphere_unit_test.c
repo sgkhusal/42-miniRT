@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:29:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/07 16:33:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:34:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	sphere_tests(void)
 	sphere_intersection_test(sphere, ray, 2, -6.0, -4.0);
 	free(sphere);
 	sphere = create_sphere(set_point(4, 3, 0), 1, set_color(255, 0, 0));
-	ray  = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));
+	ray = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));
 	sphere_intersection_test(sphere, ray, 2, 4.242641, 5.656854);
 }

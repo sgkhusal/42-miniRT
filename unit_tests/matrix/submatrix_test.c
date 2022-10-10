@@ -6,15 +6,15 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:26:32 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 11:09:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:28:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "unit_tests.h"
+#include "unit_tests.h"
 
 void	submatrix_test(t_matrix m, int row, int column, t_matrix expected)
 {
-	t_matrix sub;
+	t_matrix	sub;
 	static int	n = 1;
 
 	printf(GREY "submatrix test %d: ", n);
@@ -26,8 +26,7 @@ void	submatrix_test(t_matrix m, int row, int column, t_matrix expected)
 	n++;
 }
 
-
-void	submatrix_test_cases()
+void	submatrix_test_cases(void)
 {
 	t_matrix	m1;
 	t_matrix	m2;
@@ -44,18 +43,14 @@ void	submatrix_test_cases()
 	m1.matrix[2][0] = 0;
 	m1.matrix[2][1] = 6;
 	m1.matrix[2][2] = -3;
-
 	expected1 = create_matrix(2);
 	expected1.matrix[0][0] = -3;
 	expected1.matrix[0][1] = 2;
 	expected1.matrix[1][0] = 0;
 	expected1.matrix[1][1] = 6;
-
 	submatrix_test(m1, 0, 2, expected1);
-
 	free_matrix(m1);
 	free_matrix(expected1);
-
 	m2 = create_matrix(4);
 	m2.matrix[0][0] = -6;
 	m2.matrix[0][1] = 1;
@@ -73,7 +68,6 @@ void	submatrix_test_cases()
 	m2.matrix[3][1] = 1;
 	m2.matrix[3][2] = -1;
 	m2.matrix[3][3] = 1;
-
 	expected2 = create_matrix(3);
 	expected2.matrix[0][0] = -6;
 	expected2.matrix[0][1] = 1;
@@ -84,9 +78,7 @@ void	submatrix_test_cases()
 	expected2.matrix[2][0] = -7;
 	expected2.matrix[2][1] = -1;
 	expected2.matrix[2][2] = 1;
-
 	submatrix_test(m2, 2, 1, expected2);
-
 	free_matrix(m2);
 	free_matrix(expected2);
 }

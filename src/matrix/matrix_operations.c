@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elrailra-aira- <lraira-a-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/08 11:02:16 by lraira-a-         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:52:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,26 @@ t_matrix	matrix_transpose(t_matrix matrix)
  */
 t_matrix	get_submatrix(t_matrix m, int row, int column)
 {
-	t_matrix submatrix;
-	int i;
-	int j;
-	int k;
-	int	l;
+	t_matrix	submatrix;
+	int			i;
+	int			j;
+	int			k;
+	int			l;
 
 	submatrix = create_matrix(m.size - 1);
 	i = -1;
 	k = 0;
 	while (++i < submatrix.size)
 	{
-		j = 0;
+		j = -1;
 		l = 0;
 		if (k == row)
 			k++;
-		while (j < submatrix.size)
+		while (++j < submatrix.size)
 		{
 			if (l == column)
 				l++;
 			submatrix.matrix[i][j] = m.matrix[k][l];
-			j++;
 			l++;
 		}
 		k++;
@@ -91,7 +90,7 @@ double	get_matrix_minor(t_matrix m, int row, int column)
 	t_matrix	submatrix;
 
 	submatrix = get_submatrix(m, row, column);
-	return(get_matrix_determinant(submatrix));
+	return (get_matrix_determinant(submatrix));
 }
 
 /**
@@ -103,7 +102,7 @@ double	get_matrix_minor(t_matrix m, int row, int column)
  */
 double	get_matrix_cofactor(t_matrix m, int row, int column)
 {
-	double minor;
+	double	minor;
 
 	minor = get_matrix_minor(m, row, column);
 	if ((column + row) % 2 == 0)

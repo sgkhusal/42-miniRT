@@ -6,24 +6,23 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:25:32 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/08 10:45:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:31:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "unit_tests.h"
+#include "unit_tests.h"
 
 void	multiply_matrix_test(void)
 {
-	t_matrix m1;
-	t_matrix m2;
-	t_matrix res;
-	t_matrix expected;
+	t_matrix	m1;
+	t_matrix	m2;
+	t_matrix	res;
+	t_matrix	expected;
 
 	printf(GREY "multiply_matrix_test 1: ");
 	m1 = create_matrix(4);
 	m2 = create_matrix(4);
 	expected = create_matrix(4);
-
 	m1.matrix[0][0] = 1;
 	m1.matrix[0][1] = 2;
 	m1.matrix[0][2] = 3;
@@ -40,7 +39,6 @@ void	multiply_matrix_test(void)
 	m1.matrix[3][1] = 4;
 	m1.matrix[3][2] = 3;
 	m1.matrix[3][3] = 2;
-
 	m2.matrix[0][0] = -2;
 	m2.matrix[0][1] = 1;
 	m2.matrix[0][2] = 2;
@@ -57,7 +55,6 @@ void	multiply_matrix_test(void)
 	m2.matrix[3][1] = 2;
 	m2.matrix[3][2] = 7;
 	m2.matrix[3][3] = 8;
-
 	expected.matrix[0][0] = 20;
 	expected.matrix[0][1] = 22;
 	expected.matrix[0][2] = 50;
@@ -74,7 +71,6 @@ void	multiply_matrix_test(void)
 	expected.matrix[3][1] = 26;
 	expected.matrix[3][2] = 46;
 	expected.matrix[3][3] = 42;
-
 	res = multiply_matrix(m1, m2);
 	free_matrix(m1);
 	free_matrix(m2);
@@ -88,16 +84,15 @@ void	multiply_matrix_test(void)
 
 void	multiply_by_vector_test(void)
 {
-	t_matrix m;
-	t_vector v;
-	t_vector expected;
-	t_vector res;
+	t_matrix	m;
+	t_vector	v;
+	t_vector	expected;
+	t_vector	res;
 
 	printf(GREY "multiply_matrix_by_vector_test 1: ");
 	m = create_matrix(4);
 	v = set_vector(1, 2, 3);
 	expected = set_vector(14, 22, 32);
-
 	m.matrix[0][0] = 1;
 	m.matrix[0][1] = 2;
 	m.matrix[0][2] = 3;
@@ -114,7 +109,6 @@ void	multiply_by_vector_test(void)
 	m.matrix[3][1] = 0;
 	m.matrix[3][2] = 0;
 	m.matrix[3][3] = 1;
-
 	res = multiply_matrix_by_vector(m, v);
 	free_matrix(m);
 	if (res.x == expected.x && res.y == expected.y && res.z == expected.z)
@@ -125,16 +119,15 @@ void	multiply_by_vector_test(void)
 
 void	multiply_by_point_test(void)
 {
-	t_matrix m;
-	t_point p;
-	t_point expected;
-	t_point res;
+	t_matrix	m;
+	t_point		p;
+	t_point		expected;
+	t_point		res;
 
 	printf(GREY "multiply_matrix_by_point_test 1: ");
 	m = create_matrix(4);
 	p = set_point(1, 2, 3);
 	expected = set_point(18, 24, 33);
-
 	m.matrix[0][0] = 1;
 	m.matrix[0][1] = 2;
 	m.matrix[0][2] = 3;
@@ -151,7 +144,6 @@ void	multiply_by_point_test(void)
 	m.matrix[3][1] = 0;
 	m.matrix[3][2] = 0;
 	m.matrix[3][3] = 1;
-
 	res = multiply_matrix_by_point(m, p);
 	free_matrix(m);
 	if (res.x == expected.x && res.y == expected.y && res.z == expected.z)
@@ -162,14 +154,13 @@ void	multiply_by_point_test(void)
 
 void	multiply_matrix_by_identity_test(void)
 {
-	t_matrix m;
-	t_matrix identity;
-	t_matrix res;
+	t_matrix	m;
+	t_matrix	identity;
+	t_matrix	res;
 
 	printf(GREY "multiply_matrix_by_identity_test 1: ");
 	m = create_matrix(4);
 	identity = identity_matrix(4);
-
 	m.matrix[0][0] = 0;
 	m.matrix[0][1] = 1;
 	m.matrix[0][2] = 2;
@@ -186,7 +177,6 @@ void	multiply_matrix_by_identity_test(void)
 	m.matrix[3][1] = 8;
 	m.matrix[3][2] = 16;
 	m.matrix[3][3] = 32;
-
 	res = multiply_matrix(m, identity);
 	free_matrix(identity);
 	if (check_equal_matrices(m, res))

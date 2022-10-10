@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:45:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 12:26:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:50:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_point	set_point(double x, double y, double z)
 	point.x = x;
 	point.y = y;
 	point.z = z;
-	point.w = 1.0; // verificar se precisa
+	point.w = 1.0;
 	return (point);
 }
 

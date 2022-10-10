@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:17:06 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:38:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:32:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	shearing_test(t_matrix s, t_point expected)
 	static int	n = 1;
 
 	printf(GREY "shearing_test %d: " END, n);
-
 	p = set_point(2, 3, 4);
 	res = multiply_matrix_by_point(s, p);
 	if (check_double_values(res.x, expected.x)
@@ -71,4 +70,3 @@ void	shearing_test_cases(void)
 	matrix = shearing_matrix(shearing);
 	shearing_test(matrix, set_point(2, 3, 7));
 }
-

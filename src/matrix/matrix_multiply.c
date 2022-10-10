@@ -6,11 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/07 18:03:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:48:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minirt.h"
+#include "minirt.h"
 
 /**
  * @brief This function will multiply two equal size square matrices.
@@ -19,12 +19,12 @@
  * @param m2 The second matrix.
  * @return t_matrix The resulting matrix.
  */
-t_matrix multiply_matrix(t_matrix m1, t_matrix m2)
+t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 {
-	t_matrix res;
-	int i;
-	int j;
-	int k;
+	t_matrix	res;
+	int			i;
+	int			j;
+	int			k;
 
 	if (m1.size != m2.size)
 	{
@@ -33,7 +33,7 @@ t_matrix multiply_matrix(t_matrix m1, t_matrix m2)
 	}
 	i = -1;
 	res = create_matrix(m1.size);
-	while(++i < m1.size)
+	while (++i < m1.size)
 	{
 		j = -1;
 		while (++j < m2.size)
@@ -57,7 +57,7 @@ t_matrix multiply_matrix(t_matrix m1, t_matrix m2)
  */
 t_vector	multiply_matrix_by_vector(t_matrix m, t_vector v)
 {
-	t_vector res;
+	t_vector	res;
 
 	res.x = m.matrix[0][0] * v.x + m.matrix[0][1] * v.y
 		+ m.matrix[0][2] * v.z + m.matrix[0][3] * v.w;
@@ -80,7 +80,7 @@ t_vector	multiply_matrix_by_vector(t_matrix m, t_vector v)
  */
 t_point	multiply_matrix_by_point(t_matrix m, t_point p)
 {
-	t_point res;
+	t_point	res;
 
 	res.x = m.matrix[0][0] * p.x + m.matrix[0][1] * p.y
 		+ m.matrix[0][2] * p.z + m.matrix[0][3] * p.w;

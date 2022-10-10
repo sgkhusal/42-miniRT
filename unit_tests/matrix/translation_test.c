@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_test.c                                   :+:      :+:    :+:   */
+/*   translation_test.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:41:06 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 14:54:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:22:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	translation_test1()
+void	translation_test1(void)
 {
 	t_matrix	t;
 	t_point		p;
@@ -29,7 +29,7 @@ void	translation_test1()
 	free_matrix(t);
 }
 
-void	translation_test2()
+void	translation_test2(void)
 {
 	t_matrix	t;
 	t_matrix	inverse;
@@ -38,7 +38,6 @@ void	translation_test2()
 
 	t = translation_matrix(5, -3, 2);
 	inverse = get_matrix_inverse(t);
-
 	p = set_point(-3, 4, 5);
 	printf(GREY "translation_test 2: " END);
 	res = multiply_matrix_by_point(inverse, p);
@@ -50,7 +49,7 @@ void	translation_test2()
 	free_matrix(inverse);
 }
 
-void	translation_test3()
+void	translation_test3(void)
 {
 	t_matrix	t;
 	t_vector	v;
@@ -67,7 +66,7 @@ void	translation_test3()
 	free_matrix(t);
 }
 
-void	translation_test()
+void	translation_test(void)
 {
 	translation_test1();
 	translation_test2();

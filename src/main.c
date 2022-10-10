@@ -63,8 +63,8 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 void	sphere_test(void)
 {
 	t_intersection	*intersection;
-	t_sphere	*sphere;
-	t_ray		ray;
+	t_sphere		*sphere;
+	t_ray			ray;
 
 	sphere = create_sphere(set_point(4, 3, 0), 1, set_color(255, 0, 0));
 	ray = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));

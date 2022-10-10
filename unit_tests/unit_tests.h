@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:51:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:17:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	chaining_test(void);
 void	ray_tests(void);
 void	set_sphere_test(void);
 void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int count,
-					double t1, double t2);
+			double t1, double t2);
 void	sphere_tests(void);
 
 bool	check_double_values(double a, double b);

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:42:03 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:57:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:29:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	scenario2(void)
 	if (check_double_values(result.x, 15)
 		&& check_double_values(result.y, 0)
 		&& check_double_values(result.z, 7)
-		&& check_double_values(result.w, 1 ))
+		&& check_double_values(result.w, 1))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");

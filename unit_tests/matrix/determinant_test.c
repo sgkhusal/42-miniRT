@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   determinant_test.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lraira-aira- <elralraira-a-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:25:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 10:35:58 by elralraira-a-         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:27:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "unit_tests.h"
+#include "unit_tests.h"
 
 void	determinant_test(t_matrix matrix, double expected)
 {
@@ -40,7 +40,7 @@ void	invertible_test(t_matrix matrix, bool expected)
 	n++;
 }
 
-void	determinant_test_cases()
+void	determinant_test_cases(void)
 {
 	t_matrix	m1;
 	t_matrix	m2;
@@ -55,7 +55,6 @@ void	determinant_test_cases()
 	m1.matrix[1][1] = 2;
 	determinant_test(m1, 17);
 	free_matrix(m1);
-
 	m2 = create_matrix(3);
 	m2.matrix[0][0] = 1;
 	m2.matrix[0][1] = 2;
@@ -68,7 +67,6 @@ void	determinant_test_cases()
 	m2.matrix[2][2] = 4;
 	determinant_test(m2, -196);
 	free_matrix(m2);
-
 	m3 = create_matrix(4);
 	m3.matrix[0][0] = -2;
 	m3.matrix[0][1] = -8;
@@ -88,7 +86,6 @@ void	determinant_test_cases()
 	m3.matrix[3][3] = -9;
 	determinant_test(m3, -4071);
 	free_matrix(m3);
-
 	m4 = create_matrix(4);
 	m4.matrix[0][0] = 6;
 	m4.matrix[0][1] = 4;
@@ -109,7 +106,6 @@ void	determinant_test_cases()
 	determinant_test(m4, -2120);
 	invertible_test(m4, true);
 	free_matrix(m4);
-
 	non_invertible = create_matrix(4);
 	non_invertible.matrix[0][0] = -4;
 	non_invertible.matrix[0][1] = 2;
@@ -131,4 +127,3 @@ void	determinant_test_cases()
 	invertible_test(non_invertible, false);
 	free_matrix(non_invertible);
 }
-

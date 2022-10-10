@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/07 15:05:208 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:54:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_vector
 	double	x;
 	double	y;
 	double	z;
-	double	w; // TODO: verificar se será necessário
+	double	w;
 }				t_vector;
 
 typedef struct s_point
@@ -52,7 +52,7 @@ typedef struct s_point
 	double	x;
 	double	y;
 	double	z;
-	double	w; // TODO: verificar se será necessário
+	double	w;
 }				t_point;
 
 typedef struct s_ray
@@ -101,14 +101,14 @@ typedef struct s_intersection
 	double					t1;
 	double					t2;
 	int						type;
-	double					hit; // a intersecção visível
+	double					hit;
 	struct s_intersection	*next;
 }				t_intersection;
 
 typedef struct intersection_list
 {
 	t_intersection	*intersection;
-	int		count;
+	int				count;
 }				t_intersection_list;
 
 typedef struct s_rt
@@ -160,7 +160,7 @@ void			free_matrix(t_matrix m);
 void			print_matrix(t_matrix m);
 t_matrix		identity_matrix(int size);
 bool			check_equal_matrices(t_matrix m1, t_matrix m2);
-t_matrix 		multiply_matrix(t_matrix m1, t_matrix m2);
+t_matrix		multiply_matrix(t_matrix m1, t_matrix m2);
 t_vector		multiply_matrix_by_vector(t_matrix m, t_vector v);
 t_point			multiply_matrix_by_point(t_matrix m, t_point p);
 t_matrix		matrix_transpose(t_matrix matrix);

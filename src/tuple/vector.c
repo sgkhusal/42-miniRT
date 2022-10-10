@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/06 11:56:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:49:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vector	set_vector(double x, double y, double z)
 	vector.x = x;
 	vector.y = y;
 	vector.z = z;
-	vector.w = 0.0; // verificar se precisa
+	vector.w = 0.0;
 	return (vector);
 }
 

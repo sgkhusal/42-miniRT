@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:05:52 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/07 14:47:033 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:52:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,19 @@ t_matrix	create_matrix(int size)
 	int			i;
 
 	m.size = size;
-	m.matrix = (double **)malloc(sizeof(double *) * size);
-	if(!m.matrix)
+	m.matrix = (double **) malloc(sizeof(double *) * size);
+	if (!m.matrix)
 		minirt_malloc_error("create_matrix");
 	i = 0;
 	while (i < size)
 	{
 		m.matrix[i] = (double *)malloc(sizeof(double) * size);
-		if(!m.matrix[i])
+		if (!m.matrix[i])
 			minirt_malloc_error("create_matrix");
 		i++;
 	}
 	return (m);
 }
-
 
 void	free_matrix(t_matrix m)
 {

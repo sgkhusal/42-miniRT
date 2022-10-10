@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:33:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 11:56:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:38:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ bool	is_invertible(t_matrix matrix)
 t_matrix	get_cofactor_matrix(t_matrix m)
 {
 	t_matrix	cofactor;
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 
 	cofactor = create_matrix(m.size);
 	i = -1;
@@ -53,8 +53,8 @@ t_matrix	get_matrix_inverse(t_matrix m)
 	t_matrix	cofactor;
 	t_matrix	inverse;
 	double		determinant;
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 
 	if (!is_invertible(m))
 		return (identity_matrix(m.size));

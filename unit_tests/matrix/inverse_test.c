@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 12:35:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:33:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	inverse_matrix_test(t_matrix m, t_matrix expected)
 {
-	t_matrix result;
-	static int n = 1;
+	t_matrix	result;
+	static int	n = 1;
 	int			i;
 	int			j;
 
@@ -52,7 +52,6 @@ void	inverse_matrix_ultimate_test(void)
 	int			j;
 
 	printf(GREY "inverse_matrix_ultimate_test: " END);
-
 	a = create_matrix(4);
 	a.matrix[0][0] = 3;
 	a.matrix[0][1] = -9;
@@ -70,7 +69,6 @@ void	inverse_matrix_ultimate_test(void)
 	a.matrix[3][1] = 5;
 	a.matrix[3][2] = -1;
 	a.matrix[3][3] = 1;
-
 	b = create_matrix(4);
 	b.matrix[0][0] = 8;
 	b.matrix[0][1] = 2;
@@ -88,7 +86,6 @@ void	inverse_matrix_ultimate_test(void)
 	b.matrix[3][1] = -2;
 	b.matrix[3][2] = 0;
 	b.matrix[3][3] = 5;
-
 	c = multiply_matrix(a, b);
 	b_inverse = get_matrix_inverse(b);
 	d = multiply_matrix(c, b_inverse);
@@ -132,7 +129,6 @@ void	inverse_matrix_test_cases(void)
 	m1.matrix[3][1] = -3;
 	m1.matrix[3][2] = 7;
 	m1.matrix[3][3] = 4;
-
 	expected = create_matrix(4);
 	expected.matrix[0][0] = 0.21805;
 	expected.matrix[0][1] = 0.45113;
@@ -150,9 +146,7 @@ void	inverse_matrix_test_cases(void)
 	expected.matrix[3][1] = -0.81391;
 	expected.matrix[3][2] = -0.30075;
 	expected.matrix[3][3] = 0.30639;
-
 	inverse_matrix_test(m1, expected);
-
 	m1.matrix[0][0] = 8;
 	m1.matrix[0][1] = -5;
 	m1.matrix[0][2] = 9;
@@ -169,7 +163,6 @@ void	inverse_matrix_test_cases(void)
 	m1.matrix[3][1] = 0;
 	m1.matrix[3][2] = -9;
 	m1.matrix[3][3] = -4;
-
 	expected.matrix[0][0] = -0.15385;
 	expected.matrix[0][1] = -0.15385;
 	expected.matrix[0][2] = -0.28205;
@@ -186,9 +179,7 @@ void	inverse_matrix_test_cases(void)
 	expected.matrix[3][1] = -0.69231;
 	expected.matrix[3][2] = -0.76923;
 	expected.matrix[3][3] = -1.92308;
-
 	inverse_matrix_test(m1, expected);
-
 	m1.matrix[0][0] = 9;
 	m1.matrix[0][1] = 3;
 	m1.matrix[0][2] = 0;
@@ -205,7 +196,6 @@ void	inverse_matrix_test_cases(void)
 	m1.matrix[3][1] = 6;
 	m1.matrix[3][2] = 6;
 	m1.matrix[3][3] = 2;
-
 	expected.matrix[0][0] = -0.04074;
 	expected.matrix[0][1] = -0.07778;
 	expected.matrix[0][2] = 0.14444;
@@ -222,9 +212,7 @@ void	inverse_matrix_test_cases(void)
 	expected.matrix[3][1] = 0.06667;
 	expected.matrix[3][2] = -0.26667;
 	expected.matrix[3][3] = 0.33333;
-
 	inverse_matrix_test(m1, expected);
-
 	free_matrix(m1);
 	free_matrix(expected);
 }
