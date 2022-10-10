@@ -20,6 +20,6 @@ int	main(void)
 	//projectile_test();
 	matrix_tests();
 	ray_tests();
-	//sphere_tests();
+	sphere_tests();
 	return (0);
 }

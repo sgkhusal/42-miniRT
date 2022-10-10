@@ -16,7 +16,7 @@ static void	minor_test(t_matrix m1, int row, int column, double expected)
 {
 	double		minor;
 	static int	n = 1;
-	
+
 	printf(GREY "minor_test %d: ", n);
 	minor = get_minor(m1, row, column);
 	if (minor == expected)

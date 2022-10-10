@@ -29,23 +29,39 @@ void	set_sphere_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free(sphere);
 }
 
-void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int hit,
-					double t1, double t2)
+void	sphere_intersection_test(t_sphere *sphere, t_ray ray, double t1,
+				double t2)
 {
 	t_intersection	*intersections;
 	static int		n = 1;
 
-	printf(GREY "sphere intersection test %d: " END, n);
+	printf(GREY "sphere_intersection_test %d: " END, n);
 	intersections = sphere_intersection(ray, *sphere);
-	if (intersections->hit == hit
-		&& check_double_values(intersections->t1, t1)
+	if (check_double_values(intersections->t1, t1)
 		&& check_double_values(intersections->t2, t2))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 	n++;
+	free(intersections);
+}
+
+void	sphere_no_intersection_test(t_sphere *sphere, t_ray ray)
+{
+	t_intersection	*intersections;
+
+	printf(GREY "sphere_no_intersection_test 1: " END);
+	intersections = sphere_intersection(ray, *sphere);
+	if (!intersections)
+		printf(GREEN "OK" END "\n");
+	else
+	{
+		printf(RED "KO" END "\n");
+		free(intersections);
+	}
 }
 
 void	sphere_tests(void)
@@ -53,21 +69,22 @@ void	sphere_tests(void)
 	t_sphere	*sphere;
 	t_ray		ray;
 
-	sphere = create_sphere(set_point(0, 0, 0), 1, set_color(255, 0, 0));
 	printf(YELLOW "Sphere tests: " END "\n");
 	set_sphere_test();
+	sphere = create_sphere(set_point(0, 0, 0), 1, set_color(255, 0, 0));
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
-	sphere_intersection_test(sphere, ray, 2, 4.0, 6.0);
+	sphere_intersection_test(sphere, ray, 4.0, 6.0);
 	ray = set_ray(set_point(0, 1, -5), set_vector(0, 0, 1));
-	sphere_intersection_test(sphere, ray, 2, 5.0, 5.0);
+	sphere_intersection_test(sphere, ray, 5.0, 5.0);
 	ray = set_ray(set_point(0, 2, -5), set_vector(0, 0, 1));
-	sphere_intersection_test(sphere, ray, 0, 0, 0);
+	sphere_no_intersection_test(sphere, ray);
 	ray = set_ray(set_point(0, 0, 0), set_vector(0, 0, 1));
-	sphere_intersection_test(sphere, ray, 2, -1.0, 1.0);
+	sphere_intersection_test(sphere, ray, -1.0, 1.0);
 	ray = set_ray(set_point(0, 0, 5), set_vector(0, 0, 1));
-	sphere_intersection_test(sphere, ray, 2, -6.0, -4.0);
+	sphere_intersection_test(sphere, ray, -6.0, -4.0);
 	free(sphere);
 	sphere = create_sphere(set_point(4, 3, 0), 1, set_color(255, 0, 0));
 	ray = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));
-	sphere_intersection_test(sphere, ray, 2, 4.242641, 5.656854);
+	sphere_intersection_test(sphere, ray, 4.242641, 5.656854);
+	free(sphere);
 }

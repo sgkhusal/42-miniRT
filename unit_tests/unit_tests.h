@@ -76,8 +76,8 @@ void	chaining_test(void);
 
 void	ray_tests(void);
 void	set_sphere_test(void);
-void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int count,
-			double t1, double t2);
+void	sphere_intersection_test(t_sphere *sphere, t_ray ray, double t1,
+			double t2);
 void	sphere_tests(void);
 
 bool	check_double_values(double a, double b);

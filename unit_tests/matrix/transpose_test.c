@@ -15,7 +15,7 @@
 static void	transpose_test(t_matrix m1, t_matrix expected)
 {
 	t_matrix	transposed;
-	
+
 	printf(GREY "transpose_test 1: ");
 	transposed = transposed_matrix(m1);
 	if (check_equal_matrices(transposed, expected))
