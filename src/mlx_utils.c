@@ -59,7 +59,7 @@ static int	key_press(int key, t_mlx *mlx)
 
 void	set_mlx_hooks(t_mlx *mlx)
 {
-	mlx_expose_hook(mlx->window, &put_image_again, mlx);
-	mlx_hook(mlx->window, DESTROY_NOTIFY, BUTTON_PRESS_MASK, close_minirt, mlx);
-	mlx_hook(mlx->window, KEY_PRESS, KEY_PRESS_MASK, key_press, mlx);
+	mlx_expose_hook(mlx->window, put_image_again, mlx);
+	mlx_hook(mlx->window, DESTROY_NOTIFY, 1L << 2, close_minirt, mlx);
+	mlx_hook(mlx->window, KEY_PRESS, 1L << 0, key_press, mlx);
 }
