@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/10 17:14:58 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/10 22:46:40 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,12 @@ SRCS =			main.c \
 				vector_operations_unit_test2.c \
 				points_and_vectors_unit_test.c \
 				projectile_test.c \
-				ray_unit_test.c \
-				sphere_unit_test.c \
 				matrix_test.c \
+				equality_test.c \
 				multiply_test.c \
+				identity_test.c \
+				transpose_test.c \
+				minor_test.c \
 				submatrix_test.c \
 				determinant_test.c \
 				cofactor_test.c \
@@ -43,6 +45,8 @@ SRCS =			main.c \
 				rotation_test.c \
 				shearing_test.c \
 				chaining_test.c \
+				ray_unit_test.c \
+				sphere_unit_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
