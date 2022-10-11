@@ -39,7 +39,7 @@ SRCS =			main.c \
 				submatrix_test.c \
 				determinant_test_1.c determinant_test_2.c \
 				cofactor_test.c \
-				inverse_test_1.c inverse_test_2.c \
+				inverse_test_1.c inverse_test_2.c inverse_test_3.c \
 				translation_test.c \
 				scaling_test.c \
 				rotation_test.c \

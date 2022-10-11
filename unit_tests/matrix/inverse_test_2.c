@@ -12,95 +12,115 @@
 
 #include "unit_tests.h"
 
-static t_matrix	matrix_a(void)
+static t_matrix	m2(void)
 {
-	t_matrix	a;
+	t_matrix	m;
 
-	a = create_matrix(4);
-	a.matrix[0][0] = 3;
-	a.matrix[0][1] = -9;
-	a.matrix[0][2] = 7;
-	a.matrix[0][3] = 3;
-	a.matrix[1][0] = 3;
-	a.matrix[1][1] = -8;
-	a.matrix[1][2] = 2;
-	a.matrix[1][3] = -9;
-	a.matrix[2][0] = -4;
-	a.matrix[2][1] = 4;
-	a.matrix[2][2] = 4;
-	a.matrix[2][3] = 1;
-	a.matrix[3][0] = -6;
-	a.matrix[3][1] = 5;
-	a.matrix[3][2] = -1;
-	a.matrix[3][3] = 1;
-	return (a);
+	m = create_matrix(4);
+	m.matrix[0][0] = 8;
+	m.matrix[0][1] = -5;
+	m.matrix[0][2] = 9;
+	m.matrix[0][3] = 2;
+	m.matrix[1][0] = 7;
+	m.matrix[1][1] = 5;
+	m.matrix[1][2] = 6;
+	m.matrix[1][3] = 1;
+	m.matrix[2][0] = -6;
+	m.matrix[2][1] = 0;
+	m.matrix[2][2] = 9;
+	m.matrix[2][3] = 6;
+	m.matrix[3][0] = -3;
+	m.matrix[3][1] = 0;
+	m.matrix[3][2] = -9;
+	m.matrix[3][3] = -4;
+	return (m);
 }
 
-static t_matrix	matrix_b(void)
+static t_matrix	expected2(void)
 {
-	t_matrix	b;
+	t_matrix	m;
 
-	b = create_matrix(4);
-	b.matrix[0][0] = 8;
-	b.matrix[0][1] = 2;
-	b.matrix[0][2] = 2;
-	b.matrix[0][3] = 2;
-	b.matrix[1][0] = 3;
-	b.matrix[1][1] = -1;
-	b.matrix[1][2] = 7;
-	b.matrix[1][3] = 0;
-	b.matrix[2][0] = 7;
-	b.matrix[2][1] = 0;
-	b.matrix[2][2] = 5;
-	b.matrix[2][3] = 4;
-	b.matrix[3][0] = 6;
-	b.matrix[3][1] = -2;
-	b.matrix[3][2] = 0;
-	b.matrix[3][3] = 5;
-	return (b);
+	m = create_matrix(4);
+	m.matrix[0][0] = -0.15385;
+	m.matrix[0][1] = -0.15385;
+	m.matrix[0][2] = -0.28205;
+	m.matrix[0][3] = -0.53846;
+	m.matrix[1][0] = -0.07692;
+	m.matrix[1][1] = 0.12308;
+	m.matrix[1][2] = 0.02564;
+	m.matrix[1][3] = 0.03077;
+	m.matrix[2][0] = 0.35897;
+	m.matrix[2][1] = 0.35897;
+	m.matrix[2][2] = 0.43590;
+	m.matrix[2][3] = 0.92308;
+	m.matrix[3][0] = -0.69231;
+	m.matrix[3][1] = -0.69231;
+	m.matrix[3][2] = -0.76923;
+	m.matrix[3][3] = -1.92308;
+	return (m);
 }
 
-static void	check_result(t_matrix a, t_matrix d)
+static t_matrix	m3(void)
 {
-	int			i;
-	int			j;
+	t_matrix	m;
 
-	i = 0;
-	while (i < d.size)
-	{
-		j = 0;
-		while (j < d.size)
-		{
-			if (check_double_values(d.matrix[i][j], a.matrix[i][j]) == false)
-			{
-				printf(RED "KO" END "\n");
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-	printf(GREEN "OK" END "\n");
+	m = create_matrix(4);
+	m.matrix[0][0] = 9;
+	m.matrix[0][1] = 3;
+	m.matrix[0][2] = 0;
+	m.matrix[0][3] = 9;
+	m.matrix[1][0] = -5;
+	m.matrix[1][1] = -2;
+	m.matrix[1][2] = -6;
+	m.matrix[1][3] = -3;
+	m.matrix[2][0] = -4;
+	m.matrix[2][1] = 9;
+	m.matrix[2][2] = 6;
+	m.matrix[2][3] = 4;
+	m.matrix[3][0] = -7;
+	m.matrix[3][1] = 6;
+	m.matrix[3][2] = 6;
+	m.matrix[3][3] = 2;
+	return (m);
 }
 
-void	inverse_matrix_ultimate_test(void)
+static t_matrix	expected3(void)
 {
-	t_matrix	a;
-	t_matrix	b;
-	t_matrix	c;
-	t_matrix	b_inverse;
-	t_matrix	d;
+	t_matrix	m;
 
-	printf(GREY "inverse_matrix_ultimate_test: " END);
-	a = matrix_a();
-	b = matrix_b();
-	c = multiply_matrix(a, b);
-	b_inverse = inverse_matrix(b);
-	d = multiply_matrix(c, b_inverse);
-	check_result(a, d);
-	free_matrix(a);
-	free_matrix(b);
-	free_matrix(c);
-	free_matrix(d);
-	free_matrix(b_inverse);
+	m = create_matrix(4);
+	m.matrix[0][0] = -0.04074;
+	m.matrix[0][1] = -0.07778;
+	m.matrix[0][2] = 0.14444;
+	m.matrix[0][3] = -0.22222;
+	m.matrix[1][0] = -0.07778;
+	m.matrix[1][1] = 0.03333;
+	m.matrix[1][2] = 0.36667;
+	m.matrix[1][3] = -0.33333;
+	m.matrix[2][0] = -0.02901;
+	m.matrix[2][1] = -0.14630;
+	m.matrix[2][2] = -0.10926;
+	m.matrix[2][3] = 0.12963;
+	m.matrix[3][0] = 0.17778;
+	m.matrix[3][1] = 0.06667;
+	m.matrix[3][2] = -0.26667;
+	m.matrix[3][3] = 0.33333;
+	return (m);
+}
+
+void	inverse_matrix_test_part2(void)
+{
+	t_matrix	m;
+	t_matrix	expected;
+
+	m = m2();
+	expected = expected2();
+	inverse_matrix_test(m, expected);
+	free_matrix(m);
+	free_matrix(expected);
+	m = m3();
+	expected = expected3();
+	inverse_matrix_test(m, expected);
+	free_matrix(m);
+	free_matrix(expected);
 }

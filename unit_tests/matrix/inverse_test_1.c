@@ -12,7 +12,7 @@
 
 #include "unit_tests.h"
 
-static void	inverse_matrix_test(t_matrix m, t_matrix expected)
+void	inverse_matrix_test(t_matrix m, t_matrix expected)
 {
 	t_matrix	result;
 	static int	n = 1;
@@ -40,112 +40,68 @@ static void	inverse_matrix_test(t_matrix m, t_matrix expected)
 	n++;
 }
 
-void	inverse_matrix_tests(void)
+static t_matrix	m1(void)
 {
-	t_matrix	m1;
+	t_matrix	m;
+
+	m = create_matrix(4);
+	m.matrix[0][0] = -5;
+	m.matrix[0][1] = 2;
+	m.matrix[0][2] = 6;
+	m.matrix[0][3] = -8;
+	m.matrix[1][0] = 1;
+	m.matrix[1][1] = -5;
+	m.matrix[1][2] = 1;
+	m.matrix[1][3] = 8;
+	m.matrix[2][0] = 7;
+	m.matrix[2][1] = 7;
+	m.matrix[2][2] = -6;
+	m.matrix[2][3] = -7;
+	m.matrix[3][0] = 1;
+	m.matrix[3][1] = -3;
+	m.matrix[3][2] = 7;
+	m.matrix[3][3] = 4;
+	return (m);
+}
+
+static t_matrix	expected1(void)
+{
+	t_matrix	m;
+
+	m = create_matrix(4);
+	m.matrix[0][0] = 0.21805;
+	m.matrix[0][1] = 0.45113;
+	m.matrix[0][2] = 0.24060;
+	m.matrix[0][3] = -0.04511;
+	m.matrix[1][0] = -0.80827;
+	m.matrix[1][1] = -1.45677;
+	m.matrix[1][2] = -0.44361;
+	m.matrix[1][3] = 0.52068;
+	m.matrix[2][0] = -0.07895;
+	m.matrix[2][1] = -0.22368;
+	m.matrix[2][2] = -0.05263;
+	m.matrix[2][3] = 0.19737;
+	m.matrix[3][0] = -0.52256;
+	m.matrix[3][1] = -0.81391;
+	m.matrix[3][2] = -0.30075;
+	m.matrix[3][3] = 0.30639;
+	return (m);
+}
+
+static void	inverse_matrix_test_part1(void)
+{
+	t_matrix	m;
 	t_matrix	expected;
 
-	m1 = create_matrix(4);
-	m1.matrix[0][0] = -5;
-	m1.matrix[0][1] = 2;
-	m1.matrix[0][2] = 6;
-	m1.matrix[0][3] = -8;
-	m1.matrix[1][0] = 1;
-	m1.matrix[1][1] = -5;
-	m1.matrix[1][2] = 1;
-	m1.matrix[1][3] = 8;
-	m1.matrix[2][0] = 7;
-	m1.matrix[2][1] = 7;
-	m1.matrix[2][2] = -6;
-	m1.matrix[2][3] = -7;
-	m1.matrix[3][0] = 1;
-	m1.matrix[3][1] = -3;
-	m1.matrix[3][2] = 7;
-	m1.matrix[3][3] = 4;
-	expected = create_matrix(4);
-	expected.matrix[0][0] = 0.21805;
-	expected.matrix[0][1] = 0.45113;
-	expected.matrix[0][2] = 0.24060;
-	expected.matrix[0][3] = -0.04511;
-	expected.matrix[1][0] = -0.80827;
-	expected.matrix[1][1] = -1.45677;
-	expected.matrix[1][2] = -0.44361;
-	expected.matrix[1][3] = 0.52068;
-	expected.matrix[2][0] = -0.07895;
-	expected.matrix[2][1] = -0.22368;
-	expected.matrix[2][2] = -0.05263;
-	expected.matrix[2][3] = 0.19737;
-	expected.matrix[3][0] = -0.52256;
-	expected.matrix[3][1] = -0.81391;
-	expected.matrix[3][2] = -0.30075;
-	expected.matrix[3][3] = 0.30639;
-	inverse_matrix_test(m1, expected);
-	m1.matrix[0][0] = 8;
-	m1.matrix[0][1] = -5;
-	m1.matrix[0][2] = 9;
-	m1.matrix[0][3] = 2;
-	m1.matrix[1][0] = 7;
-	m1.matrix[1][1] = 5;
-	m1.matrix[1][2] = 6;
-	m1.matrix[1][3] = 1;
-	m1.matrix[2][0] = -6;
-	m1.matrix[2][1] = 0;
-	m1.matrix[2][2] = 9;
-	m1.matrix[2][3] = 6;
-	m1.matrix[3][0] = -3;
-	m1.matrix[3][1] = 0;
-	m1.matrix[3][2] = -9;
-	m1.matrix[3][3] = -4;
-	expected.matrix[0][0] = -0.15385;
-	expected.matrix[0][1] = -0.15385;
-	expected.matrix[0][2] = -0.28205;
-	expected.matrix[0][3] = -0.53846;
-	expected.matrix[1][0] = -0.07692;
-	expected.matrix[1][1] = 0.12308;
-	expected.matrix[1][2] = 0.02564;
-	expected.matrix[1][3] = 0.03077;
-	expected.matrix[2][0] = 0.35897;
-	expected.matrix[2][1] = 0.35897;
-	expected.matrix[2][2] = 0.43590;
-	expected.matrix[2][3] = 0.92308;
-	expected.matrix[3][0] = -0.69231;
-	expected.matrix[3][1] = -0.69231;
-	expected.matrix[3][2] = -0.76923;
-	expected.matrix[3][3] = -1.92308;
-	inverse_matrix_test(m1, expected);
-	m1.matrix[0][0] = 9;
-	m1.matrix[0][1] = 3;
-	m1.matrix[0][2] = 0;
-	m1.matrix[0][3] = 9;
-	m1.matrix[1][0] = -5;
-	m1.matrix[1][1] = -2;
-	m1.matrix[1][2] = -6;
-	m1.matrix[1][3] = -3;
-	m1.matrix[2][0] = -4;
-	m1.matrix[2][1] = 9;
-	m1.matrix[2][2] = 6;
-	m1.matrix[2][3] = 4;
-	m1.matrix[3][0] = -7;
-	m1.matrix[3][1] = 6;
-	m1.matrix[3][2] = 6;
-	m1.matrix[3][3] = 2;
-	expected.matrix[0][0] = -0.04074;
-	expected.matrix[0][1] = -0.07778;
-	expected.matrix[0][2] = 0.14444;
-	expected.matrix[0][3] = -0.22222;
-	expected.matrix[1][0] = -0.07778;
-	expected.matrix[1][1] = 0.03333;
-	expected.matrix[1][2] = 0.36667;
-	expected.matrix[1][3] = -0.33333;
-	expected.matrix[2][0] = -0.02901;
-	expected.matrix[2][1] = -0.14630;
-	expected.matrix[2][2] = -0.10926;
-	expected.matrix[2][3] = 0.12963;
-	expected.matrix[3][0] = 0.17778;
-	expected.matrix[3][1] = 0.06667;
-	expected.matrix[3][2] = -0.26667;
-	expected.matrix[3][3] = 0.33333;
-	inverse_matrix_test(m1, expected);
-	free_matrix(m1);
+	m = m1();
+	expected = expected1();
+	inverse_matrix_test(m, expected);
+	free_matrix(m);
 	free_matrix(expected);
+}
+
+void	inverse_matrix_tests(void)
+{
+	inverse_matrix_test_part1();
+	inverse_matrix_test_part2();
 }

@@ -65,6 +65,8 @@ void	determinant_test_part2(void);
 void	submatrix_tests(void);
 void	cofactor_tests(void);
 void	inverse_matrix_tests(void);
+void	inverse_matrix_test(t_matrix m, t_matrix expected);
+void	inverse_matrix_test_part2(void);
 void	inverse_matrix_ultimate_test(void);
 void	translation_tests(void);
 void	scaling_tests(void);
