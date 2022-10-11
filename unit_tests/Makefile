@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/10 22:46:40 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/11 01:09:17 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,14 +32,14 @@ SRCS =			main.c \
 				projectile_test.c \
 				matrix_test.c \
 				equality_test.c \
-				multiply_test.c \
+				multiply_test_1.c multiply_test_2.c \
 				identity_test.c \
 				transpose_test.c \
 				minor_test.c \
 				submatrix_test.c \
-				determinant_test.c \
+				determinant_test_1.c determinant_test_2.c \
 				cofactor_test.c \
-				inverse_test.c \
+				inverse_test_1.c inverse_test_2.c \
 				translation_test.c \
 				scaling_test.c \
 				rotation_test.c \

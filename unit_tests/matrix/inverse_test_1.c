@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:56:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 20:47:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:28:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	inverse_matrix_test(t_matrix m, t_matrix expected)
+static void	inverse_matrix_test(t_matrix m, t_matrix expected)
 {
 	t_matrix	result;
 	static int	n = 1;
@@ -21,11 +21,11 @@ void	inverse_matrix_test(t_matrix m, t_matrix expected)
 
 	printf(GREY "inverse_matrix_test %d: " END, n);
 	result = inverse_matrix(m);
-	i = 0;
-	while (i < m.size)
+	i = -1;
+	while (++i < m.size)
 	{
-		j = 0;
-		while (j < m.size)
+		j = -1;
+		while (++j < m.size)
 		{
 			if (fabs(result.matrix[i][j] - expected.matrix[i][j]) > 0.00001)
 			{
@@ -33,87 +33,14 @@ void	inverse_matrix_test(t_matrix m, t_matrix expected)
 				n++;
 				return ;
 			}
-			j++;
 		}
-		i++;
 	}
 	printf(GREEN "OK" END "\n");
 	free_matrix(result);
 	n++;
 }
 
-void	inverse_matrix_ultimate_test(void)
-{
-	t_matrix	a;
-	t_matrix	b;
-	t_matrix	c;
-	t_matrix	b_inverse;
-	t_matrix	d;
-	int			i;
-	int			j;
-
-	printf(GREY "inverse_matrix_ultimate_test: " END);
-	a = create_matrix(4);
-	a.matrix[0][0] = 3;
-	a.matrix[0][1] = -9;
-	a.matrix[0][2] = 7;
-	a.matrix[0][3] = 3;
-	a.matrix[1][0] = 3;
-	a.matrix[1][1] = -8;
-	a.matrix[1][2] = 2;
-	a.matrix[1][3] = -9;
-	a.matrix[2][0] = -4;
-	a.matrix[2][1] = 4;
-	a.matrix[2][2] = 4;
-	a.matrix[2][3] = 1;
-	a.matrix[3][0] = -6;
-	a.matrix[3][1] = 5;
-	a.matrix[3][2] = -1;
-	a.matrix[3][3] = 1;
-	b = create_matrix(4);
-	b.matrix[0][0] = 8;
-	b.matrix[0][1] = 2;
-	b.matrix[0][2] = 2;
-	b.matrix[0][3] = 2;
-	b.matrix[1][0] = 3;
-	b.matrix[1][1] = -1;
-	b.matrix[1][2] = 7;
-	b.matrix[1][3] = 0;
-	b.matrix[2][0] = 7;
-	b.matrix[2][1] = 0;
-	b.matrix[2][2] = 5;
-	b.matrix[2][3] = 4;
-	b.matrix[3][0] = 6;
-	b.matrix[3][1] = -2;
-	b.matrix[3][2] = 0;
-	b.matrix[3][3] = 5;
-	c = multiply_matrix(a, b);
-	b_inverse = inverse_matrix(b);
-	d = multiply_matrix(c, b_inverse);
-	i = 0;
-	while (i < d.size)
-	{
-		j = 0;
-		while (j < d.size)
-		{
-			if (fabs(d.matrix[i][j] - a.matrix[i][j]) > 0.00001)
-			{
-				printf(RED "KO" END "\n");
-				return ;
-			}
-			j++;
-		}
-		i++;
-	}
-	printf(GREEN "OK" END "\n");
-	free_matrix(a);
-	free_matrix(b);
-	free_matrix(c);
-	free_matrix(d);
-	free_matrix(b_inverse);
-}
-
-void	inverse_matrix_test_cases(void)
+void	inverse_matrix_tests(void)
 {
 	t_matrix	m1;
 	t_matrix	expected;

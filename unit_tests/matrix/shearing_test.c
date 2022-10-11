@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:17:06 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:32:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:28:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-t_shearing	set_shearing(double xy, double xz, double yx, double yz,
+static t_shearing	set_shearing(double xy, double xz, double yx, double yz,
 	double zx, double zy)
 {
 	t_shearing	s;
@@ -26,7 +26,7 @@ t_shearing	set_shearing(double xy, double xz, double yx, double yz,
 	return (s);
 }
 
-void	shearing_test(t_matrix s, t_point expected)
+static void	shearing_test(t_matrix s, t_point expected)
 {
 	t_point		p;
 	t_point		res;
@@ -46,7 +46,7 @@ void	shearing_test(t_matrix s, t_point expected)
 	n++;
 }
 
-void	shearing_test_cases(void)
+void	shearing_tests(void)
 {
 	t_matrix	matrix;
 	t_shearing	shearing;

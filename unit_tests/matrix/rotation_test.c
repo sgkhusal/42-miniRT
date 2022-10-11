@@ -12,7 +12,7 @@
 
 #include "unit_tests.h"
 
-void	rotation_x_test1(void)
+static void	rotation_x_test1(void)
 {
 	t_matrix	rotation;
 	t_point		p;
@@ -40,7 +40,7 @@ void	rotation_x_test1(void)
 	free_matrix(rotation);
 }
 
-void	rotation_x_test2(void)
+static void	rotation_x_test2(void)
 {
 	t_matrix	rotation;
 	t_matrix	inverse;
@@ -63,7 +63,7 @@ void	rotation_x_test2(void)
 	free_matrix(inverse);
 }
 
-void	rotation_y_test(void)
+static void	rotation_y_test(void)
 {
 	t_point		point;
 	t_matrix	rotation;
@@ -92,7 +92,7 @@ void	rotation_y_test(void)
 	free_matrix(rotation);
 }
 
-void	rotation_z_test(void)
+static void	rotation_z_test(void)
 {
 	t_point		point;
 	t_matrix	rotation;
@@ -121,7 +121,7 @@ void	rotation_z_test(void)
 	free_matrix(rotation);
 }
 
-void	rotation_test(void)
+void	rotation_tests(void)
 {
 	rotation_x_test1();
 	rotation_x_test2();

@@ -12,7 +12,7 @@
 
 #include "unit_tests.h"
 
-void	scaling_test1(void)
+static void	scaling_test1(void)
 {
 	t_matrix	t;
 	t_point		p;
@@ -29,7 +29,7 @@ void	scaling_test1(void)
 	free_matrix(t);
 }
 
-void	scaling_test2(void)
+static void	scaling_test2(void)
 {
 	t_matrix	t;
 	t_vector	v;
@@ -46,7 +46,7 @@ void	scaling_test2(void)
 	free_matrix(t);
 }
 
-void	scaling_test3(void)
+static void	scaling_test3(void)
 {
 	t_matrix	t;
 	t_vector	v;
@@ -66,7 +66,7 @@ void	scaling_test3(void)
 	free_matrix(inv);
 }
 
-void	scaling_test4(void)
+static void	scaling_test4(void)
 {
 	t_matrix	t;
 	t_point		p;
@@ -83,7 +83,7 @@ void	scaling_test4(void)
 	free_matrix(t);
 }
 
-void	scaling_test(void)
+void	scaling_tests(void)
 {
 	scaling_test1();
 	scaling_test2();

@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:41:06 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:41:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:29:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	translation_test1(void)
+static void	translation_test1(void)
 {
 	t_matrix	t;
 	t_point		p;
@@ -29,7 +29,7 @@ void	translation_test1(void)
 	free_matrix(t);
 }
 
-void	translation_test2(void)
+static void	translation_test2(void)
 {
 	t_matrix	t;
 	t_matrix	inverse;
@@ -49,7 +49,7 @@ void	translation_test2(void)
 	free_matrix(inverse);
 }
 
-void	translation_test3(void)
+static void	translation_test3(void)
 {
 	t_matrix	t;
 	t_vector	v;
@@ -66,7 +66,7 @@ void	translation_test3(void)
 	free_matrix(t);
 }
 
-void	translation_test(void)
+void	translation_tests(void)
 {
 	translation_test1();
 	translation_test2();
