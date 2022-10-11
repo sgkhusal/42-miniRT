@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/11 20:24:02 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
+/*   Updated: 2022/10/11 20:17:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_tests.h"
+#include "minirt.h"
 
-int	main(void)
+t_intersection	*create_intersection(double t, int object)
 {
-	points_tests();
-	vectors_tests();
-	points_and_vectors_tests();
-	projectile_test();
-	matrix_tests();
-	ray_tests();
-	sphere_tests();
-	intersection_tests();
-	return (0);
+	t_intersection	*intersection;
+
+	intersection = malloc(sizeof(t_intersection));
+	if (!intersection)
+		minirt_malloc_error("create_intersection");
+	intersection->t = t;
+	intersection->object = object;
+	return (intersection);
 }

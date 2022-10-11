@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 15:50:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:54:220 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ t_sphere	*create_sphere(t_point center, double radius, t_color color)
  * @param sphere is the sphere that will be intersected by the ray.
  * @param projected_center sphere center projection into the ray direction.
  * @param projected_vector vector from ray origin to sphere's projected center.
- * @return t_intersection the t_interction struct.
+ * @return t_xs a struct containing all intersections of the ray with the
+ * sphere. If the ray doesn't intersect with any point of the sphere,the count
+ * variable of t_xs struct will be 0. If the ray is tangent to the sphere, the
+ * count variable will be 2 andt1 and t2 willhave the same value.
  */
-t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere)
+t_xs	sphere_intersection(t_ray ray, t_sphere sphere)
 {
-	t_intersection	*intersection;
+	t_xs			xs;
 	double			projected_center;
 	t_point			projected_vector;
 	double			x_sphere;
@@ -57,16 +60,15 @@ t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere)
 	y_sphere = vector_length(subtract_points(sphere.center,
 				projected_vector));
 	if (y_sphere > sphere.radius)
-		return (NULL);
-	x_sphere = sqrt(pow(sphere.radius, 2) - pow(y_sphere, 2));
-	intersection = malloc(sizeof(t_intersection));
-	if (!intersection)
-		minirt_malloc_error("sphere_intersection");
-	intersection->t1 = projected_center - x_sphere;
-	intersection->t2 = projected_center + x_sphere;
-	intersection->hit = get_hit(intersection->t1, intersection->t2);
-	intersection->type = SPHERE;
-	return (intersection);
+		xs.count = 0;
+	else
+	{
+		xs.count = 2;
+		x_sphere = sqrt(pow(sphere.radius, 2) - pow(y_sphere, 2));
+		xs.t1 = projected_center - x_sphere;
+		xs.t2 = projected_center + x_sphere;
+	}
+	return (xs);
 }
 
 /**

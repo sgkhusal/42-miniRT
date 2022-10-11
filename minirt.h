@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:22:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:52:441 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "matrix.h"
 # include "tuples.h"
 
-enum e_types
+enum e_objects
 {
 	SPHERE,
 	PLANE,
@@ -60,25 +60,31 @@ typedef struct s_sphere
  * @param t2 the distance from the ray origin to the second intersection
  * @param count the number of intersections. If there's only one intersection,
  * count = 2 and t2 = t1 and if there are no intersections, count = 0.
- * se hit < 0, a interseção é atrás da câmera
+ */
+typedef struct s_xs
+{
+	double	t1;
+	double	t2;
+	int		count;
+}				t_xs;
+
+/* * se hit < 0, a interseção é atrás da câmera
  * se hit = 0, a interseção é na câmera
  * se hit > 0, a interseção é na frente da câmera
  * a intersecção visível é a menor intersecção positiva
  */
-
 typedef struct s_intersection
 {
-	double					t1;
-	double					t2;
-	int						type;
-	double					hit;
+	double					t;
+	int						object;
+	//double					hit;
 	struct s_intersection	*next;
 }				t_intersection;
 
 typedef struct intersection_list
 {
 	t_intersection	*intersection;
-	int				count;
+	int				total;
 }				t_intersection_list;
 
 typedef struct s_rt
@@ -88,6 +94,9 @@ typedef struct s_rt
 
 // input
 void			handle_input(int argc, char *input[]);
+
+// intersections
+t_intersection	*create_intersection(double t, int object);
 
 // colors
 int				rgb_to_int(short int red, short int green, short int blue);
@@ -99,7 +108,7 @@ t_point			ray_position(t_ray ray, double distance);
 
 //elements
 t_sphere		*create_sphere(t_point center, double radius, t_color color);
-t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere);
+t_xs			sphere_intersection(t_ray ray, t_sphere sphere);
 double			get_hit(double t1, double t2);
 
 // close
