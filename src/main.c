@@ -63,8 +63,8 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 void	sphere_test(void)
 {
 	t_intersection	*intersection;
-	t_sphere	*sphere;
-	t_ray		ray;
+	t_sphere		*sphere;
+	t_ray			ray;
 
 	sphere = create_sphere(set_point(4, 3, 0), 1, set_color(255, 0, 0));
 	ray = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));
@@ -79,14 +79,12 @@ int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
 
-	// handle_input - check if is valid input and transform_input
 	handle_input(argc, &argv[1]);
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
-	// ray tracing algorithm
-	// mlx plot and mlx hook
 	coloring_image(&mlx.img, &mlx);
-	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2, rgb_to_int(255, 0, 0));
+	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2,
+		rgb_to_int(255, 0, 0));
 	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2);
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	set_mlx_hooks(&mlx);

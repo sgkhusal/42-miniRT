@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 15:00:17 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 15:10:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:42:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	scaling_test1(void)
+static void	scaling_test1(void)
 {
 	t_matrix	t;
 	t_point		p;
@@ -29,7 +29,7 @@ void	scaling_test1(void)
 	free_matrix(t);
 }
 
-void	scaling_test2(void)
+static void	scaling_test2(void)
 {
 	t_matrix	t;
 	t_vector	v;
@@ -46,7 +46,7 @@ void	scaling_test2(void)
 	free_matrix(t);
 }
 
-void	scaling_test3(void)
+static void	scaling_test3(void)
 {
 	t_matrix	t;
 	t_vector	v;
@@ -54,7 +54,7 @@ void	scaling_test3(void)
 	t_matrix	inv;
 
 	t = scaling_matrix(2, 3, 4);
-	inv = get_matrix_inverse(t);
+	inv = inverse_matrix(t);
 	v = set_vector(-4, 6, 8);
 	printf(GREY "scaling_test 3: " END);
 	res = multiply_matrix_by_vector(inv, v);
@@ -66,7 +66,7 @@ void	scaling_test3(void)
 	free_matrix(inv);
 }
 
-void	scaling_test4(void)
+static void	scaling_test4(void)
 {
 	t_matrix	t;
 	t_point		p;
@@ -83,7 +83,7 @@ void	scaling_test4(void)
 	free_matrix(t);
 }
 
-void	scaling_test(void)
+void	scaling_tests(void)
 {
 	scaling_test1();
 	scaling_test2();

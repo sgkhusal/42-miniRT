@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:51:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:29:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,33 @@ void	points_and_vectors_tests(void);
 void	projectile_test(void);
 
 void	matrix_tests(void);
-void	multiply_matrix_test(void);
+void	equality_tests(void);
+void	all_matrix_multiply_tests(void);
 void	multiply_by_vector_test(void);
 void	multiply_by_point_test(void);
 void	multiply_matrix_by_identity_test(void);
-void	all_matrix_multiply_tests(void);
-void	determinant_test_cases(void);
-void	submatrix_test_cases(void);
-void	submatrix_test(t_matrix m, int row, int column, t_matrix expected);
-void	cofactor_test_cases(void);
-void	cofactor_test(t_matrix m, int row, int column, double expected);
-void	invertible_test(t_matrix matrix, bool expected);
-void	inverse_matrix_test_cases(void);
+void	identity_tests(void);
+void	transpose_tests(void);
+void	minor_tests(void);
+void	determinant_tests(void);
+void	determinant_test(t_matrix matrix, double expected);
+void	determinant_test_part2(void);
+void	submatrix_tests(void);
+void	cofactor_tests(void);
+void	inverse_matrix_tests(void);
+void	inverse_matrix_test(t_matrix m, t_matrix expected);
+void	inverse_matrix_test_part2(void);
 void	inverse_matrix_ultimate_test(void);
-void	translation_test(void);
-void	scaling_test(void);
-void	rotation_test(void);
-void	shearing_test_cases(void);
-void	chaining_test(void);
+void	translation_tests(void);
+void	scaling_tests(void);
+void	rotation_tests(void);
+void	shearing_tests(void);
+void	chaining_tests(void);
 
 void	ray_tests(void);
 void	set_sphere_test(void);
-void	sphere_intersection_test(t_sphere *sphere, t_ray ray, int count,
-					double t1, double t2);
+void	sphere_intersection_test(t_sphere *sphere, t_ray ray, double t1,
+			double t2);
 void	sphere_tests(void);
 
 bool	check_double_values(double a, double b);

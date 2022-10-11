@@ -19,9 +19,7 @@
 # define WIDTH 500
 
 # define DESTROY_NOTIFY 17
-# define BUTTON_PRESS_MASK 1L << 2
 # define KEY_PRESS 2
-# define KEY_PRESS_MASK 1L<<0
 # define ESCAPE 65307
 
 typedef struct s_image

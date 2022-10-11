@@ -40,18 +40,15 @@ void	vector_length_test(double x, double y, double z, double expected)
 	n++;
 }
 
-void	normalize_vector_test(double x, double y, double z,
-	double expected_x, double expected_y, double expected_z)
+void	normalize_vector_test(double x, double y, double z, t_vector expected)
 {
 	t_vector	vector;
-	t_vector	expected;
 	t_vector	result;
 	double		length;
 	static int	n = 1;
 
 	printf(GREY "normalize_vector_test %d: ", n);
 	vector = set_vector(x, y, z);
-	expected = set_vector(expected_x, expected_y, expected_z);
 	result = normalize_vector(vector);
 	length = vector_length(result);
 	if (check_double_values(length, 1)
@@ -77,9 +74,11 @@ void	vectors_tests(void)
 	vector_length_test(-1, -2, -3, sqrt(14));
 	vector_length_test(0, 0, 0, 0);
 	operations_vectors_test_cases();
-	normalize_vector_test(4, 0, 0, 1, 0, 0);
-	normalize_vector_test(1, 2, 3, 1 / sqrt(14), 2 / sqrt(14), 3 / sqrt(14));
-	normalize_vector_test(3, 4, 5, 0.6 / sqrt(2), 0.8 / sqrt(2), 1 / sqrt(2));
+	normalize_vector_test(4, 0, 0, set_vector(1, 0, 0));
+	normalize_vector_test(1, 2, 3,
+		set_vector(1 / sqrt(14), 2 / sqrt(14), 3 / sqrt(14)));
+	normalize_vector_test(3, 4, 5,
+		set_vector(0.6 / sqrt(2), 0.8 / sqrt(2), 1 / sqrt(2)));
 	scalar_product_test_cases();
 	cross_product_test_cases();
 }

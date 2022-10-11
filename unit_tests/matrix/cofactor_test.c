@@ -6,19 +6,19 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 10:26:49 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 11:20:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 01:27:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "unit_tests.h"
+#include "unit_tests.h"
 
-void	cofactor_test(t_matrix m, int row, int column, double expected)
+static void	cofactor_test(t_matrix m, int row, int column, double expected)
 {
-	double	result;
+	double		result;
 	static int	n = 1;
 
 	printf(GREY "cofactor_test %d: ", n);
-	result = get_matrix_cofactor(m, row, column);
+	result = get_cofactor(m, row, column);
 	if (fabs(expected - result) < 0.0001)
 		printf(GREEN "OK" END "\n");
 	else
@@ -26,7 +26,7 @@ void	cofactor_test(t_matrix m, int row, int column, double expected)
 	n++;
 }
 
-void	cofactor_test_cases(void)
+void	cofactor_tests(void)
 {
 	t_matrix	m1;
 

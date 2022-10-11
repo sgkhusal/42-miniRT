@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/07 11:48:03 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/10/10 15:50:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere)
 	double			y_sphere;
 
 	projected_center = scalar_product(subtract_points(sphere.center,
-		ray.origin), ray.direction);
+				ray.origin), ray.direction);
 	projected_vector = ray_position(ray, projected_center);
 	y_sphere = vector_length(subtract_points(sphere.center,
-		projected_vector));
+				projected_vector));
 	if (y_sphere > sphere.radius)
 		return (NULL);
 	x_sphere = sqrt(pow(sphere.radius, 2) - pow(y_sphere, 2));
