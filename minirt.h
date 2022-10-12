@@ -77,19 +77,19 @@ typedef struct s_intersection
 {
 	double					t;
 	int						object;
-	//double					hit;
 	struct s_intersection	*next;
 }				t_intersection;
 
 typedef struct intersection_list
 {
-	t_intersection	*intersection;
+	t_intersection	*head;
+	t_intersection	*last;
 	int				total;
 }				t_intersection_list;
 
 typedef struct s_rt
 {
-	t_intersection_list	*intersections;
+	t_intersection_list	intersections;
 }				t_rt;
 
 // input
@@ -97,6 +97,8 @@ void			handle_input(int argc, char *input[]);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);
+void			add_intersection_node(t_intersection *node,
+					t_intersection_list *list);
 
 // colors
 int				rgb_to_int(short int red, short int green, short int blue);
@@ -108,8 +110,9 @@ t_point			ray_position(t_ray ray, double distance);
 
 //elements
 t_sphere		*create_sphere(t_point center, double radius, t_color color);
-t_xs			sphere_intersection(t_ray ray, t_sphere sphere);
-double			get_hit(double t1, double t2);
+void			sphere_intersection(t_ray ray, t_sphere sphere,
+					t_intersection_list *list);
+t_intersection	*get_hit_intersection(t_intersection_list list);
 
 // close
 int				close_minirt(t_mlx *mlx);

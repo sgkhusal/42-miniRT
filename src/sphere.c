@@ -46,9 +46,8 @@ t_sphere	*create_sphere(t_point center, double radius, t_color color)
  * variable of t_xs struct will be 0. If the ray is tangent to the sphere, the
  * count variable will be 2 andt1 and t2 willhave the same value.
  */
-t_xs	sphere_intersection(t_ray ray, t_sphere sphere)
+void	sphere_intersection(t_ray ray, t_sphere sphere, t_intersection_list *list)
 {
-	t_xs			xs;
 	double			projected_center;
 	t_point			projected_vector;
 	double			x_sphere;
@@ -60,15 +59,28 @@ t_xs	sphere_intersection(t_ray ray, t_sphere sphere)
 	y_sphere = vector_length(subtract_points(sphere.center,
 				projected_vector));
 	if (y_sphere > sphere.radius)
-		xs.count = 0;
+		return ;
 	else
 	{
-		xs.count = 2;
 		x_sphere = sqrt(pow(sphere.radius, 2) - pow(y_sphere, 2));
-		xs.t1 = projected_center - x_sphere;
-		xs.t2 = projected_center + x_sphere;
+		add_intersection_node(create_intersection(projected_center
+			- x_sphere, SPHERE), list);
+		add_intersection_node(create_intersection(projected_center
+			+ x_sphere, SPHERE), list);
 	}
-	return (xs);
+}
+
+double	check_hit_value(double hit, double t)
+{
+	if (hit < 0 && t < 0)
+		return (-1);
+	if (hit < 0)
+		return (t);
+	if (t < 0)
+		return (hit);
+	if (hit < t)
+		return (hit);
+	return (t);
 }
 
 /**
@@ -79,15 +91,21 @@ t_xs	sphere_intersection(t_ray ray, t_sphere sphere)
  * @param t2 is the second intersection point.
  * @return double the hit.
  */
-double	get_hit(double t1, double t2)
+t_intersection	*get_hit_intersection(t_intersection_list list)
 {
-	if (t1 < 0 && t2 < 0)
-		return (-1);
-	if (t1 < 0)
-		return (t2);
-	if (t2 < 0)
-		return (t1);
-	if (t1 < t2)
-		return (t1);
-	return (t2);
+	t_intersection	*aux;
+	t_intersection	*hit_intersection;
+	double			hit;
+
+	aux = list.head;
+	hit = -1;
+	hit_intersection = NULL;
+	while (aux)
+	{
+		hit = check_hit_value(hit, aux->t);
+		if (hit == aux->t)
+			hit_intersection = aux;
+		aux = aux->next;
+	}
+	return (hit_intersection);
 }
