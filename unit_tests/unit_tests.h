@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/12 10:55:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:16:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,10 @@ void	sphere_tests(void);
 void	intersection_tests(void);
 
 bool	check_double_values(double a, double b);
+bool	check_equal_points(t_point a, t_point b);
+bool	check_equal_vectors(t_vector a, t_vector b);
+
+void	transform_ray_test_cases(void);
+void	transformed_sphere_test(void);
 
 #endif

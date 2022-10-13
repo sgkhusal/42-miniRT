@@ -50,9 +50,10 @@ typedef struct s_ray
 
 typedef struct s_sphere
 {
-	t_point	center;
-	double	radius;
-	t_color	color;
+	t_point		center;
+	double		radius;
+	t_color		color;
+	t_matrix	transform;
 }				t_sphere;
 
 /**
@@ -107,12 +108,14 @@ t_color			set_color(short int red, short int green, short int blue);
 // rays
 t_ray			set_ray(t_point origin, t_vector direction);
 t_point			ray_position(t_ray ray, double distance);
+t_ray			transform_ray(t_ray ray, t_matrix m);
 
 //elements
-t_sphere		*create_sphere(t_point center, double radius, t_color color);
+t_sphere		*create_sphere(t_color color);
 void			sphere_intersection(t_ray ray, t_sphere sphere,
 					t_intersection_list *list);
 t_intersection	*get_hit_intersection(t_intersection_list list);
+void			set_transform(t_sphere *sphere, t_matrix transform);
 
 // close
 int				close_minirt(t_mlx *mlx);

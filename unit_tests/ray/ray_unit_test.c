@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:29:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/06 16:05:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:20:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ static void	set_ray_test(void)
 
 	printf(GREY "set_ray_test 1: ");
 	origin = set_point(1, 2, 3);
-	direction = set_vector(1, 1, 1);
+	direction = set_vector(4, 5, 6);
 	ray = set_ray(origin, direction);
 	if (ray.origin.x == 1 && ray.origin.y == 2 && ray.origin.z == 3
-		&& ray.direction.x == 1 / sqrt(3)
-		&& ray.direction.y == 1 / sqrt(3)
-		&& ray.direction.z == 1 / sqrt(3))
+		&& ray.direction.x == 4 && ray.direction.y == 5
+		&& ray.direction.z == 6)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO\n" END);
@@ -93,4 +92,5 @@ void	ray_tests(void)
 	set_ray_test();
 	ray_position_test_cases1();
 	ray_position_test_cases2();
+	transform_ray_test_cases();
 }

@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/11 20:25:01 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/13 20:16:18 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,13 +46,16 @@ SRCS =			main.c \
 				shearing_test.c \
 				chaining_test.c \
 				ray_unit_test.c \
-				sphere_unit_test.c \
+				sphere_unit_test1.c \
+				sphere_unit_test2.c \
 				intersection_test.c \
+				ray_transform_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
-				matrix_transform.c matrix_rotation.c intersection.c
+				matrix_transform.c matrix_rotation.c intersection.c \
+				element_transform.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h

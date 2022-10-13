@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/07 11:51:59 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:23:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ray	set_ray(t_point origin, t_vector direction)
 	t_ray	ray;
 
 	ray.origin = origin;
-	ray.direction = normalize_vector(direction);
+	ray.direction = direction;
 	return (ray);
 }
 
@@ -55,4 +55,13 @@ t_point	ray_position(t_ray ray, double distance)
 	z = ray.origin.z + ray.direction.z * distance;
 	position = set_point(x, y, z);
 	return (position);
+}
+
+t_ray	transform_ray(t_ray ray, t_matrix m)
+{
+	t_ray	transformed_ray;
+
+	transformed_ray = set_ray(multiply_matrix_by_point(m, ray.origin),
+		multiply_matrix_by_vector(m, ray.direction));
+	return (transformed_ray);
 }

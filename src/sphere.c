@@ -16,21 +16,20 @@
  * @brief Will create a new sphere by allocating memory and setting the given
  * values to the struct.
  *
- * @param center The center point of the sphere.
- * @param radius The radius of the sphere.
  * @param color The color of the sphere.
  * @return t_sphere* The created sphere.
  */
-t_sphere	*create_sphere(t_point center, double radius, t_color color)
+t_sphere	*create_sphere(t_color color)
 {
 	t_sphere	*sphere;
 
 	sphere = malloc(sizeof(t_sphere));
 	if (!sphere)
 		minirt_malloc_error("create_sphere");
-	sphere->center = center;
-	sphere->radius = radius;
+	sphere->center = set_point(0, 0, 0);
+	sphere->radius = 1.0;
 	sphere->color = color;
+	sphere->transform = identity_matrix(4);
 	return (sphere);
 }
 
@@ -46,23 +45,28 @@ t_sphere	*create_sphere(t_point center, double radius, t_color color)
  * variable of t_xs struct will be 0. If the ray is tangent to the sphere, the
  * count variable will be 2 andt1 and t2 willhave the same value.
  */
-void	sphere_intersection(t_ray ray, t_sphere sphere, t_intersection_list *list)
+void	sphere_intersection(t_ray ray, t_sphere s, t_intersection_list *list)
 {
 	double			projected_center;
 	t_point			projected_vector;
 	double			x_sphere;
 	double			y_sphere;
+	t_ray			transformed_ray;
+	t_matrix		inverse;
 
-	projected_center = scalar_product(subtract_points(sphere.center,
-				ray.origin), ray.direction);
-	projected_vector = ray_position(ray, projected_center);
-	y_sphere = vector_length(subtract_points(sphere.center,
-				projected_vector));
-	if (y_sphere > sphere.radius)
+	inverse = inverse_matrix(s.transform);
+	transformed_ray = transform_ray(ray, inverse); // vai gerar um leak que teremos que tratar no futuro
+	//transformed_ray = transform_ray(ray, inverse_matrix(s.transform)); // vai gerar um leak que teremos que tratar no futuro
+	free_matrix(inverse);
+	projected_center = scalar_product(subtract_points(s.center,
+				transformed_ray.origin), transformed_ray.direction);
+	projected_vector = ray_position(transformed_ray, projected_center);
+	y_sphere = vector_length(subtract_points(s.center, projected_vector));
+	if (y_sphere > s.radius)
 		return ;
 	else
 	{
-		x_sphere = sqrt(pow(sphere.radius, 2) - pow(y_sphere, 2));
+		x_sphere = sqrt(pow(s.radius, 2) - pow(y_sphere, 2));
 		add_intersection_node(create_intersection(projected_center
 			- x_sphere, SPHERE), list);
 		add_intersection_node(create_intersection(projected_center

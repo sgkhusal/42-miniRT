@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_unit_test.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 20:29:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/12 10:55:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:51:46 by elrara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,25 @@
 void	create_sphere_test(void)
 {
 	t_sphere	*sphere;
-	t_point		center;
+	t_matrix	transform;
 	t_color		color;
-	double		radius;
 
 	printf(GREY "create sphere test 1: " END);
-	center = set_point(0, 0, 0);
 	color = set_color(255, 0, 0);
-	radius = 1;
-	sphere = create_sphere(center, radius, color);
+	sphere = create_sphere(color);
+	transform = identity_matrix(4);
 	if (sphere->center.x == 0 && sphere->center.y == 0 && sphere->center.z == 0
-		&& sphere->radius == 1 && sphere->color.color == 0xFF0000)
+		&& sphere->radius == 1 && sphere->color.color == 0xFF0000
+		&& check_equal_matrices(sphere->transform, transform))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_matrix(transform);
+	free_matrix(sphere->transform);
 	free(sphere);
 }
 
-void	sphere_intersection_test(t_sphere *sphere, t_ray ray, double t1, double t2)
+void	sphere_intersection_test(t_sphere *s, t_ray ray, double t1, double t2)
 {
 	t_intersection_list	list;
 	static int		n = 1;
@@ -40,7 +41,7 @@ void	sphere_intersection_test(t_sphere *sphere, t_ray ray, double t1, double t2)
 	printf(GREY "sphere_intersection_test %d: " END, n);
 	list.head = NULL;
 	list.last = NULL;
-	sphere_intersection(ray, *sphere, &list);
+	sphere_intersection(ray, *s, &list);
 	if (list.total == 2 && check_double_values(list.head->t, t1)
 		&& check_double_values(list.head->next->t, t2)
 		&& check_double_values(list.last->t, t2)
@@ -52,6 +53,23 @@ void	sphere_intersection_test(t_sphere *sphere, t_ray ray, double t1, double t2)
 	n++;
 	free(list.head);
 	free(list.last);
+}
+
+void	sphere_transform_test(void)
+{
+	t_sphere	*sphere;
+	t_matrix	transform;
+
+	printf(GREY "sphere_transform_test 1: " END);
+	sphere = create_sphere(set_color(255, 0, 0));
+	transform = translation_matrix(2, 3, 4);
+	set_transform(sphere, transform);
+	if (check_equal_matrices(sphere->transform, transform))
+		printf(GREEN "OK" END "\n");
+	else
+		printf(RED "KO" END "\n");
+	free(sphere);
+	free_matrix(transform);
 }
 
 void	sphere_no_intersection_test(t_sphere *sphere, t_ray ray)
@@ -76,7 +94,7 @@ void	sphere_tests(void)
 
 	printf(YELLOW "Sphere tests: " END "\n");
 	create_sphere_test();
-	sphere = create_sphere(set_point(0, 0, 0), 1, set_color(255, 0, 0));
+	sphere = create_sphere(set_color(255, 0, 0));
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
 	sphere_intersection_test(sphere, ray, 4.0, 6.0);
 	ray = set_ray(set_point(0, 1, -5), set_vector(0, 0, 1));
@@ -87,9 +105,7 @@ void	sphere_tests(void)
 	sphere_intersection_test(sphere, ray, -1.0, 1.0);
 	ray = set_ray(set_point(0, 0, 5), set_vector(0, 0, 1));
 	sphere_intersection_test(sphere, ray, -6.0, -4.0);
-	free(sphere);
-	sphere = create_sphere(set_point(4, 3, 0), 1, set_color(255, 0, 0));
-	ray = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));
-	sphere_intersection_test(sphere, ray, 4.242641, 5.656854);
+	sphere_transform_test();
+	transformed_sphere_test();
 	free(sphere);
 }
