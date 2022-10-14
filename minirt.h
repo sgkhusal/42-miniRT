@@ -55,6 +55,7 @@ typedef struct s_sphere
 	t_color		color;
 	t_matrix	transform;
 	t_matrix	inverse;
+	t_matrix	transpose_inverse;
 }				t_sphere;
 
 typedef struct s_bhaskara
@@ -125,6 +126,7 @@ void			sphere_intersection(t_ray ray, t_sphere sphere,
 					t_intersection_list *list);
 t_intersection	*get_hit_intersection(t_intersection_list list);
 void			set_transform(t_sphere *sphere, t_matrix transform);
+t_vector		sphere_normal_at(t_sphere *s, t_point p);
 
 // close
 int				close_minirt(t_mlx *mlx);

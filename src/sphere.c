@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/11 19:54:220 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:31:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_sphere	*create_sphere(t_color color)
 	sphere->color = color;
 	sphere->transform = identity_matrix(4);
 	sphere->inverse = identity_matrix(4);
+	sphere->transpose_inverse = identity_matrix(4);
 	return (sphere);
 }
 

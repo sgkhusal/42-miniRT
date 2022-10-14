@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/13 20:16:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:16:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	chaining_tests(void);
 void	ray_tests(void);
 void	set_sphere_test(void);
 void	sphere_tests(void);
+void	normal_tests(void);
 
 void	intersection_tests(void);
 
