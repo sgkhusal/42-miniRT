@@ -6,12 +6,12 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/13 20:16:18 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/14 16:59:59 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			tests
-MINIRT =		minirt
+NAME =			unit_test
+MINIRT =		../miniRT
 MINIRT_PATH =	../
 
 # **************************************************************************** #
@@ -82,10 +82,10 @@ RESET	=	\033[0m
 
 all:	$(NAME)
 
-$(OBJS_DIR)/%.o:	%.c $(HEADERS) $(OBJS_DIR)
+$(OBJS_DIR)/%.o:	%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-$(NAME):	$(MINIRT) $(OBJS)
+$(NAME):	$(MINIRT) $(OBJS_DIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"

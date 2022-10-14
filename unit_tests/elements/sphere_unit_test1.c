@@ -24,11 +24,13 @@ void	create_sphere_test(void)
 	transform = identity_matrix(4);
 	if (sphere->center.x == 0 && sphere->center.y == 0 && sphere->center.z == 0
 		&& sphere->radius == 1 && sphere->color.color == 0xFF0000
-		&& check_equal_matrices(sphere->transform, transform))
+		&& check_equal_matrices(sphere->transform, transform)
+		&& check_equal_matrices(sphere->inverse, transform))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(transform);
+	free_matrix(sphere->inverse);
 	free_matrix(sphere->transform);
 	free(sphere);
 }
@@ -68,6 +70,7 @@ void	sphere_transform_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_matrix(sphere->inverse);
 	free(sphere);
 	free_matrix(transform);
 }
@@ -107,5 +110,7 @@ void	sphere_tests(void)
 	sphere_intersection_test(sphere, ray, -6.0, -4.0);
 	sphere_transform_test();
 	transformed_sphere_test();
+	free_matrix(sphere->inverse);
+	free_matrix(sphere->transform);
 	free(sphere);
 }

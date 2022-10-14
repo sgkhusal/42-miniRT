@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 20:04:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/13 20:41:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:23:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,15 @@ void	transformed_sphere_test1(void)
 	list.last = NULL;
 	list.total = 0;
 	sphere_intersection(ray, *s, &list);
-	if (check_equal_matrices(s->transform, transform))
-		printf(GREEN "transform OK" END "\n");
-	else
-		printf(RED "transform KO " END "\n");
-	printf("total: %d", list.total);
-	printf("t1: %f", list.head->t);
-	printf("\tt2: %f", list.head->next->t);
 	if (list.total == 2 && check_double_values(list.head->t, 3)
 		&& check_double_values(list.head->next->t, 7))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free(list.head->next);
+	free(list.head);
 	free_matrix(transform);
+	free_matrix(s->inverse);
 	free(s);
 }
 
@@ -65,6 +61,8 @@ void	transformed_sphere_test2(void)
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(transform);
+	free_matrix(s->inverse);
+	//free_matrix(s->transform);
 	free(s);
 }
 
