@@ -53,19 +53,15 @@ RESET	=	\033[0m
 all:	$(NAME)
 
 $(OBJS_DIR)/%.o:	%.c $(HEADERS)
-	@mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-$(NAME):	$(LIBFT) $(MLX) $(OBJS)
+$(NAME):	$(OBJS_DIR) $(LIBFT) $(MLX) $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "           miniRT created"
 	@echo "************************************"
 	@echo "$(RESET)"
-
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
 
 $(LIBFT):
 	@echo "$(YELLOW)making libft....$(RESET)"
@@ -78,6 +74,9 @@ $(MLX):
 	$(MAKE) --no-print-directory -C $(MLX_PATH)
 	@echo "$(YELLOW)libmlx.a created$(RESET)"
 	@echo "------------------------------------------------------------------"
+
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
 
 clean:
 		$(RM_DIR) $(OBJS_DIR)

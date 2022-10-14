@@ -30,6 +30,7 @@ t_sphere	*create_sphere(t_color color)
 	sphere->radius = 1.0;
 	sphere->color = color;
 	sphere->transform = identity_matrix(4);
+	sphere->inverse = identity_matrix(4);
 	return (sphere);
 }
 
@@ -47,30 +48,27 @@ t_sphere	*create_sphere(t_color color)
  */
 void	sphere_intersection(t_ray ray, t_sphere s, t_intersection_list *list)
 {
-	double			projected_center;
-	t_point			projected_vector;
-	double			x_sphere;
-	double			y_sphere;
-	t_ray			transformed_ray;
-	t_matrix		inverse;
+	t_ray		transformed_ray;
+	t_bhaskara	bhaskara;
+	t_vector	sphere_to_ray;
 
-	inverse = inverse_matrix(s.transform);
-	transformed_ray = transform_ray(ray, inverse); // vai gerar um leak que teremos que tratar no futuro
-	//transformed_ray = transform_ray(ray, inverse_matrix(s.transform)); // vai gerar um leak que teremos que tratar no futuro
-	free_matrix(inverse);
-	projected_center = scalar_product(subtract_points(s.center,
-				transformed_ray.origin), transformed_ray.direction);
-	projected_vector = ray_position(transformed_ray, projected_center);
-	y_sphere = vector_length(subtract_points(s.center, projected_vector));
-	if (y_sphere > s.radius)
+	transformed_ray = transform_ray(ray, s.inverse);
+	sphere_to_ray = subtract_points(transformed_ray.origin, s.center);
+	bhaskara.a = scalar_product(transformed_ray.direction,
+		transformed_ray.direction);
+	bhaskara.b = 2 * scalar_product(transformed_ray.direction, sphere_to_ray);
+	bhaskara.c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
+	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a *bhaskara.c;
+	if (bhaskara.delta < 0)
 		return ;
 	else
 	{
-		x_sphere = sqrt(pow(s.radius, 2) - pow(y_sphere, 2));
-		add_intersection_node(create_intersection(projected_center
-			- x_sphere, SPHERE), list);
-		add_intersection_node(create_intersection(projected_center
-			+ x_sphere, SPHERE), list);
+		add_intersection_node(create_intersection(
+			(-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a), SPHERE),
+			list);
+		add_intersection_node(create_intersection(
+			(-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a), SPHERE),
+			list);
 	}
 }
 

@@ -54,7 +54,16 @@ typedef struct s_sphere
 	double		radius;
 	t_color		color;
 	t_matrix	transform;
+	t_matrix	inverse;
 }				t_sphere;
+
+typedef struct s_bhaskara
+{
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+}				t_bhaskara;
 
 /**
  * @param t1 the distance from the ray origin to the first intersection
