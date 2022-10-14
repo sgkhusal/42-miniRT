@@ -60,21 +60,6 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 	}
 }
 
-void	sphere_test(void)
-{
-	t_intersection	*intersection;
-	t_sphere		*sphere;
-	t_ray			ray;
-
-	sphere = create_sphere(set_point(4, 3, 0), 1, set_color(255, 0, 0));
-	ray = set_ray(set_point(0, 0, 0), set_vector(1, 1, 0));
-	intersection = sphere_intersection(ray, *sphere);
-	printf("hit: %f\nt1: %f\nt2: %f\n", intersection->hit, intersection->t1,
-		intersection->t2);
-	free(sphere);
-	free(intersection);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_mlx	mlx;
@@ -88,7 +73,6 @@ int	main(int argc, char *argv[])
 	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2);
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	set_mlx_hooks(&mlx);
-	sphere_test();
 	mlx_loop(mlx.ptr);
 	return (0);
 }

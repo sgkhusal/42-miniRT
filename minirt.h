@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:22:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/11 19:52:441 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "matrix.h"
 # include "tuples.h"
 
-enum e_types
+enum e_objects
 {
 	SPHERE,
 	PLANE,
@@ -50,44 +50,65 @@ typedef struct s_ray
 
 typedef struct s_sphere
 {
-	t_point	center;
-	double	radius;
-	t_color	color;
+	t_point		center;
+	double		radius;
+	t_color		color;
+	t_matrix	transform;
+	t_matrix	inverse;
 }				t_sphere;
+
+typedef struct s_bhaskara
+{
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+}				t_bhaskara;
 
 /**
  * @param t1 the distance from the ray origin to the first intersection
  * @param t2 the distance from the ray origin to the second intersection
  * @param count the number of intersections. If there's only one intersection,
  * count = 2 and t2 = t1 and if there are no intersections, count = 0.
- * se hit < 0, a interseção é atrás da câmera
+ */
+typedef struct s_xs
+{
+	double	t1;
+	double	t2;
+	int		count;
+}				t_xs;
+
+/* * se hit < 0, a interseção é atrás da câmera
  * se hit = 0, a interseção é na câmera
  * se hit > 0, a interseção é na frente da câmera
  * a intersecção visível é a menor intersecção positiva
  */
-
 typedef struct s_intersection
 {
-	double					t1;
-	double					t2;
-	int						type;
-	double					hit;
+	double					t;
+	int						object;
 	struct s_intersection	*next;
 }				t_intersection;
 
 typedef struct intersection_list
 {
-	t_intersection	*intersection;
-	int				count;
+	t_intersection	*head;
+	t_intersection	*last;
+	int				total;
 }				t_intersection_list;
 
 typedef struct s_rt
 {
-	t_intersection_list	*intersections;
+	t_intersection_list	intersections;
 }				t_rt;
 
 // input
 void			handle_input(int argc, char *input[]);
+
+// intersections
+t_intersection	*create_intersection(double t, int object);
+void			add_intersection_node(t_intersection *node,
+					t_intersection_list *list);
 
 // colors
 int				rgb_to_int(short int red, short int green, short int blue);
@@ -96,11 +117,14 @@ t_color			set_color(short int red, short int green, short int blue);
 // rays
 t_ray			set_ray(t_point origin, t_vector direction);
 t_point			ray_position(t_ray ray, double distance);
+t_ray			transform_ray(t_ray ray, t_matrix m);
 
 //elements
-t_sphere		*create_sphere(t_point center, double radius, t_color color);
-t_intersection	*sphere_intersection(t_ray ray, t_sphere sphere);
-double			get_hit(double t1, double t2);
+t_sphere		*create_sphere(t_color color);
+void			sphere_intersection(t_ray ray, t_sphere sphere,
+					t_intersection_list *list);
+t_intersection	*get_hit_intersection(t_intersection_list list);
+void			set_transform(t_sphere *sphere, t_matrix transform);
 
 // close
 int				close_minirt(t_mlx *mlx);

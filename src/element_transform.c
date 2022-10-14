@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   element_transform.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 15:33:36 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
+/*   Updated: 2022/10/14 18:58:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_tests.h"
+#include "minirt.h"
 
-int	main(void)
+void	set_transform(t_sphere *sphere, t_matrix transform)
 {
-	points_tests();
-	vectors_tests();
-	points_and_vectors_tests();
-	projectile_test();
-	matrix_tests();
-	ray_tests();
-	sphere_tests();
-	intersection_tests();
-	return (0);
+	free_matrix(sphere->transform);
+	sphere->transform = transform;
+	free_matrix(sphere->inverse);
+	sphere->inverse = inverse_matrix(sphere->transform);
 }

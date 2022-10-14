@@ -6,12 +6,12 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/11 01:09:17 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/14 16:59:59 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =			tests
-MINIRT =		minirt
+NAME =			unit_test
+MINIRT =		../miniRT
 MINIRT_PATH =	../
 
 # **************************************************************************** #
@@ -46,12 +46,16 @@ SRCS =			main.c \
 				shearing_test.c \
 				chaining_test.c \
 				ray_unit_test.c \
-				sphere_unit_test.c \
+				sphere_unit_test1.c \
+				sphere_unit_test2.c \
+				intersection_test.c \
+				ray_transform_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
-				matrix_transform.c matrix_rotation.c
+				matrix_transform.c matrix_rotation.c intersection.c \
+				element_transform.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
@@ -78,10 +82,10 @@ RESET	=	\033[0m
 
 all:	$(NAME)
 
-$(OBJS_DIR)/%.o:	%.c $(HEADERS) $(OBJS_DIR)
+$(OBJS_DIR)/%.o:	%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-$(NAME):	$(MINIRT) $(OBJS)
+$(NAME):	$(MINIRT) $(OBJS_DIR) $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"
