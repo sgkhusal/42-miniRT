@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 21:01:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 10:44:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ void			sphere_intersection(t_ray ray, t_sphere sphere,
 t_intersection	*get_hit_intersection(t_intersection_list list);
 void			set_transform(t_sphere *sphere, t_matrix transform);
 t_vector		sphere_normal_at(t_sphere *s, t_point p);
+
+//light
+t_vector		reflect(t_vector incident, t_vector normal);
 
 // close
 int				close_minirt(t_mlx *mlx);

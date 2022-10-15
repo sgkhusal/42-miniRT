@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 20:16:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 10:46:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ bool	check_equal_vectors(t_vector a, t_vector b);
 
 void	transform_ray_test_cases(void);
 void	transformed_sphere_test(void);
+
+void	reflection_tests(void);
 
 #endif

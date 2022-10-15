@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/14 20:09:17 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/15 10:47:12 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,17 +51,18 @@ SRCS =			main.c \
 				intersection_test.c \
 				ray_transform_test.c \
 				normal_test.c \
+				reflection_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
 				matrix_transform.c matrix_rotation.c intersection.c \
-				element_transform.c normal.c
+				element_transform.c normal.c reflection.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
 VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix
-VPATH	=		$(VPATH_MINIRT) tuples elements ray matrix
+VPATH	=		$(VPATH_MINIRT) tuples elements ray matrix light
 INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 # compilation
