@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   reflection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 11:52:56 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
+/*   Updated: 2022/10/15 10:52:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_tests.h"
+#include "minirt.h"
 
-int	main(void)
+t_vector	reflect(t_vector incident, t_vector normal)
 {
-	points_tests();
-	vectors_tests();
-	points_and_vectors_tests();
-	projectile_test();
-	matrix_tests();
-	ray_tests();
-	sphere_tests();
-	intersection_tests();
-	reflection_tests();
-	light_tests();
-	material_tests();
-	return (0);
+	double		scalar;
+	t_vector	multiply;
+	t_vector	reflected;
+
+	scalar = scalar_product(incident, normal);
+	multiply = multiply_vector_by_scalar(normal, 2 * scalar);
+	reflected = subtract_vectors(incident, multiply);
+	return (reflected);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:09:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/13 20:28:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:55:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	transform_ray_test(t_ray ray, t_matrix m, t_ray expected)
 
 void	transform_ray_test_cases(void)
 {
-	t_ray ray;
-	t_ray expected;
-	t_matrix m;
+	t_ray		ray;
+	t_ray		expected;
+	t_matrix	m;
 
 	ray.origin = set_point(1, 2, 3);
 	ray.direction = set_vector(0, 1, 0);
@@ -48,7 +48,3 @@ void	transform_ray_test_cases(void)
 	transform_ray_test(ray, m, expected);
 	free_matrix(m);
 }
-
-
-
-

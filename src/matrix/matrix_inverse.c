@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 11:33:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 20:46:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:46:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_matrix	inverse_matrix(t_matrix m)
 	int			j;
 
 	determinant = get_determinant(m);
-	if (determinant == 0)
+	if (check_double_values(determinant, 0))
 		return (identity_matrix(m.size));
 	cofactor = cofactor_matrix(m);
 	inverse = transposed_matrix(cofactor);

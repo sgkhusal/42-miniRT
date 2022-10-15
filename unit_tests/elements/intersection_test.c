@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/12 11:32:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:54:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	create_intersection_test(void)
 	t_intersection	*intersection;
 
 	printf(GREY "create_intersection_test 1: " END);
-	intersection=  create_intersection(3.5, SPHERE);
+	intersection = create_intersection(3.5, SPHERE);
 	if (intersection->t == 3.5 && intersection->object == SPHERE)
 		printf(GREEN "OK" END "\n");
 	else
@@ -28,11 +28,10 @@ static void	create_intersection_test(void)
 static void	get_hit_test(double t1, double t2, double expected)
 {
 	t_intersection_list	list;
-	t_intersection *inter1;
-	t_intersection *inter2;
-	static int n = 1;
-
-	t_intersection	*hit;
+	t_intersection		*inter1;
+	t_intersection		*inter2;
+	static int			n = 1;
+	t_intersection		*hit;
 
 	printf(GREY "get_hit_test %d: " END, n);
 	inter1 = create_intersection(t1, SPHERE);
@@ -53,15 +52,14 @@ static void	get_hit_test(double t1, double t2, double expected)
 	free(inter2);
 }
 
-static void	get_hit_test2()
+static void	get_hit_test2(void)
 {
 	t_intersection_list	list;
-	t_intersection *inter1;
-	t_intersection *inter2;
-	t_intersection *inter3;
-	t_intersection *inter4;
-
-	t_intersection	*hit;
+	t_intersection		*inter1;
+	t_intersection		*inter2;
+	t_intersection		*inter3;
+	t_intersection		*inter4;
+	t_intersection		*hit;
 
 	printf(GREY "last_get_hit_test: " END);
 	inter1 = create_intersection(5, SPHERE);
@@ -85,12 +83,11 @@ static void	get_hit_test2()
 	free(inter4);
 }
 
-
 static void	agregate_intersection_test(void)
 {
 	t_intersection_list	list;
-	t_intersection	*intersection1;
-	t_intersection	*intersection2;
+	t_intersection		*intersection1;
+	t_intersection		*intersection2;
 
 	printf(GREY "agregate_intersection_test 1: " END);
 	intersection1 = create_intersection(1, SPHERE);
@@ -100,7 +97,8 @@ static void	agregate_intersection_test(void)
 	add_intersection_node(intersection1, &list);
 	add_intersection_node(intersection2, &list);
 	if (list.head->t == 1 && list.head->next->t == 2 && list.last->t == 2
-		&& list.total == 2 && list.head->object == SPHERE && list.last->object == SPHERE)
+		&& list.total == 2 && list.head->object == SPHERE
+		&& list.last->object == SPHERE)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");

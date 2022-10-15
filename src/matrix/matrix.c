@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:05:52 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 16:01:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:47:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_matrix(t_matrix m)
 	free(m.matrix);
 }
 
-void	print_matrix(t_matrix m) // remove
+void	print_matrix(t_matrix m) /* remove */
 {
 	int	i;
 	int	j;

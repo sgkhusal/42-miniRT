@@ -6,7 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/11 19:54:220 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 11:36:08 by sguilher         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
+/*   Updated: 2022/10/15 11:35:28 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +38,17 @@ t_sphere	*create_sphere(t_color color)
 	sphere->color = color;
 	sphere->transform = identity_matrix(4);
 	sphere->inverse = identity_matrix(4);
+	sphere->transpose_inverse = identity_matrix(4);
+	sphere->material = set_material();
 	return (sphere);
+}
+
+void	free_sphere(t_sphere *sphere)
+{
+	free_matrix(sphere->transform);
+	free_matrix(sphere->inverse);
+	free_matrix(sphere->transpose_inverse);
+	free(sphere);
 }
 
 /**
@@ -55,20 +72,20 @@ void	sphere_intersection(t_ray ray, t_sphere s, t_intersection_list *list)
 	transformed_ray = transform_ray(ray, s.inverse);
 	sphere_to_ray = subtract_points(transformed_ray.origin, s.center);
 	bhaskara.a = scalar_product(transformed_ray.direction,
-		transformed_ray.direction);
+			transformed_ray.direction);
 	bhaskara.b = 2 * scalar_product(transformed_ray.direction, sphere_to_ray);
 	bhaskara.c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
-	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a *bhaskara.c;
+	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a * bhaskara.c;
 	if (bhaskara.delta < 0)
 		return ;
 	else
 	{
 		add_intersection_node(create_intersection(
-			(-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a), SPHERE),
-			list);
+				(-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a),
+				SPHERE), list);
 		add_intersection_node(create_intersection(
-			(-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a), SPHERE),
-			list);
+				(-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a),
+				SPHERE), list);
 	}
 }
 

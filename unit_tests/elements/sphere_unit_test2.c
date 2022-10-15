@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 20:04:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 19:23:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 21:05:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	transformed_sphere_test1(void)
 		printf(RED "KO" END "\n");
 	free(list.head->next);
 	free(list.head);
-	free_matrix(transform);
-	free_matrix(s->inverse);
-	free(s);
+	free_sphere(s);
 }
 
 void	transformed_sphere_test2(void)
@@ -60,10 +58,7 @@ void	transformed_sphere_test2(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
-	free_matrix(transform);
-	free_matrix(s->inverse);
-	//free_matrix(s->transform);
-	free(s);
+	free_sphere(s);
 }
 
 void	transformed_sphere_test(void)

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 16:13:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 20:48:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ t_ray	transform_ray(t_ray ray, t_matrix m)
 	t_ray	transformed_ray;
 
 	transformed_ray = set_ray(multiply_matrix_by_point(m, ray.origin),
-		multiply_matrix_by_vector(m, ray.direction));
+			multiply_matrix_by_vector(m, ray.direction));
 	return (transformed_ray);
 }
