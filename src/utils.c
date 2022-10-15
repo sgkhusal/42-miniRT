@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/05 12:19:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:41:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,11 @@ void	minirt_malloc_error(char *function)
 	ft_putstr_fd(function, 2);
 	ft_putstr_fd(" function\n", 2);
 	exit(EXIT_FAILURE);
+}
+
+bool	check_double_values(double a, double b)
+{
+	if (fabs(a - b) < 0.00001)
+		return (true);
+	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 10:44:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:37:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,36 @@ typedef struct s_ray
 	t_vector	direction;
 }				t_ray;
 
+typedef struct s_light
+{
+	t_point		position;
+	t_vector	intensity; // color
+}				t_light;
+
+/**
+ * @param color normalized color with range [0-1]
+ * @param diffuse diffuse color with range [0-1]
+ * @param ambient ambient color with range [0-1]
+ * @param specular specular color with range [0-1]
+ * @param shininess shininess value with range [10-200]
+ * (at least?)(very small highlight)
+ */
+typedef struct s_material
+{
+	t_vector	normalized_color;
+	double		diffuse;
+	double		ambient;
+	double		specular;
+	double		shininess;
+}				t_material;
+
+typedef struct s_shading
+{
+	t_vector diffuse;
+	t_vector ambient;
+	t_vector specular;
+}				t_shading;
+
 typedef struct s_sphere
 {
 	t_point		center;
@@ -56,6 +86,7 @@ typedef struct s_sphere
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transpose_inverse;
+	t_material	material;
 }				t_sphere;
 
 typedef struct s_bhaskara
@@ -79,10 +110,10 @@ typedef struct s_xs
 	int		count;
 }				t_xs;
 
-/* * se hit < 0, a interseção é atrás da câmera
- * se hit = 0, a interseção é na câmera
- * se hit > 0, a interseção é na frente da câmera
- * a intersecção visível é a menor intersecção positiva
+/* if hit < 0, the intersection is behind the camera
+ * if hit = 0, the intersection is at the camera
+ * if hit > 0, the intersection is ahead of the camera
+ * the visible intersection is the smaller positive number
  */
 typedef struct s_intersection
 {
@@ -114,6 +145,8 @@ void			add_intersection_node(t_intersection *node,
 // colors
 int				rgb_to_int(short int red, short int green, short int blue);
 t_color			set_color(short int red, short int green, short int blue);
+t_vector		multiply_colors(t_vector a, t_vector b);
+t_vector		normalize_color(t_color color);
 
 // rays
 t_ray			set_ray(t_point origin, t_vector direction);
@@ -129,8 +162,14 @@ t_intersection	*get_hit_intersection(t_intersection_list list);
 void			set_transform(t_sphere *sphere, t_matrix transform);
 t_vector		sphere_normal_at(t_sphere *s, t_point p);
 
-//light
+// material
+t_material		set_material(void);
+
+// light
 t_vector		reflect(t_vector incident, t_vector normal);
+t_light			set_point_light(t_point position, t_vector intensity);
+t_vector		lighting(t_material material, t_light light, t_point point,
+					t_vector normal, t_vector eye);
 
 // close
 int				close_minirt(t_mlx *mlx);
@@ -138,5 +177,8 @@ int				close_minirt(t_mlx *mlx);
 // error
 int				minirt_error(t_mlx *mlx, char *msg);
 void			minirt_malloc_error(char *function);
+
+// utils
+bool	check_double_values(double a, double b);
 
 #endif

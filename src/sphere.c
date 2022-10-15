@@ -6,7 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/14 21:00:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 11:36:08 by sguilher         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
+/*   Updated: 2022/10/15 11:35:28 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +39,7 @@ t_sphere	*create_sphere(t_color color)
 	sphere->transform = identity_matrix(4);
 	sphere->inverse = identity_matrix(4);
 	sphere->transpose_inverse = identity_matrix(4);
+	sphere->material = set_material();
 	return (sphere);
 }
 

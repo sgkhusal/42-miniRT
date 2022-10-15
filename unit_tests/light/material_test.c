@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unit_tests_utils.c                                 :+:      :+:    :+:   */
+/*   material_test.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 15:42:43 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 14:42:25 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/15 11:47:09 by sguilher          #+#    #+#             */
+/*   Updated: 2022/10/15 11:51:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-bool	check_equal_points(t_point a, t_point b)
+void	set_material_test(void)
 {
-	return (
-		check_double_values(a.x, b.x)
-		&& check_double_values(a.y, b.y)
-		&& check_double_values(a.z, b.z)
-		&& check_double_values(a.w, b.w)
-	);
+	t_material		result;
+
+	printf(GREY "set_material_test 1: " END);
+	result = set_material();
+	if (check_equal_vectors(set_vector(1, 1, 1), result.normalized_color)
+		&& result.ambient == 0.1 && result.specular == 0.9
+		&& result.diffuse == 0.9 && result.shininess == 200)
+		printf(GREEN "OK" END "\n");
+	else
+		printf(RED "KO" END "\n");
 }
 
-bool	check_equal_vectors(t_vector a, t_vector b)
+void	material_tests(void)
 {
-	return (
-		check_double_values(a.x, b.x)
-		&& check_double_values(a.y, b.y)
-		&& check_double_values(a.z, b.z)
-		&& check_double_values(a.w, b.w)
-	);
+	set_material_test();
 }

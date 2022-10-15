@@ -22,7 +22,7 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 
 SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c intersection.c element_transform.c normal.c \
-				reflection.c \
+				reflection.c material.c light.c \
 				$(TUPLES) $(MATRICES)
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c

@@ -25,7 +25,10 @@ void	create_sphere_test(void)
 	if (sphere->center.x == 0 && sphere->center.y == 0 && sphere->center.z == 0
 		&& sphere->radius == 1 && sphere->color.color == 0xFF0000
 		&& check_equal_matrices(sphere->transform, transform)
-		&& check_equal_matrices(sphere->inverse, transform))
+		&& check_equal_matrices(sphere->inverse, transform)
+		&& sphere->material.ambient == 0.1 && sphere->material.diffuse == 0.9
+		&& sphere->material.shininess == 200
+		&& sphere->material.specular == 0.9)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
