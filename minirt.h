@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/11 19:52:441 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 21:01:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ t_ray			transform_ray(t_ray ray, t_matrix m);
 
 //elements
 t_sphere		*create_sphere(t_color color);
+void			free_sphere(t_sphere *sphere);
 void			sphere_intersection(t_ray ray, t_sphere sphere,
 					t_intersection_list *list);
 t_intersection	*get_hit_intersection(t_intersection_list list);

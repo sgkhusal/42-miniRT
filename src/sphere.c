@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/14 20:31:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/14 21:00:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ t_sphere	*create_sphere(t_color color)
 	return (sphere);
 }
 
+void	free_sphere(t_sphere *sphere)
+{
+	free_matrix(sphere->transform);
+	free_matrix(sphere->inverse);
+	free_matrix(sphere->transpose_inverse);
+	free(sphere);
+}
+
 /**
  * @brief Gets the intersections between a ray and a sphere.
  *
@@ -56,20 +64,20 @@ void	sphere_intersection(t_ray ray, t_sphere s, t_intersection_list *list)
 	transformed_ray = transform_ray(ray, s.inverse);
 	sphere_to_ray = subtract_points(transformed_ray.origin, s.center);
 	bhaskara.a = scalar_product(transformed_ray.direction,
-		transformed_ray.direction);
+			transformed_ray.direction);
 	bhaskara.b = 2 * scalar_product(transformed_ray.direction, sphere_to_ray);
 	bhaskara.c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
-	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a *bhaskara.c;
+	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a * bhaskara.c;
 	if (bhaskara.delta < 0)
 		return ;
 	else
 	{
 		add_intersection_node(create_intersection(
-			(-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a), SPHERE),
-			list);
+				(-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a),
+				SPHERE), list);
 		add_intersection_node(create_intersection(
-			(-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a), SPHERE),
-			list);
+				(-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a),
+				SPHERE), list);
 	}
 }
 

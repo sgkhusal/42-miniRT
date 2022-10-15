@@ -30,15 +30,13 @@ void	create_sphere_test(void)
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(transform);
-	free_matrix(sphere->inverse);
-	free_matrix(sphere->transform);
-	free(sphere);
+	free_sphere(sphere);
 }
 
 void	sphere_intersection_test(t_sphere *s, t_ray ray, double t1, double t2)
 {
 	t_intersection_list	list;
-	static int		n = 1;
+	static int			n = 1;
 
 	printf(GREY "sphere_intersection_test %d: " END, n);
 	list.head = NULL;
@@ -70,9 +68,7 @@ void	sphere_transform_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
-	free_matrix(sphere->inverse);
-	free(sphere);
-	free_matrix(transform);
+	free_sphere(sphere);
 }
 
 void	sphere_no_intersection_test(t_sphere *sphere, t_ray ray)
@@ -111,7 +107,5 @@ void	sphere_tests(void)
 	sphere_transform_test();
 	transformed_sphere_test();
 	normal_tests();
-	free_matrix(sphere->inverse);
-	free_matrix(sphere->transform);
-	free(sphere);
+	free_sphere(sphere);
 }
