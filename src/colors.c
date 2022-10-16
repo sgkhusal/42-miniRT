@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 15:37:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:16:220 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,14 @@ t_vector	normalize_color(t_color color)
 	normalized_color.y = color.rgb[1] / 255.0;
 	normalized_color.z = color.rgb[0] / 255.0;
 	return (normalized_color);
+}
+
+t_color transform_vector_to_color(t_vector color)
+{
+	t_color rgb;
+
+	rgb.rgb[2] = (int)(color.x * 255);
+	rgb.rgb[1] = (int)(color.y * 255);
+	rgb.rgb[0] = (int)(color.z * 255);
+	return (rgb);
 }
