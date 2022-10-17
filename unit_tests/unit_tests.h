@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 17:40:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:43:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	check_int_values(int result, int expected);
 // minirt functions
 int		check_argc(int argc);
 int		check_file_extension(char *file);
+int		open_file(char *file);
 
 #endif
 

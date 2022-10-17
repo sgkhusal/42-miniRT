@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:19:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 19:30:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:58:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ void	check_file_extension_test(char *file, int expected)
 	n++;
 }
 
+void	open_file_test(char *file, int expected)
+{
+	int			result;
+	static int	n = 1;
+
+	printf(GREY "open_file %d: " END, n);
+	result = open_file(file);
+	check_int_values(result, expected);
+	if (result != ERROR)
+		close(result);
+	n++;
+}
+
 void	input_tests(void)
 {
 	printf(YELLOW "Input tests: " END "\n");
@@ -45,4 +58,9 @@ void	input_tests(void)
 	check_file_extension_test(".rt", ERROR);
 	check_file_extension_test("scene.pdf", ERROR);
 	check_file_extension_test("scene.ri", ERROR);
+	open_file_test("unit_tests.h", 3);
+	open_file_test("../minirt.h", 3);
+	open_file_test("hello", ERROR);
+	open_file_test("../tuple/point.c", ERROR);
+	open_file_test("../scenes/invalid/no_permission.rt", ERROR); //
 }

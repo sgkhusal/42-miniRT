@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 16:53:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:40:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h> // printf
 # include <math.h>
 # include <stdbool.h>
+# include <fcntl.h> // open flags
 
 # include "mlx_utils.h"
 # include "matrix.h"

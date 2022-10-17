@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 17:49:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 19:43:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,30 @@ int	check_file_extension(char *file)
 	return (OK);
 }
 
+int	open_file(char *file)
+{
+	int	fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		perror(file);
+		return (ERROR);
+	}
+	return (fd);
+}
+
 int	handle_input(int argc, char *input[])
 {
+	int	fd;
+
 	if (check_argc(argc) == ERROR)
 		return (ERROR);
 	if (check_file_extension(input[1]) == ERROR)
+		return (ERROR);
+	fd = open_file(input[1]);
+	if (fd == ERROR)
 		return (ERROR);
 	return (OK);
 }
