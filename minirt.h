@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 21:43:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:53:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include "mlx_utils.h"
 # include "matrix.h"
 # include "tuples.h"
+
+enum e_status
+{
+	OK,
+	ERROR
+};
 
 enum e_objects
 {
@@ -135,7 +141,7 @@ typedef struct s_rt
 }				t_rt;
 
 // input
-void			handle_input(int argc, char *input[]);
+int				handle_input(int argc, char *input[]);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);
@@ -176,6 +182,7 @@ t_vector		lighting(t_material material, t_light light, t_point point,
 					t_vector normal, t_vector eye);
 
 // error
+void			print_error_msg(char *msg);
 int				minirt_error(t_mlx *mlx, char *msg);
 void			minirt_malloc_error(char *function);
 

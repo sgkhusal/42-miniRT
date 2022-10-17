@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 14:41:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 16:29:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,16 @@ int	close_minirt(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
-int	minirt_error(t_mlx *mlx, char *msg)
+void	print_error_msg(char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putchar_fd('\n', 2);
+}
+
+int	minirt_error(t_mlx *mlx, char *msg)
+{
+	print_error_msg(msg);
 	clean_minirt(mlx);
 	exit(EXIT_FAILURE);
 }

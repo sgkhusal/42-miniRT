@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:42:43 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 14:42:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 17:37:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,12 @@ bool	check_equal_vectors(t_vector a, t_vector b)
 		&& check_double_values(a.z, b.z)
 		&& check_double_values(a.w, b.w)
 	);
+}
+
+void	check_int_values(int result, int expected)
+{
+	if (result == expected)
+		printf(GREEN "OK" END "\n");
+	else
+		printf(RED "KO" END "\n");
 }

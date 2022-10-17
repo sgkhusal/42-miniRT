@@ -109,6 +109,5 @@ void	sphere_tests(void)
 	sphere_intersection_test(sphere, ray, -6.0, -4.0);
 	sphere_transform_test();
 	transformed_sphere_test();
-	normal_tests();
 	free_sphere(sphere);
 }

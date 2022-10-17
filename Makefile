@@ -79,6 +79,12 @@ $(MLX):
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
+#test:	$(NAME)
+#	./$(NAME) scenes/scene.rt
+
+utest:
+	@$(MAKE) --no-print-directory -C ./unit_tests test
+
 clean:
 		$(RM_DIR) $(OBJS_DIR)
 		@$(MAKE) -C $(LIBFT_PATH) clean
@@ -90,4 +96,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test utest
