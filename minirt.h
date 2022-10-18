@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 19:40:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:05:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ typedef struct s_rt
 }				t_rt;
 
 // input
-int				handle_input(int argc, char *input[]);
+int				handle_input(int argc, char *filename);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);

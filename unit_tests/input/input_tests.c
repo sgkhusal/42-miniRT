@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:19:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 19:58:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:37:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void	input_tests(void)
 	open_file_test("../minirt.h", 3);
 	open_file_test("hello", ERROR);
 	open_file_test("../tuple/point.c", ERROR);
-	open_file_test("../scenes/invalid/no_permission.rt", ERROR); //
+	open_file_test("no_permission.rt", ERROR);
 }

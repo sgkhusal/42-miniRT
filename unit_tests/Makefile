@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/17 18:10:48 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/17 22:43:36 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ $(MINIRT):
 	@echo "------------------------------------------------------------------"
 
 test:		$(NAME)
+		@touch no_permission.rt && chmod 000 no_permission.rt
 		./$(NAME) 2> log
 
 clean:
@@ -118,6 +119,7 @@ clean:
 fclean:		clean
 		$(RM) $(NAME)
 		$(RM) log
+		$(RM) no_permission.rt
 		@$(MAKE) -C $(MINIRT_PATH) fclean
 
 re:			fclean all

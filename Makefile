@@ -13,10 +13,11 @@
 NAME =			miniRT
 
 # **************************************************************************** #
-LIBFT_PATH =	./libraries/libft
-LIBFT =			$(LIBFT_PATH)/libft.a
-MLX_PATH =		./libraries/minilibx_linux
-MLX		 =		$(MLX_PATH)/libmlx.a
+LIBFT_PATH =		./libraries/libft
+LIBFT =				$(LIBFT_PATH)/libft.a
+MLX_PATH =			./libraries/minilibx_linux
+MLX		 =			$(MLX_PATH)/libmlx.a
+UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
@@ -83,7 +84,7 @@ $(OBJS_DIR):
 #	./$(NAME) scenes/scene.rt
 
 utest:
-	@$(MAKE) --no-print-directory -C ./unit_tests test
+		@$(MAKE) --no-print-directory -C $(UNIT_TESTS_PATH) test
 
 clean:
 		$(RM_DIR) $(OBJS_DIR)
@@ -93,6 +94,7 @@ clean:
 fclean:		clean
 		$(RM) $(NAME)
 		@$(MAKE) -C $(LIBFT_PATH) fclean
+		@$(MAKE) -C $(UNIT_TESTS_PATH) fclean
 
 re:			fclean all
 

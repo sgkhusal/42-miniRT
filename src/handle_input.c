@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 19:43:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:46:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	check_file_extension(char *file)
 {
 	int	len;
 
+	if (!file)
+	{
+		print_error_msg("invalid file name");
+		return (ERROR);
+	}
 	len = ft_strlen(file);
 	if (len < 4 || ft_strncmp(&file[len - 3], ".rt", 4))
 	{
@@ -50,15 +55,21 @@ int	open_file(char *file)
 	return (fd);
 }
 
-int	handle_input(int argc, char *input[])
+/* int	read_file(int fd, char **file)
+{
+
+	return (OK);
+} */
+
+int	handle_input(int argc, char *filename)
 {
 	int	fd;
 
 	if (check_argc(argc) == ERROR)
 		return (ERROR);
-	if (check_file_extension(input[1]) == ERROR)
+	if (check_file_extension(filename) == ERROR)
 		return (ERROR);
-	fd = open_file(input[1]);
+	fd = open_file(filename);
 	if (fd == ERROR)
 		return (ERROR);
 	return (OK);

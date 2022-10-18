@@ -87,7 +87,7 @@ int	main(int argc, char *argv[])
 	t_mlx		mlx;
 	t_vector	pixel_color[500][500];
 
-	if (handle_input(argc, &argv[1]) == ERROR)
+	if (handle_input(argc, argv[1]) == ERROR)
 		exit (EXIT_FAILURE);
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
