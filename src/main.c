@@ -25,7 +25,7 @@ void	put_pixel_color(t_image *img, int x, int y, int color)
 // função de lightning
 // retorna a cor do pixel
 
-void	set_pixel_color(t_vector pixel_color[500][500])
+/* void	set_pixel_color(t_vector pixel_color[500][500])
 {
 	int				i;
 	int				j;
@@ -39,6 +39,27 @@ void	set_pixel_color(t_vector pixel_color[500][500])
 			pixel_color[i][j] = set_vector(1, 1, 1); // lightning
 			j++;
 		}
+		i++;
+	}
+} */
+
+void	set_pixel_color(t_vector pixel_color[500][500])
+{
+	int				i;
+	int				j;
+	double			x;
+
+	i = 0;
+	x = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			pixel_color[i][j] = set_vector(x, x, x); // lightning
+			j++;
+		}
+		x = x + 0.002;
 		i++;
 	}
 }

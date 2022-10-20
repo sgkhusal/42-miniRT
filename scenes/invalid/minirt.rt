@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 18:45:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 23:16:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ enum e_status
 {
 	OK,
 	ERROR
-};
-
-enum e_yes_no
-{
-	NO,
-	YES
 };
 
 enum e_objects
@@ -149,10 +143,6 @@ typedef struct s_rt
 
 // input
 int				handle_input(int argc, char *filename);
-int				check_file_extension(char *file);
-int				open_file(char *file);
-int				read_file(int fd, char **content);
-int				is_empty_file(char *content);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);

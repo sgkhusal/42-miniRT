@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 22:46:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:45:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,47 +23,10 @@ int	check_argc(int argc)
 	return (ERROR);
 }
 
-int	check_file_extension(char *file)
-{
-	int	len;
-
-	if (!file)
-	{
-		print_error_msg("invalid file name");
-		return (ERROR);
-	}
-	len = ft_strlen(file);
-	if (len < 4 || ft_strncmp(&file[len - 3], ".rt", 4))
-	{
-		print_error_msg("miniRT only supports *.rt files");
-		return (ERROR);
-	}
-	return (OK);
-}
-
-int	open_file(char *file)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd("Error\n", 2);
-		perror(file);
-		return (ERROR);
-	}
-	return (fd);
-}
-
-/* int	read_file(int fd, char **file)
-{
-
-	return (OK);
-} */
-
 int	handle_input(int argc, char *filename)
 {
-	int	fd;
+	int		fd;
+	char	*content;
 
 	if (check_argc(argc) == ERROR)
 		return (ERROR);
@@ -72,5 +35,11 @@ int	handle_input(int argc, char *filename)
 	fd = open_file(filename);
 	if (fd == ERROR)
 		return (ERROR);
+	content = ft_strdup("");
+	if (read_file(fd, &content) == ERROR)
+		return (ERROR);
+	if (is_empty_file(content))
+		return (print_error_msg("empty file"));
+	free(content);
 	return (OK);
 }

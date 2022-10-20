@@ -21,10 +21,11 @@ UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c handle_input.c mlx_utils.c colors.c utils.c ray.c \
+SRCS =			main.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c intersection.c element_transform.c normal.c \
 				reflection.c material.c light.c \
-				$(TUPLES) $(MATRICES)
+				$(INPUT) $(TUPLES) $(MATRICES)
+INPUT =			handle_input.c input_file.c
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
@@ -32,7 +33,7 @@ MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		minirt.h
-VPATH	=		src src/tuple src/matrix
+VPATH	=		src src/tuple src/matrix src/input
 INCLUDE	=		-I ./ -I ./includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 # compilation
@@ -94,7 +95,6 @@ clean:
 fclean:		clean
 		$(RM) $(NAME)
 		@$(MAKE) -C $(LIBFT_PATH) fclean
-		@$(MAKE) -C $(UNIT_TESTS_PATH) fclean
 
 re:			fclean all
 
