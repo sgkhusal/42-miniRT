@@ -109,7 +109,8 @@ int	main(int argc, char *argv[])
 	t_rt		rt;
 	t_vector	pixel_color[500][500];
 
-	rt = handle_input(argc, argv[1]);
+	if (handle_input(argc, argv[1], &rt) == ERROR)
+		exit (EXIT_FAILURE);
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	set_pixel_color(pixel_color);
@@ -120,6 +121,5 @@ int	main(int argc, char *argv[])
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
-	printf("oi: %d", rt.camera.oi);
 	return (0);
 }

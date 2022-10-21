@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 20:29:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:47:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,23 @@ int	check_argc(int argc)
 	return (ERROR);
 }
 
-t_rt	handle_input(int argc, char *filename)
+int	handle_input(int argc, char *filename, t_rt	*rt)
 {
 	int		fd;
 	char	*content;
 
 	if (check_argc(argc) == ERROR)
-		exit (EXIT_FAILURE);
+		return (ERROR);
 	if (check_file_extension(filename) == ERROR)
-		exit (EXIT_FAILURE);
+		return (ERROR);
 	fd = open_file(filename);
 	if (fd == ERROR)
-		exit (EXIT_FAILURE);
+		return (ERROR);
 	content = ft_strdup("");
 	if (read_file(fd, &content) == ERROR)
-		exit (EXIT_FAILURE);
-	return (handle_content(content));
+		return (ERROR);
+	if (handle_content(content, rt) == ERROR)
+		return (ERROR);
+	// criar as matrizes de transformação
+	return (OK);
 }

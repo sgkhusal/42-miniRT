@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 23:32:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/21 15:22:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,16 @@ typedef struct s_ray
 typedef struct s_light
 {
 	t_point		position;
-	t_vector	intensity; // color
+	t_vector	intensity; // normalized color
+	t_color		color;
 }				t_light;
+
+typedef struct s_ambient
+{
+	t_vector	intensity; // normalized color
+	t_color		color;
+	double		ratio;
+}				t_ambient;
 
 /**
  * @param color normalized color with range [0-1]
@@ -157,18 +165,26 @@ typedef struct intersection_list
 
 typedef struct s_rt
 {
+	int			oi;
 	t_camera	camera;
-	t_light		ambient_light;
+	t_ambient	ambient_light;
 	t_light		light;
 	t_intersection_list	intersections;
 }				t_rt;
 
 // input
-t_rt			handle_input(int argc, char *filename);
+int				handle_input(int argc, char *filename, t_rt	*rt);
 int				check_file_extension(char *file);
 int				open_file(char *file);
 int				read_file(int fd, char **content);
-t_rt			handle_content(char *content);
+int				handle_content(char *content, t_rt	*rt);
+int				handle_line(char *line, t_rt *rt);
+int				handle_ambient_light(char *line, t_rt *rt);
+
+// input utils
+int	total_infos(char **infos);
+int				validate_color_chars(char *str);
+int				validate_coordinates_chars(char *str);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);
@@ -208,13 +224,16 @@ t_light			set_point_light(t_point position, t_vector intensity);
 t_vector		lighting(t_material material, t_light light, t_point point,
 					t_vector normal, t_vector eye);
 
+// utils
+bool			check_double_values(double a, double b);
+
 // error
 int				print_error_msg(char *msg);
 int				print_error_msg2(char *msg, char *str);
 int				minirt_error(t_mlx *mlx, char *msg);
 void			minirt_malloc_error(char *function);
 
-// utils
-bool			check_double_values(double a, double b);
+// clean
+void			free_array(char **arr);
 
 #endif
