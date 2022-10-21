@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 15:22:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/21 19:07:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,11 +180,18 @@ int				read_file(int fd, char **content);
 int				handle_content(char *content, t_rt	*rt);
 int				handle_line(char *line, t_rt *rt);
 int				handle_ambient_light(char *line, t_rt *rt);
+int				handle_camera(char *line, t_rt *rt);
+int				handle_light(char *line, t_rt *rt);
+int				handle_sphere(char *line, t_rt *rt);
+int				handle_plane(char *line, t_rt *rt);
+int				handle_cylinder(char *line, t_rt *rt);
 
 // input utils
-int	total_infos(char **infos);
+int				total_infos(char **infos);
+int				validate_double_chars(char *str);
 int				validate_color_chars(char *str);
 int				validate_coordinates_chars(char *str);
+int				validate_nb_chars(char *str);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);

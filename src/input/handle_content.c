@@ -6,28 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 15:46:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/21 19:06:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-static int	is_element_valid(char *line)
-{
-	if (ft_strncmp(line, "A ", 2) == 0)
-		return (OK);
-	if (ft_strncmp(line, "C ", 2) == 0)
-		return (OK);
-	if (ft_strncmp(line, "L ", 2) == 0)
-		return (OK);
-	if (ft_strncmp(line, "sp ", 3) == 0)
-		return (OK);
-	if (ft_strncmp(line, "pl ", 3) == 0)
-		return (OK);
-	if (ft_strncmp(line, "cy ", 3) == 0)
-		return (OK);
-	return (ERROR);
-}
 
 static int	check_qty(int qty, char *element)
 {
@@ -65,22 +48,38 @@ static int	check_elements_count(char **lines)
 	return (OK);
 }
 
-static int	check_elements(char **lines)
+static int	check_separator(char **lines)
 {
 	int	i;
 
 	i = 0;
 	while (lines[i])
 	{
-		if (is_element_valid(lines[i]) == ERROR)
-		{
-			if (lines[i][0] == ' ')
-				return (print_error_msg("line can't start with space"));
-			return (print_error_msg2("invalid element: ", lines[i]));
-		}
+		if (ft_strchr(lines[i], '\t'))
+			return (print_error_msg("invalid separator (tab)"));
 		i++;
 	}
-	return (check_elements_count(lines));
+	return (OK);
+}
+
+int	handle_line(char *line, t_rt *rt)
+{
+	if (line[0] == 'A')
+		return (handle_ambient_light(line, rt));
+	if (line[0] == 'C')
+		return (handle_camera(line, rt));
+	if (line[0] == 'L')
+		return (handle_light(line, rt));
+	if (ft_strncmp(line, "sp ", 3) == 0)
+		return (handle_sphere(line, rt));
+	if (ft_strncmp(line, "pl ", 3) == 0)
+		return (handle_plane(line, rt));
+	if (ft_strncmp(line, "cy ", 3) == 0)
+		return (handle_cylinder(line, rt));
+	if (line[0] == ' ')
+		return (print_error_msg("line can't start with space"));
+	return (print_error_msg2("invalid element: ", line));
+	// função de validação para cada tipo de elemento: A, C, L, sp, cy e pl
 }
 
 int	handle_content(char *content, t_rt	*rt)
@@ -94,10 +93,12 @@ int	handle_content(char *content, t_rt	*rt)
 	free(content);
 	if (!lines || !*lines)
 		return (print_error_msg("empty file"));
-	if (check_elements(lines) == ERROR)
+	if (check_elements_count(lines) == ERROR)
 		status = ERROR;
-	// checks if uses tabs - invalid separator - must use spaces
+	if (check_separator(lines) == ERROR)
+		status = ERROR;
 	i = 0;
+	// init rt aqui?
 	while (lines[i] && status == OK)
 	{
 		if (handle_line(lines[i], rt) == ERROR)
