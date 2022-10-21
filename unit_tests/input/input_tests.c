@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:19:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 18:33:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:16:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,6 @@ void	read_file_test(int fd, int expected)
 	n++;
 }
 
-void	is_empty_file_test(char *file, int expected)
-{
-	int			fd;
-	int			result;
-	char		*content;
-	static int	n = 1;
-
-	printf(GREY "is_empty_file_test %d: " END, n);
-	fd = open(file, O_RDONLY);
-	content = ft_strdup("");
-	read_file(fd, &content);
-	result = is_empty_file(content);
-	check_int_values(result, expected);
-	close(fd);
-	if (result == NO)
-		free(content);
-}
-
 void	input_tests(void)
 {
 	int	fd;
@@ -107,6 +89,4 @@ void	input_tests(void)
 	fd = open("hello", O_RDONLY);
 	read_file_test(fd, ERROR);
 	read_file_test(5, ERROR);
-	is_empty_file_test("../scenes/cool.rt", NO);
-	is_empty_file_test("../scenes/invalid/empty.rt", YES);
 }

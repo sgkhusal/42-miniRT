@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 18:45:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/20 23:32:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 # include "mlx_utils.h"
 # include "matrix.h"
 # include "tuples.h"
+
+# define AMBIENT_LIGHT 'A'
+# define CAMERA 'C'
+# define LIGHT 'L'
+# define FILE_PLANE 'pl'
+# define FILE_SPHERE 'sp'
+# define FILE_CYLINDER 'cy'
 
 enum e_status
 {
@@ -110,6 +117,12 @@ typedef struct s_bhaskara
 	double	delta;
 }				t_bhaskara;
 
+typedef struct s_camera
+{
+	int	oi;
+	/* data */
+}				t_camera;
+
 /**
  * @param t1 the distance from the ray origin to the first intersection
  * @param t2 the distance from the ray origin to the second intersection
@@ -144,15 +157,18 @@ typedef struct intersection_list
 
 typedef struct s_rt
 {
+	t_camera	camera;
+	t_light		ambient_light;
+	t_light		light;
 	t_intersection_list	intersections;
 }				t_rt;
 
 // input
-int				handle_input(int argc, char *filename);
+t_rt			handle_input(int argc, char *filename);
 int				check_file_extension(char *file);
 int				open_file(char *file);
 int				read_file(int fd, char **content);
-int				is_empty_file(char *content);
+t_rt			handle_content(char *content);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);
@@ -194,6 +210,7 @@ t_vector		lighting(t_material material, t_light light, t_point point,
 
 // error
 int				print_error_msg(char *msg);
+int				print_error_msg2(char *msg, char *str);
 int				minirt_error(t_mlx *mlx, char *msg);
 void			minirt_malloc_error(char *function);
 

@@ -25,7 +25,7 @@ SRCS =			main.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c intersection.c element_transform.c normal.c \
 				reflection.c material.c light.c \
 				$(INPUT) $(TUPLES) $(MATRICES)
-INPUT =			handle_input.c input_file.c
+INPUT =			handle_input.c input_file.c handle_content.c
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \

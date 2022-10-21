@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 18:45:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:29:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,20 @@ int	check_argc(int argc)
 	return (ERROR);
 }
 
-int	handle_input(int argc, char *filename)
+t_rt	handle_input(int argc, char *filename)
 {
 	int		fd;
 	char	*content;
 
 	if (check_argc(argc) == ERROR)
-		return (ERROR);
+		exit (EXIT_FAILURE);
 	if (check_file_extension(filename) == ERROR)
-		return (ERROR);
+		exit (EXIT_FAILURE);
 	fd = open_file(filename);
 	if (fd == ERROR)
-		return (ERROR);
+		exit (EXIT_FAILURE);
 	content = ft_strdup("");
 	if (read_file(fd, &content) == ERROR)
-		return (ERROR);
-	if (is_empty_file(content))
-		return (print_error_msg("empty file"));
-	free(content);
-	return (OK);
+		exit (EXIT_FAILURE);
+	return (handle_content(content));
 }

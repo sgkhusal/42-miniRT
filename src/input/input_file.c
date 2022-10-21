@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:44:45 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 18:49:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:01:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,3 @@ int	read_file(int fd, char **content)
 	return (OK);
 }
 
-int	is_empty_file(char *content)
-{
-	if (!content || !*content || (content[0] == '\n' && !content[1]))
-	{
-		if (content)
-			free(content);
-		return (YES);
-	}
-	return (NO);
-}
