@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:05:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:06:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,36 @@ static int validate_cylinder_chars(char **infos)
 	return (OK);
 }
 
-int	handle_cylinder(char *line, t_rt *rt)
+int	handle_cylinder(char *line)//, t_object *objs)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
+	//t_object	*o;
+	//t_cylinder	*c;
 
 	status = OK;
 	infos = ft_split(line, ' ');
 	if (!infos)
 		return (print_error_msg("malloc error on handle_cylinder"));
 	if (total_infos(infos) != 6)
-		status = print_error_msg2("to many or few arguments for cylinder",
+		status = print_error_msg2("to many or few arguments for cylinder: ",
 			line);
 	else if (validate_cylinder_chars(infos) == ERROR)
 		status = ERROR;
-	/* else if (set_cylinder(&infos[1], &rt->cylinder) == ERROR)
-		status = ERROR; */
-	// transform
-	// validate range:
-	// ∗ x,y,z coordinates: 0.0,0.0,20.6
-	// ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
-	// ∗ R,G,B colors in range [0-255]: 10, 0, 255
-	if (status == ERROR)
+	/* else
 	{
-		free_array(infos);
-		rt->oi = 0; //
-		return (ERROR);
-	}
-	return (OK);
+		c = create_cylinder();
+		o = create_object(CYLINDER, c);
+		o->xyz = transform_coordinates(infos[1], &status);
+		c->orientation = transform_orientation(infos[2], &status);
+		// the cylinder diameter: 14.2
+		c->radius = transform_double(infos[3], &status) / 2;
+		// the cylinder height: 21.42
+		c->height = transform_double(infos[4], &status);
+		o->color = transform_color(infos[5], &status);
+		// criar as matrizes de transformação aqui? ou depois?
+		append_object(objs, o);
+	} */
+	free_array(infos);
+	return (status);
 }

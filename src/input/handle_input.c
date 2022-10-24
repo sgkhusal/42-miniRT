@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 15:47:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:02:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ int	handle_input(int argc, char *filename, t_rt	*rt)
 		return (ERROR);
 	if (handle_content(content, rt) == ERROR)
 		return (ERROR);
-	// criar as matrizes de transformação
 	return (OK);
 }

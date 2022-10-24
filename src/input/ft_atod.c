@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:15:49 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/21 19:10:01 by sguilher          #+#    #+#             */
+/*   Updated: 2022/10/22 18:14:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unit_tests.h"
+#include "minirt.h"
 
-int	main(void)
+double	ft_atod(char *nb)
 {
-	input_tests();
-	points_tests();
-	vectors_tests();
-	points_and_vectors_tests();
-	matrix_tests();
-	ray_tests();
-	sphere_tests();
-	intersection_tests();
-	light_tests();
-	return (0);
+	return (ft_strlen(nb));
 }

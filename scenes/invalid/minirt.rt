@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/17 23:16:14 by sguilher         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    minirt.rt                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#              #
+#    Updated: 2022/10/22 18:54:15 by sguilher         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -162,7 +162,7 @@ t_point			ray_position(t_ray ray, double distance);
 t_ray			transform_ray(t_ray ray, t_matrix m);
 
 //elements
-t_sphere		*create_sphere(t_color color);
+t_sphere		*create_sphere();
 void			free_sphere(t_sphere *sphere);
 void			sphere_intersection(t_ray ray, t_sphere sphere,
 					t_intersection_list *list);

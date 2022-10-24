@@ -6,11 +6,28 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:02:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:43:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+// FOV : Horizontal field of view in degrees in range [0,180]
+double	transform_fov(char *fov_str, int *status)
+{
+	double	fov;
+
+	if (ft_strlen(fov_str) > 3)
+	{
+		*status = print_error_msg2("invalid FOV range: ", fov_str);
+		return (0);
+	}
+	fov = 70;
+	//fov = ft_atod(fov_str);
+	if (fov < 0 || fov > 180)
+		*status = print_error_msg2("invalid FOV range: ", fov_str);
+	return (fov);
+}
 
 static int validate_camera_chars(char **infos)
 {
@@ -23,7 +40,7 @@ static int validate_camera_chars(char **infos)
 	return (OK);
 }
 
-int	handle_camera(char *line, t_rt *rt)
+int	handle_camera(char *line, t_camera *cam)
 {
 	char	**infos;
 	int		status;
@@ -36,18 +53,13 @@ int	handle_camera(char *line, t_rt *rt)
 		status = print_error_msg2("to many or few arguments for camera", line);
 	else if (validate_camera_chars(infos) == ERROR)
 		status = ERROR;
-	/* else if (set_camera(&infos[1], &rt->camera) == ERROR)
-		status = ERROR; */
-	// transform
-	// validate range:
-	// ∗ x,y,z coordinates of the view point: 0.0,0.0,20.6
-	// ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
-	// ∗ FOV : Horizontal field of view in degrees in range [0,180]
-	if (status == ERROR)
+	else
 	{
-		free_array(infos);
-		rt->oi = 0; //
-		return (ERROR);
+		cam->origin = transform_coordinates(infos[1], &status);
+		// ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
+		cam->orientation = set_vector(0,0,1); //
+		cam->fov = transform_fov(infos[3], &status);
 	}
-	return (OK);
+	free_array(infos);
+	return (status);
 }

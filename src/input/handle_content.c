@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:06:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:02:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ static int	check_separator(char **lines)
 int	handle_line(char *line, t_rt *rt)
 {
 	if (line[0] == 'A')
-		return (handle_ambient_light(line, rt));
+		return (handle_ambient_light(line, &rt->ambient));
 	if (line[0] == 'C')
-		return (handle_camera(line, rt));
+		return (handle_camera(line, &rt->camera));
 	if (line[0] == 'L')
-		return (handle_light(line, rt));
+		return (handle_light(line, &rt->light));
 	if (ft_strncmp(line, "sp ", 3) == 0)
-		return (handle_sphere(line, rt));
+		return (handle_sphere(line, &(rt->objects)));
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		return (handle_plane(line, rt));
+		return (handle_plane(line));//, rt->objects));
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		return (handle_cylinder(line, rt));
+		return (handle_cylinder(line));//, rt->objects));
 	if (line[0] == ' ')
 		return (print_error_msg("line can't start with space"));
 	return (print_error_msg2("invalid element: ", line));
@@ -99,11 +99,12 @@ int	handle_content(char *content, t_rt	*rt)
 		status = ERROR;
 	i = 0;
 	// init rt aqui?
+	rt->objects = NULL;
 	while (lines[i] && status == OK)
 	{
 		if (handle_line(lines[i], rt) == ERROR)
 		{
-			// free rt ? - free elements
+			free_objects(&(rt->objects));
 			status = ERROR;
 		}
 		i++;

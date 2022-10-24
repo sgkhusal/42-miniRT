@@ -20,10 +20,10 @@ void	create_sphere_test(void)
 
 	printf(GREY "create sphere test 1: " END);
 	color = set_color(255, 0, 0);
-	sphere = create_sphere(color);
+	sphere = create_sphere();
 	transform = identity_matrix(4);
 	if (sphere->center.x == 0 && sphere->center.y == 0 && sphere->center.z == 0
-		&& sphere->radius == 1 && sphere->color.color == 0xFF0000
+		&& sphere->radius == 1
 		&& check_equal_matrices(sphere->transform, transform)
 		&& check_equal_matrices(sphere->inverse, transform)
 		&& sphere->material.ambient == 0.1 && sphere->material.diffuse == 0.9
@@ -64,7 +64,7 @@ void	sphere_transform_test(void)
 	t_matrix	transform;
 
 	printf(GREY "sphere_transform_test 1: " END);
-	sphere = create_sphere(set_color(255, 0, 0));
+	sphere = create_sphere();
 	transform = translation_matrix(2, 3, 4);
 	set_transform(sphere, transform);
 	if (check_equal_matrices(sphere->transform, transform))
@@ -96,7 +96,7 @@ void	sphere_tests(void)
 
 	printf(YELLOW "Sphere tests: " END "\n");
 	create_sphere_test();
-	sphere = create_sphere(set_color(255, 0, 0));
+	sphere = create_sphere();
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
 	sphere_intersection_test(sphere, ray, 4.0, 6.0);
 	ray = set_ray(set_point(0, 1, -5), set_vector(0, 0, 1));

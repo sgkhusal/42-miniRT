@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:35 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:01:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:01:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int validate_ambient_chars(char **infos)
 	return (OK);
 }
 
-int	handle_ambient_light(char *line, t_rt *rt)
+int	handle_ambient_light(char *line, t_ambient *amb)
 {
 	char	**infos;
 	int		status;
@@ -35,17 +35,11 @@ int	handle_ambient_light(char *line, t_rt *rt)
 			line);
 	else if (validate_ambient_chars(infos) == ERROR)
 		status = ERROR;
-	/* else if (set_ambient_light(&infos[1], &rt->ambient_light) == ERROR)
-		status = ERROR; */
-	// transform
-	// validate range
-	// ∗ ambient lighting ratio in range [0.0,1.0]: 0.2
-	//∗ R,G,B colors in range [0-255]: 255, 255, 255
-	if (status == ERROR)
+	else
 	{
-		free_array(infos);
-		rt->oi = 0; //
-		return (ERROR);
+		amb->ratio = transform_ratio(infos[1], &status);
+		amb->color = transform_color(infos[2], &status);
 	}
-	return (OK);
+	free_array(infos);
+	return (status);
 }

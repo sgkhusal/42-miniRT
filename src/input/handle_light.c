@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:02:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:03:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int validate_light_chars(char **infos)
 	return (OK);
 }
 
-int	handle_light(char *line, t_rt *rt)
+int	handle_light(char *line, t_light *light)
 {
 	char	**infos;
 	int		status;
@@ -36,18 +36,12 @@ int	handle_light(char *line, t_rt *rt)
 		status = print_error_msg2("to many or few arguments for light", line);
 	else if (validate_light_chars(infos) == ERROR)
 		status = ERROR;
-	/* else if (set_light(&infos[1], &rt->light) == ERROR)
-		status = ERROR; */
-	// transform
-	// validate range:
-	// ∗ x,y,z coordinates of the light point: 0.0,0.0,20.6
-	// ∗ the light brightness ratio in range [0.0,1.0]: 0.6
-	// ∗ (unused in mandatory part)R,G,B colors in range [0-255]: 10, 0, 255
-	if (status == ERROR)
+	else
 	{
-		free_array(infos);
-		rt->oi = 0; //
-		return (ERROR);
+		light->position = transform_coordinates(infos[1], &status);
+		light->brightness = transform_ratio(infos[2], &status);
+		light->color = transform_color(infos[3], &status);
 	}
-	return (OK);
+	free_array(infos);
+	return (status);
 }

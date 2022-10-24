@@ -119,6 +119,7 @@ int	main(int argc, char *argv[])
 		rgb_to_int(255, 0, 0));
 	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2); */
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
+	free_objects(&rt.objects); // precisa ser colocado dentro da função da mlx
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);

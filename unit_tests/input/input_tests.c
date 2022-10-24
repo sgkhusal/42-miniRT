@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 15:19:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 20:16:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:18:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	check_argc_test(int argc, int expected)
+static void	check_argc_test(int argc, int expected)
 {
 	int			result;
 	static int	n = 1;
@@ -23,7 +23,7 @@ void	check_argc_test(int argc, int expected)
 	n++;
 }
 
-void	check_file_extension_test(char *file, int expected)
+static void	check_file_extension_test(char *file, int expected)
 {
 	int			result;
 	static int	n = 1;
@@ -34,7 +34,7 @@ void	check_file_extension_test(char *file, int expected)
 	n++;
 }
 
-void	open_file_test(char *file, int expected)
+static void	open_file_test(char *file, int expected)
 {
 	int			result;
 	static int	n = 1;
@@ -47,7 +47,7 @@ void	open_file_test(char *file, int expected)
 	n++;
 }
 
-void	read_file_test(int fd, int expected)
+static void	read_file_test(int fd, int expected)
 {
 	int			result;
 	char		*content;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:00:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:06:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,31 @@ static int validate_plane_chars(char **infos)
 	return (OK);
 }
 
-int	handle_plane(char *line, t_rt *rt)
+int	handle_plane(char *line)//, t_object *objs)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
+	//t_object	*o;
+	//t_plane		*p;
 
 	status = OK;
 	infos = ft_split(line, ' ');
 	if (!infos)
 		return (print_error_msg("malloc error on handle_plane"));
 	if (total_infos(infos) != 4)
-		status = print_error_msg2("to many or few arguments for plane", line);
+		status = print_error_msg2("to many or few arguments for plane: ", line);
 	else if (validate_plane_chars(infos) == ERROR)
 		status = ERROR;
-	/* else if (set_plane(&infos[1], &rt->plane) == ERROR)
-		status = ERROR; */
-	// transform
-	// validate range:
-	// ∗ x,y,z coordinates: 0.0,0.0,20.6
-	// ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
-	// ∗ R,G,B colors in range [0-255]: 10, 0, 255
-	if (status == ERROR)
+	/* else
 	{
-		free_array(infos);
-		rt->oi = 0; //
-		return (ERROR);
-	}
-	return (OK);
+		p = create_plane();
+		o = create_object(PLANE, p);
+		o->xyz = transform_coordinates(infos[1], &status);
+		p->orientation = transform_orientation(infos[2], &status);
+		o->color = transform_color(infos[3], &status);
+		// criar as matrizes de transformação aqui? ou depois?
+		append_object(objs, o);
+	} */
+	free_array(infos);
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 19:07:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 21:58:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_light
 	t_point		position;
 	t_vector	intensity; // normalized color
 	t_color		color;
+	double		brightness;
 }				t_light;
 
 typedef struct s_ambient
@@ -110,12 +111,37 @@ typedef struct s_sphere
 {
 	t_point		center;
 	double		radius;
-	t_color		color;
+	t_color		color; //
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transpose_inverse;
 	t_material	material;
 }				t_sphere;
+
+typedef struct s_plane
+{
+	t_point		point;
+	t_vector	orientation;
+	t_color		color;
+}				t_plane;
+
+typedef struct s_cylinder
+{
+	t_point		center;
+	t_vector	orientation;
+	double		radius;
+	double		height;
+	t_color		color;
+}				t_cylinder;
+
+typedef struct s_object
+{
+	void			*obj;
+	t_point			xyz;
+	t_color			color;
+	enum e_objects	type;
+	struct s_object	*next;
+}				t_object;
 
 typedef struct s_bhaskara
 {
@@ -127,7 +153,9 @@ typedef struct s_bhaskara
 
 typedef struct s_camera
 {
-	int	oi;
+	t_point		origin;
+	t_vector	orientation;
+	double		fov;
 	/* data */
 }				t_camera;
 
@@ -165,10 +193,11 @@ typedef struct intersection_list
 
 typedef struct s_rt
 {
-	int			oi;
+	int			oi; //
+	t_ambient	ambient;
 	t_camera	camera;
-	t_ambient	ambient_light;
 	t_light		light;
+	t_object	*objects;
 	t_intersection_list	intersections;
 }				t_rt;
 
@@ -179,12 +208,12 @@ int				open_file(char *file);
 int				read_file(int fd, char **content);
 int				handle_content(char *content, t_rt	*rt);
 int				handle_line(char *line, t_rt *rt);
-int				handle_ambient_light(char *line, t_rt *rt);
-int				handle_camera(char *line, t_rt *rt);
-int				handle_light(char *line, t_rt *rt);
-int				handle_sphere(char *line, t_rt *rt);
-int				handle_plane(char *line, t_rt *rt);
-int				handle_cylinder(char *line, t_rt *rt);
+int				handle_ambient_light(char *line, t_ambient *amb);
+int				handle_camera(char *line, t_camera *cam);
+int				handle_light(char *line, t_light *light);
+int				handle_sphere(char *line, t_object **objs);
+int				handle_plane(char *line);//, t_object *objs);
+int				handle_cylinder(char *line);//, t_object *objs);
 
 // input utils
 int				total_infos(char **infos);
@@ -192,6 +221,12 @@ int				validate_double_chars(char *str);
 int				validate_color_chars(char *str);
 int				validate_coordinates_chars(char *str);
 int				validate_nb_chars(char *str);
+t_color			transform_color(char *rgb_str, int *status);
+double	transform_ratio(char *ratio_str, int *status);
+t_point	transform_coordinates(char *xyz_str, int *status);
+t_vector	transform_orientation(char *xyz_str, int *status);
+double	transform_double(char *str, int *status);
+double	transform_fov(char *fov_str, int *status);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);
@@ -211,7 +246,10 @@ t_point			ray_position(t_ray ray, double distance);
 t_ray			transform_ray(t_ray ray, t_matrix m);
 
 //elements
-t_sphere		*create_sphere(t_color color);
+t_object	*create_object(enum e_objects type, void *shape);
+void	append_object(t_object **head, t_object *obj);
+void	free_objects(t_object **head);
+t_sphere		*create_sphere();
 void			free_sphere(t_sphere *sphere);
 void			sphere_intersection(t_ray ray, t_sphere sphere,
 					t_intersection_list *list);
@@ -233,6 +271,7 @@ t_vector		lighting(t_material material, t_light light, t_point point,
 
 // utils
 bool			check_double_values(double a, double b);
+double	ft_atod(char *nb);
 
 // error
 int				print_error_msg(char *msg);

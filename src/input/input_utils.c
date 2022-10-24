@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:24:56 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 18:55:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 20:31:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,15 @@ int	validate_double_chars(char *str)
 	return (OK);
 }
 
-int	validate_color_chars(char *str)
+int	validate_color_chars(char *rgb_str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (rgb_str[i])
 	{
-		if (str[i] != ',' && !ft_isdigit(str[i]))
-			return (print_error_msg2("Invalid character in color: ",
-				str));
+		if (rgb_str[i] != ',' && !ft_isdigit(rgb_str[i]))
+			return (print_error_msg2("invalid character for color: ", rgb_str));
 		i++;
 	}
 	return (OK);

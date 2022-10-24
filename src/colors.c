@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-int	rgb_to_int(short int red, short int green, short int blue)
+int	rgb_to_int(short int red, short int green, short int blue) // provavelmente não vamos usar
 {
 	t_color	color;
 

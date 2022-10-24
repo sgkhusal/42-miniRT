@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:07:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 21:01:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:07:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	normal_tests(void)
 {
 	t_sphere	*s;
 
-	s = create_sphere(set_color(255, 0, 0));
+	s = create_sphere();
 	sphere_normal_test(s, set_point(1, 0, 0), set_vector(1, 0, 0));
 	sphere_normal_test(s, set_point(0, 1, 0), set_vector(0, 1, 0));
 	sphere_normal_test(s, set_point(0, 0, 1), set_vector(0, 0, 1));
