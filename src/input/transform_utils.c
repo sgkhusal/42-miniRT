@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:41:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 00:24:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_color	transform_color(char *rgb_str, int *status)
 	int		green;
 	int		blue;
 
-	if (ft_strlen(rgb_str) > 11)
+	if (ft_strlen(rgb_str) > 11) // 3 * 3 + 2 commas
 	{
 		*status = print_error_msg2("invalid color range: ", rgb_str);
 		return (set_color(0, 0, 0));
@@ -45,11 +45,11 @@ double	transform_ratio(char *ratio_str, int *status)
 {
 	double	ratio;
 
-	/* if (ft_strlen(ratio_str) > 11)
+	if (ft_strlen(ratio_str) > 11) // 0.00001
 	{
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
 		return (0);
-	} */
+	}
 	ratio = ft_atod(ratio_str);
 	if (ratio < 0 || ratio > 1)
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
@@ -63,11 +63,11 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	double	y;
 	double	z;
 
-	/* if (ft_strlen(xyz_str) > 11)
+	if (ft_strlen(xyz_str) > 11) // 3 * 11 + 2 -> acho que a gente pode limitar mais
 	{
 		*status = print_error_msg2("invalid xyz range: ", xyz_str);
 		return (set_point(0, 0, 0));
-	} */
+	}
 	xyz = ft_split(xyz_str, ',');
 	if (!xyz)
 	{
@@ -92,11 +92,11 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	double	y;
 	double	z;
 
-	/* if (ft_strlen(xyz_str) > 11)
+	if (ft_strlen(xyz_str) > 35) // 3 * 11 + 2 -> acho que a gente pode limitar mais
 	{
 		*status = print_error_msg2("invalid xyz range: ", xyz_str);
 		return (set_vector(0, 0, 0));
-	} */
+	}
 	xyz = ft_split(xyz_str, ',');
 	if (!xyz)
 	{
@@ -119,11 +119,11 @@ double	transform_double(char *str, int *status)
 {
 	double	d;
 
-	/* if (ft_strlen(str) > 11)
+	if (ft_strlen(str) > 11) // acho que a gente pode limitar mais
 	{
 		*status = print_error_msg2("invalid number range: ", str);
 		return (0);
-	} */
+	}
 	d = ft_atod(str);
 	if (d < -1000 || d > 1000) // verificar que range vamos deixar
 		*status = print_error_msg2("invalid number range: ", str);

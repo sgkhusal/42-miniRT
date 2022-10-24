@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 18:45:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 23:01:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_environment
 	t_vector	wind;
 }	t_environment;
 
+void	ft_atod_tests(void);
 void	input_tests(void);
 
 void	points_tests(void);
