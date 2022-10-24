@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 20:46:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:41:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ double	transform_ratio(char *ratio_str, int *status)
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
 		return (0);
 	} */
-	ratio = 0.2;
-	//ratio = ft_atod(ratio_str);
+	ratio = ft_atod(ratio_str);
 	if (ratio < 0 || ratio > 1)
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
 	return (ratio);
@@ -125,8 +124,7 @@ double	transform_double(char *str, int *status)
 		*status = print_error_msg2("invalid number range: ", str);
 		return (0);
 	} */
-	d = 2;
-	//d = ft_atod(str);
+	d = ft_atod(str);
 	if (d < -1000 || d > 1000) // verificar que range vamos deixar
 		*status = print_error_msg2("invalid number range: ", str);
 	return (d);
