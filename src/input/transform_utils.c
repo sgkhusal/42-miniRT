@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 13:43:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:54:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ char	**parse_input(char *line, char c, int size_expected, int *status)
 
 t_color	transform_color(char *color_str, int *status)
 {
-	char	**rgb;
-	int		red;
-	int		green;
-	int		blue;
+	char		**rgb;
+	short int	red;
+	short int	green;
+	short int	blue;
 
 	rgb = parse_input(color_str, ',', 3, status);
 	if (*status == ERROR)
@@ -57,13 +57,16 @@ t_color	transform_color(char *color_str, int *status)
 double	transform_ratio(char *ratio_str, int *status)
 {
 	double	ratio;
+	char	*cpy;
 
-	if (ft_strlen(ratio_str) > 11) // 0.00001
+	if (ft_strlen(ratio_str) > 7) // 0.00001
 	{
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
 		return (0);
 	}
-	ratio = ft_atod(ratio_str);
+	cpy = ft_strdup(ratio_str);
+	ratio = ft_atod(cpy);
+	free(cpy);
 	if (ratio < 0 || ratio > 1)
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
 	return (ratio);
@@ -115,8 +118,8 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
-	if (x < -1 || x > 1 || y < -1 || y > 1 || z < -1 || z > 1)
-		*status = print_error_msg2("invalid orientation vector range: ",
+	if (vector_length(set_vector(x, y, z)) != 1)
+		*status = print_error_msg2("orientation vector is not normalized: ",
 			xyz_str);
 	free_array(xyz);
 	return (set_vector(x, y, z));
@@ -127,14 +130,17 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 double	transform_double(char *str, int *status)
 {
 	double	d;
+	char	*cpy;
 
 	if (ft_strlen(str) > 11) // acho que a gente pode limitar mais
 	{
 		*status = print_error_msg2("invalid number range: ", str);
 		return (0);
 	}
-	d = ft_atod(str);
-	if (d < -1000 || d > 1000) // verificar que range vamos deixar
+	cpy = ft_strdup(str);
+	d = ft_atod(cpy);
+	free(cpy);
+	if (d < 0 || d > 1000) // verificar que range vamos deixar
 		*status = print_error_msg2("invalid number range: ", str);
 	return (d);
 }

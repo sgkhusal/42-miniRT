@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 23:01:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:10:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_environment
 
 void	ft_atod_tests(void);
 void	input_tests(void);
+void	validate_input_tests(void);
+void	transform_input_tests(void);
 
 void	points_tests(void);
 void	vectors_tests(void);

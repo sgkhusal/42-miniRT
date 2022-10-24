@@ -6,23 +6,23 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:44:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:58:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 // FOV : Horizontal field of view in degrees in range [0,180]
-double	transform_fov(char *fov_str, int *status)
+int	transform_fov(char *fov_str, int *status) // deixa como double ou int??
 {
-	double	fov;
+	int	fov;
 
 	if (ft_strlen(fov_str) > 3)
 	{
 		*status = print_error_msg2("invalid FOV range: ", fov_str);
 		return (0);
 	}
-	fov = ft_atod(fov_str);
+	fov = ft_atoi(fov_str);
 	if (fov < 0 || fov > 180)
 		*status = print_error_msg2("invalid FOV range: ", fov_str);
 	return (fov);

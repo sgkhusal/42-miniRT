@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/24 11:44:16 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/24 18:06:22 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,10 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 # INPUTS
 
 SRCS =			main.c \
-				ft_atod_tests.c \
 				input_tests.c \
+				ft_atod_tests.c \
+				validate_input_tests.c \
+				transform_input_tests.c \
 				unit_tests_utils.c \
 				points_unit_test.c \
 				vectors_unit_test.c \

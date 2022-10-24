@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:59:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:10:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	main(void)
 {
-	ft_atod_tests();
 	input_tests();
+	ft_atod_tests();
+	validate_input_tests();
+	transform_input_tests();
 	points_tests();
 	vectors_tests();
 	points_and_vectors_tests();

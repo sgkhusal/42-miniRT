@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 21:58:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:02:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ double	transform_ratio(char *ratio_str, int *status);
 t_point	transform_coordinates(char *xyz_str, int *status);
 t_vector	transform_orientation(char *xyz_str, int *status);
 double	transform_double(char *str, int *status);
-double	transform_fov(char *fov_str, int *status);
+int	transform_fov(char *fov_str, int *status);
 
 // intersections
 t_intersection	*create_intersection(double t, int object);

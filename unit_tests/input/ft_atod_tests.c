@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 22:52:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 00:14:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 17:44:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	ft_atod_tests(void)
 	ft_atod_test(ft_memcpy(input, "21.42", 6), 21.42);
 	ft_atod_test(ft_memcpy(input, "100000.0555", 15), 100000.0555);
 	ft_atod_test(ft_memcpy(input, "-100000.0555", 17), -100000.0555);
+	ft_atod_test(ft_memcpy(input, "-1000000555.", 17), -1000000555.0);
 }
