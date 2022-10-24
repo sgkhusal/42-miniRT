@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:02:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 19:23:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ typedef struct s_sphere
 {
 	t_point		center;
 	double		radius;
-	t_color		color; //
 	t_matrix	transform;
 	t_matrix	inverse;
 	t_matrix	transpose_inverse;
@@ -122,7 +121,6 @@ typedef struct s_plane
 {
 	t_point		point;
 	t_vector	orientation;
-	t_color		color;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -131,7 +129,6 @@ typedef struct s_cylinder
 	t_vector	orientation;
 	double		radius;
 	double		height;
-	t_color		color;
 }				t_cylinder;
 
 typedef struct s_object
@@ -193,7 +190,6 @@ typedef struct intersection_list
 
 typedef struct s_rt
 {
-	int			oi; //
 	t_ambient	ambient;
 	t_camera	camera;
 	t_light		light;

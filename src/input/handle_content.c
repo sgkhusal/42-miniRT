@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:02:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:49:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int	check_elements_count(char **lines)
 		else if (lines[i][0] == 'L')
 			light++;
 	}
-	if (check_qty(ambient, "ambient light") == ERROR // pode não ter luz ambiente?
-		|| check_qty(camera, "camera") == ERROR // pode não ter câmera?
-		|| check_qty(light, "light") == ERROR) // acho que pode não ter luz
+	if (check_qty(ambient, "ambient light") == ERROR
+		|| check_qty(camera, "camera") == ERROR
+		|| check_qty(light, "light") == ERROR)
 		return (ERROR);
 	return (OK);
 }
