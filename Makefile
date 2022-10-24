@@ -28,7 +28,7 @@ SRCS =			main.c mlx_utils.c colors.c utils.c ray.c \
 INPUT =			handle_input.c input_file.c handle_content.c \
 				handle_ambient.c handle_camera.c handle_light.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c \
-				input_utils.c transform_utils.c ft_atod.c
+				validate_utils.c transform_utils.c ft_atod.c
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \

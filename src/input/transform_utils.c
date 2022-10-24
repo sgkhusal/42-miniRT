@@ -6,35 +6,48 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 00:24:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 13:43:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_color	transform_color(char *rgb_str, int *status)
+char	**parse_input(char *line, char c, int size_expected, int *status)
+{
+	char	**parsed;
+
+	parsed = ft_split(line, c);
+	if (!parsed)
+		*status = print_error_msg2("malloc error on parse_input: ", line);
+	else if (total_infos(parsed) != size_expected)
+	{
+		free_array(parsed);
+		*status = print_error_msg2("to many or few arguments in ", line);
+	}
+	return (parsed);
+}
+
+t_color	transform_color(char *color_str, int *status)
 {
 	char	**rgb;
 	int		red;
 	int		green;
 	int		blue;
 
-	if (ft_strlen(rgb_str) > 11) // 3 * 3 + 2 commas
-	{
-		*status = print_error_msg2("invalid color range: ", rgb_str);
+	rgb = parse_input(color_str, ',', 3, status);
+	if (*status == ERROR)
 		return (set_color(0, 0, 0));
-	}
-	rgb = ft_split(rgb_str, ',');
-	if (!rgb)
+	if (ft_strlen(rgb[0]) > 3 || ft_strlen(rgb[1]) > 3 || ft_strlen(rgb[2]) > 3)
 	{
-		*status = print_error_msg("malloc error on transform_color");
+		*status = print_error_msg2("invalid color range: ", color_str);
+		free_array(rgb);
 		return (set_color(0, 0, 0));
 	}
 	red = ft_atoi(rgb[0]);
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);
 	if (red > 255 || green > 255 || blue > 255)
-		*status = print_error_msg2("invalid color range: ", rgb_str);
+		*status = print_error_msg2("invalid color range: ", color_str);
 	free_array(rgb);
 	return (set_color(red, green, blue));
 }
@@ -63,22 +76,19 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	double	y;
 	double	z;
 
-	if (ft_strlen(xyz_str) > 11) // 3 * 11 + 2 -> acho que a gente pode limitar mais
-	{
-		*status = print_error_msg2("invalid xyz range: ", xyz_str);
+	xyz = parse_input(xyz_str, ',', 3, status);
+	if (*status == ERROR)
 		return (set_point(0, 0, 0));
-	}
-	xyz = ft_split(xyz_str, ',');
-	if (!xyz)
+	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11 || ft_strlen(xyz[2]) > 11) //
 	{
-		*status = print_error_msg("malloc error on transform_coordinates");
+		*status = print_error_msg2("invalid coordinates range: ", xyz_str);
+		free_array(xyz);
 		return (set_point(0, 0, 0));
 	}
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
-	if (x < -1000 || x > 1000 || y < -1000 || y > 1000 || z < -1000
-		|| z > 1000) // verificar que range vamos deixar
+	if (x < -1000 || x > 1000 || y < -1000 || y > 1000 || z < -1000 || z > 1000) // verificar que range vamos deixar
 		*status = print_error_msg2("invalid coordinates range: ", xyz_str);
 	free_array(xyz);
 	return (set_point(x, y, z));
@@ -92,23 +102,22 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	double	y;
 	double	z;
 
-	if (ft_strlen(xyz_str) > 35) // 3 * 11 + 2 -> acho que a gente pode limitar mais
-	{
-		*status = print_error_msg2("invalid xyz range: ", xyz_str);
+	xyz = parse_input(xyz_str, ',', 3, status);
+	if (*status == ERROR)
 		return (set_vector(0, 0, 0));
-	}
-	xyz = ft_split(xyz_str, ',');
-	if (!xyz)
+	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11 || ft_strlen(xyz[2]) > 11) //
 	{
-		*status = print_error_msg("malloc error on transform_orientation");
+		*status = print_error_msg2("invalid orientation vector range: ",
+			xyz_str);
+		free_array(xyz);
 		return (set_vector(0, 0, 0));
 	}
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
 	if (x < -1 || x > 1 || y < -1 || y > 1 || z < -1 || z > 1)
-		*status = print_error_msg2(
-			"invalid 3d normalized orientation vector range: ", xyz_str);
+		*status = print_error_msg2("invalid orientation vector range: ",
+			xyz_str);
 	free_array(xyz);
 	return (set_vector(x, y, z));
 }

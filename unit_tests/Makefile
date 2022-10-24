@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/23 23:01:13 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/24 11:44:16 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
 				matrix_transform.c matrix_rotation.c intersection.c \
 				element_transform.c normal.c reflection.c material.c light.c \
-				handle_input.c input_file.c handle_content.c  input_utils.c \
+				handle_input.c input_file.c handle_content.c  validate_utils.c \
 				handle_ambient.c handle_camera.c handle_light.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c \
 				transform_utils.c objects.c ft_atod.c
