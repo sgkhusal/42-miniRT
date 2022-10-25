@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 20:04:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 21:05:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/23 22:07:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	transformed_sphere_test1(void)
 
 	printf(GREY "transformed_sphere_test 1: " END);
 	transform = scaling_matrix(2, 2, 2);
-	s = create_sphere(set_color(255, 0, 0));
+	s = create_sphere();
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
 	set_transform(s, transform);
 	list.head = NULL;
@@ -47,7 +47,7 @@ void	transformed_sphere_test2(void)
 
 	printf(GREY "transformed_sphere_test 2: " END);
 	transform = translation_matrix(5, 0, 0);
-	s = create_sphere(set_color(255, 0, 0));
+	s = create_sphere();
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
 	set_transform(s, transform);
 	list.head = NULL;

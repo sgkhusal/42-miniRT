@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 02:05:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/05/06 01:35:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 22:56:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define MALLOC_ERROR2 -2
 # define INPUT_ERROR -1
 # define NO_LINE_FEED -1
+# define GNL_ERROR -1
+# define GNL_EOF 0
+# define GNL_READ_LINE 1
 
 typedef struct s_list
 {

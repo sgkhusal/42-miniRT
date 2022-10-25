@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 02:08:39 by sguilher          #+#    #+#              #
-#    Updated: 2022/09/22 16:32:20 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/17 23:45:58 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ INCLUDES =	-I./
 # compilation
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror
-GNLFLAGS =	-D BUFFER_SIZE=10
+GNLFLAGS =	-D BUFFER_SIZE=1000
 
 # clean
 RM =		rm -f

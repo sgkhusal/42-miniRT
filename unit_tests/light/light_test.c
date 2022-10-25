@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:26:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 15:21:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/17 15:13:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	light_tests(void)
 	t_vector	eye;
 	t_vector	expected;
 
+	printf(YELLOW "Lighting tests: " END "\n");
+	normal_tests();
+	reflection_tests();
+	material_tests();
 	set_light_test(set_point(0, 0, 0), set_vector(1, 1, 1));
 	eye = set_vector(0, 0, -1);
 	light = set_point_light(set_point(0, 0, -10), set_vector(1, 1, 1));

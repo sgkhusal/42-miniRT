@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/14 00:18:14 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 15:35:47 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/21 19:10:01 by sguilher          #+#    #+#             */
+/*   Updated: 2022/10/24 19:16:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minirt.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+double	ft_atod(char *nb)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	double	n;
+	int		point;
+	int		size;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	i = 0;
-	while (i < n && (str1[i] || str2[i]))
-	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
-	}
-	return (0);
+	size = ft_strlen(nb);
+	point = 0;
+	while (nb[point] != '.' && point < size)
+		point++;
+	if (point == size)
+		return (ft_atoi(nb));
+	ft_memmove(nb + point, nb + point + 1, size - point);
+	n = ft_atoi(nb);
+	n /= pow(10, size - point - 1);
+	return (n);
 }

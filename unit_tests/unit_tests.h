@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 14:42:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/24 18:10:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ typedef struct s_environment
 	t_vector	gravity;
 	t_vector	wind;
 }	t_environment;
+
+void	ft_atod_tests(void);
+void	input_tests(void);
+void	validate_input_tests(void);
+void	transform_input_tests(void);
 
 void	points_tests(void);
 void	vectors_tests(void);
@@ -81,9 +86,6 @@ void	normal_tests(void);
 
 void	intersection_tests(void);
 
-bool	check_equal_points(t_point a, t_point b);
-bool	check_equal_vectors(t_vector a, t_vector b);
-
 void	transform_ray_test_cases(void);
 void	transformed_sphere_test(void);
 
@@ -91,4 +93,15 @@ void	reflection_tests(void);
 void	light_tests(void);
 void	material_tests(void);
 
+// utils
+bool	check_equal_points(t_point a, t_point b);
+bool	check_equal_vectors(t_vector a, t_vector b);
+void	check_int_values(int result, int expected);
+
+
+// minirt functions
+int		check_argc(int argc);
+
+
 #endif
+

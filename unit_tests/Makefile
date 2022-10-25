@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/15 11:51:05 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/24 18:06:22 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,10 @@ MLX		 =		$(MLX_PATH)/libmlx.a
 # INPUTS
 
 SRCS =			main.c \
+				input_tests.c \
+				ft_atod_tests.c \
+				validate_input_tests.c \
+				transform_input_tests.c \
 				unit_tests_utils.c \
 				points_unit_test.c \
 				vectors_unit_test.c \
@@ -59,12 +63,16 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
 				matrix_transform.c matrix_rotation.c intersection.c \
-				element_transform.c normal.c reflection.c material.c light.c
+				element_transform.c normal.c reflection.c material.c light.c \
+				handle_input.c input_file.c handle_content.c  validate_utils.c \
+				handle_ambient.c handle_camera.c handle_light.c \
+				handle_sphere.c handle_plane.c handle_cylinder.c \
+				transform_utils.c objects.c ft_atod.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
-VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix
-VPATH	=		$(VPATH_MINIRT) tuples elements ray matrix light
+VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix ../src/input
+VPATH	=		$(VPATH_MINIRT) input tuples elements ray matrix light
 INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 # compilation
@@ -106,14 +114,20 @@ $(MINIRT):
 	@echo "$(YELLOW)minirt created$(RESET)"
 	@echo "------------------------------------------------------------------"
 
+test:		$(NAME)
+		@touch no_permission.rt && chmod 000 no_permission.rt
+		./$(NAME) 2> log
+
 clean:
 		$(RM_DIR) $(OBJS_DIR)
 		@$(MAKE) -C $(MINIRT_PATH) clean
 
 fclean:		clean
 		$(RM) $(NAME)
+		$(RM) log
+		$(RM) no_permission.rt
 		@$(MAKE) -C $(MINIRT_PATH) fclean
 
 re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test

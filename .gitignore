@@ -12,3 +12,5 @@ unit_test
 
 # othes
 *.vscode
+log
+no_permission.rt

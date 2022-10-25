@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/15 11:36:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/22 18:56:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  * @param color The color of the sphere.
  * @return t_sphere* The created sphere.
  */
-t_sphere	*create_sphere(t_color color)
+t_sphere	*create_sphere()
 {
 	t_sphere	*sphere;
 
@@ -35,7 +35,6 @@ t_sphere	*create_sphere(t_color color)
 		minirt_malloc_error("create_sphere");
 	sphere->center = set_point(0, 0, 0);
 	sphere->radius = 1.0;
-	sphere->color = color;
 	sphere->transform = identity_matrix(4);
 	sphere->inverse = identity_matrix(4);
 	sphere->transpose_inverse = identity_matrix(4);

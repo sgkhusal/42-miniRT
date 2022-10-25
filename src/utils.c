@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 14:41:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:10:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,26 @@ int	close_minirt(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
-int	minirt_error(t_mlx *mlx, char *msg)
+int	print_error_msg(char *msg)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putchar_fd('\n', 2);
+	return (ERROR);
+}
+
+int	print_error_msg2(char *msg, char *str)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(str, 2);
+	ft_putchar_fd('\n', 2);
+	return (ERROR);
+}
+
+int	minirt_error(t_mlx *mlx, char *msg)
+{
+	print_error_msg(msg);
 	clean_minirt(mlx);
 	exit(EXIT_FAILURE);
 }
@@ -53,4 +68,21 @@ bool	check_double_values(double a, double b)
 	if (fabs(a - b) < 0.00001)
 		return (true);
 	return (false);
+}
+
+void	free_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	free(arr);
+	arr = NULL;
 }

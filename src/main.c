@@ -20,23 +20,66 @@ void	put_pixel_color(t_image *img, int x, int y, int color)
 	*(unsigned int *)pixel = color;
 }
 
-void	coloring_image(t_image *img, t_mlx *mlx)
+// criação de raios
+// joga o raio nos elementos
+// função de lightning
+// retorna a cor do pixel
+
+/* void	set_pixel_color(t_vector pixel_color[500][500])
 {
-	unsigned int	color;
-	int				x;
-	int				y;
+	int				i;
+	int				j;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			pixel_color[i][j] = set_vector(1, 1, 1); // lightning
+			j++;
+		}
+		i++;
+	}
+} */
+
+void	set_pixel_color(t_vector pixel_color[500][500])
+{
+	int				i;
+	int				j;
+	double			x;
+
+	i = 0;
+	x = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			pixel_color[i][j] = set_vector(x, x, x); // lightning
+			j++;
+		}
+		x = x + 0.002;
+		i++;
+	}
+}
+
+void	plot_image(t_image *img, t_mlx *mlx, t_vector pixel_color[500][500])
+{
+	t_color		color;
+	int			x;
+	int			y;
 
 	x = 0;
 	y = 0;
-	color = 0x000000;
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
 		{
-			put_pixel_color(img, x, y, color);
+			color = transform_vector_to_color(pixel_color[y][x]);
+			put_pixel_color(img, x, y, color.color);
 			x++;
 		}
-		color++;
 		x = 0;
 		y++;
 	}
@@ -62,16 +105,21 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 
 int	main(int argc, char *argv[])
 {
-	t_mlx	mlx;
+	t_mlx		mlx;
+	t_rt		rt;
+	t_vector	pixel_color[500][500];
 
-	handle_input(argc, &argv[1]);
+	if (handle_input(argc, argv[1], &rt) == ERROR)
+		exit (EXIT_FAILURE);
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
-	coloring_image(&mlx.img, &mlx);
-	put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2,
+	set_pixel_color(pixel_color);
+	plot_image(&mlx.img, &mlx, pixel_color);
+	/* put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2,
 		rgb_to_int(255, 0, 0));
-	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2);
+	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2); */
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
+	free_objects(&rt.objects); // precisa ser colocado dentro da função da mlx
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);
