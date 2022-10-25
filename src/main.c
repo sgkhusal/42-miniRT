@@ -103,6 +103,56 @@ void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
 	}
 }
 
+void	rendering_rays(t_mlx *mlx)
+{
+	t_ray		ray;
+	//t_vector	pixel_color[500][500];
+	int			x_mlx; // 0 - 500
+	int			y_mlx; // 0 - 500
+	t_point		ray_origin;
+	t_sphere	*s;
+	t_color		color;
+	t_intersection_list	list;
+	t_intersection		*intersection;
+
+	// z = 1 para o cálculo da direção do raio - (0, 0 , -3)
+	x_mlx = 0;
+	y_mlx = 0;
+	ray_origin = set_point(0, 0, -3);
+	s = create_sphere();
+	//set_transform(s, t_matrix transform);
+	color = set_color(255, 0, 0);
+	intersection = NULL;
+	t_matrix translation;
+	t_matrix scaling;
+	translation = translation_matrix(0, 0, -3);
+	scaling = scaling_matrix(100, 100, 100);
+	set_transform(s, multiply_matrix(translation, scaling));
+	while (y_mlx < mlx->height)
+	{
+		while (x_mlx < mlx->width)
+		{
+			//pixel_color = transform_vector_to_color(pixel_color[y][x]);
+			//put_pixel_color(mlx, x, y, color.color);
+			ray = set_ray(ray_origin, set_vector(x_mlx + 250, -y_mlx + 250, 0));
+			sphere_intersection(ray, *s, &list);
+			if (list.head)
+				intersection = get_hit_intersection(list);
+			if (intersection)
+			{
+				printf("intersection in x = %d, y = %d - t = %f\n", x_mlx, y_mlx, list.head->t);
+				put_pixel_color(&mlx->img, x_mlx, y_mlx, color.color);
+				mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img.ptr, 0, 0);
+			}
+			// verifica se tem algum t e usa get_hit
+			// seta o pixel_color com a cor do elemento
+			x_mlx++;
+		}
+		x_mlx = 0;
+		y_mlx++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx		mlx;
@@ -114,10 +164,21 @@ int	main(int argc, char *argv[])
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	set_pixel_color(pixel_color);
+	t_matrix translation;
+	t_matrix scaling;
+	t_matrix m1;
+	t_matrix m2;
+	translation = translation_matrix(0, 0, 3);
+	scaling = scaling_matrix(100, 100, 100);
+	m1 = multiply_matrix(translation, scaling);
+	m2 = multiply_matrix(scaling, translation);
+	print_matrix(m1);
+	print_matrix(m2);
 	plot_image(&mlx.img, &mlx, pixel_color);
 	/* put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2,
 		rgb_to_int(255, 0, 0));
 	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2); */
+	rendering_rays(&mlx);
 	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
 	free_objects(&rt.objects); // precisa ser colocado dentro da função da mlx
 	set_mlx_hooks(&mlx);
