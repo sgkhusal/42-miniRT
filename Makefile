@@ -23,7 +23,7 @@ UNIT_TESTS_PATH =	./unit_tests
 
 SRCS =			main.c mlx_utils.c colors.c utils.c ray.c \
 				sphere.c intersection.c element_transform.c normal.c \
-				reflection.c material.c light.c objects.c \
+				reflection.c material.c light.c objects.c canvas.c plot.c\
 				$(INPUT) $(TUPLES) $(MATRICES)
 INPUT =			handle_input.c input_file.c handle_content.c \
 				handle_ambient.c handle_camera.c handle_light.c \
