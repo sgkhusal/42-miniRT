@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 19:23:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/26 17:39:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,8 @@ int	transform_fov(char *fov_str, int *status);
 t_intersection	*create_intersection(double t, int object);
 void			add_intersection_node(t_intersection *node,
 					t_intersection_list *list);
+void	init_intersection_list(t_intersection_list *list);
+void	free_intersection_list(t_intersection_list *list);
 
 // colors
 int				rgb_to_int(short int red, short int green, short int blue);
