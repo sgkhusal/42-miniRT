@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:30:52 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/04 18:55:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/26 19:36:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <../libraries/minilibx_linux/mlx.h>
 
-# define HEIGHT 500
-# define WIDTH 500
+# define HEIGHT 700
+# define WIDTH 700
 
 # define DESTROY_NOTIFY 17
 # define KEY_PRESS 2

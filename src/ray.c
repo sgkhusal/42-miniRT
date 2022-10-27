@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 20:48:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/25 19:32:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@
  * @return t_ray The t_ray struct containinf the point of the origin and the
  * normalized direction vector.
  */
+
 t_ray	set_ray(t_point origin, t_vector direction)
 {
 	t_ray	ray;
 
-	ray.origin = origin;
+	ray.origin = origin; //0,0,-3
 	ray.direction = direction;
 	return (ray);
 }

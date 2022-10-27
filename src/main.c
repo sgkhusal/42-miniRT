@@ -12,114 +12,92 @@
 
 #include "minirt.h"
 
-void	put_pixel_color(t_image *img, int x, int y, int color)
+// 1m = 200px
+void	rendering_rays(t_vector **pixel_color)
 {
-	char	*pixel;
+	t_ray				ray;
+	int					x_mlx; // 0 - 500
+	int					y_mlx; // 0 - 500
+	t_point				ray_origin;
+	t_vector			ray_direction;
+	t_sphere			*s;
+	t_vector			color;
+	t_intersection_list	list;
+	t_intersection		*hit;
+	t_light				light;
+	t_vector			normal;
+	t_vector			eye;
+	t_point				point;
 
-	pixel = img->addr + (y * img->line_size + x * (img->bpp / 8));
-	*(unsigned int *)pixel = color;
-}
-
-// criação de raios
-// joga o raio nos elementos
-// função de lightning
-// retorna a cor do pixel
-
-/* void	set_pixel_color(t_vector pixel_color[500][500])
-{
-	int				i;
-	int				j;
-
-	i = 0;
-	while (i < HEIGHT)
+	x_mlx = 0;
+	y_mlx = 0;
+	ray_origin = set_point(0, 0, -5);
+	s = create_sphere();
+	s->material.normalized_color = set_vector(1, 0.2, 1);
+	light.position = set_point(-10, 10, -10);
+	light.intensity = set_vector(1, 1, 1);
+	/* t_matrix translation;
+	translation = translation_matrix(0.5, 0.75, 0);
+	set_transform(s, translation);
+	t_matrix scaling;
+	scaling = scaling_matrix(0.25, 0.25, 0.25); */
+	//set_transform(s, (scaling));
+	//set_transform(s, multiply_matrix(translation, scaling));
+	//free_matrix(translation);
+	//free_matrix(scaling);
+	init_intersection_list(&list);
+	hit = NULL;
+	while (y_mlx < HEIGHT)
 	{
-		j = 0;
-		while (j < WIDTH)
+		while (x_mlx < WIDTH)
 		{
-			pixel_color[i][j] = set_vector(1, 1, 1); // lightning
-			j++;
+			ray_direction = set_vector((double)(x_mlx - WIDTH / 2)/100,
+				(double)(-y_mlx + HEIGHT / 2)/100, 15); //z = posição da tela ou "parede" em relação a camera
+			//printf("ray direction: %f %f %f\n", ray_direction.x, ray_direction.y, ray_direction.z);
+			ray = set_ray(ray_origin, normalize_vector(ray_direction));
+			sphere_intersection(ray, *s, &list);
+			if (list.head)
+				hit = get_hit_intersection(list);
+			if (hit)
+			{
+				//printf("intersection in x = %d, y = %d - t = %f\n", x_mlx, y_mlx, hit->t);
+				point = ray_position(ray, hit->t);
+				normal = sphere_normal_at(s, point);
+				eye = negative_vector((ray.direction));
+				color = lighting(s->material, light, point, normal, eye);
+				if (color.x > 1)
+					color.x = 1;
+				if (color.y > 1)
+					color.y = 1;
+				if (color.z > 1)
+					color.z = 1;
+				pixel_color[y_mlx][x_mlx] = color;
+			}
+			free_intersection_list(&list);
+			hit = NULL;
+			x_mlx++;
 		}
-		i++;
+		x_mlx = 0;
+		y_mlx++;
 	}
-} */
-
-void	set_pixel_color(t_vector pixel_color[500][500])
-{
-	int				i;
-	int				j;
-	double			x;
-
-	i = 0;
-	x = 0;
-	while (i < HEIGHT)
-	{
-		j = 0;
-		while (j < WIDTH)
-		{
-			pixel_color[i][j] = set_vector(x, x, x); // lightning
-			j++;
-		}
-		x = x + 0.002;
-		i++;
-	}
-}
-
-void	plot_image(t_image *img, t_mlx *mlx, t_vector pixel_color[500][500])
-{
-	t_color		color;
-	int			x;
-	int			y;
-
-	x = 0;
-	y = 0;
-	while (y < mlx->height)
-	{
-		while (x < mlx->width)
-		{
-			color = transform_vector_to_color(pixel_color[y][x]);
-			put_pixel_color(img, x, y, color.color);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}
-
-void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
-{
-	double	teta;
-	double	x;
-	double	y;
-	int		color;
-
-	color = rgb_to_int(0, 255, 0);
-	teta = 0;
-	while (teta < 360)
-	{
-		x = center_x + radius * cos(teta);
-		y = center_y + radius * sin(teta);
-		put_pixel_color(&mlx->img, x, y, color);
-		teta += 0.1;
-	}
+	free_sphere(s);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_mlx		mlx;
 	t_rt		rt;
-	t_vector	pixel_color[500][500];
+	t_vector	**canvas;
 
 	if (handle_input(argc, argv[1], &rt) == ERROR)
 		exit (EXIT_FAILURE);
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
-	set_pixel_color(pixel_color);
-	plot_image(&mlx.img, &mlx, pixel_color);
-	/* put_pixel_color(&mlx.img, mlx.width / 2, mlx.height / 2,
-		rgb_to_int(255, 0, 0));
-	put_circle(&mlx, 50.5, WIDTH / 2, HEIGHT / 2); */
-	mlx_put_image_to_window(mlx.ptr, mlx.window, mlx.img.ptr, 0, 0);
+	canvas = create_canvas();
+	rendering_rays(canvas);
+	plot_image(&mlx.img, &mlx, canvas);
 	free_objects(&rt.objects); // precisa ser colocado dentro da função da mlx
+	free_canvas(canvas);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);
