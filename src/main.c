@@ -23,24 +23,30 @@ void	rendering_rays(t_vector **pixel_color)
 	t_sphere			*s;
 	t_vector			color;
 	t_intersection_list	list;
-	t_intersection		*intersection;
+	t_intersection		*hit;
+	t_light				light;
+	t_vector			normal;
+	t_vector			eye;
+	t_point				point;
 
 	x_mlx = 0;
 	y_mlx = 0;
 	ray_origin = set_point(0, 0, -5);
 	s = create_sphere();
-	color = normalize_color(set_color(255, 0, 0));
+	s->material.normalized_color = set_vector(1, 0.2, 1);
+	light.position = set_point(-10, 10, -10);
+	light.intensity = set_vector(1, 1, 1);
 	/* t_matrix translation;
-	translation = translation_matrix(2, 1, 0);
-	//set_transform(s, translation);
+	translation = translation_matrix(0.5, 0.75, 0);
+	set_transform(s, translation);
 	t_matrix scaling;
-	scaling = scaling_matrix(2, 2, 2); */
+	scaling = scaling_matrix(0.25, 0.25, 0.25); */
 	//set_transform(s, (scaling));
-	/* set_transform(s, multiply_matrix(translation, scaling));
-	free_matrix(translation);
-	free_matrix(scaling); */
+	//set_transform(s, multiply_matrix(translation, scaling));
+	//free_matrix(translation);
+	//free_matrix(scaling);
 	init_intersection_list(&list);
-	intersection = NULL;
+	hit = NULL;
 	while (y_mlx < HEIGHT)
 	{
 		while (x_mlx < WIDTH)
@@ -48,17 +54,27 @@ void	rendering_rays(t_vector **pixel_color)
 			ray_direction = set_vector((double)(x_mlx - WIDTH / 2)/100,
 				(double)(-y_mlx + HEIGHT / 2)/100, 15); //z = posição da tela ou "parede" em relação a camera
 			//printf("ray direction: %f %f %f\n", ray_direction.x, ray_direction.y, ray_direction.z);
-			ray = set_ray(ray_origin, ray_direction);
+			ray = set_ray(ray_origin, normalize_vector(ray_direction));
 			sphere_intersection(ray, *s, &list);
 			if (list.head)
-				intersection = get_hit_intersection(list);
-			if (intersection)
+				hit = get_hit_intersection(list);
+			if (hit)
 			{
-				//printf("intersection in x = %d, y = %d - t = %f\n", x_mlx, y_mlx, intersection->t);
+				//printf("intersection in x = %d, y = %d - t = %f\n", x_mlx, y_mlx, hit->t);
+				point = ray_position(ray, hit->t);
+				normal = sphere_normal_at(s, point);
+				eye = negative_vector((ray.direction));
+				color = lighting(s->material, light, point, normal, eye);
+				if (color.x > 1)
+					color.x = 1;
+				if (color.y > 1)
+					color.y = 1;
+				if (color.z > 1)
+					color.z = 1;
 				pixel_color[y_mlx][x_mlx] = color;
 			}
 			free_intersection_list(&list);
-			intersection = NULL;
+			hit = NULL;
 			x_mlx++;
 		}
 		x_mlx = 0;
