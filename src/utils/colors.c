@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 16:16:220 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:43:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ int	rgb_to_int(short int red, short int green, short int blue) // provavelmente 
 {
 	t_color	color;
 
-	/* if (red < 0 || red > 255)
+	if (red > 255)
 		red = 255;
-	if (green < 0 || green > 255)
+	if (green > 255)
 		green = 255;
-	if (blue < 0 || blue > 255)
-		blue = 255; */
+	if (blue > 255)
+		blue = 255;
+	if (red > 255)
+		red = 255;
+	if (green < 0)
+		green = 0;
+	if (blue < 0)
+		blue = 0;
 	color.rgb[3] = 0;
 	color.rgb[2] = red;
 	color.rgb[1] = green;
@@ -60,9 +66,9 @@ t_vector	normalize_color(t_color color)
 	return (normalized_color);
 }
 
-t_color transform_vector_to_color(t_vector color)
+t_color	transform_vector_to_color(t_vector color)
 {
-	t_color rgb;
+	t_color	rgb;
 
 	rgb.rgb[2] = (int)(color.x * 255);
 	rgb.rgb[1] = (int)(color.y * 255);

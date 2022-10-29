@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 20:51:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:56:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int validate_plane_chars(char **infos)
+static int	validate_plane_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
 		return (ERROR);

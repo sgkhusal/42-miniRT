@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:24:56 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:31:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:56:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	validate_double_chars(char *str)
 			if (str[i] == '-')
 				return (print_error_msg2("number must be positive: ", str));
 			return (print_error_msg2("Invalid character in lighting ratio: ",
-				str));
+					str));
 		}
 		i++;
 	}
@@ -54,7 +54,7 @@ int	validate_color_chars(char *rgb_str)
 		{
 			if (rgb_str[i] == '-')
 				return (print_error_msg2("color numbers must be positive: ",
-					rgb_str));
+						rgb_str));
 			return (print_error_msg2("invalid character for color: ", rgb_str));
 		}
 		i++;
@@ -72,7 +72,7 @@ int	validate_coordinates_chars(char *str)
 		if (str[i] != '.' && str[i] != ',' && str[i] != '-'
 			&& !ft_isdigit(str[i]))
 			return (print_error_msg2("Invalid character in coordinates: ",
-				str));
+					str));
 		i++;
 	}
 	return (OK);

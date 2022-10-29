@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/25 19:32:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:38:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_ray	set_ray(t_point origin, t_vector direction)
 {
 	t_ray	ray;
 
-	ray.origin = origin; //0,0,-3
+	ray.origin = origin;
 	ray.direction = direction;
 	return (ray);
 }

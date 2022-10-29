@@ -21,7 +21,7 @@ UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c mlx_utils.c colors.c utils.c ray.c \
+SRCS =			main.c mlx_utils.c colors.c utils.c error.c ray.c \
 				sphere.c intersection.c hit.c element_transform.c normal.c \
 				reflection.c material.c light.c objects.c canvas.c plot.c \
 				$(INPUT) $(TUPLES) $(MATRICES)
@@ -36,7 +36,8 @@ MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		minirt.h matrix.h tuples.h mlx_utils.h elements.h utils.h
-VPATH	=		includes src src/tuple src/matrix src/input
+VPATH	=		includes src src/tuple src/matrix src/input src/objects \
+				src/utils
 INCLUDE	=		-I./ -I./includes
 
 # compilation

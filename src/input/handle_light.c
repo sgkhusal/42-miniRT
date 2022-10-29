@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/22 19:03:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:53:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int validate_light_chars(char **infos)
+static int	validate_light_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
 		return (ERROR);

@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 20:51:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:54:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int validate_cylinder_chars(char **infos)
+static int	validate_cylinder_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
 		return (ERROR);
@@ -40,7 +40,7 @@ int	handle_cylinder(char *line)//, t_object *objs)
 		return (print_error_msg("malloc error on handle_cylinder"));
 	if (total_infos(infos) != 6)
 		status = print_error_msg2("to many or few arguments for cylinder: ",
-			line);
+				line);
 	else if (validate_cylinder_chars(infos) == ERROR)
 		status = ERROR;
 	/* else

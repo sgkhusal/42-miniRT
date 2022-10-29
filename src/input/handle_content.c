@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:49:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:43:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	handle_line(char *line, t_rt *rt)
 	if (line[0] == ' ')
 		return (print_error_msg("line can't start with space"));
 	return (print_error_msg2("invalid element: ", line));
-	// função de validação para cada tipo de elemento: A, C, L, sp, cy e pl
 }
 
 int	handle_content(char *content, t_rt	*rt)
@@ -97,17 +96,16 @@ int	handle_content(char *content, t_rt	*rt)
 		status = ERROR;
 	if (check_separator(lines) == ERROR)
 		status = ERROR;
-	i = 0;
-	// init rt aqui?
+	i = -1;
 	rt->objects = NULL;
-	while (lines[i] && status == OK)
+	while (lines[++i] && status == OK)
 	{
+		printf("linha = %s\n", lines[i]);
 		if (handle_line(lines[i], rt) == ERROR)
 		{
 			free_objects(&(rt->objects));
 			status = ERROR;
 		}
-		i++;
 	}
 	free_array(lines);
 	return (status);

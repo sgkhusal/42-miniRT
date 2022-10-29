@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/28 22:12:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:12:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  * @param color The color of the sphere.
  * @return t_sphere* The created sphere.
  */
-t_sphere	*create_sphere()
+t_sphere	*create_sphere(void)
 {
 	t_sphere	*sphere;
 

@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 20:51:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:53:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int validate_sphere_chars(char **infos)
+static int	validate_sphere_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
 		return (ERROR);
@@ -35,7 +35,7 @@ int	handle_sphere(char *line, t_object **objs)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_sphere"));
 	if (total_infos(infos) != 4)
-		status = print_error_msg2("to many or few arguments for sphere: ", line);
+		status = print_error_msg2("to many or few arguments in sphere: ", line);
 	else if (validate_sphere_chars(infos) == ERROR)
 		status = ERROR;
 	else
@@ -43,7 +43,6 @@ int	handle_sphere(char *line, t_object **objs)
 		s = create_sphere();
 		o = create_object(SPHERE, s);
 		o->xyz = transform_coordinates(infos[1], &status);
-		// ∗ the sphere diameter: 12.6
 		s->radius = transform_double(infos[2], &status) / 2; // vai ter que colocar em outro lugar
 		o->color = transform_color(infos[3], &status); // talvez não precise dessa parte
 		s->material.normalized_color = normalize_color(o->color);
@@ -53,4 +52,3 @@ int	handle_sphere(char *line, t_object **objs)
 	free_array(infos);
 	return (status);
 }
-

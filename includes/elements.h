@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:07:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:36:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_material	set_material(void);
 t_vector	reflect(t_vector incident, t_vector normal);
 t_light		set_point_light(t_point position, t_vector intensity);
 t_vector	lighting(t_material material, t_light light, t_point point,
-					t_vector normal, t_vector eye);
+				t_vector normal, t_vector eye);
 
 // objects
 t_object	*create_object(enum e_objects type, void *shape);
@@ -118,7 +118,7 @@ void		append_object(t_object **head, t_object *obj);
 void		free_objects(t_object **head);
 
 // sphere
-t_sphere	*create_sphere();
+t_sphere	*create_sphere(void);
 void		free_sphere(t_sphere *sphere);
 void		set_transform(t_sphere *sphere, t_matrix transform);
 t_vector	sphere_normal_at(t_sphere *s, t_point p);

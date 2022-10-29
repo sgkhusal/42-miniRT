@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/28 22:23:05 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/28 23:45:59 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ SRCS =			main.c \
 				light_test.c \
 				material_test.c \
 				$(MINIRT_SRCS)
-MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
+MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
 				matrix_transform.c matrix_rotation.c intersection.c hit.c \
@@ -71,7 +71,8 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
-VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix ../src/input
+VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix ../src/input ../src/objects \
+				../src/utils
 VPATH	=		$(VPATH_MINIRT) input tuples elements ray matrix light
 INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
 
