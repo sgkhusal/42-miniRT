@@ -38,24 +38,17 @@ void	create_sphere_test(void)
 
 void	sphere_intersection_test(t_sphere *s, t_ray ray, double t1, double t2)
 {
-	t_intersection_list	list;
+	t_xs				xs;
 	static int			n = 1;
 
 	printf(GREY "sphere_intersection_test %d: " END, n);
-	list.head = NULL;
-	list.last = NULL;
-	sphere_intersection(ray, *s, &list);
-	if (list.total == 2 && check_double_values(list.head->t, t1)
-		&& check_double_values(list.head->next->t, t2)
-		&& check_double_values(list.last->t, t2)
-		&& list.head->object == SPHERE && list.last->object == SPHERE
-		&& list.head->next->object == SPHERE)
+	xs = sphere_intersection(ray, *s);
+	if (xs.count == 2 && check_double_values(xs.t1, t1)
+		&& check_double_values(xs.t2, t2))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 	n++;
-	free(list.head);
-	free(list.last);
 }
 
 void	sphere_transform_test(void)
@@ -76,14 +69,11 @@ void	sphere_transform_test(void)
 
 void	sphere_no_intersection_test(t_sphere *sphere, t_ray ray)
 {
-	t_intersection_list	list;
+	t_xs		xs;
 
 	printf(GREY "sphere_no_intersection_test 1: " END);
-	list.head = NULL;
-	list.last = NULL;
-	list.total = 0;
-	sphere_intersection(ray, *sphere, &list);
-	if (list.total == 0)
+	xs = sphere_intersection(ray, *sphere);
+	if (xs.count == 0)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");

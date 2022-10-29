@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:10:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:16:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void	transformed_sphere_test(void);
 void	reflection_tests(void);
 void	light_tests(void);
 void	material_tests(void);
+
+void	world_tests(void);
+
+void	computations_tests(void);
 
 // utils
 bool	check_equal_points(t_point a, t_point b);
