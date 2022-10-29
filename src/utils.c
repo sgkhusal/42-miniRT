@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 14:10:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:26:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	minirt_malloc_error(char *function)
 	exit(EXIT_FAILURE);
 }
 
-bool	check_double_values(double a, double b)
+int	check_double_values(double a, double b)
 {
 	if (fabs(a - b) < 0.00001)
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }
 
 void	free_array(char **arr)

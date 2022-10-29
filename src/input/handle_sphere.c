@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 19:24:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:51:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	handle_sphere(char *line, t_object **objs)
 		o->xyz = transform_coordinates(infos[1], &status);
 		// ∗ the sphere diameter: 12.6
 		s->radius = transform_double(infos[2], &status) / 2; // vai ter que colocar em outro lugar
-		o->color = transform_color(infos[3], &status);
+		o->color = transform_color(infos[3], &status); // talvez não precise dessa parte
+		s->material.normalized_color = normalize_color(o->color);
 		// criar as matrizes de transformação aqui? ou depois?
 		append_object(objs, o);
 	}

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:06:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:51:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	handle_cylinder(char *line)//, t_object *objs)
 		c->radius = transform_double(infos[3], &status) / 2;
 		// the cylinder height: 21.42
 		c->height = transform_double(infos[4], &status);
-		o->color = transform_color(infos[5], &status);
+		o->color = transform_color(infos[5], &status); // talvez não precise dessa parte
+		c->material.normalized_color = normalize_color(o->color);
 		// criar as matrizes de transformação aqui? ou depois?
 		append_object(objs, o);
 	} */

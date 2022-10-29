@@ -51,8 +51,8 @@ void	rendering_rays(t_vector **pixel_color)
 	{
 		while (x_mlx < WIDTH)
 		{
-			ray_direction = set_vector((double)(x_mlx - WIDTH / 2)/100,
-				(double)(-y_mlx + HEIGHT / 2)/100, 15); //z = posição da tela ou "parede" em relação a camera
+			ray_direction = set_vector((double)(x_mlx - WIDTH / 2) / PPU,
+				(double)(-y_mlx + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
 			//printf("ray direction: %f %f %f\n", ray_direction.x, ray_direction.y, ray_direction.z);
 			ray = set_ray(ray_origin, normalize_vector(ray_direction));
 			sphere_intersection(ray, *s, &list);

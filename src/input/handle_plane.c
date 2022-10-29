@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:06:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 20:51:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	handle_plane(char *line)//, t_object *objs)
 		o = create_object(PLANE, p);
 		o->xyz = transform_coordinates(infos[1], &status);
 		p->orientation = transform_orientation(infos[2], &status);
-		o->color = transform_color(infos[3], &status);
+		o->color = transform_color(infos[3], &status); // talvez não precise dessa parte
+		p->material.normalized_color = normalize_color(o->color);
 		// criar as matrizes de transformação aqui? ou depois?
 		append_object(objs, o);
 	} */

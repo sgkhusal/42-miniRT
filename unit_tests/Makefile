@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/24 18:06:22 by sguilher         ###   ########.fr        #
+#    Updated: 2022/10/28 22:23:05 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCS =			main.c \
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
-				matrix_transform.c matrix_rotation.c intersection.c \
+				matrix_transform.c matrix_rotation.c intersection.c hit.c \
 				element_transform.c normal.c reflection.c material.c light.c \
 				handle_input.c input_file.c handle_content.c  validate_utils.c \
 				handle_ambient.c handle_camera.c handle_light.c \
