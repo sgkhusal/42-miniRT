@@ -101,6 +101,8 @@ t_point				ray_position(t_ray ray, double distance);
 t_ray				transform_ray(t_ray ray, t_matrix m);
 
 // intersections
+t_xs				sphere_intersection(t_ray ray, t_sphere sphere);
+t_xs				cylinder_intersection(t_ray ray, t_cylinder c);
 t_intersection		*create_intersection(double t, t_object *object);
 void				add_intersection_node(t_intersection *node,
 						t_intersection_list *list);
@@ -108,9 +110,14 @@ t_intersection		*get_hit_intersection(t_intersection_list list);
 void				init_intersection_list(t_intersection_list *list);
 void				free_intersection_list(t_intersection_list *list);
 t_intersection_list	intersect_world(t_world world, t_ray ray);
-t_xs				sphere_intersection(t_ray ray, t_sphere sphere);
-t_xs				cylinder_intersection(t_ray ray, t_cylinder c);
+void				add_intersections(t_xs xs, t_object *object,
+						t_intersection_list *list);
 
+// color
+t_vector			get_sphere_color(t_ray ray, t_sphere *s, t_light light,
+						t_intersection *hit);
+
+// world
 t_world	default_world(void); /* remove */
 
 //intersect_sort

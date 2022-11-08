@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/08 16:34:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:13:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ void	world_tests(void);
 
 void	computations_tests(void);
 
+void	sphere_render_test(void);
+
 // utils
 bool	check_equal_points(t_point a, t_point b);
 bool	check_equal_vectors(t_vector a, t_vector b);
 void	check_int_values(int result, int expected);
-
 
 // minirt functions
 int		check_argc(int argc);

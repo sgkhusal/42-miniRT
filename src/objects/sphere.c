@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/08 17:06:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:22:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,25 @@ t_xs	sphere_intersection(t_ray ray, t_sphere s)
 	xs.t1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	xs.t2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	return (xs);
+}
+
+t_vector	get_sphere_color(t_ray ray, t_sphere *s, t_light light,
+					t_intersection *hit)
+{
+	t_vector			color;
+	t_vector			normal;
+	t_vector			eye;
+	t_point				point;
+
+	point = ray_position(ray, hit->t);
+	normal = sphere_normal_at(s, point);
+	eye = negative_vector((ray.direction));
+	color = lighting(s->material, light, point, normal, eye);
+	if (color.x > 1)
+		color.x = 1;
+	if (color.y > 1)
+		color.y = 1;
+	if (color.z > 1)
+		color.z = 1;
+	return (color);
 }
