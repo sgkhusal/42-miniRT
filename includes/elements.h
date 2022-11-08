@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:36:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:43:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef struct s_cylinder
 	t_vector	orientation;
 	double		radius;
 	double		height;
+	t_matrix	transform;
+	t_matrix	inverse;
+	t_matrix	transpose_inverse;
 	t_material	material;
 }				t_cylinder;
 
@@ -120,7 +123,13 @@ void		free_objects(t_object **head);
 // sphere
 t_sphere	*create_sphere(void);
 void		free_sphere(t_sphere *sphere);
-void		set_transform(t_sphere *sphere, t_matrix transform);
+void		set_transform_sphere(t_sphere *sphere, t_matrix transform);
 t_vector	sphere_normal_at(t_sphere *s, t_point p);
+
+// cylinder
+t_cylinder	*create_cylinder(void);
+void		free_cylinder(t_cylinder *cylinder);
+void		set_transform_cylinder(t_cylinder *cylinder, t_matrix transform);
+t_vector	cylinder_normal_at(t_cylinder *c, t_point p);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/29 16:19:00 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/08 16:39:59 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS =			main.c \
 				material_test.c \
 				world_test.c \
 				computations_test.c \
+				cylinder_unit_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
@@ -70,7 +71,7 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				handle_ambient.c handle_camera.c handle_light.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c world.c \
 				transform_utils.c objects.c ft_atod.c intersect_sort.c \
-				computations.c
+				computations.c cylinder.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h

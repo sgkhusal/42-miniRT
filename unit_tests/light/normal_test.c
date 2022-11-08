@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:07:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:07:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:21:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	normal_tests(void)
 	sphere_normal_test(s, set_point(0, 0, 1), set_vector(0, 0, 1));
 	sphere_normal_test(s, set_point(sqrt(3) / 3, sqrt(3) / 3, sqrt(3) / 3),
 		set_vector(sqrt(3) / 3, sqrt(3) / 3, sqrt(3) / 3));
-	set_transform(s, translation_matrix(0, 1, 0));
+	set_transform_sphere(s, translation_matrix(0, 1, 0));
 	sphere_normal_test(s, set_point(0, 1.70711, -0.70711),
 		set_vector(0, 0.70711, -0.70711));
-	set_transform(s, scaling_matrix(1, 0.5, 1));
+	set_transform_sphere(s, scaling_matrix(1, 0.5, 1));
 	sphere_normal_test(s, set_point(0, sqrt(2) / 2, -sqrt(2) / 2),
 		set_vector(0, 0.97014, -0.24254));
 	free_sphere(s);

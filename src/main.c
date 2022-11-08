@@ -44,12 +44,15 @@ void	rendering_rays(t_vector **pixel_color, t_rt *rt)
 	t_sphere			*s;
 	t_intersection_list	list;
 	t_intersection		*hit;
+	t_xs				xs;
+	t_object			*o;
 
 	x_mlx = 0;
 	y_mlx = 0;
 	ray_origin = set_point(0, 0, -5);
 	s = create_sphere();
 	s->material.normalized_color = set_vector(1, 0.2, 1);
+	o = create_object(SPHERE, s);
 	rt->world.light.position = set_point(-10, 10, -10);
 	rt->world.light.intensity = set_vector(1, 1, 1);
 	/* t_matrix translation;
@@ -71,7 +74,12 @@ void	rendering_rays(t_vector **pixel_color, t_rt *rt)
 					(double)(-y_mlx + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
 			//printf("ray direction: %f %f %f\n", ray_direction.x, ray_direction.y, ray_direction.z);
 			ray = set_ray(ray_origin, normalize_vector(ray_direction));
-			sphere_intersection(ray, *s, &list);
+			xs = sphere_intersection(ray, *s);
+			if (xs.count == 2)
+			{
+				add_intersection_node(create_intersection(xs.t1, o), &list);
+				add_intersection_node(create_intersection(xs.t2, o), &list);
+			}
 			if (list.head)
 				hit = get_hit_intersection(list);
 			if (hit)
@@ -86,7 +94,7 @@ void	rendering_rays(t_vector **pixel_color, t_rt *rt)
 		x_mlx = 0;
 		y_mlx++;
 	}
-	free_sphere(s);
+	free_objects(&o);
 }
 
 int	main(int argc, char *argv[])

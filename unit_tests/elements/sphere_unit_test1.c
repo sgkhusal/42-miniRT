@@ -15,24 +15,25 @@
 void	create_sphere_test(void)
 {
 	t_sphere	*sphere;
-	t_matrix	transform;
+	t_matrix	identity;
 	t_color		color;
 
-	printf(GREY "create sphere test 1: " END);
+	printf(GREY "create sphere test: " END);
 	color = set_color(255, 0, 0);
 	sphere = create_sphere();
-	transform = identity_matrix(4);
+	identity = identity_matrix(4);
 	if (sphere->center.x == 0 && sphere->center.y == 0 && sphere->center.z == 0
 		&& sphere->radius == 1
-		&& check_equal_matrices(sphere->transform, transform)
-		&& check_equal_matrices(sphere->inverse, transform)
+		&& check_equal_matrices(sphere->transform, identity)
+		&& check_equal_matrices(sphere->inverse, identity)
+		&& check_equal_matrices(sphere->transpose_inverse, identity)
 		&& sphere->material.ambient == 0.1 && sphere->material.diffuse == 0.9
 		&& sphere->material.shininess == 200
 		&& sphere->material.specular == 0.9)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
-	free_matrix(transform);
+	free_matrix(identity);
 	free_sphere(sphere);
 }
 
@@ -56,10 +57,10 @@ void	sphere_transform_test(void)
 	t_sphere	*sphere;
 	t_matrix	transform;
 
-	printf(GREY "sphere_transform_test 1: " END);
+	printf(GREY "sphere_transform_test: " END);
 	sphere = create_sphere();
 	transform = translation_matrix(2, 3, 4);
-	set_transform(sphere, transform);
+	set_transform_sphere(sphere, transform);
 	if (check_equal_matrices(sphere->transform, transform))
 		printf(GREEN "OK" END "\n");
 	else
@@ -71,7 +72,7 @@ void	sphere_no_intersection_test(t_sphere *sphere, t_ray ray)
 {
 	t_xs		xs;
 
-	printf(GREY "sphere_no_intersection_test 1: " END);
+	printf(GREY "sphere_no_intersection_test: " END);
 	xs = sphere_intersection(ray, *sphere);
 	if (xs.count == 0)
 		printf(GREEN "OK" END "\n");

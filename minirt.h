@@ -109,6 +109,7 @@ void				init_intersection_list(t_intersection_list *list);
 void				free_intersection_list(t_intersection_list *list);
 t_intersection_list	intersect_world(t_world world, t_ray ray);
 t_xs				sphere_intersection(t_ray ray, t_sphere sphere);
+t_xs				cylinder_intersection(t_ray ray, t_cylinder c);
 
 t_world	default_world(void); /* remove */
 

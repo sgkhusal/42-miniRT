@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:09:00 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:04:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:27:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	free_objects(t_object **head)
 	{
 		if ((*head)->type == SPHERE)
 			free_sphere((*head)->obj);
-		/* else if (aux->type == PLANE)
-			free_plane(aux->obj);
-		else if (aux->type == CYLINDER)
-			free_cylinder(aux->obj); */
+		/* else if ((*head)->type == PLANE)
+			free_plane((*head)->obj); */
+		else if ((*head)->type == CYLINDER)
+			free_cylinder((*head)->obj);
 		aux = (*head)->next;
 		free(*head);
 		*head = aux;

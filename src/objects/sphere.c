@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/29 16:23:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:06:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_xs	sphere_intersection(t_ray ray, t_sphere s)
 	t_bhaskara	bhaskara;
 	t_vector	sphere_to_ray;
 
+	xs.count = 0;
 	transformed_ray = transform_ray(ray, s.inverse);
 	sphere_to_ray = subtract_points(transformed_ray.origin, s.center);
 	bhaskara.a = scalar_product(transformed_ray.direction,
@@ -70,12 +71,9 @@ t_xs	sphere_intersection(t_ray ray, t_sphere s)
 	bhaskara.c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
 	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a * bhaskara.c;
 	if (bhaskara.delta < 0)
-		xs.count = 0;
-	else
-	{
-		xs.count = 2;
-		xs.t1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
-		xs.t2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
-	}
+		return (xs);
+	xs.count = 2;
+	xs.t1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
+	xs.t2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	return (xs);
 }

@@ -23,7 +23,7 @@ void	transformed_sphere_test1(void)
 	transform = scaling_matrix(2, 2, 2);
 	s = create_sphere();
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
-	set_transform(s, transform);
+	set_transform_sphere(s, transform);
 	xs.count = 0;
 	xs = sphere_intersection(ray, *s);
 	if (xs.count == 2 && check_double_values(xs.t1, 3)
@@ -45,7 +45,7 @@ void	transformed_sphere_test2(void)
 	transform = translation_matrix(5, 0, 0);
 	s = create_sphere();
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
-	set_transform(s, transform);
+	set_transform_sphere(s, transform);
 	xs.count = 0;
 	sphere_intersection(ray, *s);
 	if (xs.count == 0)
