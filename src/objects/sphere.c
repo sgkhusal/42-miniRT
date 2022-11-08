@@ -6,14 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/28 23:12:24 by sguilher         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/15 11:35:28 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:23:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +55,9 @@ void	free_sphere(t_sphere *sphere)
  * variable of t_xs struct will be 0. If the ray is tangent to the sphere, the
  * count variable will be 2 andt1 and t2 willhave the same value.
  */
-void	sphere_intersection(t_ray ray, t_sphere s, t_intersection_list *list)
+t_xs	sphere_intersection(t_ray ray, t_sphere s)
 {
+	t_xs		xs;
 	t_ray		transformed_ray;
 	t_bhaskara	bhaskara;
 	t_vector	sphere_to_ray;
@@ -76,14 +70,12 @@ void	sphere_intersection(t_ray ray, t_sphere s, t_intersection_list *list)
 	bhaskara.c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
 	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a * bhaskara.c;
 	if (bhaskara.delta < 0)
-		return ;
+		xs.count = 0;
 	else
 	{
-		add_intersection_node(create_intersection(
-				(-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a),
-				SPHERE), list);
-		add_intersection_node(create_intersection(
-				(-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a),
-				SPHERE), list);
+		xs.count = 2;
+		xs.t1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
+		xs.t2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	}
+	return (xs);
 }

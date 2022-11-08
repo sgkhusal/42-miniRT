@@ -12,8 +12,29 @@
 
 #include "minirt.h"
 
+t_vector	get_color(t_ray ray, t_sphere *s, t_light light,
+					t_intersection *hit)
+{
+	t_vector			color;
+	t_vector			normal;
+	t_vector			eye;
+	t_point				point;
+
+	point = ray_position(ray, hit->t);
+	normal = sphere_normal_at(s, point);
+	eye = negative_vector((ray.direction));
+	color = lighting(s->material, light, point, normal, eye);
+	if (color.x > 1)
+		color.x = 1;
+	if (color.y > 1)
+		color.y = 1;
+	if (color.z > 1)
+		color.z = 1;
+	return (color);
+}
+
 // 1m = 200px
-void	rendering_rays(t_vector **pixel_color)
+void	rendering_rays(t_vector **pixel_color, t_rt *rt)
 {
 	t_ray				ray;
 	int					x_mlx; // 0 - 500
@@ -21,21 +42,16 @@ void	rendering_rays(t_vector **pixel_color)
 	t_point				ray_origin;
 	t_vector			ray_direction;
 	t_sphere			*s;
-	t_vector			color;
 	t_intersection_list	list;
 	t_intersection		*hit;
-	t_light				light;
-	t_vector			normal;
-	t_vector			eye;
-	t_point				point;
 
 	x_mlx = 0;
 	y_mlx = 0;
 	ray_origin = set_point(0, 0, -5);
 	s = create_sphere();
 	s->material.normalized_color = set_vector(1, 0.2, 1);
-	light.position = set_point(-10, 10, -10);
-	light.intensity = set_vector(1, 1, 1);
+	rt->world.light.position = set_point(-10, 10, -10);
+	rt->world.light.intensity = set_vector(1, 1, 1);
 	/* t_matrix translation;
 	translation = translation_matrix(0.5, 0.75, 0);
 	set_transform(s, translation);
@@ -61,17 +77,7 @@ void	rendering_rays(t_vector **pixel_color)
 			if (hit)
 			{
 				//printf("intersection in x = %d, y = %d - t = %f\n", x_mlx, y_mlx, hit->t);
-				point = ray_position(ray, hit->t);
-				normal = sphere_normal_at(s, point);
-				eye = negative_vector((ray.direction));
-				color = lighting(s->material, light, point, normal, eye);
-				if (color.x > 1)
-					color.x = 1;
-				if (color.y > 1)
-					color.y = 1;
-				if (color.z > 1)
-					color.z = 1;
-				pixel_color[y_mlx][x_mlx] = color;
+				pixel_color[y_mlx][x_mlx] = get_color(ray, s, rt->world.light, hit);
 			}
 			free_intersection_list(&list);
 			hit = NULL;
@@ -91,12 +97,14 @@ int	main(int argc, char *argv[])
 
 	if (handle_input(argc, argv[1], &rt) == ERROR)
 		exit (EXIT_FAILURE);
+	free_objects(&rt.world.objects); // /* remove */
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
-	rendering_rays(canvas);
+	rt.world = default_world();
+	rendering_rays(canvas, &rt);
 	plot_image(&mlx.img, &mlx, canvas);
-	free_objects(&rt.objects);
+	free_objects(&rt.world.objects);
 	free_canvas(canvas);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);

@@ -21,9 +21,10 @@ UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c mlx_utils.c colors.c utils.c error.c ray.c \
+SRCS =			main.c mlx_utils.c colors.c utils.c error.c ray.c world.c \
 				sphere.c intersection.c hit.c element_transform.c normal.c \
 				reflection.c material.c light.c objects.c canvas.c plot.c \
+				intersect_sort.c computations.c \
 				$(INPUT) $(TUPLES) $(MATRICES)
 INPUT =			handle_input.c input_file.c handle_content.c \
 				handle_ambient.c handle_camera.c handle_light.c \
