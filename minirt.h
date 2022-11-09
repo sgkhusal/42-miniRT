@@ -116,6 +116,8 @@ void				add_intersections(t_xs xs, t_object *object,
 // color
 t_vector			get_sphere_color(t_ray ray, t_sphere *s, t_light light,
 						t_intersection *hit);
+t_vector			get_cylinder_color(t_ray ray, t_cylinder *c, t_light light,
+						t_intersection *hit);
 
 // world
 t_world	default_world(void); /* remove */

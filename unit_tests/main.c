@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/08 18:14:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:13:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main(void)
 	cylinder_tests();
 	world_tests();
 	computations_tests();
-	sphere_render_test();
+	//sphere_render_test();
+	cylinder_render_test();
 	return (0);
 }
