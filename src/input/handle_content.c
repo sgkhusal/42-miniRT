@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/29 10:50:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:44:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,23 @@ int	handle_line(char *line, t_rt *rt)
 	return (print_error_msg2("invalid element: ", line));
 }
 
+void	print_objects(t_object *objects)
+{
+	t_object	*aux;
+
+	aux = objects;
+	while (aux)
+	{
+		if (aux->type == SPHERE)
+			printf("sphere\n");
+		else if (aux->type == PLANE)
+			printf("plane\n");
+		else if (aux->type == CYLINDER)
+			printf("cylinder\n");
+		aux = aux->next;
+	}
+}
+
 int	handle_content(char *content, t_rt	*rt)
 {
 	char	**lines;
@@ -100,13 +117,14 @@ int	handle_content(char *content, t_rt	*rt)
 	rt->world.objects = NULL;
 	while (lines[++i] && status == OK)
 	{
-		printf("linha = %s\n", lines[i]);
 		if (handle_line(lines[i], rt) == ERROR)
 		{
 			free_objects(&(rt->world.objects));
 			status = ERROR;
+			break ;
 		}
 	}
+	print_objects(rt->world.objects);
 	free_array(lines);
 	return (status);
 }

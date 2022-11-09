@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:53:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 14:58:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,31 @@ static int	validate_sphere_chars(char **infos)
 	if (validate_color_chars(infos[3]) == ERROR)
 		return (ERROR);
 	return (OK);
+}
+
+static void	set_sphere_matrixes(t_sphere *s, t_point center, double radius)
+{
+	t_matrix	translation;
+	t_matrix	scaling;
+
+	if (center.x != 0 || center.y != 0 || center.z != 0)
+	{
+		translation = translation_matrix(center.x, center.y, center.z);
+		if (radius != 1)
+		{
+			scaling = scaling_matrix(radius, radius, radius);
+			set_transform_sphere(s, multiply_matrix(translation, scaling));
+			free_matrix(translation);
+			free_matrix(scaling);
+		}
+		else
+			set_transform_sphere(s, translation);
+	}
+	else if (radius != 1)
+	{
+		scaling = scaling_matrix(radius, radius, radius);
+		set_transform_sphere(s, scaling);
+	}
 }
 
 int	handle_sphere(char *line, t_object **objs)
@@ -43,10 +68,9 @@ int	handle_sphere(char *line, t_object **objs)
 		s = create_sphere();
 		o = create_object(SPHERE, s);
 		o->xyz = transform_coordinates(infos[1], &status);
-		s->radius = transform_double(infos[2], &status) / 2; // vai ter que colocar em outro lugar
 		o->color = transform_color(infos[3], &status); // talvez não precise dessa parte
 		s->material.normalized_color = normalize_color(o->color);
-		// criar as matrizes de transformação aqui? ou depois?
+		set_sphere_matrixes(s, o->xyz, transform_double(infos[2], &status) / 2);
 		append_object(objs, o);
 	}
 	free_array(infos);

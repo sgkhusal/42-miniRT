@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/08 17:43:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:29:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,16 @@ typedef struct s_cylinder
 	t_material	material;
 }				t_cylinder;
 
+typedef union u_shape
+{
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+}				t_shape;
+
 typedef struct s_object
 {
-	void			*obj;
+	t_shape			shape;
 	t_point			xyz;
 	t_color			color;
 	enum e_objects	type;

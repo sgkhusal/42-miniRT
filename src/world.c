@@ -49,11 +49,11 @@ t_intersection_list	intersect_world(t_world world, t_ray ray)
 	while (object)
 	{
 		if (object->type == SPHERE)
-			xs = sphere_intersection(ray, *(t_sphere *)object->obj);
+			xs = sphere_intersection(ray, *(object->shape.sphere));
 		/* else if (object->type == PLANE)
-			xs = plane_intersection(ray, *(t_plane *)object->obj);
+			xs = plane_intersection(ray, *(object->shape.plane));
 		else if (object->type == CYLINDER)
-			xs = cylinder_intersection(ray, *(t_cylinder *)object->obj); */
+			xs = cylinder_intersection(ray, *(object->shape.cylinder)); */
 		if (xs.count == 2)
 			add_intersections(xs, object, &list);
 		object = object->next;

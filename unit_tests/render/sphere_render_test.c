@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:11:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:39:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 	t_intersection_list	list;
 	t_intersection		*hit;
 	t_xs				xs;
+	t_vector			color;
 
 	hit = NULL;
+	color = set_vector(0, 0, 0);
 	init_intersection_list(&list);
 	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
 					(double)(-y + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
 	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	xs = sphere_intersection(ray, *(t_sphere *)(rt->world.objects->obj));
+	xs = sphere_intersection(ray, *(rt->world.objects->shape.sphere));
 	if (xs.count == 2)
 		add_intersections(xs, rt->world.objects, &list);
 	if (list.head)
 		hit = get_hit_intersection(list);
 	if (hit)
-		return (get_sphere_color(ray,
-			(t_sphere *)(rt->world.objects->obj), rt->world.light, hit));
+		color = get_sphere_color(ray,
+			rt->world.objects->shape.sphere, rt->world.light, hit);
 	free_intersection_list(&list);
-	return (set_vector(0, 0, 0));
+	return (color);
 }
 
 // 1m = 100px

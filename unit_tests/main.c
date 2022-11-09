@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:13:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:44:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	input_tests();
 	ft_atod_tests();
@@ -29,7 +29,11 @@ int	main(void)
 	cylinder_tests();
 	world_tests();
 	computations_tests();
-	//sphere_render_test();
-	cylinder_render_test();
+	if (argc == 1)
+		return (0);
+	if (strcmp(argv[1], "sp") == 0)
+		sphere_render_test();
+	else if (strcmp(argv[1], "cy") == 0)
+		cylinder_render_test();
 	return (0);
 }
