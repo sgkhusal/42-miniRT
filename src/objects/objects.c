@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:09:00 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 15:57:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:06:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	free_objects(t_object **head)
 		free_matrix((*head)->transpose_inverse);
 		if ((*head)->type == SPHERE)
 			free((*head)->shape.sphere);
-		/* else if ((*head)->type == PLANE)
-			free((*head)->shape.plane); */
+		else if ((*head)->type == PLANE)
+			free((*head)->shape.plane);
 		else if ((*head)->type == CYLINDER)
 			free((*head)->shape.cylinder);
 		aux = (*head)->next;

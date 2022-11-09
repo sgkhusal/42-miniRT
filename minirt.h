@@ -92,8 +92,8 @@ int					handle_ambient_light(char *line, t_ambient *amb);
 int					handle_camera(char *line, t_camera *cam);
 int					handle_light(char *line, t_light *light);
 int					handle_sphere(char *line, t_object **objs);
-int					handle_plane(char *line);//, t_object *objs);
-int					handle_cylinder(char *line);//, t_object *objs);
+int					handle_plane(char *line, t_object **objs);
+int					handle_cylinder(char *line, t_object **objs);
 
 // rays
 t_ray				set_ray(t_point origin, t_vector direction);

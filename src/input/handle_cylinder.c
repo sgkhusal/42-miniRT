@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:54:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:05:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,59 @@ static int	validate_cylinder_chars(char **infos)
 	return (OK);
 }
 
-int	handle_cylinder(char *line)//, t_object *objs)
+static void	set_cylinder_matrixes(t_object *o, t_point center, double radius)
+{
+	t_matrix	translation;
+	t_matrix	scaling;
+
+	if (center.x != 0 || center.y != 0 || center.z != 0)
+	{
+		translation = translation_matrix(center.x, center.y, center.z);
+		if (radius != 1)
+		{
+			scaling = scaling_matrix(radius, radius, radius);
+			set_transform(o, multiply_matrix(translation, scaling));
+			free_matrix(translation);
+			free_matrix(scaling);
+		}
+		else
+			set_transform(o, translation);
+	}
+	else if (radius != 1)
+	{
+		scaling = scaling_matrix(radius, radius, radius);
+		set_transform(o, scaling);
+	}
+}
+
+static void	create_and_append_cylinder(t_object **objs, char **infos,
+	int *status)
+{
+	t_object	*c;
+	double		radius;
+	t_color		color;
+	t_point		center;
+
+	c = create_object(CYLINDER, create_cylinder());
+	center = transform_coordinates(infos[1], status);
+	c->shape.cylinder->orientation = transform_orientation(infos[2], status);//
+	radius = transform_double(infos[3], status) / 2;
+	c->shape.cylinder->height = transform_double(infos[4], status);//
+	color = transform_color(infos[5], status);
+	if (*status == ERROR)
+	{
+		free_objects(&c);
+		return ;
+	}
+	c->material.normalized_color = normalize_color(color);
+	set_cylinder_matrixes(c, center, radius); // tem rotação tb
+	append_object(objs, c);
+}
+
+int	handle_cylinder(char *line, t_object **objs)
 {
 	char		**infos;
 	int			status;
-	//t_object	*o;
-	//t_cylinder	*c;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -43,21 +90,8 @@ int	handle_cylinder(char *line)//, t_object *objs)
 				line);
 	else if (validate_cylinder_chars(infos) == ERROR)
 		status = ERROR;
-	/* else
-	{
-		c = create_cylinder();
-		o = create_object(CYLINDER, c);
-		o->xyz = transform_coordinates(infos[1], &status);
-		c->orientation = transform_orientation(infos[2], &status);
-		// the cylinder diameter: 14.2
-		c->radius = transform_double(infos[3], &status) / 2;
-		// the cylinder height: 21.42
-		c->height = transform_double(infos[4], &status);
-		o->color = transform_color(infos[5], &status); // talvez não precise dessa parte
-		c->material.normalized_color = normalize_color(o->color);
-		// criar as matrizes de transformação aqui? ou depois?
-		append_object(objs, o);
-	} */
+	else
+		create_and_append_cylinder(objs, infos, &status);
 	free_array(infos);
 	return (status);
 }

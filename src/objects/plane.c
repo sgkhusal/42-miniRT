@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   element_transform.c                                :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 17:57:00 by sguilher         ###   ########.fr       */
+/*   Created: 2022/11/09 17:59:47 by sguilher          #+#    #+#             */
+/*   Updated: 2022/11/09 18:00:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	set_transform(t_object *o, t_matrix transform)
+t_plane	*create_plane(void) // precisa ver se está certo!!
 {
-	free_matrix(o->transform);
-	o->transform = transform;
-	free_matrix(o->inverse);
-	o->inverse = inverse_matrix(o->transform);
-	free_matrix(o->transpose_inverse);
-	o->transpose_inverse = transposed_matrix(o->inverse);
+	t_plane	*plane;
+
+	plane = malloc(sizeof(t_plane));
+	if (!plane)
+		minirt_malloc_error("create_plane");
+	plane->point = set_point(0, 0, 0);
+	plane->orientation = set_vector(0, 1, 0);
+	return (plane);
 }

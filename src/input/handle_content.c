@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:44:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:16:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	handle_line(char *line, t_rt *rt)
 	if (ft_strncmp(line, "sp ", 3) == 0)
 		return (handle_sphere(line, &(rt->world.objects)));
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		return (handle_plane(line));//, rt->world.objects));
+		return (handle_plane(line, &(rt->world.objects)));
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		return (handle_cylinder(line));//, rt->world.objects));
+		return (handle_cylinder(line, &(rt->world.objects)));
 	if (line[0] == ' ')
 		return (print_error_msg("line can't start with space"));
 	return (print_error_msg2("invalid element: ", line));

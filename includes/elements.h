@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 17:11:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:01:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_plane
 {
 	t_point		point;
 	t_vector	orientation;
-	t_material	material;
 }				t_plane;
 
 typedef struct s_cylinder
@@ -100,8 +99,6 @@ typedef struct s_object
 {
 	enum e_objects	type;
 	t_shape			shape;
-	t_point			xyz;
-	t_color			color;
 	t_matrix		transform;
 	t_matrix		inverse;
 	t_matrix		transpose_inverse;
@@ -127,6 +124,9 @@ void		free_objects(t_object **head);
 // sphere
 t_sphere	*create_sphere(void);
 t_vector	sphere_normal_at(t_object *s, t_point p);
+
+// plane
+t_plane		*create_plane(void);
 
 // cylinder
 t_cylinder	*create_cylinder(void);

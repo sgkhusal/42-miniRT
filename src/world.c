@@ -20,6 +20,8 @@ t_world	default_world(void)
 
 	world.light.position = set_point(-10, 10, -10);
 	world.objects = NULL;
+	o1 = NULL;
+	o2 = NULL;
 	world.light.intensity = set_vector(1, 1, 1);
 	o1 = create_object(SPHERE, create_sphere());
 	o1->material.normalized_color = set_vector(0.8, 1.0, 0.6);
