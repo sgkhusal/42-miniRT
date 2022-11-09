@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 15:44:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:37:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char *argv[])
 	points_and_vectors_tests();
 	matrix_tests();
 	ray_tests();
+	object_tests();
 	sphere_tests();
 	intersection_tests();
 	light_tests();

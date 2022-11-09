@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:58:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:13:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	validate_sphere_chars(char **infos)
 	return (OK);
 }
 
-static void	set_sphere_matrixes(t_sphere *s, t_point center, double radius)
+static void	set_sphere_matrixes(t_object *o, t_point center, double radius)
 {
 	t_matrix	translation;
 	t_matrix	scaling;
@@ -34,17 +34,17 @@ static void	set_sphere_matrixes(t_sphere *s, t_point center, double radius)
 		if (radius != 1)
 		{
 			scaling = scaling_matrix(radius, radius, radius);
-			set_transform_sphere(s, multiply_matrix(translation, scaling));
+			set_transform(o, multiply_matrix(translation, scaling));
 			free_matrix(translation);
 			free_matrix(scaling);
 		}
 		else
-			set_transform_sphere(s, translation);
+			set_transform(o, translation);
 	}
 	else if (radius != 1)
 	{
 		scaling = scaling_matrix(radius, radius, radius);
-		set_transform_sphere(s, scaling);
+		set_transform(o, scaling);
 	}
 }
 
@@ -67,10 +67,10 @@ int	handle_sphere(char *line, t_object **objs)
 	{
 		s = create_sphere();
 		o = create_object(SPHERE, s);
-		o->xyz = transform_coordinates(infos[1], &status);
-		o->color = transform_color(infos[3], &status); // talvez não precise dessa parte
-		s->material.normalized_color = normalize_color(o->color);
-		set_sphere_matrixes(s, o->xyz, transform_double(infos[2], &status) / 2);
+		o->xyz = transform_coordinates(infos[1], &status); // talvez possa tirar
+		o->color = transform_color(infos[3], &status); // talvez possa tirar
+		o->material.normalized_color = normalize_color(o->color);
+		set_sphere_matrixes(o, o->xyz, transform_double(infos[2], &status) / 2);
 		append_object(objs, o);
 	}
 	free_array(infos);

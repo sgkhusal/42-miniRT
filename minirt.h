@@ -75,7 +75,7 @@ typedef struct s_world
 
 typedef struct s_rt
 {
-	t_ambient			ambient;
+	t_ambient			ambient; // vai ter que passar para o material dos elementos
 	t_camera			camera;
 	t_world				world;
 	t_intersection_list	intersections;
@@ -101,8 +101,8 @@ t_point				ray_position(t_ray ray, double distance);
 t_ray				transform_ray(t_ray ray, t_matrix m);
 
 // intersections
-t_xs				sphere_intersection(t_ray ray, t_sphere sphere);
-t_xs				cylinder_intersection(t_ray ray, t_cylinder c);
+t_xs				sphere_intersection(t_ray ray, t_object *o);
+t_xs				cylinder_intersection(t_ray ray, t_object *o);
 t_intersection		*create_intersection(double t, t_object *object);
 void				add_intersection_node(t_intersection *node,
 						t_intersection_list *list);
@@ -114,9 +114,9 @@ void				add_intersections(t_xs xs, t_object *object,
 						t_intersection_list *list);
 
 // color
-t_vector			get_sphere_color(t_ray ray, t_sphere *s, t_light light,
+t_vector			get_sphere_color(t_ray ray, t_object *o, t_light light,
 						t_intersection *hit);
-t_vector			get_cylinder_color(t_ray ray, t_cylinder *c, t_light light,
+t_vector			get_cylinder_color(t_ray ray, t_object *o, t_light light,
 						t_intersection *hit);
 
 // world

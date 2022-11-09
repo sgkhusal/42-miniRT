@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:17:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/08 17:45:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:59:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,42 +25,35 @@ void	create_cylinder_test(void)
 	if (cylinder->center.x == 0 && cylinder->center.y == 0
 		&& cylinder->center.z == 0
 		&& cylinder->radius == 1 && cylinder->height == 1
-		&& check_equal_vectors(cylinder->orientation, set_vector(0, 1, 0))
-		&& check_equal_matrices(cylinder->transform, identity)
-		&& check_equal_matrices(cylinder->inverse, identity)
-		&& check_equal_matrices(cylinder->transpose_inverse, identity)
-		&& cylinder->material.ambient == 0.1
-		&& cylinder->material.diffuse == 0.9
-		&& cylinder->material.shininess == 200
-		&& cylinder->material.specular == 0.9)
+		&& check_equal_vectors(cylinder->orientation, set_vector(0, 1, 0)))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 	free_matrix(identity);
-	free_cylinder(cylinder);
+	free(cylinder);
 }
 
-void	cylinder_no_intersection_test(t_cylinder *cylinder, t_ray ray)
+void	cylinder_no_intersection_test(t_object *cy, t_ray ray)
 {
 	t_xs		xs;
 	static int	n = 1;
 
 	printf(GREY "cylinder_no_intersection_test %d: " END, n);
-	xs = cylinder_intersection(ray, *cylinder);
+	xs = cylinder_intersection(ray, cy);
 	if (xs.count == 0)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 }
 
-void	cylinder_intersection_test(t_cylinder *c, t_ray ray, double t1,
+void	cylinder_intersection_test(t_object *cy, t_ray ray, double t1,
 			double t2)
 {
 	t_xs				xs;
 	static int			n = 1;
 
 	printf(GREY "cylinder_intersection_test %d: " END, n);
-	xs = cylinder_intersection(ray, *c);
+	xs = cylinder_intersection(ray, cy);
 	if (xs.count == 2 && check_double_values(xs.t1, t1)
 		&& check_double_values(xs.t2, t2))
 		printf(GREEN "OK" END "\n");
@@ -73,23 +66,7 @@ void	cylinder_intersection_test(t_cylinder *c, t_ray ray, double t1,
 	n++;
 }
 
-void	cylinder_transform_test(void)
-{
-	t_cylinder	*cylinder;
-	t_matrix	transform;
-
-	printf(GREY "cylinder_transform_test: " END);
-	cylinder = create_cylinder();
-	transform = translation_matrix(2, 3, 4);
-	set_transform_cylinder(cylinder, transform);
-	if (check_equal_matrices(cylinder->transform, transform))
-		printf(GREEN "OK" END "\n");
-	else
-		printf(RED "KO" END "\n");
-	free_cylinder(cylinder);
-}
-
-void	cylinder_normal_test(t_cylinder *c, t_point p, t_vector expected)
+void	cylinder_normal_test(t_object *c, t_point p, t_vector expected)
 {
 	static int	n = 1;
 	t_vector	result;
@@ -105,12 +82,11 @@ void	cylinder_normal_test(t_cylinder *c, t_point p, t_vector expected)
 
 void	cylinder_tests(void)
 {
-	t_cylinder *cylinder;
+	t_object	*cylinder;
 
 	printf(YELLOW "Cylinder tests: " END "\n");
 	create_cylinder_test();
-	cylinder_transform_test();
-	cylinder = create_cylinder();
+	cylinder = create_object(CYLINDER, create_cylinder());
 	cylinder_no_intersection_test(cylinder,
 		set_ray(set_point(1, 0, 0), set_vector(0, 1, 0)));
 	cylinder_no_intersection_test(cylinder,
@@ -127,5 +103,5 @@ void	cylinder_tests(void)
 	cylinder_normal_test(cylinder, set_point(0, 5, -1), set_vector(0, 0, -1));
 	cylinder_normal_test(cylinder, set_point(0, -2, 1), set_vector(0, 0, 1));
 	cylinder_normal_test(cylinder, set_point(-1, 1, 0), set_vector(-1, 0, 0));
-	free_cylinder(cylinder);
+	free_objects(&cylinder);
 }

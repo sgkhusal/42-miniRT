@@ -27,14 +27,13 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
 					(double)(-y + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
 	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	xs = sphere_intersection(ray, *(rt->world.objects->shape.sphere));
+	xs = sphere_intersection(ray, rt->world.objects);
 	if (xs.count == 2)
 		add_intersections(xs, rt->world.objects, &list);
 	if (list.head)
 		hit = get_hit_intersection(list);
 	if (hit)
-		color = get_sphere_color(ray,
-			rt->world.objects->shape.sphere, rt->world.light, hit);
+		color = get_sphere_color(ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list); // precisaria dar free antes do outro retorno...
 	return (color);
 }

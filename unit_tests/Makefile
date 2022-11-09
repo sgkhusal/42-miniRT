@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/09 14:11:06 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/09 16:36:55 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS =			main.c \
 				shearing_test.c \
 				chaining_test.c \
 				ray_unit_test.c \
+				object_unit_test.c \
 				sphere_unit_test1.c \
 				sphere_unit_test2.c \
 				intersection_test.c \

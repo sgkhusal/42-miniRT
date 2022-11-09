@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/09 15:00:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:23:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,7 @@ t_sphere	*create_sphere(void)
 		minirt_malloc_error("create_sphere");
 	sphere->center = set_point(0, 0, 0);
 	sphere->radius = 1.0;
-	sphere->transform = identity_matrix(4);
-	sphere->inverse = identity_matrix(4);
-	sphere->transpose_inverse = identity_matrix(4);
-	sphere->material = set_material();
 	return (sphere);
-}
-
-void	free_sphere(t_sphere *sphere)
-{
-	free_matrix(sphere->transform);
-	free_matrix(sphere->inverse);
-	free_matrix(sphere->transpose_inverse);
-	free(sphere);
 }
 
 /**
@@ -55,7 +43,7 @@ void	free_sphere(t_sphere *sphere)
  * variable of t_xs struct will be 0. If the ray is tangent to the sphere, the
  * count variable will be 2 andt1 and t2 willhave the same value.
  */
-t_xs	sphere_intersection(t_ray ray, t_sphere s)
+t_xs	sphere_intersection(t_ray ray, t_object *o)
 {
 	t_xs		xs;
 	t_ray		transformed_ray;
@@ -63,8 +51,9 @@ t_xs	sphere_intersection(t_ray ray, t_sphere s)
 	t_vector	sphere_to_ray;
 
 	xs.count = 0;
-	transformed_ray = transform_ray(ray, s.inverse);
-	sphere_to_ray = subtract_points(transformed_ray.origin, s.center);
+	transformed_ray = transform_ray(ray, o->inverse);
+	sphere_to_ray = subtract_points(transformed_ray.origin,
+			o->shape.sphere->center);
 	bhaskara.a = scalar_product(transformed_ray.direction,
 			transformed_ray.direction);
 	bhaskara.b = 2 * scalar_product(transformed_ray.direction, sphere_to_ray);
@@ -78,7 +67,7 @@ t_xs	sphere_intersection(t_ray ray, t_sphere s)
 	return (xs);
 }
 
-t_vector	get_sphere_color(t_ray ray, t_sphere *s, t_light light,
+t_vector	get_sphere_color(t_ray ray, t_object *o, t_light light,
 					t_intersection *hit)
 {
 	t_vector			color;
@@ -87,9 +76,9 @@ t_vector	get_sphere_color(t_ray ray, t_sphere *s, t_light light,
 	t_point				point;
 
 	point = ray_position(ray, hit->t);
-	normal = sphere_normal_at(s, point);
+	normal = sphere_normal_at(o, point);
 	eye = negative_vector((ray.direction));
-	color = lighting(s->material, light, point, normal, eye);
+	color = lighting(o->material, light, point, normal, eye);
 	if (color.x > 1)
 		color.x = 1;
 	if (color.y > 1)

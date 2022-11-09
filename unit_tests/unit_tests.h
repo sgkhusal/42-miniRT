@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:12:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:37:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	shearing_tests(void);
 void	chaining_tests(void);
 
 void	ray_tests(void);
+void	object_tests(void);
 void	sphere_tests(void);
 void	cylinder_tests(void);
 void	normal_tests(void);

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:09:00 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:59:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:57:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ t_object	*create_object(enum e_objects type, void *shape)
 		obj->shape.plane = (t_plane *)shape;
 	else if (type == CYLINDER)
 		obj->shape.cylinder = (t_cylinder *)shape;
+	obj->transform = identity_matrix(4);
+	obj->inverse = identity_matrix(4);
+	obj->transpose_inverse = identity_matrix(4);
+	obj->material = set_material();
 	obj->next = NULL;
 	return (obj);
 }
@@ -51,12 +55,15 @@ void	free_objects(t_object **head)
 
 	while (*head)
 	{
+		free_matrix((*head)->transform);
+		free_matrix((*head)->inverse);
+		free_matrix((*head)->transpose_inverse);
 		if ((*head)->type == SPHERE)
-			free_sphere((*head)->shape.sphere);
+			free((*head)->shape.sphere);
 		/* else if ((*head)->type == PLANE)
-			free_plane((*head)->shape.plane); */
+			free((*head)->shape.plane); */
 		else if ((*head)->type == CYLINDER)
-			free_cylinder((*head)->shape.cylinder);
+			free((*head)->shape.cylinder);
 		aux = (*head)->next;
 		free(*head);
 		*head = aux;

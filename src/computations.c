@@ -30,7 +30,7 @@ t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 	comp.point = ray_position(ray, intersect->t);
 	comp.eyev = negative_vector(ray.direction);
 	if (intersect->object->type == SPHERE)
-		comp.normalv = sphere_normal_at(intersect->object->shape.sphere, comp.point);
+		comp.normalv = sphere_normal_at(intersect->object, comp.point);
 	comp.inside = is_inside(&comp);
 	return (comp);
 }

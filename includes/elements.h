@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 15:29:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:11:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,6 @@ typedef struct s_sphere
 {
 	t_point		center;
 	double		radius;
-	t_matrix	transform;
-	t_matrix	inverse;
-	t_matrix	transpose_inverse;
-	t_material	material;
 }				t_sphere;
 
 typedef struct s_plane
@@ -91,10 +87,6 @@ typedef struct s_cylinder
 	t_vector	orientation;
 	double		radius;
 	double		height;
-	t_matrix	transform;
-	t_matrix	inverse;
-	t_matrix	transpose_inverse;
-	t_material	material;
 }				t_cylinder;
 
 typedef union u_shape
@@ -106,10 +98,14 @@ typedef union u_shape
 
 typedef struct s_object
 {
+	enum e_objects	type;
 	t_shape			shape;
 	t_point			xyz;
 	t_color			color;
-	enum e_objects	type;
+	t_matrix		transform;
+	t_matrix		inverse;
+	t_matrix		transpose_inverse;
+	t_material		material;
 	struct s_object	*next;
 }				t_object;
 
@@ -124,19 +120,16 @@ t_vector	lighting(t_material material, t_light light, t_point point,
 
 // objects
 t_object	*create_object(enum e_objects type, void *shape);
+void		set_transform(t_object *o, t_matrix transform);
 void		append_object(t_object **head, t_object *obj);
 void		free_objects(t_object **head);
 
 // sphere
 t_sphere	*create_sphere(void);
-void		free_sphere(t_sphere *sphere);
-void		set_transform_sphere(t_sphere *sphere, t_matrix transform);
-t_vector	sphere_normal_at(t_sphere *s, t_point p);
+t_vector	sphere_normal_at(t_object *s, t_point p);
 
 // cylinder
 t_cylinder	*create_cylinder(void);
-void		free_cylinder(t_cylinder *cylinder);
-void		set_transform_cylinder(t_cylinder *cylinder, t_matrix transform);
-t_vector	cylinder_normal_at(t_cylinder *c, t_point p);
+t_vector	cylinder_normal_at(t_object *c, t_point p);
 
 #endif

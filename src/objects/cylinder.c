@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:10:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 15:00:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:21:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,18 @@ t_cylinder	*create_cylinder(void)
 	cylinder->orientation = set_vector(0, 1, 0);
 	cylinder->radius = 1.0;
 	cylinder->height = 1.0; // infinite height
-	cylinder->transform = identity_matrix(4);
-	cylinder->inverse = identity_matrix(4);
-	cylinder->transpose_inverse = identity_matrix(4);
-	cylinder->material = set_material();
 	return (cylinder);
 }
 
-void	free_cylinder(t_cylinder *cylinder)
-{
-	free_matrix(cylinder->transform);
-	free_matrix(cylinder->inverse);
-	free_matrix(cylinder->transpose_inverse);
-	free(cylinder);
-}
-
-t_xs	cylinder_intersection(t_ray ray, t_cylinder c) // tem que normalizar a direção do raio antes de ele vir como nos testes!!
+// aqui pode mandar apenas a matriz inversa...
+t_xs	cylinder_intersection(t_ray ray, t_object *o) // tem que normalizar a direção do raio antes de ele vir como nos testes!!
 {
 	t_xs		xs;
 	t_ray		transformed_ray;
 	t_bhaskara	bhaskara;
 
 	xs.count = 0;
-	transformed_ray = transform_ray(ray, c.inverse);
+	transformed_ray = transform_ray(ray, o->inverse);
 	bhaskara.a = pow(transformed_ray.direction.x, 2)
 		+ pow(transformed_ray.direction.z, 2);
 	if (check_double_values(bhaskara.a, 0))
@@ -66,7 +55,7 @@ t_xs	cylinder_intersection(t_ray ray, t_cylinder c) // tem que normalizar a dire
 	return (xs);
 }
 
-t_vector	get_cylinder_color(t_ray ray, t_cylinder *c, t_light light,
+t_vector	get_cylinder_color(t_ray ray, t_object *o, t_light light,
 					t_intersection *hit)
 {
 	t_vector			color;
@@ -75,9 +64,9 @@ t_vector	get_cylinder_color(t_ray ray, t_cylinder *c, t_light light,
 	t_point				point;
 
 	point = ray_position(ray, hit->t);
-	normal = cylinder_normal_at(c, point);
+	normal = cylinder_normal_at(o, point);
 	eye = negative_vector((ray.direction));
-	color = lighting(c->material, light, point, normal, eye);
+	color = lighting(o->material, light, point, normal, eye);
 	if (color.x > 1)
 		color.x = 1;
 	if (color.y > 1)

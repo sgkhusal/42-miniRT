@@ -6,24 +6,33 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 15:39:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:58:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-// set_transform_sphere(s, translation);
-// set_transform_sphere(s, (scaling));
-void	transform_sphere(t_sphere *s)
+static void	transform_sphere(t_object *s, int type)
 {
 	t_matrix	translation;
 	t_matrix	scaling;
 
-	translation = translation_matrix(0.5, 0.75, 0);
-	scaling = scaling_matrix(0.25, 0.25, 0.25);
-	set_transform_sphere(s, multiply_matrix(translation, scaling));
-	free_matrix(translation);
-	free_matrix(scaling);
+	if (type == 0)
+		return ;
+	if (type == 1 || type == 3)
+		translation = translation_matrix(5, -3, 2);
+	else if (type == 2 || type == 3)
+		scaling = scaling_matrix(2, 2, 2);
+	if (type == 1)
+		set_transform(s, translation);
+	else if (type == 2)
+		set_transform(s, scaling);
+	else if (type == 3)
+	{
+		set_transform(s, multiply_matrix(scaling, translation));
+		free_matrix(translation);
+		free_matrix(scaling);
+	}
 }
 
 static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
@@ -41,14 +50,13 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
 					(double)(-y + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
 	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	xs = sphere_intersection(ray, *(rt->world.objects->shape.sphere));
+	xs = sphere_intersection(ray, rt->world.objects);
 	if (xs.count == 2)
 		add_intersections(xs, rt->world.objects, &list);
 	if (list.head)
 		hit = get_hit_intersection(list);
 	if (hit)
-		color = get_sphere_color(ray,
-			rt->world.objects->shape.sphere, rt->world.light, hit);
+		color = get_sphere_color(ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list);
 	return (color);
 }
@@ -80,15 +88,17 @@ void	sphere_render_test(void)
 {
 	t_mlx		mlx;
 	t_rt		rt;
-	t_sphere	*s;
+	t_object	*s;
 	t_vector	**canvas;
 
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
-	s = create_sphere();
+	s = create_object(SPHERE, create_sphere());
+	transform_sphere(s, 0);
 	s->material.normalized_color = set_vector(1, 0.2, 1);
-	rt.world.objects = create_object(SPHERE, s);
+	rt.world.objects = NULL;
+	append_object(&rt.world.objects, s);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
 	rendering_rays(canvas, &rt);
