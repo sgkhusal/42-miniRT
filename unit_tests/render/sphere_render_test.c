@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 16:58:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:35:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	transform_sphere(t_object *s, int type)
 		return ;
 	if (type == 1 || type == 3)
 		translation = translation_matrix(5, -3, 2);
-	else if (type == 2 || type == 3)
+	if (type == 2 || type == 3)
 		scaling = scaling_matrix(2, 2, 2);
 	if (type == 1)
 		set_transform(s, translation);
@@ -29,7 +29,7 @@ static void	transform_sphere(t_object *s, int type)
 		set_transform(s, scaling);
 	else if (type == 3)
 	{
-		set_transform(s, multiply_matrix(scaling, translation));
+		set_transform(s, multiply_matrix(translation, scaling));
 		free_matrix(translation);
 		free_matrix(scaling);
 	}
@@ -95,7 +95,7 @@ void	sphere_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	s = create_object(SPHERE, create_sphere());
-	transform_sphere(s, 0);
+	transform_sphere(s, 3);
 	s->material.normalized_color = set_vector(1, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, s);

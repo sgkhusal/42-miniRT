@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:30:52 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 14:04:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:03:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define HEIGHT 700
 # define WIDTH 700
-# define PPU 100 // pixels per unit
+# define PPU 10 // pixels per unit
 
 # define DESTROY_NOTIFY 17
 # define KEY_PRESS 2

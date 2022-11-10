@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 16:58:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 21:40:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	transform_cylinder(t_object *c, int type)
 {
 	t_matrix	translation;
 	t_matrix	scaling;
+	t_matrix	rotation_x;
+	t_matrix	rotation_z;
 
-	if (type == 0)
-		return ;
 	if (type == 1 || type == 3)
 		translation = translation_matrix(5, -3, 2);
-	else if (type == 2 || type == 3)
+	if (type == 2 || type == 3)
 		scaling = scaling_matrix(2, 2, 2);
 	if (type == 1)
 		set_transform(c, translation);
@@ -29,9 +29,17 @@ static void	transform_cylinder(t_object *c, int type)
 		set_transform(c, scaling);
 	else if (type == 3)
 	{
-		set_transform(c, multiply_matrix(scaling, translation));
+		set_transform(c, multiply_matrix(translation, scaling));
 		free_matrix(translation);
 		free_matrix(scaling);
+	}
+	else if (type == 4)
+	{
+		rotation_x = rotation_x_matrix(M_PI / 4);
+		rotation_z = rotation_z_matrix(M_PI / 4);
+		set_transform(c, multiply_matrix(rotation_x, rotation_z));
+		free_matrix(rotation_x);
+		free_matrix(rotation_z);
 	}
 }
 
@@ -96,8 +104,8 @@ void	cylinder_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 0);
-	c->material.normalized_color = set_vector(1, 0.2, 1);
+	transform_cylinder(c, 2);
+	c->material.normalized_color = set_vector(0.5, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, c);
 	rt.world.light.position = set_point(-10, 10, -10);
