@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/26 21:08:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:51:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ t_vector	lighting(t_material material, t_light light, t_point point,
 			sh.specular = multiply_vector_by_scalar(light.intensity,
 					pow(reflected_dot_eye, material.shininess) * material.specular);
 	}
+	//return (sh.specular);
 	return (add_vectors(add_vectors(sh.ambient, sh.diffuse), sh.specular));
 }
+//spcecular tá cagando tudo para o cilindro

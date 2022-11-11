@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder_unit_test.c                               :+:      :+:    :+:   */
+/*   cylinder_unit_test1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:17:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 16:59:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/10 20:49:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	create_cylinder_test(void)
 	identity = identity_matrix(4);
 	if (cylinder->center.x == 0 && cylinder->center.y == 0
 		&& cylinder->center.z == 0
-		&& cylinder->radius == 1 && cylinder->height == 1
+		&& cylinder->radius == 1 && cylinder->height == INFINITY
+		&& cylinder->min == -INFINITY && cylinder->max == INFINITY
 		&& check_equal_vectors(cylinder->orientation, set_vector(0, 1, 0)))
 		printf(GREEN "OK" END "\n");
 	else
@@ -49,8 +50,8 @@ void	cylinder_no_intersection_test(t_object *cy, t_ray ray)
 void	cylinder_intersection_test(t_object *cy, t_ray ray, double t1,
 			double t2)
 {
-	t_xs				xs;
-	static int			n = 1;
+	t_xs		xs;
+	static int	n = 1;
 
 	printf(GREY "cylinder_intersection_test %d: " END, n);
 	xs = cylinder_intersection(ray, cy);
@@ -58,11 +59,7 @@ void	cylinder_intersection_test(t_object *cy, t_ray ray, double t1,
 		&& check_double_values(xs.t2, t2))
 		printf(GREEN "OK" END "\n");
 	else
-	{
 		printf(RED "KO" END "\n");
-		printf("xs.count = %d, xs.t1 = %f, xs.t2 = %f\n", xs.count, xs.t1,
-			xs.t2);
-	}
 	n++;
 }
 
@@ -103,5 +100,6 @@ void	cylinder_tests(void)
 	cylinder_normal_test(cylinder, set_point(0, 5, -1), set_vector(0, 0, -1));
 	cylinder_normal_test(cylinder, set_point(0, -2, 1), set_vector(0, 0, 1));
 	cylinder_normal_test(cylinder, set_point(-1, 1, 0), set_vector(-1, 0, 0));
+	truncate_cylinder_test_cases();
 	free_objects(&cylinder);
 }

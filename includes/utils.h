@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 21:54:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 23:23:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:33:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define FILE_PLANE 'pl'
 # define FILE_SPHERE 'sp'
 # define FILE_CYLINDER 'cy'
+
+# define EPSILON 0.00001
 
 enum e_status
 {

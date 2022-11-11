@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:03:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 18:18:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:32:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ t_vector	sphere_normal_at(t_object *s, t_point p)
 
 t_vector	cylinder_normal_at(t_object *o, t_point p)
 {
-	(void)(*o);
-	return (set_vector(p.x, 0, p.z));
+	double	dist;
+
+	dist = pow(p.x, 2) + pow(p.z, 2);
+	if (dist < 1 && p.y >= o->shape.cylinder->max - EPSILON)
+		return (set_vector(0, 1, 0));
+	else if (dist < 1 && p.y <= o->shape.cylinder->min + EPSILON)
+		return (set_vector(0, -1, 0));
+	else
+		return (set_vector(p.x, 0, p.z));
 }

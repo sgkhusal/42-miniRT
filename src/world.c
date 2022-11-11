@@ -53,11 +53,13 @@ t_intersection_list	intersect_world(t_world world, t_ray ray)
 		if (object->type == SPHERE)
 			xs = sphere_intersection(ray, object);
 		/* else if (object->type == PLANE)
-			xs = plane_intersection(ray, object);
+			xs = plane_intersection(ray, object); */
 		else if (object->type == CYLINDER)
-			xs = cylinder_intersection(ray, object); */
+			xs = cylinder_intersection(ray, object);
 		if (xs.count == 2)
 			add_intersections(xs, object, &list);
+		if (xs.count == 1)
+			add_intersection_node(create_intersection(xs.t1, object), &list);
 		object = object->next;
 	}
 	intersect_sort(&(list.head));

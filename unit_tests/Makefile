@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/09 18:02:36 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/09 22:52:57 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,8 @@ SRCS =			main.c \
 				sphere_render_test.c \
 				world_test.c \
 				computations_test.c \
-				cylinder_unit_test.c \
+				cylinder_unit_test1.c \
+				cylinder_unit_test2.c \
 				cylinder_render_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \

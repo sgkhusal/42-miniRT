@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 18:01:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:45:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_cylinder
 	t_vector	orientation;
 	double		radius;
 	double		height;
+	double		min;
+	double		max;
 }				t_cylinder;
 
 typedef union u_shape
