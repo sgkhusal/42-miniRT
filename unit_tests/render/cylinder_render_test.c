@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 01:18:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/12 00:04:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	transform_cylinder(t_object *c, int type)
 	t_matrix	rotation_z;
 
 	if (type == 1 || type == 3)
-		translation = translation_matrix(5, -3, 2);
+		translation = translation_matrix(5, 0, 0);
 	if (type == 2 || type == 3)
-		scaling = scaling_matrix(2, 2, 2);
+		scaling = scaling_matrix(2, 1, 2);
 	if (type == 1)
 		set_transform(c, translation);
 	else if (type == 2)
@@ -46,6 +46,7 @@ static void	transform_cylinder(t_object *c, int type)
 static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 {
 	t_ray				ray;
+	t_ray				transformed_ray;
 	t_vector			ray_direction;
 	t_intersection_list	list;
 	t_intersection		*hit;
@@ -57,15 +58,15 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 	init_intersection_list(&list);
 	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
 					(double)(-y + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
-	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	xs = cylinder_intersection(ray, rt->world.objects);
+	ray = set_ray(ray_origin, (ray_direction));
+	transformed_ray = transform_ray(ray, rt->world.objects->inverse);
+	xs = cylinder_intersection(transformed_ray, rt->world.objects);
 	if (xs.count == 2)
 		add_intersections(xs, rt->world.objects, &list);
 	if (list.head)
 		hit = get_hit_intersection(list);
 	if (hit)
-		color = get_cylinder_color(ray,
-			rt->world.objects, rt->world.light, hit);
+		color = get_color(transformed_ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list);
 	return (color);
 }
@@ -104,8 +105,8 @@ void	cylinder_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 1);
-	c->shape.cylinder->min = -7;
+	transform_cylinder(c, 2);
+	c->shape.cylinder->min = 1;
 	c->shape.cylinder->max = 7;
 	c->material.normalized_color = set_vector(0.5, 0.2, 1);
 	rt.world.objects = NULL;

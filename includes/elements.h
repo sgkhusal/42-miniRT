@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 22:45:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:28:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ t_material	set_material(void);
 // light
 t_vector	reflect(t_vector incident, t_vector normal);
 t_light		set_point_light(t_point position, t_vector intensity);
-t_vector	lighting(t_material material, t_light light, t_point point,
-				t_vector normal, t_vector eye);
 
 // objects
 t_object	*create_object(enum e_objects type, void *shape);

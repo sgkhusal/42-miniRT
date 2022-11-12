@@ -40,22 +40,24 @@ void	add_intersections(t_xs xs, t_object *object, t_intersection_list *list)
 	add_intersection_node(create_intersection(xs.t2, object), list);
 }
 
-t_intersection_list	intersect_world(t_world world, t_ray ray)
+t_intersection_list	intersect_world(t_world world, t_ray ray) // normalizar a direção do raio antes
 {
 	t_intersection_list	list;
 	t_xs				xs;
 	t_object			*object;
+	t_ray				transformed_ray;
 
 	init_intersection_list(&list);
 	object = world.objects;
 	while (object)
 	{
+		transformed_ray = transform_ray(ray, object->inverse);
 		if (object->type == SPHERE)
-			xs = sphere_intersection(ray, object);
+			xs = sphere_intersection(transformed_ray, object);
 		/* else if (object->type == PLANE)
-			xs = plane_intersection(ray, object); */
+			xs = plane_intersection(transformed_ray, object); */
 		else if (object->type == CYLINDER)
-			xs = cylinder_intersection(ray, object);
+			xs = cylinder_intersection(transformed_ray, object);
 		if (xs.count == 2)
 			add_intersections(xs, object, &list);
 		if (xs.count == 1)

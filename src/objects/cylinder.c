@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:10:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 00:50:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:24:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void calculate_cylinder_intersection(t_cylinder *c, t_ray ray,
 	}
 }
 
-int	check_cap(t_ray ray, double t)
+t_bool	check_cap(t_ray ray, double t)
 {
 	double x;
 	double z;
@@ -75,7 +75,10 @@ void	cylinder_intersect_caps(t_ray ray, t_cylinder *c, t_xs *xs)
 	t = (c->min - ray.origin.y) / ray.direction.y;
 	if (check_cap(ray, t))
 	{
-		xs->t1 = t;
+		if (xs->count == 0)
+			xs->t1 = t;
+		else
+			xs->t2 = t;
 		xs->count++;
 	}
 	t = (c->max - ray.origin.y) / ray.direction.y;
@@ -83,7 +86,7 @@ void	cylinder_intersect_caps(t_ray ray, t_cylinder *c, t_xs *xs)
 	{
 		if (xs->count == 0)
 			xs->t1 = t;
-		else
+		else if (xs->count == 1)
 			xs->t2 = t;
 		xs->count++;
 	}
@@ -91,23 +94,21 @@ void	cylinder_intersect_caps(t_ray ray, t_cylinder *c, t_xs *xs)
 
 t_xs cylinder_intersection(t_ray ray, t_object *c) // tem que normalizar a direção do raio antes de ele vir como nos testes!!
 {
-	t_xs xs;
-	t_ray transformed_ray;
-	t_bhaskara bhaskara;
+	t_xs		xs;
+	t_bhaskara	bhaskara;
 
 	xs.count = 0;
-	transformed_ray = transform_ray(ray, c->inverse);
-	bhaskara.a = pow(transformed_ray.direction.x, 2)
-		+ pow(transformed_ray.direction.z, 2);
+	bhaskara.a = pow(ray.direction.x, 2)
+		+ pow(ray.direction.z, 2);
 	if (check_double_values(bhaskara.a, 0))
 	{
-		cylinder_intersect_caps(transformed_ray, c->shape.cylinder, &xs);
+		cylinder_intersect_caps(ray, c->shape.cylinder, &xs);
 		return (xs);
 	}
-	bhaskara.b = 2 * transformed_ray.origin.x * transformed_ray.direction.x
-		+ 2 * transformed_ray.origin.z * transformed_ray.direction.z;
-	bhaskara.c = pow(transformed_ray.origin.x, 2)
-		+ pow(transformed_ray.origin.z, 2) - 1;
+	bhaskara.b = 2 * ray.origin.x * ray.direction.x 
+		+ 2 * ray.origin.z * ray.direction.z;
+	bhaskara.c = pow(ray.origin.x, 2)
+		+ pow(ray.origin.z, 2) - 1;
 	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a * bhaskara.c;
 	if (bhaskara.delta < 0)
 		return (xs);
@@ -115,27 +116,6 @@ t_xs cylinder_intersection(t_ray ray, t_object *c) // tem que normalizar a dire�
 		calculate_cylinder_intersection(c->shape.cylinder, ray, bhaskara, &xs);
 	if (xs.count == 2)
 		return (xs);
-	cylinder_intersect_caps(transformed_ray, c->shape.cylinder, &xs);
+	cylinder_intersect_caps(ray, c->shape.cylinder, &xs);
 	return (xs);
-}
-
-t_vector get_cylinder_color(t_ray ray, t_object *o, t_light light,
-							t_intersection *hit)
-{
-	t_vector color;
-	t_vector normal;
-	t_vector eye;
-	t_point point;
-
-	point = ray_position(ray, hit->t);
-	normal = cylinder_normal_at(o, point);
-	eye = negative_vector((ray.direction));
-	color = lighting(o->material, light, point, normal, eye);
-	if (color.x > 1)
-		color.x = 1;
-	if (color.y > 1)
-		color.y = 1;
-	if (color.z > 1)
-		color.z = 1;
-	return (color);
 }

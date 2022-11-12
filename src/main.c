@@ -33,7 +33,7 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 	if (list.head)
 		hit = get_hit_intersection(list);
 	if (hit)
-		color = get_sphere_color(ray, rt->world.objects, rt->world.light, hit);
+		color = get_color(ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list); // precisaria dar free antes do outro retorno...
 	return (color);
 }

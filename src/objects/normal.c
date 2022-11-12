@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:03:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 00:32:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:50:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_vector	sphere_normal_at(t_object *s, t_point p)
 	return (world_normal);
 }
 
+// os pontos estão sendo passados em relação ao mundo e não ao objeto
 t_vector	cylinder_normal_at(t_object *o, t_point p)
 {
 	double	dist;

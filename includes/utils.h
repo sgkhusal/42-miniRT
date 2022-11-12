@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 21:54:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 00:33:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:10:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ enum e_status
 	ERROR
 };
 
-enum e_bool
+typedef enum e_bool
 {
 	FALSE,
 	TRUE
-};
+}			t_bool;
 
 typedef struct s_bhaskara
 {
