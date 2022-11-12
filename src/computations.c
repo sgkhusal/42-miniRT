@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-enum e_bool is_inside(t_comp *comp)
+t_bool is_inside(t_comp *comp)
 {
 	if (scalar_product(comp->normalv, comp->eyev) < 0)
 	{
@@ -31,7 +31,11 @@ t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 	comp.eyev = negative_vector(ray.direction);
 	if (intersect->object->type == SPHERE)
 		comp.normalv = sphere_normal_at(intersect->object, comp.point);
-	comp.inside = is_inside(&comp);
+	/* else if (intersect->object->type == PLANE)
+		comp.normalv = plane_normal_at(intersect->object, comp.point); */
+	else if (intersect->object->type == CYLINDER)
+		comp.normalv = cylinder_normal_at(intersect->object, comp.point);
+	comp.inside = is_inside(&comp); // como fica para o plano??
 	return (comp);
 }
 

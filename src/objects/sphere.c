@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/09 18:15:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:43:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,13 @@ t_sphere	*create_sphere(void)
 t_xs	sphere_intersection(t_ray ray, t_object *o)
 {
 	t_xs		xs;
-	t_ray		transformed_ray;
 	t_bhaskara	bhaskara;
 	t_vector	sphere_to_ray;
 
 	xs.count = 0;
-	transformed_ray = transform_ray(ray, o->inverse);
-	sphere_to_ray = subtract_points(transformed_ray.origin,
-			o->shape.sphere->center);
-	bhaskara.a = scalar_product(transformed_ray.direction,
-			transformed_ray.direction);
-	bhaskara.b = 2 * scalar_product(transformed_ray.direction, sphere_to_ray);
+	sphere_to_ray = subtract_points(ray.origin, o->shape.sphere->center);
+	bhaskara.a = scalar_product(ray.direction, ray.direction);
+	bhaskara.b = 2 * scalar_product(ray.direction, sphere_to_ray);
 	bhaskara.c = scalar_product(sphere_to_ray, sphere_to_ray) - 1;
 	bhaskara.delta = pow(bhaskara.b, 2) - 4 * bhaskara.a * bhaskara.c;
 	if (bhaskara.delta < 0)
@@ -65,25 +61,4 @@ t_xs	sphere_intersection(t_ray ray, t_object *o)
 	xs.t1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	xs.t2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	return (xs);
-}
-
-t_vector	get_sphere_color(t_ray ray, t_object *o, t_light light,
-					t_intersection *hit)
-{
-	t_vector			color;
-	t_vector			normal;
-	t_vector			eye;
-	t_point				point;
-
-	point = ray_position(ray, hit->t);
-	normal = sphere_normal_at(o, point);
-	eye = negative_vector((ray.direction));
-	color = lighting(o->material, light, point, normal, eye);
-	if (color.x > 1)
-		color.x = 1;
-	if (color.y > 1)
-		color.y = 1;
-	if (color.z > 1)
-		color.z = 1;
-	return (color);
 }

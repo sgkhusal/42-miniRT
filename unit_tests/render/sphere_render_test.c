@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 21:35:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/12 01:20:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	transform_sphere(t_object *s, int type)
 	if (type == 1 || type == 3)
 		translation = translation_matrix(5, -3, 2);
 	if (type == 2 || type == 3)
-		scaling = scaling_matrix(2, 2, 2);
+		scaling = scaling_matrix(0.5, 0.5, 0.5);
 	if (type == 1)
 		set_transform(s, translation);
 	else if (type == 2)
@@ -38,6 +38,7 @@ static void	transform_sphere(t_object *s, int type)
 static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 {
 	t_ray				ray;
+	t_ray				transformed_ray;
 	t_vector			ray_direction;
 	t_intersection_list	list;
 	t_intersection		*hit;
@@ -50,13 +51,13 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
 					(double)(-y + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
 	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	xs = sphere_intersection(ray, rt->world.objects);
-	if (xs.count == 2)
-		add_intersections(xs, rt->world.objects, &list);
+	list = intersect_world(rt->world, ray);
 	if (list.head)
 		hit = get_hit_intersection(list);
+	//transformed_ray = transform_ray(ray, rt->world.objects->inverse);
+	//por que a esfera não precisa do raio transformado para o cálculo dos componentes da comp?
 	if (hit)
-		color = get_sphere_color(ray, rt->world.objects, rt->world.light, hit);
+		color = get_color(ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list);
 	return (color);
 }
@@ -95,7 +96,7 @@ void	sphere_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	s = create_object(SPHERE, create_sphere());
-	transform_sphere(s, 3);
+	transform_sphere(s, 2);
 	s->material.normalized_color = set_vector(1, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, s);

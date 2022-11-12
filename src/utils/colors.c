@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:43:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:22:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,21 @@ t_color	transform_vector_to_color(t_vector color)
 	rgb.rgb[1] = (int)(color.y * 255);
 	rgb.rgb[0] = (int)(color.z * 255);
 	return (rgb);
+}
+
+t_vector	get_color(t_ray ray, t_object *o, t_light light,
+					t_intersection *hit)
+{
+	t_comp		comp;
+	t_vector	color;
+
+	comp = prepare_computations(ray, hit);
+	color = lighting(o->material, light, comp);
+	if (color.x > 1)
+		color.x = 1;
+	if (color.y > 1)
+		color.y = 1;
+	if (color.z > 1)
+		color.z = 1;
+	return (color);
 }
