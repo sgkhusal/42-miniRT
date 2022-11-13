@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:49:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 17:16:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,33 @@ int	handle_line(char *line, t_rt *rt)
 	if (line[0] == 'C')
 		return (handle_camera(line, &rt->camera));
 	if (line[0] == 'L')
-		return (handle_light(line, &rt->light));
+		return (handle_light(line, &rt->world.light));
 	if (ft_strncmp(line, "sp ", 3) == 0)
-		return (handle_sphere(line, &(rt->objects)));
+		return (handle_sphere(line, &(rt->world.objects)));
 	if (ft_strncmp(line, "pl ", 3) == 0)
-		return (handle_plane(line));//, rt->objects));
+		return (handle_plane(line, &(rt->world.objects)));
 	if (ft_strncmp(line, "cy ", 3) == 0)
-		return (handle_cylinder(line));//, rt->objects));
+		return (handle_cylinder(line, &(rt->world.objects)));
 	if (line[0] == ' ')
 		return (print_error_msg("line can't start with space"));
 	return (print_error_msg2("invalid element: ", line));
-	// função de validação para cada tipo de elemento: A, C, L, sp, cy e pl
+}
+
+void	print_objects(t_object *objects)
+{
+	t_object	*aux;
+
+	aux = objects;
+	while (aux)
+	{
+		if (aux->type == SPHERE)
+			printf("sphere\n");
+		else if (aux->type == PLANE)
+			printf("plane\n");
+		else if (aux->type == CYLINDER)
+			printf("cylinder\n");
+		aux = aux->next;
+	}
 }
 
 int	handle_content(char *content, t_rt	*rt)
@@ -97,18 +113,18 @@ int	handle_content(char *content, t_rt	*rt)
 		status = ERROR;
 	if (check_separator(lines) == ERROR)
 		status = ERROR;
-	i = 0;
-	// init rt aqui?
-	rt->objects = NULL;
-	while (lines[i] && status == OK)
+	i = -1;
+	rt->world.objects = NULL;
+	while (lines[++i] && status == OK)
 	{
 		if (handle_line(lines[i], rt) == ERROR)
 		{
-			free_objects(&(rt->objects));
+			free_objects(&(rt->world.objects));
 			status = ERROR;
+			break ;
 		}
-		i++;
 	}
+	print_objects(rt->world.objects);
 	free_array(lines);
 	return (status);
 }

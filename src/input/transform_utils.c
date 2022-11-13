@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 19:17:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:46:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	xyz = parse_input(xyz_str, ',', 3, status);
 	if (*status == ERROR)
 		return (set_point(0, 0, 0));
-	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11 || ft_strlen(xyz[2]) > 11) //
+	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11
+		|| ft_strlen(xyz[2]) > 11)
 	{
 		*status = print_error_msg2("invalid coordinates range: ", xyz_str);
 		free_array(xyz);
@@ -91,13 +92,15 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
-	if (x < -1000 || x > 1000 || y < -1000 || y > 1000 || z < -1000 || z > 1000) // verificar que range vamos deixar
+	// verificar que range vamos deixar
+	if (x < -1000 || x > 1000 || y < -1000 || y > 1000 || z < -1000 || z > 1000)
 		*status = print_error_msg2("invalid coordinates range: ", xyz_str);
 	free_array(xyz);
 	return (set_point(x, y, z));
 }
 
-// ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
+// ∗ 3d normalized orientation vector.
+// In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
 t_vector	transform_orientation(char *xyz_str, int *status)
 {
 	char	**xyz;
@@ -108,10 +111,11 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	xyz = parse_input(xyz_str, ',', 3, status);
 	if (*status == ERROR)
 		return (set_vector(0, 0, 0));
-	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11 || ft_strlen(xyz[2]) > 11) //
+	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11
+		|| ft_strlen(xyz[2]) > 11)
 	{
 		*status = print_error_msg2("invalid orientation vector range: ",
-			xyz_str);
+				xyz_str);
 		free_array(xyz);
 		return (set_vector(0, 0, 0));
 	}
@@ -120,7 +124,7 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	z = ft_atod(xyz[2]);
 	if (vector_length(set_vector(x, y, z)) != 1)
 		*status = print_error_msg2("orientation vector is not normalized: ",
-			xyz_str);
+				xyz_str);
 	free_array(xyz);
 	return (set_vector(x, y, z));
 }

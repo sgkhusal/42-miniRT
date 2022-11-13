@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:10:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 22:59:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,33 @@ void	shearing_tests(void);
 void	chaining_tests(void);
 
 void	ray_tests(void);
-void	set_sphere_test(void);
+void	transform_ray_test_cases(void);
+
+void	object_tests(void);
+
 void	sphere_tests(void);
-void	normal_tests(void);
+void	transformed_sphere_test(void);
 
 void	intersection_tests(void);
 
-void	transform_ray_test_cases(void);
-void	transformed_sphere_test(void);
-
+void	normal_tests(void);
 void	reflection_tests(void);
-void	light_tests(void);
 void	material_tests(void);
+void	light_tests(void);
+
+void	cylinder_tests(void);
+void	truncate_cylinder_test_cases(void);
+
+void	world_tests(void);
+void	computations_tests(void);
+
+void	sphere_render_test(void);
+void	cylinder_render_test(void);
 
 // utils
 bool	check_equal_points(t_point a, t_point b);
 bool	check_equal_vectors(t_vector a, t_vector b);
 void	check_int_values(int result, int expected);
-
 
 // minirt functions
 int		check_argc(int argc);

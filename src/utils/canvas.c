@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:59:31 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/26 19:00:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:35:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_vector	**create_canvas()
+t_vector	**create_canvas(void)
 {
 	t_vector	**canvas;
 	int			i;

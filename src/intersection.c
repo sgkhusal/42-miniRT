@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/26 17:29:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:19:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_intersection	*create_intersection(double t, int object)
+t_intersection	*create_intersection(double t, t_object *object)
 {
 	t_intersection	*intersection;
 

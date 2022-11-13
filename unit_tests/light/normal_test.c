@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 20:07:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:07:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:48:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-void	sphere_normal_test(t_sphere *s, t_point p, t_vector expected)
+void	sphere_normal_test(t_object *s, t_point p, t_vector expected)
 {
 	static int	n = 1;
 	t_vector	result;
@@ -28,9 +28,9 @@ void	sphere_normal_test(t_sphere *s, t_point p, t_vector expected)
 
 void	normal_tests(void)
 {
-	t_sphere	*s;
+	t_object	*s;
 
-	s = create_sphere();
+	s = create_object(SPHERE, create_sphere());
 	sphere_normal_test(s, set_point(1, 0, 0), set_vector(1, 0, 0));
 	sphere_normal_test(s, set_point(0, 1, 0), set_vector(0, 1, 0));
 	sphere_normal_test(s, set_point(0, 0, 1), set_vector(0, 0, 1));
@@ -42,5 +42,5 @@ void	normal_tests(void)
 	set_transform(s, scaling_matrix(1, 0.5, 1));
 	sphere_normal_test(s, set_point(0, sqrt(2) / 2, -sqrt(2) / 2),
 		set_vector(0, 0.97014, -0.24254));
-	free_sphere(s);
+	free_objects(&s);
 }

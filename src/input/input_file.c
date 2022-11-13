@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:44:45 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/20 20:01:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:55:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ int	read_file(int fd, char **content)
 	close(fd);
 	return (OK);
 }
-

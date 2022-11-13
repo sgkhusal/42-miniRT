@@ -6,13 +6,19 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 16:20:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/10 16:22:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 21:01:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TUPLES_H
 # define TUPLES_H
 
+/**
+ * @param x x axis value (right)
+ * @param y y axis value (up)
+ * @param z z axis value (out of screen)
+ * @param w type (1 = point, 0 = vector)
+ */
 typedef struct s_vector
 {
 	double	x;

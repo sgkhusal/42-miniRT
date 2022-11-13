@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:09:00 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:04:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:06:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,16 @@ t_object	*create_object(enum e_objects type, void *shape)
 	if (!obj)
 		minirt_malloc_error("create_object");
 	obj->type = type;
-	obj->obj = shape;
+	if (type == SPHERE)
+		obj->shape.sphere = (t_sphere *)shape;
+	else if (type == PLANE)
+		obj->shape.plane = (t_plane *)shape;
+	else if (type == CYLINDER)
+		obj->shape.cylinder = (t_cylinder *)shape;
+	obj->transform = identity_matrix(4);
+	obj->inverse = identity_matrix(4);
+	obj->transpose_inverse = identity_matrix(4);
+	obj->material = set_material();
 	obj->next = NULL;
 	return (obj);
 }
@@ -46,12 +55,15 @@ void	free_objects(t_object **head)
 
 	while (*head)
 	{
+		free_matrix((*head)->transform);
+		free_matrix((*head)->inverse);
+		free_matrix((*head)->transpose_inverse);
 		if ((*head)->type == SPHERE)
-			free_sphere((*head)->obj);
-		/* else if (aux->type == PLANE)
-			free_plane(aux->obj);
-		else if (aux->type == CYLINDER)
-			free_cylinder(aux->obj); */
+			free((*head)->shape.sphere);
+		else if ((*head)->type == PLANE)
+			free((*head)->shape.plane);
+		else if ((*head)->type == CYLINDER)
+			free((*head)->shape.cylinder);
 		aux = (*head)->next;
 		free(*head);
 		*head = aux;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 17:58:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:46:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	transform_fov(char *fov_str, int *status) // deixa como double ou int??
 	return (fov);
 }
 
-static int validate_camera_chars(char **infos)
+static int	validate_camera_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
 		return (ERROR);
@@ -55,8 +55,7 @@ int	handle_camera(char *line, t_camera *cam)
 	else
 	{
 		cam->origin = transform_coordinates(infos[1], &status);
-		// ∗ 3d normalized orientation vector. In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
-		cam->orientation = set_vector(0,0,1); //
+		//cam->orientation = transform_orientation(infos[2], &status);
 		cam->fov = transform_fov(infos[3], &status);
 	}
 	free_array(infos);

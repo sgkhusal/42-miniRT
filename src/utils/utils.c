@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/21 14:10:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/11 00:33:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,43 +31,11 @@ int	close_minirt(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
-int	print_error_msg(char *msg)
+int	check_double_values(double a, double b)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putchar_fd('\n', 2);
-	return (ERROR);
-}
-
-int	print_error_msg2(char *msg, char *str)
-{
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd(str, 2);
-	ft_putchar_fd('\n', 2);
-	return (ERROR);
-}
-
-int	minirt_error(t_mlx *mlx, char *msg)
-{
-	print_error_msg(msg);
-	clean_minirt(mlx);
-	exit(EXIT_FAILURE);
-}
-
-void	minirt_malloc_error(char *function)
-{
-	ft_putstr_fd("Error\nmalloc failed at ", 2);
-	ft_putstr_fd(function, 2);
-	ft_putstr_fd(" function\n", 2);
-	exit(EXIT_FAILURE);
-}
-
-bool	check_double_values(double a, double b)
-{
-	if (fabs(a - b) < 0.00001)
-		return (true);
-	return (false);
+	if (fabs(a - b) < EPSILON)
+		return (TRUE);
+	return (FALSE);
 }
 
 void	free_array(char **arr)

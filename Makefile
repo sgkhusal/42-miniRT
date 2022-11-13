@@ -21,10 +21,9 @@ UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c mlx_utils.c colors.c utils.c ray.c \
-				sphere.c intersection.c element_transform.c normal.c \
-				reflection.c material.c light.c objects.c canvas.c plot.c\
-				$(INPUT) $(TUPLES) $(MATRICES)
+SRCS =			main.c ray.c world.c reflection.c material.c light.c \
+				intersection.c hit.c normal.c intersect_sort.c computations.c \
+				$(INPUT) $(TUPLES) $(MATRICES) $(UTILS) $(SHAPES)
 INPUT =			handle_input.c input_file.c handle_content.c \
 				handle_ambient.c handle_camera.c handle_light.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c \
@@ -33,11 +32,14 @@ TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
 				matrix_inverse.c matrix_transform.c matrix_rotation.c
+SHAPES =		sphere.c cylinder.c objects.c element_transform.c plane.c
+UTILS =			utils.c error.c mlx_utils.c colors.c canvas.c plot.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
-HEADERS	=		minirt.h
-VPATH	=		src src/tuple src/matrix src/input
-INCLUDE	=		-I ./ -I ./includes -I $(LIBFT_PATH) -I $(MLX_PATH)
+HEADERS	=		minirt.h matrix.h tuples.h mlx_utils.h elements.h utils.h
+VPATH	=		includes src src/tuple src/matrix src/input src/objects \
+				src/utils
+INCLUDE	=		-I./ -I./includes
 
 # compilation
 CC =		gcc

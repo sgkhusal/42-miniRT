@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:06:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:05:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int validate_plane_chars(char **infos)
+static int	validate_plane_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
 		return (ERROR);
@@ -23,12 +23,41 @@ static int validate_plane_chars(char **infos)
 	return (OK);
 }
 
-int	handle_plane(char *line)//, t_object *objs)
+static void	set_plane_matrixes(t_object *o, t_point center)
+{
+	t_matrix	translation;
+
+	if (center.x != 0 || center.y != 0 || center.z != 0)
+	{
+		translation = translation_matrix(center.x, center.y, center.z);
+		set_transform(o, translation);
+	}
+}
+
+static void	create_and_append_plane(t_object **objs, char **infos, int *status)
+{
+	t_object	*p;
+	t_color		color;
+	t_point		xyz;
+
+	p = create_object(PLANE, create_plane());
+	xyz = transform_coordinates(infos[1], status);
+	p->shape.plane->orientation = transform_orientation(infos[2], status);
+	color = transform_color(infos[3], status);
+	if (*status == ERROR)
+	{
+		free_objects(&p);
+		return ;
+	}
+	p->material.normalized_color = normalize_color(color);
+	set_plane_matrixes(p, xyz); // falta rotação
+	append_object(objs, p);
+}
+
+int	handle_plane(char *line, t_object **objs)
 {
 	char		**infos;
 	int			status;
-	//t_object	*o;
-	//t_plane		*p;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -38,16 +67,8 @@ int	handle_plane(char *line)//, t_object *objs)
 		status = print_error_msg2("to many or few arguments for plane: ", line);
 	else if (validate_plane_chars(infos) == ERROR)
 		status = ERROR;
-	/* else
-	{
-		p = create_plane();
-		o = create_object(PLANE, p);
-		o->xyz = transform_coordinates(infos[1], &status);
-		p->orientation = transform_orientation(infos[2], &status);
-		o->color = transform_color(infos[3], &status);
-		// criar as matrizes de transformação aqui? ou depois?
-		append_object(objs, o);
-	} */
+	else
+		create_and_append_plane(objs, infos, &status);
 	free_array(infos);
 	return (status);
 }

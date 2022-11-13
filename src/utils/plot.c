@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:59:31 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/26 19:02:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/10/28 22:38:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void	plot_image(t_image *img, t_mlx *mlx, t_vector **canvas)
 	}
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img.ptr, 0, 0);
 }
-
