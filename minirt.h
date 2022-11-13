@@ -127,4 +127,7 @@ void				intersect_sort(t_intersection **head);
 //computations
 t_comp				prepare_computations(t_ray ray, t_intersection *intersect);
 
+//shade hit
+t_vector			shade_hit(t_world world, t_comp comps);
+
 #endif

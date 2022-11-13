@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 16:37:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 11:51:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char *argv[])
 	cylinder_tests();
 	world_tests();
 	computations_tests();
+	shade_hit_tests();
 	if (argc == 1)
 		return (0);
 	if (strcmp(argv[1], "sp") == 0)
