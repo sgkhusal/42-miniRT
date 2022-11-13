@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 22:57:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 12:28:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	set_cylinder_matrixes(t_object *o, t_point center, double radius)
 		translation = translation_matrix(center.x, center.y, center.z);
 		if (radius != 1)
 		{
-			scaling = scaling_matrix(radius, radius, radius);
+			scaling = scaling_matrix(radius, 1, radius);
 			set_transform(o, multiply_matrix(translation, scaling));
 			free_matrix(translation);
 			free_matrix(scaling);
