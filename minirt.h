@@ -129,4 +129,7 @@ t_comp				prepare_computations(t_ray ray, t_intersection *intersect);
 t_vector			shade_hit(t_world world, t_comp comps);
 t_vector			color_at(t_world world, t_ray ray);
 
+//view transform
+t_matrix			view_transform(t_point from, t_point to, t_vector up);
+
 #endif

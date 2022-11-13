@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:38:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 14:44:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:51:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	shade_hit_tests(void)
 	xs = create_intersection(0.5, w.objects->next);
 	expected = set_vector(0.90498, 0.90498, 0.90498);
 	shade_hit_test(w, ray, xs, expected);
+	free_objects(&(w.objects));
 	w = default_world();
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 1, 0));
 	expected = set_vector(0, 0, 0);
@@ -69,4 +70,5 @@ void	shade_hit_tests(void)
 	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
 	expected = set_vector(0.38066, 0.47583, 0.2855);
 	color_at_test(w, ray, expected);
+	free_objects(&(w.objects));
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 14:45:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:33:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ void	check_int_values(int result, int expected);
 
 // minirt functions
 int		check_argc(int argc);
+
+// view transformation
+void	transformation_tests(void);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 14:58:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:36:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	transform_cylinder(t_object *c, int type)
 	}
 }
 
-static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
+/* static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 {
 	t_ray				ray;
 	t_ray				transformed_ray;
@@ -66,7 +66,7 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 		color = get_color(transformed_ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list);
 	return (color);
-}
+} */
 
 // 1m = 100px
 static void	rendering_rays(t_vector **pixel_color, t_rt *rt)
