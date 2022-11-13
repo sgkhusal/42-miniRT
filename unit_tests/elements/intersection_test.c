@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/14 20:54:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 16:57:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	get_hit_test(double t1, double t2, double expected)
 	add_intersection_node(inter2, &list);
 	hit = get_hit_intersection(list);
 	if (hit == NULL && expected == -1)
-		printf(GREEN "OK" END "\n");
+		printf(GREEN"OK" END "\n");
 	else if (hit && hit->t == expected)
 		printf(GREEN "OK" END "\n");
 	else
