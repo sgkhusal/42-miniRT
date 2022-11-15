@@ -131,5 +131,6 @@ t_vector			color_at(t_world world, t_ray ray);
 
 //view transform
 t_matrix			view_transform(t_point from, t_point to, t_vector up);
+t_ray				ray_for_pixel(t_camera cam, double x, double y);
 
 #endif

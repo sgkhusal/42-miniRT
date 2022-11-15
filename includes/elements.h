@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 16:02:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:01:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ typedef struct s_camera
 	t_vector	orientation;
 	double		fov;
 	t_matrix	transform;
+	t_matrix	inverse;
 	int			hsize;
 	int			vsize;
+	double 		pixel_size;
+	double		half_width;
+	double		half_height;
 }				t_camera;
 
 typedef struct s_light
@@ -142,5 +146,8 @@ t_plane		*create_plane(void);
 // cylinder
 t_cylinder	*create_cylinder(void);
 t_vector	cylinder_normal_at(t_object *c, t_point p);
+
+// camera
+t_camera	set_camera(double fov, int hsize, int vsize);
 
 #endif
