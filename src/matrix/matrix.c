@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:05:52 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/28 22:26:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:56:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_equal_matrices(t_matrix m1, t_matrix m2)
 		j = 0;
 		while (j < m1.size)
 		{
-			if (m1.matrix[i][j] != m2.matrix[i][j])
+			if (!check_double_values(m1.matrix[i][j], m2.matrix[i][j]))
 				return (FALSE);
 			j++;
 		}

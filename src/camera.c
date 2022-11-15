@@ -1,23 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   element_transform.c                                :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 17:57:00 by sguilher         ###   ########.fr       */
+/*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
+/*   Updated: 2022/11/13 16:05:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-void	set_transform(t_object *o, t_matrix transform)
-{
-	free_matrix(o->transform);
-	o->transform = transform;
-	free_matrix(o->inverse);
-	o->inverse = inverse_matrix(o->transform);
-	free_matrix(o->transpose_inverse);
-	o->transpose_inverse = transposed_matrix(o->inverse);
-}

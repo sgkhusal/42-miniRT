@@ -60,8 +60,6 @@ t_intersection_list	intersect_world(t_world world, t_ray ray) // normalizar a di
 			xs = cylinder_intersection(transformed_ray, object);
 		if (xs.count == 2)
 			add_intersections(xs, object, &list);
-		if (xs.count == 1)
-			add_intersection_node(create_intersection(xs.t1, object), &list);
 		object = object->next;
 	}
 	intersect_sort(&(list.head));

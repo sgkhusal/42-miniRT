@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/29 15:19:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 12:16:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_intersection	*create_intersection(double t, t_object *object)
 {
 	t_intersection	*intersection;
 
+	intersection = NULL;
 	intersection = malloc(sizeof(t_intersection));
 	if (!intersection)
 		minirt_malloc_error("create_intersection");

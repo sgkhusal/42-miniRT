@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 11:09:05 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/29 14:56:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:45:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,7 @@ void	world_tests(void)
 {
 	printf(YELLOW "World tests: " END "\n");
 	intersect_world_test();
+	computations_tests();
+	shade_hit_tests();
+	transformation_tests();
 }

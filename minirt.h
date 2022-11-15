@@ -115,8 +115,6 @@ void				add_intersections(t_xs xs, t_object *object,
 
 // color
 t_vector			lighting(t_material material, t_light light, t_comp comp);
-t_vector			get_color(t_ray ray, t_object *o, t_light light,
-						t_intersection *hit);
 
 // world
 t_world	default_world(void); /* remove */
@@ -126,5 +124,12 @@ void				intersect_sort(t_intersection **head);
 
 //computations
 t_comp				prepare_computations(t_ray ray, t_intersection *intersect);
+
+//shade hit
+t_vector			shade_hit(t_world world, t_comp comps);
+t_vector			color_at(t_world world, t_ray ray);
+
+//view transform
+t_matrix			view_transform(t_point from, t_point to, t_vector up);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/12 02:03:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:36:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	transform_cylinder(t_object *c, int type)
 	}
 }
 
-static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
+/* static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 {
 	t_ray				ray;
 	t_ray				transformed_ray;
@@ -66,24 +66,25 @@ static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
 		color = get_color(transformed_ray, rt->world.objects, rt->world.light, hit);
 	free_intersection_list(&list);
 	return (color);
-}
+} */
 
 // 1m = 100px
 static void	rendering_rays(t_vector **pixel_color, t_rt *rt)
 {
-	t_point	ray_origin;
+	t_ray	ray;
 	int		x_mlx;
 	int		y_mlx;
 
 	x_mlx = 0;
 	y_mlx = 0;
-	ray_origin = set_point(0, 0, -10);
+	ray.origin = set_point(0, 0, -10);
 	while (y_mlx < HEIGHT)
 	{
 		while (x_mlx < WIDTH)
 		{
-			pixel_color[y_mlx][x_mlx] = set_pixel_color(
-				ray_origin, x_mlx, y_mlx, rt);
+			ray.direction = normalize_vector(set_vector((double)(x_mlx - WIDTH / 2) / PPU,
+					(double)(-y_mlx + HEIGHT / 2) / PPU, 2)); //z = posição da tela ou "parede" em relação a camera
+			pixel_color[y_mlx][x_mlx] = color_at(rt->world, ray);
 			x_mlx++;
 		}
 		x_mlx = 0;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 22:59:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 16:51:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,13 @@ void	truncate_cylinder_test_cases(void);
 
 void	world_tests(void);
 void	computations_tests(void);
+void	shade_hit_tests(void);
 
 void	sphere_render_test(void);
 void	cylinder_render_test(void);
+
+void	camera_tests(void);
+void	ray_for_pixel_tests(void);
 
 // utils
 bool	check_equal_points(t_point a, t_point b);
@@ -110,6 +114,9 @@ void	check_int_values(int result, int expected);
 
 // minirt functions
 int		check_argc(int argc);
+
+// view transformation
+void	transformation_tests(void);
 
 
 #endif

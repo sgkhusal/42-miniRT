@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 23:28:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 16:02:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,22 @@ enum e_objects
 	CYLINDER
 };
 
+/**
+ * @param origin is the origin of the camera
+ * @param orientation is the direction of the ray
+ * @param hsize is the horizontal size of the canvas
+ * @param vsize is the vertical size of the canvas
+ * @param transform is the transformation matrix of the camera
+ * @param fov is the field of view of the camera
+ */
 typedef struct s_camera
 {
 	t_point		origin;
 	t_vector	orientation;
 	double		fov;
+	t_matrix	transform;
+	int			hsize;
+	int			vsize;
 }				t_camera;
 
 typedef struct s_light

@@ -12,48 +12,23 @@
 
 #include "minirt.h"
 
-static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
-{
-	t_ray				ray;
-	t_vector			ray_direction;
-	t_intersection_list	list;
-	t_intersection		*hit;
-	t_xs				xs;
-	t_vector			color;
-
-	hit = NULL;
-	color = set_vector(0, 0, 0);
-	init_intersection_list(&list);
-	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
-					(double)(-y + HEIGHT / 2) / PPU, 15); //z = posição da tela ou "parede" em relação a camera
-	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	xs = sphere_intersection(ray, rt->world.objects);
-	if (xs.count == 2)
-		add_intersections(xs, rt->world.objects, &list);
-	if (list.head)
-		hit = get_hit_intersection(list);
-	if (hit)
-		color = get_color(ray, rt->world.objects, rt->world.light, hit);
-	free_intersection_list(&list); // precisaria dar free antes do outro retorno...
-	return (color);
-}
-
 // 1m = 100px
 void	rendering_rays(t_vector **pixel_color, t_rt *rt)
 {
-	t_point	ray_origin;
+	t_ray	ray;
 	int		x_mlx;
 	int		y_mlx;
 
 	x_mlx = 0;
 	y_mlx = 0;
-	ray_origin = set_point(0, 0, -5);
+	ray.origin = set_point(0, 0, -5);
 	while (y_mlx < HEIGHT)
 	{
 		while (x_mlx < WIDTH)
 		{
-			pixel_color[y_mlx][x_mlx] = set_pixel_color(
-				ray_origin, x_mlx, y_mlx, rt);
+			ray.direction = normalize_vector(set_vector((double)(x_mlx - WIDTH / 2) / PPU,
+					(double)(-y_mlx + HEIGHT / 2) / PPU, 15));
+			pixel_color[y_mlx][x_mlx] = color_at(rt->world, ray);
 			x_mlx++;
 		}
 		x_mlx = 0;

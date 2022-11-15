@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:30:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 17:01:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/13 12:12:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	create_object_test(void)
 		&& check_equal_matrices(object->transpose_inverse, identity)
 		&& object->material.ambient == 0.1 && object->material.diffuse == 0.9
 		&& object->material.shininess == 200
-		&& object->material.specular == 0.9)
+		&& object->material.specular == 0.9
+		&& check_equal_vectors(object->material.normalized_color, set_vector(1, 1, 1)))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
