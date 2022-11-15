@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 15:49:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:00:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ void	set_transform(t_object *o, t_matrix transform)
 	o->inverse = inverse_matrix(o->transform);
 	free_matrix(o->transpose_inverse);
 	o->transpose_inverse = transposed_matrix(o->inverse);
+}
+
+void	set_camera_transform(t_camera *cam, t_matrix transform)
+{
+	free_matrix(cam->transform);
+	cam->transform = transform;
+	free_matrix(cam->inverse);
+	cam->inverse = inverse_matrix(cam->transform);
 }
 
 t_matrix	view_transform(t_point from, t_point to, t_vector up)

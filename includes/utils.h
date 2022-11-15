@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 21:54:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 23:10:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:13:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int			validate_double_chars(char *str);
 int			validate_color_chars(char *str);
 int			validate_coordinates_chars(char *str);
 int			validate_nb_chars(char *str);
-t_color		transform_color(char *rgb_str, int *status);
+t_vector	transform_color(char *rgb_str, int *status);
 double		transform_ratio(char *ratio_str, int *status);
 t_point		transform_coordinates(char *xyz_str, int *status);
 t_vector	transform_orientation(char *xyz_str, int *status);

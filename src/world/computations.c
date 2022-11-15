@@ -26,6 +26,8 @@ t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 {
 	t_comp	comp;
 
+	if (intersect->object->type == CYLINDER)
+		ray = transform_ray(ray, intersect->object->inverse);
 	comp.xs = intersect;
 	comp.point = ray_position(ray, intersect->t);
 	comp.eyev = negative_vector(ray.direction);

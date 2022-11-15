@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_render_test.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ellrairaira-a- <elralra-aira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 14:58:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:28:26 by elralraira-a-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,6 @@ static void	transform_sphere(t_object *s, int type)
 	}
 }
 
-// 1m = 100px
-static void	rendering_rays(t_vector **pixel_color, t_rt *rt)
-{
-	t_ray	ray;
-	int		x_mlx;
-	int		y_mlx;
-
-	x_mlx = 0;
-	y_mlx = 0;
-	ray.origin = set_point(0, 0, -5);
-	while (y_mlx < HEIGHT)
-	{
-		while (x_mlx < WIDTH)
-		{
-			ray.direction = normalize_vector(set_vector((double)(x_mlx - WIDTH / 2) / PPU,
-					(double)(-y_mlx + HEIGHT / 2) / PPU, 15)); //z = posição da tela ou "parede" em relação a camera
-			pixel_color[y_mlx][x_mlx] = color_at(rt->world, ray);
-			x_mlx++;
-		}
-		x_mlx = 0;
-		y_mlx++;
-	}
-}
-
 void	sphere_render_test(void)
 {
 	t_mlx		mlx;
@@ -70,14 +46,16 @@ void	sphere_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	s = create_object(SPHERE, create_sphere());
-	transform_sphere(s, 2);
+	transform_sphere(s, 0);
 	s->material.normalized_color = set_vector(1, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, s);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
-	rendering_rays(canvas, &rt);
-	plot_image(&mlx.img, &mlx, canvas);
+	rt.camera = set_camera(70, WIDTH, HEIGHT);
+	set_camera_transform(&rt.camera, view_transform(set_point(0, 0, -5),
+		set_point(0, 0, 0), set_vector(0, 1, 0)));
+	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));
 	set_mlx_hooks(&mlx);

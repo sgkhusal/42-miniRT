@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cylinder.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 12:28:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 113:573:59 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	create_and_append_cylinder(t_object **objs, char **infos,
 {
 	t_object	*c;
 	double		radius;
-	t_color		color;
+	//t_color		color;
 	t_point		center;
 
 	c = create_object(CYLINDER, create_cylinder());
@@ -65,13 +65,13 @@ static void	create_and_append_cylinder(t_object **objs, char **infos,
 	c->shape.cylinder->orientation = transform_orientation(infos[2], status);//
 	radius = transform_double(infos[3], status) / 2;
 	c->shape.cylinder->height = transform_double(infos[4], status);//
-	color = transform_color(infos[5], status);
+	//color = transform_color(infos[5], status);
 	if (*status == ERROR)
 	{
 		free_objects(&c);
 		return ;
 	}
-	c->material.normalized_color = normalize_color(color);
+	//c->material.normalized_color = normalize_color(color);
 	set_cylinder_matrixes(c, center, radius); // tem rotação tb
 	append_object(objs, c);
 }

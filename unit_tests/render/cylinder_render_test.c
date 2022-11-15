@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 15:36:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:40:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,55 +43,6 @@ static void	transform_cylinder(t_object *c, int type)
 	}
 }
 
-/* static t_vector	set_pixel_color(t_point ray_origin, int x, int y, t_rt *rt)
-{
-	t_ray				ray;
-	t_ray				transformed_ray;
-	t_vector			ray_direction;
-	t_intersection_list	list;
-	t_intersection		*hit;
-	t_vector			color;
-
-	hit = NULL;
-	color = set_vector(0, 0, 0);
-	init_intersection_list(&list);
-	ray_direction = set_vector((double)(x - WIDTH / 2) / PPU,
-					(double)(-y + HEIGHT / 2) / PPU, 2); //z = posição da tela ou "parede" em relação a camera
-	ray = set_ray(ray_origin, normalize_vector(ray_direction));
-	list = intersect_world(rt->world, ray);
-	if (list.head)
-		hit = get_hit_intersection(list);
-	transformed_ray = transform_ray(ray, rt->world.objects->inverse);
-	if (hit)
-		color = get_color(transformed_ray, rt->world.objects, rt->world.light, hit);
-	free_intersection_list(&list);
-	return (color);
-} */
-
-// 1m = 100px
-static void	rendering_rays(t_vector **pixel_color, t_rt *rt)
-{
-	t_ray	ray;
-	int		x_mlx;
-	int		y_mlx;
-
-	x_mlx = 0;
-	y_mlx = 0;
-	ray.origin = set_point(0, 0, -10);
-	while (y_mlx < HEIGHT)
-	{
-		while (x_mlx < WIDTH)
-		{
-			ray.direction = normalize_vector(set_vector((double)(x_mlx - WIDTH / 2) / PPU,
-					(double)(-y_mlx + HEIGHT / 2) / PPU, 2)); //z = posição da tela ou "parede" em relação a camera
-			pixel_color[y_mlx][x_mlx] = color_at(rt->world, ray);
-			x_mlx++;
-		}
-		x_mlx = 0;
-		y_mlx++;
-	}
-}
-
 void	cylinder_render_test(void)
 {
 	t_mlx		mlx;
@@ -103,16 +54,18 @@ void	cylinder_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 4);
+	transform_cylinder(c, 0);
 	c->shape.cylinder->min = -1;
-	c->shape.cylinder->max = 7;
+	c->shape.cylinder->max = 4;
 	c->material.normalized_color = set_vector(0.5, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, c);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
-	rendering_rays(canvas, &rt);
-	plot_image(&mlx.img, &mlx, canvas);
+	rt.camera = set_camera(70, WIDTH, HEIGHT);
+	set_camera_transform(&rt.camera, view_transform(set_point(0, 0, -5),
+		set_point(0, 0, 0), set_vector(0, 0, 1)));
+	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));
 	set_mlx_hooks(&mlx);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 23:46:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 111::00020 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ static int	validate_camera_chars(char **infos)
 
 int	handle_camera(char *line, t_camera *cam)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
+	double		fov;
+	t_matrix	transform;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -54,9 +56,12 @@ int	handle_camera(char *line, t_camera *cam)
 		status = ERROR;
 	else
 	{
+		fov = transform_fov(infos[3], &status);
+		*cam = set_camera(fov, HEIGHT, WIDTH);
 		cam->origin = transform_coordinates(infos[1], &status);
-		//cam->orientation = transform_orientation(infos[2], &status);
-		cam->fov = transform_fov(infos[3], &status);
+		cam->orientation = transform_orientation(infos[2], &status);
+		transform = view_transform(set_point(0,0,-5), set_point(0,0,0), set_vector(0, 1, 0)); //
+		set_camera_transform(cam, transform);
 	}
 	free_array(infos);
 	return (status);

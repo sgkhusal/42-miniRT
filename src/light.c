@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 12:18:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:45:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_vector	lighting(t_material material, t_light light, t_comp comp)
 	t_vector	reflected;
 	double		reflected_dot_eye;
 
+	//printf("light bright: %f %f %f\n", light.intensity.x, light.intensity.y, light.intensity.z);
+	//printf("material color: %f %f %f\n", material.normalized_color.x, material.normalized_color.y, material.normalized_color.z);
 	eff_color = multiply_colors(material.normalized_color, light.intensity);
 	light_vector = normalize_vector(subtract_points(light.position, comp.point));
 	sh.ambient = multiply_vector_by_scalar(eff_color, material.ambient);

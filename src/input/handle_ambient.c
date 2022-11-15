@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:35 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:51:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:28:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	handle_ambient_light(char *line, t_ambient *amb)
 	else
 	{
 		amb->ratio = transform_ratio(infos[1], &status);
-		amb->color = transform_color(infos[2], &status);
+		amb->intensity = transform_color(infos[2], &status);
+		amb->intensity = multiply_vector_by_scalar(amb->intensity, amb->ratio); // verificar se isso é correto
 	}
 	free_array(infos);
 	return (status);

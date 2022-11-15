@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 16:51:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:07:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	cylinder_render_test(void);
 
 void	camera_tests(void);
 void	ray_for_pixel_tests(void);
+void	scene_render_test(void);
 
 // utils
 bool	check_equal_points(t_point a, t_point b);

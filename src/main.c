@@ -44,13 +44,15 @@ int	main(int argc, char *argv[])
 
 	if (handle_input(argc, argv[1], &rt) == ERROR)
 		exit (EXIT_FAILURE);
+	//printf("camera fov: %f", rt.camera.fov);
+	//print_matrix(rt.camera.inverse);
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
-	free_objects(&rt.world.objects); /* remove */
-	rt.world = default_world();
-	rendering_rays(canvas, &rt);
-	plot_image(&mlx.img, &mlx, canvas);
+	//free_objects(&rt.world.objects); /* remove */
+	//rt.world = default_world();
+	//set_camera(rt.camera.fov, HEIGHT, WIDTH);
+	render(rt.camera, rt.world, canvas, &mlx);
 	free_objects(&rt.world.objects);
 	free_canvas(canvas);
 	set_mlx_hooks(&mlx);

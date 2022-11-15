@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 12:32:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:40:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	handle_line(char *line, t_rt *rt)
 	if (line[0] == 'A')
 		return (handle_ambient_light(line, &rt->ambient));
 	if (line[0] == 'C')
-		return (handle_camera(line, &rt->camera));
+		return (handle_camera(line, &(rt->camera)));
 	if (line[0] == 'L')
 		return (handle_light(line, &rt->world.light));
 	if (ft_strncmp(line, "sp ", 3) == 0)
@@ -81,7 +81,7 @@ int	handle_line(char *line, t_rt *rt)
 	return (print_error_msg2("invalid element: ", line));
 }
 
-int	handle_content(char *content, t_rt	*rt)
+int	handle_content(char *content, t_rt *rt)
 {
 	char	**lines;
 	int		status;

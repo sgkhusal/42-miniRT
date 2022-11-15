@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 17:01:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:08:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_material
 {
 	t_vector	normalized_color;
 	double		diffuse;
-	double		ambient;
+	double		ambient; // será que a ambiente do pdf vem pra cá?
 	double		specular;
 	double		shininess;
 }				t_material;

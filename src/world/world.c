@@ -65,3 +65,24 @@ t_intersection_list	intersect_world(t_world world, t_ray ray) // normalizar a di
 	intersect_sort(&(list.head));
 	return (list);
 }
+
+void	render(t_camera camera, t_world w, t_vector **canvas, t_mlx *mlx)
+{
+	int			i;
+	int			j;
+	t_ray		ray;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		j = 0;
+		while (j < WIDTH)
+		{
+			ray = ray_for_pixel(camera, i, j);
+			canvas[i][j] = color_at(w, ray);
+			j++;
+		}
+		i++;
+	}
+	plot_image(&mlx->img, mlx, canvas);
+}

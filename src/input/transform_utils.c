@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 23:46:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:29:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,30 @@ char	**parse_input(char *line, char c, int size_expected, int *status)
 	return (parsed);
 }
 
-t_color	transform_color(char *color_str, int *status)
+t_vector	transform_color(char *color_str, int *status)
 {
-	char		**rgb;
-	short int	red;
-	short int	green;
-	short int	blue;
+	char	**rgb;
+	double	red;
+	double	green;
+	double	blue;
 
 	rgb = parse_input(color_str, ',', 3, status);
 	if (*status == ERROR)
-		return (set_color(0, 0, 0));
+		return (set_vector(0, 0, 0));
 	if (ft_strlen(rgb[0]) > 3 || ft_strlen(rgb[1]) > 3 || ft_strlen(rgb[2]) > 3)
 	{
 		*status = print_error_msg2("invalid color range: ", color_str);
 		free_array(rgb);
-		return (set_color(0, 0, 0));
+		return (set_vector(0, 0, 0));
 	}
 	red = ft_atoi(rgb[0]);
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);
+	printf("red: %f, green: %f, blue: %f\n", red, green, blue);
 	if (red > 255 || green > 255 || blue > 255)
 		*status = print_error_msg2("invalid color range: ", color_str);
 	free_array(rgb);
-	return (set_color(red, green, blue));
+	return (set_vector(red / 255, green / 255, blue /255));
 }
 
 // ambient lighting ratio in range [0.0,1.0]
@@ -122,9 +123,9 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
-	if (vector_length(set_vector(x, y, z)) != 1)
+	/* if (vector_length(set_vector(x, y, z)) != 1)
 		*status = print_error_msg2("orientation vector is not normalized: ",
-				xyz_str);
+				xyz_str); */
 	free_array(xyz);
 	return (set_vector(x, y, z));
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 16:47:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:27:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_ray	ray_for_pixel(t_camera cam, double x, double y)
 	double	xoffset;
 	double	yoffset;
 	t_point	world;
-	t_vector	direction;
 	t_ray	ray;
 
 	xoffset = (x + 0.5) * cam.pixel_size;
