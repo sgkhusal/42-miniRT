@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:30:52 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/16 19:57:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:53:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <../libraries/minilibx_linux/mlx.h>
 
-# define HEIGHT 500
+# define HEIGHT 700
 # define WIDTH 1000
 # define PPU 100 // pixels per unit
 

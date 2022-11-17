@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 13:50:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:49:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,10 @@ t_color	set_color(short int red, short int green, short int blue)
 {
 	t_color	color;
 
-	printf("param red: %d, param green: %d, param blue: %d", red, green, blue);
 	color.rgb[0] = blue;
 	color.rgb[1] = green;
 	color.rgb[2] = red;
 	color.rgb[3] = 0;
-	printf("color: %x\n", color.color);
-	printf("red: %d, green: %d, blue: %d\n", color.rgb[2] + 256, color.rgb[1], color.rgb[0]);
 	return (color);
 } /* 0 - 255 (-128 - 127) */
 
@@ -101,8 +98,6 @@ t_vector	color_at(t_world world, t_ray ray)
 	hit = get_hit_intersection(list);
 	if (!hit)
 		return (set_vector(0, 0, 0));
-	//printf("object type: %d\n", hit->object->type);
-	//printf("material color: %f, %f, %f\n", hit->object->material.normalized_color.x, hit->object->material.normalized_color.y, hit->object->material.normalized_color.z);
 	comps = prepare_computations(ray, hit);
 	color = shade_hit(world, comps);
 	free_intersection_list(&list);
@@ -112,6 +107,5 @@ t_vector	color_at(t_world world, t_ray ray)
 		color.y = 1;
 	if (color.z > 1)
 		color.z = 1;
-	//printf("color: %f %f %f\n", color.x, color.y, color.z);
 	return (color);
 }

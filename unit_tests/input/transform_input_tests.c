@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 13:55:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 11:08:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,10 @@ void	transform_input_tests(void)
 
 	printf(YELLOW "transform_input_tests:\n" END);
 	transform_color_test("255,255,255", set_vector(1, 1, 1), OK);
+	transform_color_test("100,50,150", set_vector(0.39216, 0.19608, 0.58824), OK);
 	transform_color_test("0,0,0", set_vector(0, 0, 0), OK);
 	transform_color_test("2555,255,255", set_vector(0, 0, 0), ERROR);
-	transform_color_test("255,260,255", set_vector(1, 260 / 255, 1), ERROR);
+	transform_color_test("255,260,255", set_vector(1, 1.01961, 1), ERROR);
 	transform_ratio_test(ft_memcpy(input, "0.0", 5), 0, OK);
 	transform_ratio_test(ft_memcpy(input, "1.0", 5), 1, OK);
 	transform_ratio_test(ft_memcpy(input, "0.55", 6), 0.55, OK);

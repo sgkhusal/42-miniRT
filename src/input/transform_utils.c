@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 12:29:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:47:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_vector	transform_color(char *color_str, int *status)
 	red = ft_atoi(rgb[0]);
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);
-	printf("red: %f, green: %f, blue: %f\n", red, green, blue);
 	if (red > 255 || green > 255 || blue > 255)
 		*status = print_error_msg2("invalid color range: ", color_str);
 	free_array(rgb);
@@ -123,9 +122,9 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
-	/* if (vector_length(set_vector(x, y, z)) != 1)
+	if (!check_double_values(vector_length(set_vector(x, y, z)), 1))
 		*status = print_error_msg2("orientation vector is not normalized: ",
-				xyz_str); */
+				xyz_str);
 	free_array(xyz);
 	return (set_vector(x, y, z));
 }

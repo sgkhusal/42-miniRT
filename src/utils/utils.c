@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/11 00:33:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:45:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	close_minirt(t_mlx *mlx)
 	exit(EXIT_SUCCESS);
 }
 
-int	check_double_values(double a, double b)
+t_bool	check_double_values(double a, double b)
 {
 	if (fabs(a - b) < EPSILON)
 		return (TRUE);

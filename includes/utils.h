@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 21:54:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 12:13:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 10:46:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			transform_fov(char *fov_str, int *status);
 int			close_minirt(t_mlx *mlx);
 
 // utils
-int			check_double_values(double a, double b);
+t_bool		check_double_values(double a, double b);
 double		ft_atod(char *nb);
 
 // error

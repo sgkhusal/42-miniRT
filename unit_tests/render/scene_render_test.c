@@ -76,7 +76,7 @@ void	scene_render_test(void)
 	canvas = create_canvas();
 	rt.world.objects = NULL;
 	set_world(&(rt.world));
-	rt.camera = set_camera(M_PI / 3, WIDTH, HEIGHT);
+	rt.camera = set_camera(M_PI / 3, 1000, 500);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
 	set_camera_transform(&rt.camera, view_transform(set_point(0, 1.5, -5),
