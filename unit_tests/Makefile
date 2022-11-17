@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/15 15:08:06 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/16 20:22:13 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS =			main.c \
 				camera_test.c \
 				ray_for_pixel_test.c \
 				scene_render_test.c \
+				shadow_test.c \
 				$(MINIRT_SRCS)
 MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \

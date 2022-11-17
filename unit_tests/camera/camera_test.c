@@ -22,6 +22,7 @@ void	set_camera_test1()
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
+	free_camera(&camera);
 }
 
 void	set_camera_test2(double fov, int hsize, int vsize, double expected)
@@ -36,6 +37,7 @@ void	set_camera_test2(double fov, int hsize, int vsize, double expected)
 	else
 		printf(RED "KO" END "\n");
 	n++;
+	free_camera(&camera);
 }
 
 void	camera_tests(void)

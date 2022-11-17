@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:59:31 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 15:27:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:47:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	plot_image(t_image *img, t_mlx *mlx, t_vector **canvas)
 		while (y < mlx->height)
 		{
 			color = transform_vector_to_color(canvas[y][x]);
-			put_pixel_color(img, x, mlx->height - y, color.color);
+			put_pixel_color(img, x, y, color.color);
 			y++;
 		}
 		x++;

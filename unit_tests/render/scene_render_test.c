@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_render_test.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:53:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 15:21:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:54:509 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	scene_render_test(void)
 	canvas = create_canvas();
 	rt.world.objects = NULL;
 	set_world(&(rt.world));
-	rt.camera = set_camera(1000, 500, M_PI / 3);
+	rt.camera = set_camera(M_PI / 3, WIDTH, HEIGHT);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
 	set_camera_transform(&rt.camera, view_transform(set_point(0, 1.5, -5),
@@ -84,6 +84,7 @@ void	scene_render_test(void)
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));
+	free_camera(&rt.camera);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 }

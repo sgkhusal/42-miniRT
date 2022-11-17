@@ -62,6 +62,7 @@ typedef struct s_comp
 {
 	t_intersection *xs;
 	t_point		point;
+	t_point		over_point;
 	t_vector	eyev;
 	t_vector	normalv;
 	enum e_bool	inside;
@@ -114,7 +115,8 @@ void				add_intersections(t_xs xs, t_object *object,
 						t_intersection_list *list);
 
 // color
-t_vector			lighting(t_material material, t_light light, t_comp comp);
+t_vector			lighting(t_material material, t_light light, t_comp comp,
+						t_bool shadow);
 
 // world
 t_world	default_world(void); /* remove */
@@ -136,5 +138,8 @@ t_ray				ray_for_pixel(t_camera cam, double x, double y);
 
 void				render(t_camera camera, t_world w,
 	t_vector **canvas, t_mlx *mlx);
+
+//is_shadowed
+t_bool				is_shadowed(t_world w, t_point point);
 
 #endif

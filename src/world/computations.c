@@ -26,8 +26,6 @@ t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 {
 	t_comp	comp;
 
-	if (intersect->object->type == CYLINDER)
-		ray = transform_ray(ray, intersect->object->inverse);
 	comp.xs = intersect;
 	comp.point = ray_position(ray, intersect->t);
 	comp.eyev = negative_vector(ray.direction);
@@ -38,6 +36,8 @@ t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 	else if (intersect->object->type == CYLINDER)
 		comp.normalv = cylinder_normal_at(intersect->object, comp.point);
 	comp.inside = is_inside(&comp); // como fica para o plano??
+	comp.over_point = add_point_and_vector(comp.point,
+		multiply_vector_by_scalar(comp.normalv, EPSILON));
 	return (comp);
 }
 
