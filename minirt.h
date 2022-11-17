@@ -61,25 +61,26 @@ typedef struct intersection_list
 typedef struct s_comp
 {
 	t_intersection *xs;
-	t_point		point;
-	t_point		over_point;
-	t_vector	eyev;
-	t_vector	normalv;
-	enum e_bool	inside;
+	t_point			point;
+	t_point			over_point;
+	t_vector		eyev;
+	t_vector		normalv;
+	enum e_bool		inside;
 }				t_comp;
 
 typedef struct s_world
 {
-	t_light					light;
-	t_object				*objects;
+	t_light		light;
+	t_object	*objects;
 }				t_world;
 
 typedef struct s_rt
 {
-	t_ambient			ambient; // vai ter que passar para o material dos elementos
-	t_camera			camera;
-	t_world				world;
-	t_intersection_list	intersections;
+	t_ambient	ambient; // vai ter que passar para o material dos elementos
+	t_camera	camera;
+	t_vector	**canvas;
+	t_world		world;
+	t_mlx		mlx;
 }				t_rt;
 
 // input

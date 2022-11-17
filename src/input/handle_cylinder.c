@@ -57,23 +57,22 @@ static void	create_and_append_cylinder(t_object **objs, char **infos,
 {
 	t_object	*c;
 	double		radius;
-	//t_color		color;
+	double		half_height;
 	t_point		center;
+	//t_vector	orientation;
 
 	c = create_object(CYLINDER, create_cylinder());
 	center = transform_coordinates(infos[1], status);
-	c->shape.cylinder->orientation = transform_orientation(infos[2], status);//
+	//orientation = transform_orientation(infos[2], status);//
 	radius = transform_double(infos[3], status) / 2;
-	c->shape.cylinder->height = transform_double(infos[4], status);//
-	//color = transform_color(infos[5], status);
-	if (*status == ERROR)
-	{
-		free_objects(&c);
-		return ;
-	}
-	//c->material.normalized_color = normalize_color(color);
+	half_height = transform_double(infos[4], status) / 2;
+	c->shape.cylinder->max = half_height;
+	c->shape.cylinder->min = -half_height;
+	c->material.normalized_color = transform_color(infos[5], status);
 	set_cylinder_matrixes(c, center, radius); // tem rotação tb
 	append_object(objs, c);
+	if (*status == ERROR)
+		free_objects(&c);
 }
 
 int	handle_cylinder(char *line, t_object **objs)

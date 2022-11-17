@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 10:49:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 11:52:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,14 @@ t_vector	multiply_colors(t_vector a, t_vector b)
 	return (color);
 }
 
-t_vector	normalize_color(t_color color)
+t_vector	normalize_color(double red, double green, double blue)
 {
 	t_vector	normalized_color;
 
-	if (color.rgb[2] < 0)
-		normalized_color.x = (color.rgb[2] + 256) / 255.0;
-	else
-		normalized_color.x = color.rgb[2] / 255.0;
-	if (color.rgb[1] < 0)
-		normalized_color.y = (color.rgb[1] + 256) / 255.0;
-	else
-		normalized_color.y = color.rgb[1] / 255.0;
-	if (color.rgb[0] < 0)
-		normalized_color.z = (color.rgb[0] + 256) / 255.0;
-	else
-		normalized_color.z = color.rgb[0] / 255.0;
+	normalized_color.x = red / 255.0;
+	normalized_color.y = green / 255.0;
+	normalized_color.z = blue / 255.0;
+	normalized_color.w = 0;
 	return (normalized_color);
 }
 

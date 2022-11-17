@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 10:47:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 11:53:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_vector	transform_color(char *color_str, int *status)
 	if (red > 255 || green > 255 || blue > 255)
 		*status = print_error_msg2("invalid color range: ", color_str);
 	free_array(rgb);
-	return (set_vector(red / 255, green / 255, blue /255));
+	return (normalize_color(red, green, blue));
 }
 
 // ambient lighting ratio in range [0.0,1.0]

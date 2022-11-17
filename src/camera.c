@@ -6,12 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/16 21:37:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 11:37:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+// o fov deve ser passado em radianos
+// o input do arquivo é em graus, precisa converter -> fov = fov * M_PI / 180
 t_camera	set_camera(double fov, int hsize, int vsize)
 {
 	t_camera	camera;

@@ -64,6 +64,19 @@ void	set_world(t_world *w)
 	append_object(&(w->objects), left);
 }
 
+static void	create_mlx_window2(t_mlx *mlx)
+{
+	mlx->ptr = NULL;
+	mlx->window = NULL;
+	mlx->img.ptr = NULL;
+	mlx->ptr = mlx_init();
+	if (mlx->ptr == NULL)
+		minirt_error(mlx, "mlx error initializing mlx");
+	mlx->window = mlx_new_window(mlx->ptr, mlx->width, mlx->height, "miniRT");
+	if (mlx->window == NULL)
+		minirt_error(mlx, "mlx error creating window");
+}
+
 void	scene_render_test(void)
 {
 	t_mlx		mlx;
@@ -71,12 +84,14 @@ void	scene_render_test(void)
 	t_object	*s;
 	t_vector	**canvas;
 
-	create_mlx_window(&mlx);
+	mlx.width = 1000;
+	mlx.height = 500;
+	create_mlx_window2(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	rt.world.objects = NULL;
 	set_world(&(rt.world));
-	rt.camera = set_camera(M_PI / 3, 1000, 500);
+	rt.camera = set_camera(M_PI / 3, mlx.width, mlx.height);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
 	set_camera_transform(&rt.camera, view_transform(set_point(0, 1.5, -5),

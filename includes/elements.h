@@ -44,18 +44,17 @@ typedef struct s_camera
 	double		half_height;
 }				t_camera;
 
+// intensity é o vetor de cor normalizado
 typedef struct s_light
 {
 	t_point		position;
 	t_vector	intensity; // normalized color
-	t_color		color;
 	double		brightness;
 }				t_light;
 
 typedef struct s_ambient
 {
 	t_vector	intensity; // normalized color
-	t_color		color;
 	double		ratio;
 }				t_ambient;
 

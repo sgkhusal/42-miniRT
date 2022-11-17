@@ -57,7 +57,7 @@ int	handle_camera(char *line, t_camera *cam)
 	else
 	{
 		fov = transform_fov(infos[3], &status);
-		*cam = set_camera(fov, WIDTH, HEIGHT);
+		*cam = set_camera(fov * M_PI / 180, WIDTH, HEIGHT);
 		cam->origin = transform_coordinates(infos[1], &status);
 		cam->orientation = transform_orientation(infos[2], &status);
 		transform = view_transform(set_point(0,0,-5), set_point(0,0,0), set_vector(0, 1, 0)); //

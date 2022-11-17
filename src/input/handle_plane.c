@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 12:13:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/17 12:17:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,17 @@ static void	set_plane_matrixes(t_object *o, t_point center)
 static void	create_and_append_plane(t_object **objs, char **infos, int *status)
 {
 	t_object	*p;
-	//t_color		color;
 	t_point		xyz;
+	//t_vector	orientation;
 
 	p = create_object(PLANE, create_plane());
 	xyz = transform_coordinates(infos[1], status);
-	p->shape.plane->orientation = transform_orientation(infos[2], status);
-	//color = transform_color(infos[3], status);
-	if (*status == ERROR)
-	{
-		free_objects(&p);
-		return ;
-	}
-	//p->material.normalized_color = normalize_color(color);
+	//orientation = transform_orientation(infos[2], status);
+	p->material.normalized_color = transform_color(infos[3], status);
 	set_plane_matrixes(p, xyz); // falta rotação
 	append_object(objs, p);
+	if (*status == ERROR)
+		free_objects(&p);
 }
 
 int	handle_plane(char *line, t_object **objs)
