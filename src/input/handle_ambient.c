@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:35 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 12:28:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:48:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static int	validate_ambient_chars(char **infos)
 	return (OK);
 }
 
-int	handle_ambient_light(char *line, t_ambient *amb)
+int	handle_ambient_light(char *line, t_vector *amb)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
+	double		ratio;
+	t_vector	color;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -37,10 +39,22 @@ int	handle_ambient_light(char *line, t_ambient *amb)
 		status = ERROR;
 	else
 	{
-		amb->ratio = transform_ratio(infos[1], &status);
-		amb->intensity = transform_color(infos[2], &status);
-		amb->intensity = multiply_vector_by_scalar(amb->intensity, amb->ratio); // verificar se isso é correto
+		ratio = transform_ratio(infos[1], &status);
+		color = transform_color(infos[2], &status);
+		*amb = multiply_vector_by_scalar(color, ratio);
 	}
 	free_array(infos);
 	return (status);
+}
+
+void	set_ambient_light(t_object **objects, t_vector amb)
+{
+	t_object	*obj;
+
+	obj = *objects;
+	while (obj)
+	{
+		obj->material.ambient = amb;
+		obj = obj->next;
+	}
 }

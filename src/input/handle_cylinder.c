@@ -68,7 +68,7 @@ static void	create_and_append_cylinder(t_object **objs, char **infos,
 	half_height = transform_double(infos[4], status) / 2;
 	c->shape.cylinder->max = half_height;
 	c->shape.cylinder->min = -half_height;
-	c->material.normalized_color = transform_color(infos[5], status);
+	c->material.color = transform_color(infos[5], status);
 	set_cylinder_matrixes(c, center, radius); // tem rotação tb
 	append_object(objs, c);
 	if (*status == ERROR)

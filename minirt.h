@@ -74,9 +74,10 @@ typedef struct s_world
 	t_object	*objects;
 }				t_world;
 
+// ambient is the normalized(ambient color) * ambient ratio
 typedef struct s_rt
 {
-	t_ambient	ambient; // vai ter que passar para o material dos elementos
+	t_vector	ambient;
 	t_camera	camera;
 	t_vector	**canvas;
 	t_world		world;
@@ -88,14 +89,15 @@ int					handle_input(int argc, char *filename, t_rt	*rt);
 int					check_file_extension(char *file);
 int					open_file(char *file);
 int					read_file(int fd, char **content);
-int					handle_content(char *content, t_rt	*rt);
+int					handle_content(char **lines, t_rt	*rt);
 int					handle_line(char *line, t_rt *rt);
-int					handle_ambient_light(char *line, t_ambient *amb);
+int					handle_ambient_light(char *line, t_vector *amb);
 int					handle_camera(char *line, t_camera *cam);
 int					handle_light(char *line, t_light *light);
 int					handle_sphere(char *line, t_object **objs);
 int					handle_plane(char *line, t_object **objs);
 int					handle_cylinder(char *line, t_object **objs);
+void				set_ambient_light(t_object **objects, t_vector amb);
 
 // rays
 t_ray				set_ray(t_point origin, t_vector direction);

@@ -44,19 +44,12 @@ typedef struct s_camera
 	double		half_height;
 }				t_camera;
 
-// intensity é o vetor de cor normalizado
+// intensity is the normalized(color in rgb) * brightness
 typedef struct s_light
 {
 	t_point		position;
-	t_vector	intensity; // normalized color
-	double		brightness;
+	t_vector	intensity;
 }				t_light;
-
-typedef struct s_ambient
-{
-	t_vector	intensity; // normalized color
-	double		ratio;
-}				t_ambient;
 
 /**
  * @param color normalized color with range [0-1]
@@ -68,9 +61,9 @@ typedef struct s_ambient
  */
 typedef struct s_material
 {
-	t_vector	normalized_color;
+	t_vector	color;
+	t_vector	ambient;
 	double		diffuse;
-	double		ambient; // será que a ambiente do pdf vem pra cá?
 	double		specular;
 	double		shininess;
 }				t_material;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 11:39:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:53:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cylinder_render_test(void)
 	transform_cylinder(c, 4);
 	c->shape.cylinder->min = -1;
 	c->shape.cylinder->max = 4;
-	c->material.normalized_color = set_vector(0.5, 0.2, 1);
+	c->material.color = set_vector(0.5, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, c);
 	rt.world.light.position = set_point(-10, 10, -10);

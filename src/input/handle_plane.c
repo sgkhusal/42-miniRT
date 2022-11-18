@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 12:17:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:53:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	create_and_append_plane(t_object **objs, char **infos, int *status)
 	p = create_object(PLANE, create_plane());
 	xyz = transform_coordinates(infos[1], status);
 	//orientation = transform_orientation(infos[2], status);
-	p->material.normalized_color = transform_color(infos[3], status);
+	p->material.color = transform_color(infos[3], status);
 	set_plane_matrixes(p, xyz); // falta rotação
 	append_object(objs, p);
 	if (*status == ERROR)

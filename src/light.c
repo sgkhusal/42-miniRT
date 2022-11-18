@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/16 21:35:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:08:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 	double		reflected_dot_eye;
 
 	//printf("light bright: %f %f %f\n", light.intensity.x, light.intensity.y, light.intensity.z);
-	//printf("material color: %f %f %f\n", material.normalized_color.x, material.normalized_color.y, material.normalized_color.z);
-	eff_color = multiply_colors(m.normalized_color, light.intensity);
+	//printf("material color: %f %f %f\n", material.color.x, material.color.y, material.color.z);
+	eff_color = multiply_colors(m.color, light.intensity);
 	light_vect = normalize_vector(subtract_points(light.position, comp.point));
-	sh.ambient = multiply_vector_by_scalar(eff_color, m.ambient);
+	sh.ambient = multiply_colors(eff_color, m.ambient); // tenho a impressão que a ambient não teria que multiplicar pela intensity antes...
 	if (scalar_product(light_vect, comp.normalv) < 0 || shadow == TRUE)
 		return (sh.ambient);
 	sh.diffuse = multiply_vector_by_scalar(eff_color,

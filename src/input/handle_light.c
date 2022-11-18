@@ -25,8 +25,10 @@ static int	validate_light_chars(char **infos)
 
 int	handle_light(char *line, t_light *light)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
+	double		brightness;
+	t_vector	color;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -39,10 +41,10 @@ int	handle_light(char *line, t_light *light)
 	else
 	{
 		light->position = transform_coordinates(infos[1], &status);
-		light->brightness = transform_ratio(infos[2], &status);
-		light->intensity = transform_color(infos[3], &status);
-		light->intensity = multiply_vector_by_scalar(light->intensity, // verificar se isso é correto
-				light->brightness);
+		brightness = transform_ratio(infos[2], &status);
+		color = transform_color(infos[3], &status); // talvez isso só seja para o bônus
+		// mandatório: color = set_vector(1, 1, 1);
+		light->intensity = multiply_vector_by_scalar(color, brightness);
 	}
 	free_array(infos);
 	return (status);

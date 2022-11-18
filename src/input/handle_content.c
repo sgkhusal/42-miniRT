@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 10:40:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:02:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,12 @@ int	handle_line(char *line, t_rt *rt)
 	return (print_error_msg2("invalid element: ", line));
 }
 
-int	handle_content(char *content, t_rt *rt)
+int	handle_content(char **lines, t_rt *rt)
 {
-	char	**lines;
 	int		status;
 	int		i;
 
 	status = OK;
-	lines = ft_split(content, '\n');
-	free(content);
-	if (!lines || !*lines)
-		return (print_error_msg("empty file"));
 	if (check_elements_count(lines) == ERROR)
 		status = ERROR;
 	if (check_separator(lines) == ERROR)
@@ -104,9 +99,10 @@ int	handle_content(char *content, t_rt *rt)
 		{
 			free_objects(&(rt->world.objects));
 			status = ERROR;
-			break ;
 		}
 	}
+	if (status == OK)
+		set_ambient_light(&rt->world.objects, rt->ambient);
 	free_array(lines);
 	return (status);
 }

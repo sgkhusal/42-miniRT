@@ -16,8 +16,8 @@ t_material	set_material(void)
 {
 	t_material	material;
 
-	material.normalized_color = set_vector(1, 1, 1);
-	material.ambient = 0.1;
+	material.color = set_vector(1, 1, 1);
+	material.ambient = set_vector(0.1, 0.1, 0.1);
 	material.specular = 0.9;
 	material.diffuse = 0.9;
 	material.shininess = 200;

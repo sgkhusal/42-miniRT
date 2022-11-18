@@ -47,7 +47,7 @@ void	sphere_render_test(void)
 	canvas = create_canvas();
 	s = create_object(SPHERE, create_sphere());
 	transform_sphere(s, 0);
-	s->material.normalized_color = set_vector(1, 0.2, 1);
+	s->material.color = set_vector(1, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, s);
 	rt.world.light.position = set_point(-10, 10, -10);
