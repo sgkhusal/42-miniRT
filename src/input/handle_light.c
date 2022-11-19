@@ -42,8 +42,7 @@ int	handle_light(char *line, t_light *light)
 	{
 		light->position = transform_coordinates(infos[1], &status);
 		brightness = transform_ratio(infos[2], &status);
-		color = transform_color(infos[3], &status); // talvez isso só seja para o bônus
-		// mandatório: color = set_vector(1, 1, 1);
+		color = transform_color(infos[3], &status);
 		light->intensity = multiply_vector_by_scalar(color, brightness);
 	}
 	free_array(infos);

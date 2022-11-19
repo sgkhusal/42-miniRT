@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 22:09:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 10:45:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:10:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ t_bool	check_double_values(double a, double b)
 	if (fabs(a - b) < EPSILON)
 		return (TRUE);
 	return (FALSE);
+}
+
+t_bool	check_equal_vectors(t_vector a, t_vector b)
+{
+	return (
+		check_double_values(a.x, b.x)
+		&& check_double_values(a.y, b.y)
+		&& check_double_values(a.z, b.z)
+		&& check_double_values(a.w, b.w)
+	);
 }
 
 void	free_array(char **arr)

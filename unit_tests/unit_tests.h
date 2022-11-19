@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/16 20:22:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:09:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ void	ray_for_pixel_tests(void);
 void	scene_render_test(void);
 
 // utils
-bool	check_equal_points(t_point a, t_point b);
-bool	check_equal_vectors(t_vector a, t_vector b);
+t_bool	check_equal_points(t_point a, t_point b);
 void	check_int_values(int result, int expected);
 
 // minirt functions

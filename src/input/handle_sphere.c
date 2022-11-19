@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 19:53:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:06:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,11 @@ static void	set_sphere_matrixes(t_object *o, t_point center, double radius)
 	t_matrix	translation;
 	t_matrix	scaling;
 
-	if (center.x != 0 || center.y != 0 || center.z != 0)
-	{
-		translation = translation_matrix(center.x, center.y, center.z);
-		if (radius != 1)
-		{
-			scaling = scaling_matrix(radius, radius, radius);
-			set_transform(o, multiply_matrix(translation, scaling));
-			free_matrix(translation);
-			free_matrix(scaling);
-		}
-		else
-			set_transform(o, translation);
-	}
-	else if (radius != 1)
-	{
-		scaling = scaling_matrix(radius, radius, radius);
-		set_transform(o, scaling);
-	}
+	translation = translation_matrix(center.x, center.y, center.z);
+	scaling = scaling_matrix(radius, radius, radius);
+	set_transform(o, multiply_matrix(translation, scaling));
+	free_matrix(translation);
+	free_matrix(scaling);
 }
 
 static void	create_and_append_sphere(t_object **objs, char **infos, int *status)

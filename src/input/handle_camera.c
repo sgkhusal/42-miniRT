@@ -39,12 +39,30 @@ static int	validate_camera_chars(char **infos)
 	return (OK);
 }
 
+void	fill_camera(t_camera *cam, char **infos, int *status)
+{
+	double		fov;
+	t_point		origin;
+	t_vector	orientation;
+	t_matrix	transform;
+
+	fov = transform_fov(infos[3], status);
+	*cam = set_camera(fov * M_PI / 180, WIDTH, HEIGHT);
+	origin = transform_coordinates(infos[1], status);
+	orientation = transform_orientation(infos[2], status);
+	if (*status == ERROR)
+		return ;
+	transform = view_transform(origin, set_point(orientation.x,
+		orientation.y, orientation.z), set_vector(0, 1, 0)); // calcular o up vector
+	/* transform = view_transform(origin, add_point_and_vector(origin,
+		orientation), set_vector(0, 1, 0)); // */
+	set_camera_transform(cam, transform);
+}
+
 int	handle_camera(char *line, t_camera *cam)
 {
 	char		**infos;
 	int			status;
-	double		fov;
-	t_matrix	transform;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -55,14 +73,7 @@ int	handle_camera(char *line, t_camera *cam)
 	else if (validate_camera_chars(infos) == ERROR)
 		status = ERROR;
 	else
-	{
-		fov = transform_fov(infos[3], &status);
-		*cam = set_camera(fov * M_PI / 180, WIDTH, HEIGHT);
-		cam->origin = transform_coordinates(infos[1], &status);
-		cam->orientation = transform_orientation(infos[2], &status);
-		transform = view_transform(set_point(0,0,-5), set_point(0,0,0), set_vector(0, 1, 0)); //
-		set_camera_transform(cam, transform);
-	}
+		fill_camera(cam, infos, &status);
 	free_array(infos);
 	return (status);
 }

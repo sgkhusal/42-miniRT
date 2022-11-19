@@ -12,14 +12,39 @@
 
 #include "unit_tests.h"
 
-void	set_world(t_world *w)
+static void	put_elements(t_world *w)
+{
+	t_object	*middle;
+	t_object	*right;
+	t_object	*left;
+
+	middle = create_object(SPHERE, create_sphere());
+	middle->material.color = set_vector(0.1, 1, 0.5);
+	middle->material.diffuse = 0.7;
+	middle->material.specular = 0.3;
+	set_transform(middle, translation_matrix(-0.5, 1, 0.5));
+	append_object(&(w->objects), middle);
+	right = create_object(SPHERE, create_sphere());
+	right->material.color = set_vector(0.5, 1, 0.1);
+	right->material.diffuse = 0.7;
+	right->material.specular = 0.3;
+	set_transform(right, multiply_matrix(translation_matrix(1.5, 0.5, -0.5),
+		scaling_matrix(0.5, 0.5, 0.5)));
+	append_object(&(w->objects), right);
+	left = create_object(SPHERE, create_sphere());
+	left->material.color = set_vector(1, 0.8, 0.1);
+	left->material.diffuse = 0.7;
+	left->material.specular = 0.3;
+	set_transform(left, multiply_matrix(translation_matrix(-1.5, 0.33, -0.75),
+		scaling_matrix(0.33, 0.33, 0.33)));
+	append_object(&(w->objects), left);
+}
+
+static void	set_world(t_world *w)
 {
 	t_object	*floor;
 	t_object	*left_wall;
 	t_object	*right_wall;
-	t_object	*middle;
-	t_object	*right;
-	t_object	*left;
 
 	floor = create_object(SPHERE, create_sphere());
 	floor->material.color = set_vector(1, 0.9, 0.9);
@@ -42,26 +67,6 @@ void	set_world(t_world *w)
 		multiply_matrix(rotation_x_matrix(M_PI / 2),
 		scaling_matrix(10, 0.01, 10)))));
 	append_object(&(w->objects), right_wall);
-	middle = create_object(SPHERE, create_sphere());
-	middle->material.color = set_vector(0.1, 1, 0.5);
-	middle->material.diffuse = 0.7;
-	middle->material.specular = 0.3;
-	set_transform(middle, translation_matrix(-0.5, 1, 0.5));
-	append_object(&(w->objects), middle);
-	right = create_object(SPHERE, create_sphere());
-	right->material.color = set_vector(0.5, 1, 0.1);
-	right->material.diffuse = 0.7;
-	right->material.specular = 0.3;
-	set_transform(right, multiply_matrix(translation_matrix(1.5, 0.5, -0.5),
-		scaling_matrix(0.5, 0.5, 0.5)));
-	append_object(&(w->objects), right);
-	left = create_object(SPHERE, create_sphere());
-	left->material.color = set_vector(1, 0.8, 0.1);
-	left->material.diffuse = 0.7;
-	left->material.specular = 0.3;
-	set_transform(left, multiply_matrix(translation_matrix(-1.5, 0.33, -0.75),
-		scaling_matrix(0.33, 0.33, 0.33)));
-	append_object(&(w->objects), left);
 }
 
 static void	create_mlx_window2(t_mlx *mlx)
@@ -91,6 +96,7 @@ void	scene_render_test(void)
 	canvas = create_canvas();
 	rt.world.objects = NULL;
 	set_world(&(rt.world));
+	put_elements(&(rt.world));
 	rt.camera = set_camera(M_PI / 3, mlx.width, mlx.height);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);

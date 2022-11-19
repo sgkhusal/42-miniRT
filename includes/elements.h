@@ -32,8 +32,6 @@ enum e_objects
  */
 typedef struct s_camera
 {
-	t_point		origin;
-	t_vector	orientation;
 	double		fov;
 	t_matrix	transform;
 	t_matrix	inverse;

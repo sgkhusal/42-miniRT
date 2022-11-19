@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 19:53:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 23:09:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ static void	set_plane_matrixes(t_object *o, t_point center)
 {
 	t_matrix	translation;
 
-	if (center.x != 0 || center.y != 0 || center.z != 0)
-	{
-		translation = translation_matrix(center.x, center.y, center.z);
-		set_transform(o, translation);
-	}
+	translation = translation_matrix(center.x, center.y, center.z);
+	set_transform(o, translation);
 }
 
 static void	create_and_append_plane(t_object **objs, char **infos, int *status)
