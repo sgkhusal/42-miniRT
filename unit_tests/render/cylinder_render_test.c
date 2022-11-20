@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/19 22:06:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 10:32:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	transform_cylinder(t_object *c, int type)
 	t_matrix	rotation_z;
 
 	if (type == 1 || type == 3)
-		translation = translation_matrix(1, 1, 1); // problema
+		translation = translation_matrix(1, -3, 1);
 	if (type == 2 || type == 3)
-		scaling = scaling_matrix(0.5, 1, 0.5);
+		scaling = scaling_matrix(0.25, 1, 0.25);
 	if (type == 1)
 		set_transform(c, translation);
 	else if (type == 2)
@@ -33,7 +33,7 @@ static void	transform_cylinder(t_object *c, int type)
 		free_matrix(translation);
 		free_matrix(scaling);
 	}
-	else if (type == 4) // problema
+	else if (type == 4)
 	{
 		rotation_x = rotation_x_matrix(M_PI / 4);
 		rotation_z = rotation_z_matrix(M_PI / 4);
@@ -54,9 +54,9 @@ void	cylinder_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 4);
+	transform_cylinder(c, 3);
 	c->shape.cylinder->min = -1;
-	c->shape.cylinder->max = 1;
+	c->shape.cylinder->max = 5;
 	c->material.color = set_vector(0.5, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, c);
