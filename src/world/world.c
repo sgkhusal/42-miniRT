@@ -32,12 +32,14 @@ t_intersection_list	intersect_world(t_world world, t_ray ray)
 		local_ray = transform_ray(ray, object->inverse);
 		if (object->type == SPHERE)
 			xs = sphere_intersection(local_ray, object);
-		/* else if (object->type == PLANE)
-			xs = plane_intersection(local_ray, object); */
+		else if (object->type == PLANE)
+			xs = plane_intersection(local_ray, object);
 		else if (object->type == CYLINDER)
 			xs = cylinder_intersection(local_ray, object);
 		if (xs.count == 2)
 			add_intersections(xs, object, &list);
+		if (xs.count == 1)
+			add_intersection_node(create_intersection(xs.t1, object), &list);
 		object = object->next;
 	}
 	intersect_sort(&(list.head));

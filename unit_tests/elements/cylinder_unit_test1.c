@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:17:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/10 20:49:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:20:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 void	create_cylinder_test(void)
 {
 	t_cylinder	*cylinder;
-	t_matrix	identity;
-	t_color		color;
 
 	printf(GREY "create cylinder test: " END);
-	color = set_color(255, 0, 0);
 	cylinder = create_cylinder();
-	identity = identity_matrix(4);
 	if (cylinder->center.x == 0 && cylinder->center.y == 0
 		&& cylinder->center.z == 0
 		&& cylinder->radius == 1 && cylinder->height == INFINITY
@@ -30,7 +26,6 @@ void	create_cylinder_test(void)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
-	free_matrix(identity);
 	free(cylinder);
 }
 
