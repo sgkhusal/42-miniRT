@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:59:47 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 12:16:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:23:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_plane	*create_plane(void) // precisa ver se está certo!!
+t_plane	*create_plane(void)
 {
 	t_plane	*plane;
 
@@ -22,4 +22,23 @@ t_plane	*create_plane(void) // precisa ver se está certo!!
 	plane->point = set_point(0, 0, 0);
 	plane->orientation = set_vector(0, 1, 0);
 	return (plane);
+}
+
+// if ray is parallel to plane, there is no intersection, if the ray origin is
+// coplanar with the plane and the ray direction is parallel to the plane, there
+// is no intersection because all points are intersections and the plane is
+// invisible
+t_xs	plane_intersection(t_ray ray, t_object *p)
+{
+	t_xs		xs;
+
+	(void)p;
+	if (fabs(ray.direction.y) < EPSILON)
+	{
+		xs.count = 0;
+		return (xs);
+	}
+	xs.t1 = -ray.origin.y / ray.direction.y;
+	xs.count = 1;
+	return (xs);
 }

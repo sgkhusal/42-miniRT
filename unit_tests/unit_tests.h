@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 00:47:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 12:19:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	light_tests(void);
 
 void	cylinder_tests(void);
 void	truncate_cylinder_test_cases(void);
+
+void	plane_tests(void);
 
 void	world_tests(void);
 t_world	default_world(void);

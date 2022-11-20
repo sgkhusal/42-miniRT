@@ -55,6 +55,16 @@ t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 		world_normal.w = 0;
 		return (normalize_vector(world_normal));
 	}
-		//return (set_vector(world_point.x, 0, world_point.z)); // normalizar?
-		//na parte da esfera fala que tem que normalizar
+}
+
+t_vector	plane_normal_at(t_object *p, t_point world_point)
+{
+	t_vector	object_normal;
+	t_vector	world_normal;
+
+	(void)world_point;
+	object_normal = p->shape.plane->orientation;
+	world_normal = multiply_matrix_by_vector(
+				p->transpose_inverse, object_normal);
+	return (normalize_vector(world_normal));
 }

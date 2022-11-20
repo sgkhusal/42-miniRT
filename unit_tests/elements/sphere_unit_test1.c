@@ -16,18 +16,14 @@ void	create_sphere_test(void)
 {
 	t_sphere	*sphere;
 	t_matrix	identity;
-	t_color		color;
 
 	printf(GREY "create sphere test: " END);
-	color = set_color(255, 0, 0);
 	sphere = create_sphere();
-	identity = identity_matrix(4);
 	if (sphere->center.x == 0 && sphere->center.y == 0 && sphere->center.z == 0
 		&& sphere->radius == 1)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
-	free_matrix(identity);
 	free(sphere);
 }
 

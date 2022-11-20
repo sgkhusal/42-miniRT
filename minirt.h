@@ -107,6 +107,7 @@ t_ray				transform_ray(t_ray ray, t_matrix m);
 // intersections
 t_xs				sphere_intersection(t_ray ray, t_object *o);
 t_xs				cylinder_intersection(t_ray ray, t_object *o);
+t_xs		plane_intersection(t_ray ray, t_object *p);
 t_intersection		*create_intersection(double t, t_object *object);
 void				add_intersection_node(t_intersection *node,
 						t_intersection_list *list);

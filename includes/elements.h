@@ -134,6 +134,7 @@ t_vector	sphere_normal_at(t_object *s, t_point p);
 
 // plane
 t_plane		*create_plane(void);
+t_vector	plane_normal_at(t_object *p, t_point world_point);
 
 // cylinder
 t_cylinder	*create_cylinder(void);
