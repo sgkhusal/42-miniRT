@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 12:19:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 15:08:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	camera_tests(void);
 void	transformation_tests(void);
 void	ray_for_pixel_tests(void);
 void	scene_render_test(void);
+void	plane_render_test(void);
+void	plane_scene_render_test(void);
 
 void	shadow_tests(void);
 
