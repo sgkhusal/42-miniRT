@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 18:25:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:06:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,45 +28,27 @@ static void	set_sphere_matrixes(t_object *o, t_point center, double radius)
 	t_matrix	translation;
 	t_matrix	scaling;
 
-	if (center.x != 0 || center.y != 0 || center.z != 0)
-	{
-		translation = translation_matrix(center.x, center.y, center.z);
-		if (radius != 1)
-		{
-			scaling = scaling_matrix(radius, radius, radius);
-			set_transform(o, multiply_matrix(translation, scaling));
-			free_matrix(translation);
-			free_matrix(scaling);
-		}
-		else
-			set_transform(o, translation);
-	}
-	else if (radius != 1)
-	{
-		scaling = scaling_matrix(radius, radius, radius);
-		set_transform(o, scaling);
-	}
+	translation = translation_matrix(center.x, center.y, center.z);
+	scaling = scaling_matrix(radius, radius, radius);
+	set_transform(o, multiply_matrix(translation, scaling));
+	free_matrix(translation);
+	free_matrix(scaling);
 }
 
 static void	create_and_append_sphere(t_object **objs, char **infos, int *status)
 {
 	t_object	*s;
 	double		radius;
-	t_color		color;
 	t_point		center;
 
 	s = create_object(SPHERE, create_sphere());
 	center = transform_coordinates(infos[1], status);
 	radius = transform_double(infos[2], status) / 2;
-	color = transform_color(infos[3], status);
-	if (*status == ERROR)
-	{
-		free_objects(&s);
-		return ;
-	}
-	s->material.normalized_color = normalize_color(color);
+	s->material.color = transform_color(infos[3], status);
 	set_sphere_matrixes(s, center, radius);
 	append_object(objs, s);
+	if (*status == ERROR)
+		free_objects(&s);
 }
 
 int	handle_sphere(char *line, t_object **objs)

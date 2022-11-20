@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 15:04:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 00:57:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	rgb_to_int(short int red, short int green, short int blue) // provavelmente 
 		green = 255;
 	if (blue > 255)
 		blue = 255;
-	if (red > 255)
-		red = 255;
+	if (red < 0)
+		red = 0;
 	if (green < 0)
 		green = 0;
 	if (blue < 0)
@@ -39,12 +39,12 @@ t_color	set_color(short int red, short int green, short int blue)
 {
 	t_color	color;
 
-	color.rgb[3] = 0;
-	color.rgb[2] = red;
-	color.rgb[1] = green;
 	color.rgb[0] = blue;
+	color.rgb[1] = green;
+	color.rgb[2] = red;
+	color.rgb[3] = 0;
 	return (color);
-}
+} /* 0 - 255 (-128 - 127) */
 
 t_vector	multiply_colors(t_vector a, t_vector b)
 {
@@ -56,13 +56,14 @@ t_vector	multiply_colors(t_vector a, t_vector b)
 	return (color);
 }
 
-t_vector	normalize_color(t_color color)
+t_vector	normalize_color(double red, double green, double blue)
 {
 	t_vector	normalized_color;
 
-	normalized_color.x = color.rgb[2] / 255.0;
-	normalized_color.y = color.rgb[1] / 255.0;
-	normalized_color.z = color.rgb[0] / 255.0;
+	normalized_color.x = red / 255.0;
+	normalized_color.y = green / 255.0;
+	normalized_color.z = blue / 255.0;
+	normalized_color.w = 0;
 	return (normalized_color);
 }
 
@@ -88,7 +89,10 @@ t_vector	color_at(t_world world, t_ray ray)
 		return (set_vector(0, 0, 0));
 	hit = get_hit_intersection(list);
 	if (!hit)
+	{
+		free_intersection_list(&list);
 		return (set_vector(0, 0, 0));
+	}
 	comps = prepare_computations(ray, hit);
 	color = shade_hit(world, comps);
 	free_intersection_list(&list);

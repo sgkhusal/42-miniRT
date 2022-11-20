@@ -61,24 +61,27 @@ typedef struct intersection_list
 typedef struct s_comp
 {
 	t_intersection *xs;
-	t_point		point;
-	t_vector	eyev;
-	t_vector	normalv;
-	enum e_bool	inside;
+	t_point			point;
+	t_point			over_point;
+	t_vector		eyev;
+	t_vector		normalv;
+	enum e_bool		inside;
 }				t_comp;
 
 typedef struct s_world
 {
-	t_light					light;
-	t_object				*objects;
+	t_light		light;
+	t_object	*objects;
 }				t_world;
 
+// ambient is the normalized(ambient color) * ambient ratio
 typedef struct s_rt
 {
-	t_ambient			ambient; // vai ter que passar para o material dos elementos
-	t_camera			camera;
-	t_world				world;
-	t_intersection_list	intersections;
+	t_vector	ambient;
+	t_camera	camera;
+	t_vector	**canvas;
+	t_world		world;
+	t_mlx		mlx;
 }				t_rt;
 
 // input
@@ -86,14 +89,15 @@ int					handle_input(int argc, char *filename, t_rt	*rt);
 int					check_file_extension(char *file);
 int					open_file(char *file);
 int					read_file(int fd, char **content);
-int					handle_content(char *content, t_rt	*rt);
+int					handle_content(char **lines, t_rt	*rt);
 int					handle_line(char *line, t_rt *rt);
-int					handle_ambient_light(char *line, t_ambient *amb);
+int					handle_ambient_light(char *line, t_vector *amb);
 int					handle_camera(char *line, t_camera *cam);
 int					handle_light(char *line, t_light *light);
 int					handle_sphere(char *line, t_object **objs);
 int					handle_plane(char *line, t_object **objs);
 int					handle_cylinder(char *line, t_object **objs);
+void				set_ambient_light(t_object **objects, t_vector amb);
 
 // rays
 t_ray				set_ray(t_point origin, t_vector direction);
@@ -114,10 +118,8 @@ void				add_intersections(t_xs xs, t_object *object,
 						t_intersection_list *list);
 
 // color
-t_vector			lighting(t_material material, t_light light, t_comp comp);
-
-// world
-t_world	default_world(void); /* remove */
+t_vector			lighting(t_material material, t_light light, t_comp comp,
+						t_bool shadow);
 
 //intersect_sort
 void				intersect_sort(t_intersection **head);
@@ -130,6 +132,14 @@ t_vector			shade_hit(t_world world, t_comp comps);
 t_vector			color_at(t_world world, t_ray ray);
 
 //view transform
-t_matrix			view_transform(t_point from, t_point to, t_vector up);
+t_matrix			view_transform(t_point from, t_vector forward, t_vector up);
+void				set_camera_transform(t_camera *cam, t_matrix transform);
+t_ray				ray_for_pixel(t_camera cam, double x, double y);
+
+void				render(t_camera camera, t_world w,
+	t_vector **canvas, t_mlx *mlx);
+
+//is_shadowed
+t_bool				is_shadowed(t_world w, t_point point);
 
 #endif

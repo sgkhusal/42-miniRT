@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:53:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 1:14:1500 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static int	validate_light_chars(char **infos)
 
 int	handle_light(char *line, t_light *light)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
+	double		brightness;
+	t_vector	color;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -39,8 +41,9 @@ int	handle_light(char *line, t_light *light)
 	else
 	{
 		light->position = transform_coordinates(infos[1], &status);
-		light->brightness = transform_ratio(infos[2], &status);
-		light->color = transform_color(infos[3], &status);
+		brightness = transform_ratio(infos[2], &status);
+		color = transform_color(infos[3], &status);
+		light->intensity = multiply_vector_by_scalar(color, brightness);
 	}
 	free_array(infos);
 	return (status);

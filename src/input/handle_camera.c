@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 23:46:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/15 111::00020 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,26 @@ static int	validate_camera_chars(char **infos)
 	return (OK);
 }
 
+void	fill_camera(t_camera *cam, char **infos, int *status)
+{
+	double		fov;
+	t_matrix	transform;
+
+	fov = transform_fov(infos[3], status);
+	*cam = set_camera(fov * M_PI / 180, WIDTH, HEIGHT);
+	cam->origin = transform_coordinates(infos[1], status);
+	cam->orientation = transform_orientation(infos[2], status);
+	if (*status == ERROR)
+		return ;
+	transform = view_transform(cam->origin, cam->orientation,
+		set_vector(0, 1, 0)); // calcular o up vector
+	set_camera_transform(cam, transform);
+}
+
 int	handle_camera(char *line, t_camera *cam)
 {
-	char	**infos;
-	int		status;
+	char		**infos;
+	int			status;
 
 	status = OK;
 	infos = ft_split(line, ' ');
@@ -53,11 +69,7 @@ int	handle_camera(char *line, t_camera *cam)
 	else if (validate_camera_chars(infos) == ERROR)
 		status = ERROR;
 	else
-	{
-		cam->origin = transform_coordinates(infos[1], &status);
-		//cam->orientation = transform_orientation(infos[2], &status);
-		cam->fov = transform_fov(infos[3], &status);
-	}
+		fill_camera(cam, infos, &status);
 	free_array(infos);
 	return (status);
 }

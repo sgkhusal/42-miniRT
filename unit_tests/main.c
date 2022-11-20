@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 16:25:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:23:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ int	main(int argc, char *argv[])
 	cylinder_tests();
 	world_tests();
 	camera_tests();
+	shadow_tests();
 	if (argc == 1)
 		return (0);
 	if (strcmp(argv[1], "sp") == 0)
 		sphere_render_test();
 	else if (strcmp(argv[1], "cy") == 0)
 		cylinder_render_test();
+	else if (strcmp(argv[1], "sc") == 0)
+		scene_render_test();
 	return (0);
 }

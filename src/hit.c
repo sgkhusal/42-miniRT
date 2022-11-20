@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 22:11:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 11:37:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/16 20:223:43 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,4 @@ t_intersection	*get_hit_intersection(t_intersection_list list)
 		aux = aux->next;
 	}
 	return (hit_intersection);
-}
-
-
-t_vector	shade_hit(t_world world, t_comp comps)
-{
-	return (lighting(comps.xs->object->material, world.light, comps));
 }

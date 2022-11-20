@@ -6,23 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:42:43 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 16:19:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:10:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-bool	check_equal_points(t_point a, t_point b)
-{
-	return (
-		check_double_values(a.x, b.x)
-		&& check_double_values(a.y, b.y)
-		&& check_double_values(a.z, b.z)
-		&& check_double_values(a.w, b.w)
-	);
-}
-
-bool	check_equal_vectors(t_vector a, t_vector b)
+t_bool	check_equal_points(t_point a, t_point b)
 {
 	return (
 		check_double_values(a.x, b.x)

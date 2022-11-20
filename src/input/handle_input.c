@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/23 22:02:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/18 19:02:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	handle_input(int argc, char *filename, t_rt	*rt)
 {
 	int		fd;
 	char	*content;
+	char	**lines;
 
 	if (check_argc(argc) == ERROR)
 		return (ERROR);
@@ -38,7 +39,11 @@ int	handle_input(int argc, char *filename, t_rt	*rt)
 	content = ft_strdup("");
 	if (read_file(fd, &content) == ERROR)
 		return (ERROR);
-	if (handle_content(content, rt) == ERROR)
+	lines = ft_split(content, '\n');
+	free(content);
+	if (!lines || !*lines)
+		return (print_error_msg("empty file"));
+	if (handle_content(lines, rt) == ERROR)
 		return (ERROR);
 	return (OK);
 }

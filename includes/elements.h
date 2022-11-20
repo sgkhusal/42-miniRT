@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 16:02:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/16 221::400:444 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,24 @@ enum e_objects
  */
 typedef struct s_camera
 {
+	double		fov;
 	t_point		origin;
 	t_vector	orientation;
-	double		fov;
 	t_matrix	transform;
+	t_matrix	inverse;
 	int			hsize;
 	int			vsize;
+	double 		pixel_size;
+	double		half_width;
+	double		half_height;
 }				t_camera;
 
+// intensity is the normalized(color in rgb) * brightness
 typedef struct s_light
 {
 	t_point		position;
-	t_vector	intensity; // normalized color
-	t_color		color;
-	double		brightness;
+	t_vector	intensity;
 }				t_light;
-
-typedef struct s_ambient
-{
-	t_vector	intensity; // normalized color
-	t_color		color;
-	double		ratio;
-}				t_ambient;
 
 /**
  * @param color normalized color with range [0-1]
@@ -65,9 +61,9 @@ typedef struct s_ambient
  */
 typedef struct s_material
 {
-	t_vector	normalized_color;
+	t_vector	color;
+	t_vector	ambient;
 	double		diffuse;
-	double		ambient;
 	double		specular;
 	double		shininess;
 }				t_material;
@@ -142,5 +138,9 @@ t_plane		*create_plane(void);
 // cylinder
 t_cylinder	*create_cylinder(void);
 t_vector	cylinder_normal_at(t_object *c, t_point p);
+
+// camera
+t_camera	set_camera(double fov, int hsize, int vsize);
+void		free_camera(t_camera *camera);
 
 #endif
