@@ -68,21 +68,21 @@ t_intersection_list	intersect_world(t_world world, t_ray ray)
 
 void	render(t_camera camera, t_world w, t_vector **canvas, t_mlx *mlx)
 {
-	int			i;
-	int			j;
-	t_ray		ray;
+	int		x;
+	int		y;
+	t_ray	ray;
 
-	i = 0;
-	while (i < HEIGHT)
+	y = 0;
+	while (y < HEIGHT)
 	{
-		j = 0;
-		while (j < WIDTH)
+		x = 0;
+		while (x < WIDTH)
 		{
-			ray = ray_for_pixel(camera, j, i);
-			canvas[i][j] = color_at(w, ray);
-			j++;
+			ray = ray_for_pixel(camera, x, y);
+			canvas[y][x] = color_at(w, ray);
+			x++;
 		}
-		i++;
+		y++;
 	}
 	plot_image(&mlx->img, mlx, canvas);
 }
