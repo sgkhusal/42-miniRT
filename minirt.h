@@ -121,9 +121,6 @@ void				add_intersections(t_xs xs, t_object *object,
 t_vector			lighting(t_material material, t_light light, t_comp comp,
 						t_bool shadow);
 
-// world
-t_world	default_world(void); /* remove */
-
 //intersect_sort
 void				intersect_sort(t_intersection **head);
 
