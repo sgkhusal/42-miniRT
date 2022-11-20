@@ -102,7 +102,8 @@ void	scene_render_test(void)
 	rt.camera = set_camera(M_PI / 3, mlx.width, mlx.height);
 	rt.camera.origin = set_point(0, 1.5, -5);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		set_point(0, 1, 0), set_vector(0, 1, 0)));
+		normalize_vector(subtract_points(set_point(0, 1, 0), rt.camera.origin)),
+		set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

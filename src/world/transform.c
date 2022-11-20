@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/16 19:00:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 10:53:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,23 @@ void	set_camera_transform(t_camera *cam, t_matrix transform)
 	cam->inverse = inverse_matrix(cam->transform);
 }
 
-t_matrix	view_transform(t_point from, t_point to, t_vector up)
+/*
+Simulates the eye movement
+from: the eye position - default: point(0, 0, 0)
+to: the point where the eye is looking at - default: point(0, 0, -1)
+up: a vector indicating which direction is up - default: vector(0, 1, 0)
+The up vector doesn't need to be normalized and it doesn't need to be
+perpendicular to the viewing direction. The function will take care of that.
+You only have to point vaguely in the direction you want
+*/
+t_matrix	view_transform(t_point from, t_vector forward, t_vector up)
 {
-	t_vector	forward;
 	t_vector	left;
 	t_vector	true_up;
 	t_matrix	translation;
 	t_matrix	orientation;
 	t_matrix	transform;
 
-	forward = normalize_vector(subtract_points(to, from));
 	left = cross_product(forward, normalize_vector(up));
 	true_up = cross_product(left, forward);
 	orientation = identity_matrix(4);

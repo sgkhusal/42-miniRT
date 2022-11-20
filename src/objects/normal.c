@@ -36,16 +36,25 @@ t_vector	sphere_normal_at(t_object *s, t_point world_point)
 // os pontos estão sendo passados em relação ao mundo e não ao objeto
 t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 {
-	//t_point	object_point;
-	double	dist;
+	t_point		object_point;
+	t_vector	object_normal;
+	t_vector	world_normal;
+	double		dist;
 
-	//object_point = multiply_matrix_by_point(c->inverse, p);
-	dist = pow(world_point.x, 2) + pow(world_point.z, 2);
-	if (dist < 1 && world_point.y >= c->shape.cylinder->max - EPSILON)
+	object_point = multiply_matrix_by_point(c->inverse, world_point);
+	dist = pow(object_point.x, 2) + pow(object_point.z, 2);
+	if (dist < 1 && object_point.y >= c->shape.cylinder->max - EPSILON)
 		return (set_vector(0, 1, 0));
-	else if (dist < 1 && world_point.y <= c->shape.cylinder->min + EPSILON)
+	else if (dist < 1 && object_point.y <= c->shape.cylinder->min + EPSILON)
 		return (set_vector(0, -1, 0));
 	else
-		return (set_vector(world_point.x, 0, world_point.z)); // normalizar?
+	{
+		object_normal = set_vector(object_point.x, 0, object_point.z);
+		world_normal = multiply_matrix_by_vector(
+					c->transpose_inverse, object_normal);
+		world_normal.w = 0;
+		return (normalize_vector(world_normal));
+	}
+		//return (set_vector(world_point.x, 0, world_point.z)); // normalizar?
 		//na parte da esfera fala que tem que normalizar
 }

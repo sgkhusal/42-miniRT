@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 00:40:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 10:37:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 	//return (add_vectors(sh.ambient, sh.diffuse));
 	return (add_vectors(add_vectors(sh.ambient, sh.diffuse), sh.specular));
 }
-// na scaling, a luz especular não está aparecendo quando aumenta o tamanho do cilindro
-// na scaling, a luz especular vai para o infinito quando diminui o tamanho do cilindro
 
 t_bool	is_shadowed(t_world w, t_point point)
 {
@@ -95,11 +93,11 @@ t_bool	is_shadowed(t_world w, t_point point)
 	free_intersection_list(&list);
 	return (FALSE);
 }
-//-1 -2 5 6
+
 t_vector	shade_hit(t_world world, t_comp comps)
 {
 	t_bool	shadow;
 
 	shadow = is_shadowed(world, comps.over_point);
-	return (lighting(comps.xs->object->material, world.light, comps, shadow));//
+	return (lighting(comps.xs->object->material, world.light, comps, shadow));
 }

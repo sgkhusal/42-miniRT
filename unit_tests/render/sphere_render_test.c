@@ -79,7 +79,7 @@ void	sphere_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	s = create_object(SPHERE, create_sphere());
-	transform_sphere(s, 4);
+	transform_sphere(s, 0);
 	s->material.color = set_vector(1, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, s);
@@ -87,8 +87,10 @@ void	sphere_render_test(void)
 		set_vector(1, 1, 1));
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5); // não está funcionando quando está dentro da esfera, na origem dela
+	// no cilindro também
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		set_point(0, 0, 0), set_vector(0, 1, 0)));
+		normalize_vector(subtract_points(set_point(0, 0, 0), rt.camera.origin)),
+		set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

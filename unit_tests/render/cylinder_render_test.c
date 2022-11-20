@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 10:32:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 11:04:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	cylinder_render_test(void)
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 3);
+	transform_cylinder(c, 0);
 	c->shape.cylinder->min = -1;
 	c->shape.cylinder->max = 5;
 	c->material.color = set_vector(0.5, 0.2, 1);
@@ -65,7 +65,8 @@ void	cylinder_render_test(void)
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		set_point(0, 0, 0), set_vector(0, 1, 0)));
+		normalize_vector(subtract_points(set_point(0, 0, 0), rt.camera.origin)),
+		set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

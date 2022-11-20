@@ -132,7 +132,7 @@ t_vector			shade_hit(t_world world, t_comp comps);
 t_vector			color_at(t_world world, t_ray ray);
 
 //view transform
-t_matrix			view_transform(t_point from, t_point to, t_vector up);
+t_matrix			view_transform(t_point from, t_vector forward, t_vector up);
 void				set_camera_transform(t_camera *cam, t_matrix transform);
 t_ray				ray_for_pixel(t_camera cam, double x, double y);
 

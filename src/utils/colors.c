@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 11:52:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 00:57:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ t_vector	color_at(t_world world, t_ray ray)
 		return (set_vector(0, 0, 0));
 	hit = get_hit_intersection(list);
 	if (!hit)
+	{
+		free_intersection_list(&list);
 		return (set_vector(0, 0, 0));
+	}
 	comps = prepare_computations(ray, hit);
 	color = shade_hit(world, comps);
 	free_intersection_list(&list);
