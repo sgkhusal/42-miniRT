@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 20:08:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/20 00:40:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,51 @@ t_light	set_point_light(t_point position, t_vector intensity)
 	return (light);
 }
 
+/*
+reflect_dot_eye: the cosine of the angle between the reflection vector and the
+eye vector. A negative number means the light reflects away from the eye.
+*/
+t_vector	get_specular(t_material m, t_light light, t_comp comp,
+							t_vector light_vect)
+{
+	t_vector	specular;
+	t_vector	reflected;
+	double		reflected_dot_eye;
+
+	reflected = reflect(negative_vector(light_vect), comp.normalv);
+	reflected_dot_eye = scalar_product(reflected, comp.eyev);
+	if (reflected_dot_eye < 0 || check_double_values(reflected_dot_eye, 0))
+		specular = set_vector(0, 0, 0);
+	else
+		specular = multiply_vector_by_scalar(light.intensity,
+			pow(reflected_dot_eye, m.shininess) * m.specular);
+	return (specular);
+}
+
+/*
+light_vect: the direction from the point to the light source
+light_dot_normal: the cosine of the angle between the light vector and the
+normal vector. A negative number means the light is on the other side of the
+surface.
+*/
 t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 {
 	t_vector	eff_color;
 	t_vector	light_vect;
 	t_shading	sh;
-	t_vector	reflected;
-	double		reflected_dot_eye;
+	double		light_dot_normal;
 
 	//printf("light bright: %f %f %f\n", light.intensity.x, light.intensity.y, light.intensity.z);
 	//printf("material color: %f %f %f\n", material.color.x, material.color.y, material.color.z);
 	eff_color = multiply_colors(m.color, light.intensity);
 	light_vect = normalize_vector(subtract_points(light.position, comp.point));
-	sh.ambient = multiply_colors(eff_color, m.ambient); // tenho a impressão que a ambient não teria que multiplicar pela intensity antes...
-	if (scalar_product(light_vect, comp.normalv) < 0 || shadow == TRUE)
+	sh.ambient = multiply_colors(eff_color, m.ambient); // tenho a impressão que a ambient não teria que multiplicar pela intensity antes... - light 0,0,0
+	light_dot_normal = scalar_product(light_vect, comp.normalv);
+	if (light_dot_normal < 0 || shadow == TRUE)
 		return (sh.ambient);
 	sh.diffuse = multiply_vector_by_scalar(eff_color,
-		m.diffuse * scalar_product(light_vect, comp.normalv));
-	reflected = reflect(negative_vector(light_vect), comp.normalv);
-	reflected_dot_eye = scalar_product(reflected, comp.eyev);
-	if (reflected_dot_eye < 0 || check_double_values(reflected_dot_eye, 0))
-		sh.specular = set_vector(0, 0, 0);
-	else
-		sh.specular = multiply_vector_by_scalar(light.intensity,
-			pow(reflected_dot_eye, m.shininess) * m.specular);
+		m.diffuse * light_dot_normal);
+	sh.specular = get_specular(m, light, comp, light_vect);
 	//return (add_vectors(sh.ambient, sh.diffuse));
 	return (add_vectors(add_vectors(sh.ambient, sh.diffuse), sh.specular));
 }

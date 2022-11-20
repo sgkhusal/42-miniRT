@@ -83,8 +83,8 @@ void	sphere_render_test(void)
 	s->material.color = set_vector(1, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, s);
-	rt.world.light.position = set_point(-10, 10, -10);
-	rt.world.light.intensity = set_vector(1, 1, 1);
+	rt.world.light = set_point_light(set_point(-10, 10, -10),
+		set_vector(1, 1, 1));
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5); // não está funcionando quando está dentro da esfera, na origem dela
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
