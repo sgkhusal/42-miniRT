@@ -42,17 +42,16 @@ static int	validate_camera_chars(char **infos)
 void	fill_camera(t_camera *cam, char **infos, int *status)
 {
 	double		fov;
-	t_point		origin;
 	t_vector	orientation;
 	t_matrix	transform;
 
 	fov = transform_fov(infos[3], status);
 	*cam = set_camera(fov * M_PI / 180, WIDTH, HEIGHT);
-	origin = transform_coordinates(infos[1], status);
+	cam->origin = transform_coordinates(infos[1], status);
 	orientation = transform_orientation(infos[2], status);
 	if (*status == ERROR)
 		return ;
-	transform = view_transform(origin, set_point(orientation.x,
+	transform = view_transform(cam->origin, set_point(orientation.x,
 		orientation.y, orientation.z), set_vector(0, 1, 0)); // calcular o up vector
 	/* transform = view_transform(origin, add_point_and_vector(origin,
 		orientation), set_vector(0, 1, 0)); // */

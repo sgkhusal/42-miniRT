@@ -40,7 +40,7 @@ void	add_intersections(t_xs xs, t_object *object, t_intersection_list *list)
 	add_intersection_node(create_intersection(xs.t2, object), list);
 }
 
-t_intersection_list	intersect_world(t_world world, t_ray ray) // normalizar a direção do raio antes
+t_intersection_list	intersect_world(t_world world, t_ray ray)
 {
 	t_intersection_list	list;
 	t_xs				xs;

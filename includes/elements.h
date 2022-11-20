@@ -33,6 +33,7 @@ enum e_objects
 typedef struct s_camera
 {
 	double		fov;
+	t_point		origin;
 	t_matrix	transform;
 	t_matrix	inverse;
 	int			hsize;

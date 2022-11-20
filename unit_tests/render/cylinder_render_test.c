@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 19:53:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:58:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ static void	transform_cylinder(t_object *c, int type)
 	t_matrix	rotation_z;
 
 	if (type == 1 || type == 3)
-		translation = translation_matrix(5, 0, 0);
+		translation = translation_matrix(1, 1, 1); // problema
 	if (type == 2 || type == 3)
 		scaling = scaling_matrix(0.5, 1, 0.5);
 	if (type == 1)
 		set_transform(c, translation);
 	else if (type == 2)
 		set_transform(c, scaling);
-	else if (type == 3)
+	else if (type == 3) // problema
 	{
 		set_transform(c, multiply_matrix(translation, scaling));
 		free_matrix(translation);
 		free_matrix(scaling);
 	}
-	else if (type == 4)
+	else if (type == 4) // problema
 	{
 		rotation_x = rotation_x_matrix(M_PI / 4);
 		rotation_z = rotation_z_matrix(M_PI / 4);
@@ -56,15 +56,16 @@ void	cylinder_render_test(void)
 	c = create_object(CYLINDER, create_cylinder());
 	transform_cylinder(c, 4);
 	c->shape.cylinder->min = -1;
-	c->shape.cylinder->max = 4;
+	c->shape.cylinder->max = 1;
 	c->material.color = set_vector(0.5, 0.2, 1);
 	rt.world.objects = NULL;
 	append_object(&rt.world.objects, c);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
-	set_camera_transform(&rt.camera, view_transform(set_point(0, 0, -5),
-		set_point(0, 0, 0), set_vector(0, 0, 1)));
+	rt.camera.origin = set_point(0, 0, -5);
+	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
+		set_point(0, 0, 0), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

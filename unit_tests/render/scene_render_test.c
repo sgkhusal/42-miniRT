@@ -97,10 +97,11 @@ void	scene_render_test(void)
 	rt.world.objects = NULL;
 	set_world(&(rt.world));
 	put_elements(&(rt.world));
-	rt.camera = set_camera(M_PI / 3, mlx.width, mlx.height);
 	rt.world.light.position = set_point(-10, 10, -10);
 	rt.world.light.intensity = set_vector(1, 1, 1);
-	set_camera_transform(&rt.camera, view_transform(set_point(0, 1.5, -5),
+	rt.camera = set_camera(M_PI / 3, mlx.width, mlx.height);
+	rt.camera.origin = set_point(0, 1.5, -5);
+	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 		set_point(0, 1, 0), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
