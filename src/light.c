@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 10:37:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:25:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 
 	//printf("light bright: %f %f %f\n", light.intensity.x, light.intensity.y, light.intensity.z);
 	//printf("material color: %f %f %f\n", material.color.x, material.color.y, material.color.z);
+	sh.ambient = multiply_colors(m.color, m.ambient);
 	eff_color = multiply_colors(m.color, light.intensity);
 	light_vect = normalize_vector(subtract_points(light.position, comp.point));
-	sh.ambient = multiply_colors(eff_color, m.ambient); // tenho a impressão que a ambient não teria que multiplicar pela intensity antes... - light 0,0,0
 	light_dot_normal = scalar_product(light_vect, comp.normalv);
 	if (light_dot_normal < 0 || shadow == TRUE)
 		return (sh.ambient);
