@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 10:53:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/25 18:34:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	set_camera_transform(t_camera *cam, t_matrix transform)
 Simulates the eye movement
 from: the eye position - default: point(0, 0, 0)
 to: the point where the eye is looking at - default: point(0, 0, -1)
+forward = to - from -> the orientation vector of the camera
 up: a vector indicating which direction is up - default: vector(0, 1, 0)
 The up vector doesn't need to be normalized and it doesn't need to be
 perpendicular to the viewing direction. The function will take care of that.

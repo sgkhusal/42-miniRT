@@ -13,7 +13,7 @@
 #include "minirt.h"
 
 // FOV : Horizontal field of view in degrees in range [0,180]
-int	transform_fov(char *fov_str, int *status) // deixa como double ou int??
+int	transform_fov(char *fov_str, int *status)
 {
 	int	fov;
 
@@ -39,6 +39,13 @@ static int	validate_camera_chars(char **infos)
 	return (OK);
 }
 
+t_vector	set_up(t_vector orientation)
+{
+	if (check_double_values(fabs(orientation.y), 1))
+		return (set_vector(1, 0, 0)); /////
+	return (set_vector(0, 1, 0));
+}
+
 void	fill_camera(t_camera *cam, char **infos, int *status)
 {
 	double		fov;
@@ -51,7 +58,7 @@ void	fill_camera(t_camera *cam, char **infos, int *status)
 	if (*status == ERROR)
 		return ;
 	transform = view_transform(cam->origin, cam->orientation,
-		set_vector(0, 1, 0)); // calcular o up vector
+		set_up(cam->orientation));
 	set_camera_transform(cam, transform);
 }
 
