@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/21 17:25:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:35:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 	sh.diffuse = multiply_vector_by_scalar(eff_color,
 		m.diffuse * light_dot_normal);
 	sh.specular = get_specular(m, light, comp, light_vect);
-	//return (add_vectors(sh.ambient, sh.diffuse));
 	return (add_vectors(add_vectors(sh.ambient, sh.diffuse), sh.specular));
 }
 

@@ -49,13 +49,7 @@ void	camera_tests(void)
 
 	printf(YELLOW "Camera tests: " END "\n");
 	set_camera_test1();
-	psize = 0.01;
-	fov = M_PI / 2;
-	hsize = 200;
-	vsize = 125;
-	set_camera_test2(fov, hsize, vsize, psize);
-	hsize = 125;
-	vsize = 200;
-	set_camera_test2(fov, hsize, vsize, psize);
+	set_camera_test2(M_PI / 2, 200, 125, 0.01);
+	set_camera_test2(M_PI / 2, 125, 200, 0.016);
 	ray_for_pixel_tests();
 }
