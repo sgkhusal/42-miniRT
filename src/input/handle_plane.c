@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 23:09:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 00:22:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,36 @@ static int	validate_plane_chars(char **infos)
 	return (OK);
 }
 
-static void	set_plane_matrixes(t_object *o, t_point center)
+static void	set_plane_matrixes(t_object *o, t_point center,
+					t_vector orientation)
 {
 	t_matrix	translation;
+	t_matrix	rotation;
+	t_matrix	transform;
 
 	translation = translation_matrix(center.x, center.y, center.z);
-	set_transform(o, translation);
+	rotation = get_rotation_matrix(orientation);
+	transform = multiply_matrix(translation, rotation);
+	set_transform(o, transform);
+	free_matrix(translation);
+	free_matrix(rotation);
 }
 
 static void	create_and_append_plane(t_object **objs, char **infos, int *status)
 {
-	t_object	*p;
+	t_object	*pl;
 	t_point		xyz;
-	//t_vector	orientation;
+	t_vector	orientation;
 
-	p = create_object(PLANE, create_plane());
+	pl = create_object(PLANE, create_plane());
 	xyz = transform_coordinates(infos[1], status);
-	//orientation = transform_orientation(infos[2], status);
-	p->material.color = transform_color(infos[3], status);
-	set_plane_matrixes(p, xyz); // falta rotação
-	append_object(objs, p);
+	orientation = transform_orientation(infos[2], status);
+	pl->material.color = transform_color(infos[3], status);
+	set_plane_matrixes(pl, xyz, orientation);
 	if (*status == ERROR)
-		free_objects(&p);
+		free_objects(&pl);
+	else
+		append_object(objs, pl);
 }
 
 int	handle_plane(char *line, t_object **objs)

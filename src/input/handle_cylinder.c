@@ -27,43 +27,6 @@ static int	validate_cylinder_chars(char **infos)
 	return (OK);
 }
 
-t_matrix	cylinder_rotation_matrix(t_vector orientation)
-{
-	t_matrix	rotation_x;
-	t_matrix	rotation_y;
-	t_matrix	rotation_z;
-	t_matrix	rotation;
-
-	if (check_equal_vectors(set_vector(0, 1, 0), orientation))
-		return (identity_matrix(4));
-	else if (check_equal_vectors(set_vector(0, -1, 0), orientation))
-		return (rotation_x_matrix(M_PI));
-	else if (check_equal_vectors(set_vector(1, 0, 0), orientation))
-		return (rotation_z_matrix(-M_PI / 2));
-	else if (check_equal_vectors(set_vector(-1, 0, 0), orientation))
-		return (rotation_z_matrix(M_PI / 2));
-	else if (check_equal_vectors(set_vector(0, 0, 1), orientation))
-		return (rotation_x_matrix(M_PI / 2));
-	else if (check_equal_vectors(set_vector(0, 0, -1), orientation))
-		return (rotation_x_matrix(-M_PI / 2));
-	if (check_double_values(orientation.y, 0))
-	{
-		rotation_x = rotation_x_matrix(M_PI / 2);
-		rotation_y = rotation_y_matrix(atan(orientation.x / orientation.z));
-		rotation = multiply_matrix(rotation_y, rotation_x);
-		free_matrix(rotation_y);
-	}
-	else
-	{
-		rotation_x = rotation_x_matrix(atan(orientation.z / orientation.y));
-		rotation_z = rotation_z_matrix(atan(-orientation.x / orientation.y));
-		rotation = multiply_matrix(rotation_z, rotation_x);
-		free_matrix(rotation_z);
-	}
-	free_matrix(rotation_x);
-	return (rotation);
-}
-
 static void	set_cylinder_matrixes(t_object *o, t_point center, double radius,
 									t_vector orientation)
 {
@@ -74,7 +37,7 @@ static void	set_cylinder_matrixes(t_object *o, t_point center, double radius,
 
 	translation = translation_matrix(center.x, center.y, center.z);
 	scaling = scaling_matrix(radius, 1, radius);
-	rotation = cylinder_rotation_matrix(orientation);
+	rotation = get_rotation_matrix(orientation);
 	tmp = multiply_matrix(translation, rotation);
 	set_transform(o, multiply_matrix(tmp, scaling));
 	free_matrix(translation);
@@ -86,24 +49,25 @@ static void	set_cylinder_matrixes(t_object *o, t_point center, double radius,
 static void	create_and_append_cylinder(t_object **objs, char **infos,
 	int *status)
 {
-	t_object	*c;
+	t_object	*cy;
 	double		radius;
 	double		half_height;
 	t_point		center;
 	t_vector	orientation;
 
-	c = create_object(CYLINDER, create_cylinder());
+	cy = create_object(CYLINDER, create_cylinder());
 	center = transform_coordinates(infos[1], status);
 	orientation = transform_orientation(infos[2], status);
 	radius = transform_double(infos[3], status) / 2;
 	half_height = transform_double(infos[4], status) / 2;
-	c->shape.cylinder->max = half_height;
-	c->shape.cylinder->min = -half_height;
-	c->material.color = transform_color(infos[5], status);
-	set_cylinder_matrixes(c, center, radius, orientation);
-	append_object(objs, c);
+	cy->shape.cylinder->max = half_height;
+	cy->shape.cylinder->min = -half_height;
+	cy->material.color = transform_color(infos[5], status);
+	set_cylinder_matrixes(cy, center, radius, orientation);
 	if (*status == ERROR)
-		free_objects(&c);
+		free_objects(&cy);
+	else
+		append_object(objs, cy);
 }
 
 int	handle_cylinder(char *line, t_object **objs)

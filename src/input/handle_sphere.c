@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 21:06:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 00:22:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ static void	create_and_append_sphere(t_object **objs, char **infos, int *status)
 	radius = transform_double(infos[2], status) / 2;
 	s->material.color = transform_color(infos[3], status);
 	set_sphere_matrixes(s, center, radius);
-	append_object(objs, s);
 	if (*status == ERROR)
 		free_objects(&s);
+	else
+		append_object(objs, s);
 }
 
 int	handle_sphere(char *line, t_object **objs)
