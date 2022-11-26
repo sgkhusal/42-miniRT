@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/25 21:56:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:25:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_world	create_world(void)
 	t_world		world;
 
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 1);
+	transform_cylinder(c, 9);
 	c->shape.cylinder->min = -1;
 	c->shape.cylinder->max = 6;
 	c->material.color = set_vector(0.5, 0.2, 1);
