@@ -98,6 +98,7 @@ int					handle_sphere(char *line, t_object **objs);
 int					handle_plane(char *line, t_object **objs);
 int					handle_cylinder(char *line, t_object **objs);
 void				set_ambient_light(t_object **objects, t_vector amb);
+t_matrix			get_rotation_matrix(t_vector orientation);
 
 // rays
 t_ray				set_ray(t_point origin, t_vector direction);
