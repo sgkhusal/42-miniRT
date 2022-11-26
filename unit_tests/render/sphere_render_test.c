@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_render_test.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ellrairaira-a- <elralra-aira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 11:28:26 by elralraira-a-         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:32:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,21 @@ static void	transform_sphere(t_object *s, int type)
 		transform_sphere2(s, type);
 }
 
+static t_world	create_world(void)
+{
+	t_object	*s;
+	t_world		world;
+
+	s = create_object(SPHERE, create_sphere());
+	transform_sphere(s, 0);
+	s->material.color = set_vector(1, 0.2, 1);
+	world.objects = NULL;
+	append_object(&world.objects, s);
+	world.light = set_point_light(set_point(-10, 10, -10),
+			set_vector(1, 1, 1));
+	return (world);
+}
+
 void	sphere_render_test(void)
 {
 	t_mlx		mlx;
@@ -78,19 +93,13 @@ void	sphere_render_test(void)
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
-	s = create_object(SPHERE, create_sphere());
-	transform_sphere(s, 0);
-	s->material.color = set_vector(1, 0.2, 1);
-	rt.world.objects = NULL;
-	append_object(&rt.world.objects, s);
-	rt.world.light = set_point_light(set_point(-10, 10, -10),
-		set_vector(1, 1, 1));
+	rt.world = create_world();
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
-	rt.camera.origin = set_point(0, 0, -5); // não está funcionando quando está dentro da esfera, na origem dela
-	// no cilindro também
+	rt.camera.origin = set_point(0, 0, -5); // não está funcionando quando está
+	// dentro da esfera, na origem dela; no cilindro também
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		normalize_vector(subtract_points(set_point(0, 0, 0), rt.camera.origin)),
-		set_vector(0, 1, 0)));
+			normalize_vector(subtract_points(set_point(0, 0, 0),
+			rt.camera.origin)), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

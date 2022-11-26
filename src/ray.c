@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/19 21:46:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:13:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ t_ray	ray_for_pixel(t_camera cam, double x, double y)
 	double	xoffset;
 	double	yoffset;
 	t_point	world;
+	t_point	pixel;
 	t_ray	ray;
 
 	xoffset = (x + 0.5) * cam.pixel_size;
 	yoffset = (y + 0.5) * cam.pixel_size;
 	world = set_point(cam.half_width - xoffset, cam.half_height - yoffset, -1);
+	pixel = multiply_matrix_by_point(cam.inverse, world);
 	ray.origin = cam.origin;
-	ray.direction = normalize_vector(subtract_points(multiply_matrix_by_point(
-					cam.inverse, world), ray.origin));
+	ray.direction = normalize_vector(subtract_points(pixel, ray.origin));
 	return (ray);
 }

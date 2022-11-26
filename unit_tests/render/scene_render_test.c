@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_render_test.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:53:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/16 19:54:509 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:36:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	put_elements(t_world *w)
 	right->material.diffuse = 0.7;
 	right->material.specular = 0.3;
 	set_transform(right, multiply_matrix(translation_matrix(1.5, 0.5, -0.5),
-		scaling_matrix(0.5, 0.5, 0.5)));
+			scaling_matrix(0.5, 0.5, 0.5)));
 	append_object(&(w->objects), right);
 	left = create_object(SPHERE, create_sphere());
 	left->material.color = set_vector(1, 0.8, 0.1);
 	left->material.diffuse = 0.7;
 	left->material.specular = 0.3;
 	set_transform(left, multiply_matrix(translation_matrix(-1.5, 0.33, -0.75),
-		scaling_matrix(0.33, 0.33, 0.33)));
+			scaling_matrix(0.33, 0.33, 0.33)));
 	append_object(&(w->objects), left);
 }
 
@@ -55,17 +55,17 @@ static void	set_world(t_world *w)
 	left_wall->material.color = set_vector(1, 0.9, 0.9);
 	left_wall->material.specular = 0;
 	set_transform(left_wall, multiply_matrix(translation_matrix(0, 0, 5),
-		multiply_matrix(rotation_y_matrix(-M_PI / 4),
-		multiply_matrix(rotation_x_matrix(M_PI / 2),
-		scaling_matrix(10, 0.01, 10)))));
+			multiply_matrix(rotation_y_matrix(-M_PI / 4),
+			multiply_matrix(rotation_x_matrix(M_PI / 2),
+			scaling_matrix(10, 0.01, 10)))));
 	append_object(&(w->objects), left_wall);
 	right_wall = create_object(SPHERE, create_sphere());
 	right_wall->material.color = set_vector(1, 0.9, 0.9);
 	right_wall->material.specular = 0;
 	set_transform(right_wall, multiply_matrix(translation_matrix(0, 0, 5),
-		multiply_matrix(rotation_y_matrix(M_PI / 4),
-		multiply_matrix(rotation_x_matrix(M_PI / 2),
-		scaling_matrix(10, 0.01, 10)))));
+			multiply_matrix(rotation_y_matrix(M_PI / 4),
+			multiply_matrix(rotation_x_matrix(M_PI / 2),
+			scaling_matrix(10, 0.01, 10)))));
 	append_object(&(w->objects), right_wall);
 }
 
@@ -102,8 +102,14 @@ void	scene_render_test(void)
 	rt.camera = set_camera(M_PI / 3, mlx.width, mlx.height);
 	rt.camera.origin = set_point(0, 1.5, -5);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		normalize_vector(subtract_points(set_point(0, 1, 0), rt.camera.origin)),
-		set_vector(0, 1, 0)));
+			normalize_vector(subtract_points(set_point(0, 1, 0),
+			rt.camera.origin)), set_vector(0, 1, 0)));
+	/* t_vector orientation = normalize_vector(subtract_points(set_point(0, 1, 0), rt.camera.origin));
+	t_vector right = cross_product(set_vector(0, 1, 0), orientation);
+	t_vector up = cross_product(orientation, right);
+	printf("right: %f, %f, %f\n", right.x, right.y, right.z);
+	printf("up: %f, %f, %f\n", up.x, up.y, up.z);
+	set_camera_transform(&rt.camera, view_transform(rt.camera.origin, orientation, up)); */
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

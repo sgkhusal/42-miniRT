@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_scene_render_test.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:02:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 15:13:110 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:34:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	put_elements(t_world *w)
 	right->material.diffuse = 0.7;
 	right->material.specular = 0.3;
 	set_transform(right, multiply_matrix(translation_matrix(1.5, 0.5, -0.5),
-		scaling_matrix(0.5, 0.5, 0.5)));
+			scaling_matrix(0.5, 0.5, 0.5)));
 	append_object(&(w->objects), right);
 	left = create_object(SPHERE, create_sphere());
 	left->material.color = set_vector(1, 0.8, 0.1);
 	left->material.diffuse = 0.7;
 	left->material.specular = 0.3;
 	set_transform(left, multiply_matrix(translation_matrix(-1.5, 0.33, -0.75),
-		scaling_matrix(0.33, 0.33, 0.33)));
+			scaling_matrix(0.33, 0.33, 0.33)));
 	append_object(&(w->objects), left);
 }
 
@@ -54,7 +54,7 @@ static void	set_world(t_world *w)
 	backdrop_wall->material.color = set_vector(1, 1, 0);
 	backdrop_wall->material.specular = 0;
 	set_transform(backdrop_wall, multiply_matrix(translation_matrix(0, 0, 3),
-		rotation_x_matrix(M_PI / 2)));
+			rotation_x_matrix(M_PI / 2)));
 	append_object(&(w->objects), backdrop_wall);
 	ceiling = create_object(PLANE, create_plane());
 	ceiling->material.color = set_vector(0, 0, 0);
@@ -96,8 +96,8 @@ void	plane_scene_render_test(void)
 	rt.camera = set_camera(M_PI / 2, mlx.width, mlx.height);
 	rt.camera.origin = set_point(0, 1.5, -5);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		normalize_vector(subtract_points(set_point(0, 1, 0), rt.camera.origin)),
-		set_vector(0, 1, 0)));
+			normalize_vector(subtract_points(set_point(0, 1, 0),
+			rt.camera.origin)), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));
