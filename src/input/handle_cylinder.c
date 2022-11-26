@@ -30,6 +30,7 @@ static int	validate_cylinder_chars(char **infos)
 t_matrix	cylinder_rotation_matrix(t_vector orientation)
 {
 	t_matrix	rotation_x;
+	t_matrix	rotation_y;
 	t_matrix	rotation_z;
 	t_matrix	rotation;
 
@@ -37,17 +38,29 @@ t_matrix	cylinder_rotation_matrix(t_vector orientation)
 		return (identity_matrix(4));
 	else if (check_equal_vectors(set_vector(0, -1, 0), orientation))
 		return (rotation_x_matrix(M_PI));
-	if (check_double_values(orientation.z, 0))
-		rotation_x = identity_matrix(4);
+	else if (check_equal_vectors(set_vector(1, 0, 0), orientation))
+		return (rotation_z_matrix(-M_PI / 2));
+	else if (check_equal_vectors(set_vector(-1, 0, 0), orientation))
+		return (rotation_z_matrix(M_PI / 2));
+	else if (check_equal_vectors(set_vector(0, 0, 1), orientation))
+		return (rotation_x_matrix(M_PI / 2));
+	else if (check_equal_vectors(set_vector(0, 0, -1), orientation))
+		return (rotation_x_matrix(-M_PI / 2));
+	if (check_double_values(orientation.y, 0))
+	{
+		rotation_x = rotation_x_matrix(M_PI / 2);
+		rotation_y = rotation_y_matrix(atan(orientation.x / orientation.z));
+		rotation = multiply_matrix(rotation_y, rotation_x);
+		free_matrix(rotation_y);
+	}
 	else
-		rotation_x = rotation_x_matrix(atan(orientation.y / orientation.z)); // é invertido?
-	if (check_double_values(orientation.x, 0))
-		rotation_z = identity_matrix(4);
-	else
-		rotation_z = rotation_z_matrix(atan(orientation.y / orientation.x)); // é invertido?
-	rotation = multiply_matrix(rotation_z, rotation_x);
+	{
+		rotation_x = rotation_x_matrix(atan(orientation.z / orientation.y));
+		rotation_z = rotation_z_matrix(atan(-orientation.x / orientation.y));
+		rotation = multiply_matrix(rotation_z, rotation_x);
+		free_matrix(rotation_z);
+	}
 	free_matrix(rotation_x);
-	free_matrix(rotation_z);
 	return (rotation);
 }
 
@@ -62,7 +75,7 @@ static void	set_cylinder_matrixes(t_object *o, t_point center, double radius,
 	translation = translation_matrix(center.x, center.y, center.z);
 	scaling = scaling_matrix(radius, 1, radius);
 	rotation = cylinder_rotation_matrix(orientation);
-	tmp = multiply_matrix(scaling, rotation);
+	tmp = multiply_matrix(translation, rotation);
 	set_transform(o, multiply_matrix(tmp, scaling));
 	free_matrix(translation);
 	free_matrix(scaling);
