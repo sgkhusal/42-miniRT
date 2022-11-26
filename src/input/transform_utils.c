@@ -6,26 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/17 11:53:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:51:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-char	**parse_input(char *line, char c, int size_expected, int *status)
-{
-	char	**parsed;
-
-	parsed = ft_split(line, c);
-	if (!parsed)
-		*status = print_error_msg2("malloc error on parse_input: ", line);
-	else if (total_infos(parsed) != size_expected)
-	{
-		free_array(parsed);
-		*status = print_error_msg2("to many or few arguments in ", line);
-	}
-	return (parsed);
-}
 
 t_vector	transform_color(char *color_str, int *status)
 {
@@ -59,7 +44,7 @@ double	transform_ratio(char *ratio_str, int *status)
 	double	ratio;
 	char	*cpy;
 
-	if (ft_strlen(ratio_str) > 7) // 0.00001
+	if (ft_strlen(ratio_str) > 7)
 	{
 		*status = print_error_msg2("invalid ratio range: ", ratio_str);
 		return (0);
@@ -92,9 +77,9 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	x = ft_atod(xyz[0]);
 	y = ft_atod(xyz[1]);
 	z = ft_atod(xyz[2]);
-	// verificar que range vamos deixar
 	if (x < -1000 || x > 1000 || y < -1000 || y > 1000 || z < -1000 || z > 1000)
-		*status = print_error_msg2("invalid coordinates range: ", xyz_str);
+		*status = print_error_msg2("invalid coordinates range [-1000,1000]: ",
+				xyz_str);
 	free_array(xyz);
 	return (set_point(x, y, z));
 }
@@ -136,15 +121,15 @@ double	transform_double(char *str, int *status)
 	double	d;
 	char	*cpy;
 
-	if (ft_strlen(str) > 11) // acho que a gente pode limitar mais
+	if (ft_strlen(str) > 11)
 	{
-		*status = print_error_msg2("invalid number range: ", str);
+		*status = print_error_msg2("invalid number range: [0,10000]", str);
 		return (0);
 	}
 	cpy = ft_strdup(str);
 	d = ft_atod(cpy);
 	free(cpy);
-	if (d < 0 || d > 1000) // verificar que range vamos deixar
-		*status = print_error_msg2("invalid number range: ", str);
+	if (d < 0 || d > 1000)
+		*status = print_error_msg2("invalid number range: [0,10000]", str);
 	return (d);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   elements.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 20:59:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/16 221::400:444 by elraira-         ###   ########.fr       */
+/*   Created: 2022/11/26 12:39:46 by sguilher          #+#    #+#             */
+/*   Updated: 2022/11/26 12:40:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_camera
 	t_matrix	inverse;
 	int			hsize;
 	int			vsize;
-	double 		pixel_size;
+	double		pixel_size;
 	double		half_width;
 	double		half_height;
 }				t_camera;

@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:03:15 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/29 15:46:221 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:14:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_bool is_inside(t_comp *comp)
+t_bool	is_inside(t_comp *comp)
 {
 	if (scalar_product(comp->normalv, comp->eyev) < 0)
 	{
@@ -40,7 +40,6 @@ t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 		comp.normalv = cylinder_normal_at(intersect->object, comp.point);
 	comp.inside = is_inside(&comp);
 	comp.over_point = add_point_and_vector(comp.point,
-		multiply_vector_by_scalar(comp.normalv, EPSILON));
+			multiply_vector_by_scalar(comp.normalv, EPSILON));
 	return (comp);
 }
-

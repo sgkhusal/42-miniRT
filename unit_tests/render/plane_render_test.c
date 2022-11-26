@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:11:30 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:33:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:31:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,35 +59,42 @@ static void	transform_plane(t_object *p, int type)
 		ultimate_transform_plane(p, PLANE);
 }
 
+static t_world	create_world(void)
+{
+	t_object	*p;
+	t_object	*p2;
+	t_world		world;
+
+	world.objects = NULL;
+	p = create_object(PLANE, create_plane());
+	transform_plane(p, 1);
+	p->material.color = set_vector(0.4, 0.4, 1); //azul
+	append_object(&world.objects, p);
+	p2 = create_object(PLANE, create_plane());
+	transform_plane(p2, 6);
+	p2->material.color = set_vector(1, 0.4, 0.4); // rosa
+	append_object(&world.objects, p2);
+	world.light = set_point_light(set_point(-10, 10, -10),
+			set_vector(1, 1, 1));
+	return (world);
+}
+
 void	plane_render_test(void)
 {
 	t_mlx		mlx;
 	t_rt		rt;
-	t_object	*p;
-	t_object	*p2;
 	t_vector	**canvas;
 
 	create_mlx_window(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
-	rt.world.objects = NULL;
-	p = create_object(PLANE, create_plane());
-	transform_plane(p, 1);
-	p->material.color = set_vector(0.4, 0.4, 1); //azul
-	append_object(&rt.world.objects, p);
-	p2 = create_object(PLANE, create_plane());
-	transform_plane(p2, 6);
-	p2->material.color = set_vector(1, 0.4, 0.4); // rosa
-	append_object(&rt.world.objects, p2);
-	rt.world.light = set_point_light(set_point(-10, 10, -10),
-			set_vector(1, 1, 1));
+	rt.world = create_world();
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5);
 	// camera em y = 0  e plano sem transformação tem um efeito diferente...
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			normalize_vector(subtract_points(set_point(0, 0, 0),
-			rt.camera.origin)), set_vector(0, 1, 0)));
-	printf("scene size: %f x %f\n", rt.camera.half_width * 2, rt.camera.half_height * 2);
+					rt.camera.origin)), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

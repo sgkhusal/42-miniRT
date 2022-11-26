@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:02:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:34:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:28:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,19 @@ static void	create_mlx_window2(t_mlx *mlx)
 		minirt_error(mlx, "mlx error creating window");
 }
 
+static t_world	create_world(void)
+{
+	t_object	*c;
+	t_world		world;
+
+	world.objects = NULL;
+	set_world(&(world));
+	put_elements(&(world));
+	world.light.position = set_point(-10, 3, -10);
+	world.light.intensity = set_vector(1, 1, 1);
+	return (world);
+}
+
 void	plane_scene_render_test(void)
 {
 	t_mlx		mlx;
@@ -88,16 +101,12 @@ void	plane_scene_render_test(void)
 	create_mlx_window2(&mlx);
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
-	rt.world.objects = NULL;
-	set_world(&(rt.world));
-	put_elements(&(rt.world));
-	rt.world.light.position = set_point(-10, 3, -10);
-	rt.world.light.intensity = set_vector(1, 1, 1);
+	rt.world = create_world();
 	rt.camera = set_camera(M_PI / 2, mlx.width, mlx.height);
 	rt.camera.origin = set_point(0, 1.5, -5);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			normalize_vector(subtract_points(set_point(0, 1, 0),
-			rt.camera.origin)), set_vector(0, 1, 0)));
+					rt.camera.origin)), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

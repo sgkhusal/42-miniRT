@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:38:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/13 15:51:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:14:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	color_at_test(t_world w, t_ray ray, t_vector expected)
 
 void	shade_hit_tests(void)
 {
-	t_world	w;
-	t_ray	ray;
+	t_world			w;
+	t_ray			ray;
 	t_intersection	*xs;
-	t_vector	expected;
+	t_vector		expected;
 
 	printf(YELLOW "Shade hit tests: " END "\n");
 	w = default_world();

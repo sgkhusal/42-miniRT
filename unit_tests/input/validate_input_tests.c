@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 18:06:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 18:22:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:49:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	validate_color_chars_test(char *str, int expected)
 {
-	int	result;
+	int			result;
 	static int	n = 1;
 
 	printf(GREY "validate_color_chars_test %d: " END, n);
@@ -25,7 +25,7 @@ void	validate_color_chars_test(char *str, int expected)
 
 void	validate_double_chars_test(char *str, int expected)
 {
-	int	result;
+	int			result;
 	static int	n = 1;
 
 	printf(GREY "validate_double_chars_test %d: " END, n);
@@ -36,7 +36,7 @@ void	validate_double_chars_test(char *str, int expected)
 
 void	validate_coordinates_chars_test(char *str, int expected)
 {
-	int	result;
+	int			result;
 	static int	n = 1;
 
 	printf(GREY "validate_coordinates_chars_test %d: " END, n);
@@ -47,7 +47,7 @@ void	validate_coordinates_chars_test(char *str, int expected)
 
 void	validate_nb_chars_test(char *str, int expected)
 {
-	int	result;
+	int			result;
 	static int	n = 1;
 
 	printf(GREY "validate_nb_chars_test %d: " END, n);

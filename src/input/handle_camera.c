@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 13:53:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/15 111::00020 by elraira-         ###   ########.fr       */
+/*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
+/*   Updated: 2022/11/26 12:58:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	validate_camera_chars(char **infos)
 t_vector	set_up(t_vector orientation)
 {
 	if (check_double_values(fabs(orientation.y), 1))
-		return (set_vector(1, 0, 0)); /////
+		return (normalize_vector(set_vector(0.1, 1, 0))); /////
 	return (set_vector(0, 1, 0));
 }
 
@@ -61,14 +61,14 @@ void	fill_camera(t_camera *cam, char **infos, int *status)
 		return ;
 	}
 	transform = view_transform(cam->origin, cam->orientation,
-		set_up(cam->orientation));
+			set_up(cam->orientation));
 	set_camera_transform(cam, transform);
 }
 
 int	handle_camera(char *line, t_camera *cam)
 {
-	char		**infos;
-	int			status;
+	char	**infos;
+	int		status;
 
 	status = OK;
 	infos = ft_split(line, ' ');

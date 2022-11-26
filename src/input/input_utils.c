@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atod.c                                          :+:      :+:    :+:   */
+/*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:10:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 19:16:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 12:44:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,19 @@ double	ft_atod(char *nb)
 	n = ft_atoi(nb);
 	n /= pow(10, size - point - 1);
 	return (n);
+}
+
+char	**parse_input(char *line, char c, int size_expected, int *status)
+{
+	char	**parsed;
+
+	parsed = ft_split(line, c);
+	if (!parsed)
+		*status = print_error_msg2("malloc error on parse_input: ", line);
+	else if (total_infos(parsed) != size_expected)
+	{
+		free_array(parsed);
+		*status = print_error_msg2("to many or few arguments in ", line);
+	}
+	return (parsed);
 }
