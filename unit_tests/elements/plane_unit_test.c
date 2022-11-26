@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 12:09:32 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/20 12:56:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:40:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	create_plane_test(void)
 
 void	plane_intersection_test(t_ray ray, t_object *p, int count, double t)
 {
-	t_xs	xs;
+	t_xs		xs;
 	static int	n = 1;
 
 	printf(GREY "plane_intersection_test %d: " END, n);

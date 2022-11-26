@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:13:33 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/16 21:29:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:19:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	shadow_test3(void)
 	i.t = 4;
 	i.object = s2;
 	comp = prepare_computations(set_ray(set_point(0, 0, 5),
-		set_vector(0, 0, 1)), &i);
+				set_vector(0, 0, 1)), &i);
 	result = shade_hit(w, comp);
 	if (check_equal_vectors(result, set_vector(0.1, 0.1, 0.1)))
 		printf(GREEN "OK" END "\n");
@@ -72,23 +72,23 @@ void	shadow_test3(void)
 }
 
 // Test for over_point
-void    over_point_test(void)
+void	over_point_test(void)
 {
-    t_ray        ray;
-    t_object    *sphere;
-    t_intersection        *intersection;
-    t_comp        comp;
+	t_ray			ray;
+	t_object		*sphere;
+	t_intersection	*intersection;
+	t_comp			comp;
 
-    printf(GREY "over_point_test: " END);
-    sphere = create_object(SPHERE, create_sphere());
-    set_transform(sphere, translation_matrix(0, 0, 1));
-    ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
-    intersection = create_intersection(5, sphere);
-    comp = prepare_computations(ray, intersection);
-    if (comp.over_point.z < -EPSILON / 2 && comp.point.z > comp.over_point.z)
-        printf(GREEN "OK" END "\n");
-    else
-        printf(RED "KO" END "\n");
+	printf(GREY "over_point_test: " END);
+	sphere = create_object(SPHERE, create_sphere());
+	set_transform(sphere, translation_matrix(0, 0, 1));
+	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
+	intersection = create_intersection(5, sphere);
+	comp = prepare_computations(ray, intersection);
+	if (comp.over_point.z < -EPSILON / 2 && comp.point.z > comp.over_point.z)
+		printf(GREEN "OK" END "\n");
+	else
+		printf(RED "KO" END "\n");
 	free_objects(&sphere);
 	free(intersection);
 }

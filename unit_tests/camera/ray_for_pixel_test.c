@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 16:48:52 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/19 21:50:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:19:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ray_for_pixel_test(t_camera camera, double x, double y, t_ray expected)
 {
-	t_ray	result;
+	t_ray		result;
 	static int	n = 0;
 
 	printf(GREY "ray_for_pixel_test %d" END, n);
@@ -46,10 +46,9 @@ void	ray_for_pixel_tests(void)
 	camera.transform = multiply_matrix(rotation, translation);
 	camera.inverse = inverse_matrix(camera.transform);
 	camera.origin = set_point(0, 2, -5);
-	ray = set_ray(camera.origin, set_vector(sqrt(2)/2, 0, -sqrt(2)/2));
+	ray = set_ray(camera.origin, set_vector(sqrt(2) / 2, 0, -sqrt(2) / 2));
 	ray_for_pixel_test(camera, 100, 50, ray);
 	free_camera(&camera);
 	free_matrix(translation);
 	free_matrix(rotation);
 }
-

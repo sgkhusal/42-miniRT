@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/26 12:18:57 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/26 15:04:54 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS =			main.c \
 				input_tests.c \
 				ft_atod_tests.c \
 				validate_input_tests.c \
-				transform_input_tests.c \
+				transform_input_tests1.c \
+				transform_input_tests2.c \
 				unit_tests_utils.c \
 				points_unit_test.c \
 				vectors_unit_test.c \
@@ -83,7 +84,7 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				handle_input.c input_file.c handle_content.c  validate_utils.c \
 				handle_ambient.c handle_camera.c handle_light.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c world.c \
-				transform_utils.c objects.c ft_atod.c intersect_sort.c \
+				transform_utils.c objects.c input_utils.c intersect_sort.c \
 				computations.c cylinder.c mlx_utils.c canvas.c plot.c plane.c \
 				camera.c get_rotation.c
 OBJS_DIR =		./obj
@@ -140,14 +141,15 @@ test:		$(NAME)
 
 clean:
 		$(RM_DIR) $(OBJS_DIR)
-		@$(MAKE) -C $(MINIRT_PATH) clean
 
 fclean:		clean
 		$(RM) $(NAME)
 		$(RM) log
 		$(RM) no_permission.rt
+
+fcleanrt:
 		@$(MAKE) -C $(MINIRT_PATH) fclean
 
 re:			fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test fcleanrt

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/23 18:35:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:17:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vector	get_specular(t_material m, t_light light, t_comp comp,
 		specular = set_vector(0, 0, 0);
 	else
 		specular = multiply_vector_by_scalar(light.intensity,
-			pow(reflected_dot_eye, m.shininess) * m.specular);
+				pow(reflected_dot_eye, m.shininess) * m.specular);
 	return (specular);
 }
 
@@ -55,8 +55,6 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 	t_shading	sh;
 	double		light_dot_normal;
 
-	//printf("light bright: %f %f %f\n", light.intensity.x, light.intensity.y, light.intensity.z);
-	//printf("material color: %f %f %f\n", material.color.x, material.color.y, material.color.z);
 	sh.ambient = multiply_colors(m.color, m.ambient);
 	eff_color = multiply_colors(m.color, light.intensity);
 	light_vect = normalize_vector(subtract_points(light.position, comp.point));
@@ -64,18 +62,18 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 	if (light_dot_normal < 0 || shadow == TRUE)
 		return (sh.ambient);
 	sh.diffuse = multiply_vector_by_scalar(eff_color,
-		m.diffuse * light_dot_normal);
+			m.diffuse * light_dot_normal);
 	sh.specular = get_specular(m, light, comp, light_vect);
 	return (add_vectors(add_vectors(sh.ambient, sh.diffuse), sh.specular));
 }
 
 t_bool	is_shadowed(t_world w, t_point point)
 {
-	t_vector	v;
-	double		distance;
-	t_ray		r;
+	t_vector			v;
+	double				distance;
+	t_ray				r;
 	t_intersection_list	list;
-	t_intersection	*hit;
+	t_intersection		*hit;
 
 	v = subtract_points(w.light.position, point);
 	distance = vector_length(v);

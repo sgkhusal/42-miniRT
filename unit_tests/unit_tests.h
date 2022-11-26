@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 15:08:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:20:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_atod_tests(void);
 void	input_tests(void);
 void	validate_input_tests(void);
 void	transform_input_tests(void);
+void	transform_input_tests_part2(void);
 
 void	points_tests(void);
 void	vectors_tests(void);
@@ -124,4 +125,3 @@ void	check_int_values(int result, int expected);
 int		check_argc(int argc);
 
 #endif
-

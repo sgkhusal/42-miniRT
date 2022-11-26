@@ -6,15 +6,15 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:10:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/12 02:05:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:04:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_cylinder *create_cylinder(void)
+t_cylinder	*create_cylinder(void)
 {
-	t_cylinder *cylinder;
+	t_cylinder	*cylinder;
 
 	cylinder = malloc(sizeof(t_cylinder));
 	if (!cylinder)
@@ -28,17 +28,16 @@ t_cylinder *create_cylinder(void)
 	return (cylinder);
 }
 
-static void calculate_cylinder_intersection(t_cylinder *c, t_ray ray,
+static void	calculate_cylinder_intersection(t_cylinder *c, t_ray ray,
 											t_bhaskara bhaskara, t_xs *xs)
 {
-	double t1;
-	double t2;
-	double y;
+	double	t1;
+	double	t2;
+	double	y;
 
 	t1 = (-bhaskara.b - sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	t2 = (-bhaskara.b + sqrt(bhaskara.delta)) / (2 * bhaskara.a);
 	y = ray.origin.y + t1 * ray.direction.y;
-	//printf("t1: %f, t2: %f, xs.count: %d, xs.t1 = %f, xs.t2 = %f\n", t1, t2, xs->count, xs->t1, xs->t2);
 	if (c->min < y && y < c->max)
 	{
 		if (xs->count == 0)
@@ -60,8 +59,8 @@ static void calculate_cylinder_intersection(t_cylinder *c, t_ray ray,
 
 t_bool	check_cap(t_ray ray, double t)
 {
-	double x;
-	double z;
+	double	x;
+	double	z;
 
 	x = ray.origin.x + t * ray.direction.x;
 	z = ray.origin.z + t * ray.direction.z;
@@ -92,7 +91,7 @@ void	cylinder_intersect_caps(t_ray ray, t_cylinder *c, t_xs *xs)
 	}
 }
 
-t_xs cylinder_intersection(t_ray ray, t_object *c) // tem que normalizar a direção do raio antes de ele vir como nos testes!!
+t_xs	cylinder_intersection(t_ray ray, t_object *c)
 {
 	t_xs		xs;
 	t_bhaskara	bhaskara;

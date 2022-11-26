@@ -6,16 +6,16 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/29 10:34:110 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:44:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <stdio.h> // printf
+# include <stdio.h>
 # include <math.h>
-# include <fcntl.h> // open flags
+# include <fcntl.h>
 
 # include "utils.h"
 # include "elements.h"
@@ -34,7 +34,7 @@ typedef struct s_ray
  */
 typedef struct s_xs
 {
-	double	t1; // talvez saia
+	double	t1;
 	double	t2;
 	int		count;
 }				t_xs;
@@ -60,7 +60,7 @@ typedef struct intersection_list
 
 typedef struct s_comp
 {
-	t_intersection *xs;
+	t_intersection	*xs;
 	t_point			point;
 	t_point			over_point;
 	t_vector		eyev;
@@ -98,7 +98,6 @@ int					handle_sphere(char *line, t_object **objs);
 int					handle_plane(char *line, t_object **objs);
 int					handle_cylinder(char *line, t_object **objs);
 void				set_ambient_light(t_object **objects, t_vector amb);
-t_matrix			get_rotation_matrix(t_vector orientation);
 
 // rays
 t_ray				set_ray(t_point origin, t_vector direction);
@@ -108,7 +107,7 @@ t_ray				transform_ray(t_ray ray, t_matrix m);
 // intersections
 t_xs				sphere_intersection(t_ray ray, t_object *o);
 t_xs				cylinder_intersection(t_ray ray, t_object *o);
-t_xs		plane_intersection(t_ray ray, t_object *p);
+t_xs				plane_intersection(t_ray ray, t_object *p);
 t_intersection		*create_intersection(double t, t_object *object);
 void				add_intersection_node(t_intersection *node,
 						t_intersection_list *list);
@@ -138,8 +137,8 @@ t_matrix			view_transform(t_point from, t_vector forward, t_vector up);
 void				set_camera_transform(t_camera *cam, t_matrix transform);
 t_ray				ray_for_pixel(t_camera cam, double x, double y);
 
-void				render(t_camera camera, t_world w,
-	t_vector **canvas, t_mlx *mlx);
+void				render(t_camera camera, t_world w, t_vector **canvas,
+						t_mlx *mlx);
 
 //is_shadowed
 t_bool				is_shadowed(t_world w, t_point point);

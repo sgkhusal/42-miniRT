@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 22:52:51 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/24 17:44:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:56:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_atod_test(char *input, double expected)
 {
-	double	result;
+	double		result;
 	static int	n = 1;
 
 	printf(GREY "ft_atod_test %d: " END, n);
@@ -28,8 +28,12 @@ static void	ft_atod_test(char *input, double expected)
 
 void	ft_atod_tests(void)
 {
-	char input[20] = "0.2";
+	char	input[20];
 
+	input[0] = '0';
+	input[1] = '.';
+	input[2] = '2';
+	input[2] = '\0';
 	printf(YELLOW "atod tests: " END "\n");
 	ft_atod_test(ft_memcpy(input, "0.2", 4), 0.2);
 	ft_atod_test(ft_memcpy(input, "0.0", 4), 0.0);

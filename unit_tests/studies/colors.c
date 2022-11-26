@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_circle.c                                       :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 17:33:12 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 13:08:11 by sguilher         ###   ########.fr       */
+/*   Created: 2022/11/26 13:11:06 by sguilher          #+#    #+#             */
+/*   Updated: 2022/11/26 13:12:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,14 @@ int	rgb_to_int(short int red, short int green, short int blue)
 	return (color.color);
 }
 
-void	put_circle(t_mlx *mlx, double radius, double center_x, double center_y)
+t_color	set_color(short int red, short int green, short int blue)
 {
-	double	teta;
-	double	x;
-	double	y;
-	int		color;
+	t_color	color;
 
-	color = rgb_to_int(0, 255, 0);
-	teta = 0;
-	while (teta < 360)
-	{
-		x = center_x + radius * cos(teta);
-		y = center_y + radius * sin(teta);
-		put_pixel_color(&mlx->img, x, y, color);
-		teta += 0.1;
-	}
+	color.rgb[0] = blue;
+	color.rgb[1] = green;
+	color.rgb[2] = red;
+	color.rgb[3] = 0;
+	return (color);
 }
+/* 0 - 255 (-128 - 127) */

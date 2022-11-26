@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:30:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 19:53:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:39:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	create_object_test(void)
 {
 	t_object	*o;
 	t_matrix	identity;
-	t_color		color;
 
 	printf(GREY "create_object_test: " END);
-	color = set_color(255, 0, 0);
 	o = create_object(SPHERE, create_sphere());
 	identity = identity_matrix(4);
 	if (o->shape.sphere->center.x == 0
@@ -29,8 +27,8 @@ void	create_object_test(void)
 		&& check_equal_matrices(o->transform, identity)
 		&& check_equal_matrices(o->inverse, identity)
 		&& check_equal_matrices(o->transpose_inverse, identity)
-		&& check_equal_vectors(o->material.ambient,
-		set_vector(0.1, 0.1, 0.1)) && o->material.diffuse == 0.9
+		&& check_equal_vectors(o->material.ambient, set_vector(0.1, 0.1, 0.1))
+		&& o->material.diffuse == 0.9
 		&& o->material.shininess == 200
 		&& o->material.specular == 0.9
 		&& check_equal_vectors(o->material.color, set_vector(1, 1, 1)))

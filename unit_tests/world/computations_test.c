@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 15:25:27 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/29 16:42:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:14:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	computations_test2(t_ray ray, t_intersection *intersect)
 	printf(GREY "computation_test 2: ");
 	comp = prepare_computations(ray, intersect);
 	if (check_equal_points(comp.point, set_point(0, 0, 1))
-	&& check_equal_vectors(comp.eyev, set_vector(0, 0, -1))
-	&& check_equal_vectors(comp.normalv, set_vector(0, 0, -1))
-	&& comp.inside == TRUE)
+		&& check_equal_vectors(comp.eyev, set_vector(0, 0, -1))
+		&& check_equal_vectors(comp.normalv, set_vector(0, 0, -1))
+		&& comp.inside == TRUE)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 10:42:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/15 10:54:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:20:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	reflection_tests(void)
 	t_vector	normal;
 	t_vector	expected;
 
-	incident =	set_vector(1, -1, 0);
-	normal =	set_vector(0, 1, 0);
-	expected =	set_vector(1, 1, 0);
+	incident = set_vector(1, -1, 0);
+	normal = set_vector(0, 1, 0);
+	expected = set_vector(1, 1, 0);
 	reflection_test(incident, normal, expected);
-	incident =	set_vector(0, -1, 0);
-	normal =	set_vector(sqrt(2) / 2, sqrt(2) / 2, 0);
-	expected =	set_vector(1, 0, 0);
+	incident = set_vector(0, -1, 0);
+	normal = set_vector(sqrt(2) / 2, sqrt(2) / 2, 0);
+	expected = set_vector(1, 0, 0);
 	reflection_test(incident, normal, expected);
 }

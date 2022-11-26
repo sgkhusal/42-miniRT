@@ -12,7 +12,7 @@
 
 #include "unit_tests.h"
 
-void	set_camera_test1()
+void	set_camera_test1(void)
 {
 	t_camera	camera;
 

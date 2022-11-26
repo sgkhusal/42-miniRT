@@ -28,7 +28,7 @@ t_vector	sphere_normal_at(t_object *s, t_point world_point)
 	object_point = multiply_matrix_by_point(s->inverse, world_point);
 	object_normal = subtract_points(object_point, s->shape.sphere->center);
 	world_normal = multiply_matrix_by_vector(
-				s->transpose_inverse, object_normal);
+			s->transpose_inverse, object_normal);
 	world_normal.w = 0;
 	return (normalize_vector(world_normal));
 }
@@ -51,7 +51,7 @@ t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 	{
 		object_normal = set_vector(object_point.x, 0, object_point.z);
 		world_normal = multiply_matrix_by_vector(
-					c->transpose_inverse, object_normal);
+				c->transpose_inverse, object_normal);
 		world_normal.w = 0;
 		return (normalize_vector(world_normal));
 	}
@@ -65,6 +65,6 @@ t_vector	plane_normal_at(t_object *p, t_point world_point)
 	(void)world_point;
 	object_normal = p->shape.plane->orientation;
 	world_normal = multiply_matrix_by_vector(
-				p->transpose_inverse, object_normal);
+			p->transpose_inverse, object_normal);
 	return (normalize_vector(world_normal));
 }

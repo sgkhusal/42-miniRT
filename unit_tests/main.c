@@ -6,11 +6,25 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 14:17:110 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:22:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
+
+void	render_tests(char *argv[])
+{
+	if (strcmp(argv[1], "sp") == 0)
+		sphere_render_test();
+	else if (strcmp(argv[1], "cy") == 0)
+		cylinder_render_test();
+	else if (strcmp(argv[1], "sc") == 0)
+		scene_render_test();
+	else if (strcmp(argv[1], "pl") == 0)
+		plane_render_test();
+	else if (strcmp(argv[1], "pl-sc") == 0)
+		plane_scene_render_test();
+}
 
 int	main(int argc, char *argv[])
 {
@@ -34,15 +48,6 @@ int	main(int argc, char *argv[])
 	plane_tests();
 	if (argc == 1)
 		return (0);
-	if (strcmp(argv[1], "sp") == 0)
-		sphere_render_test();
-	else if (strcmp(argv[1], "cy") == 0)
-		cylinder_render_test();
-	else if (strcmp(argv[1], "sc") == 0)
-		scene_render_test();
-	else if (strcmp(argv[1], "pl") == 0)
-		plane_render_test();
-	else if (strcmp(argv[1], "pl-sc") == 0)
-		plane_scene_render_test();
+	render_tests(argv);
 	return (0);
 }

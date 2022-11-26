@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:32:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:32:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	sphere_render_test(void)
 	// dentro da esfera, na origem dela; no cilindro também
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			normalize_vector(subtract_points(set_point(0, 0, 0),
-			rt.camera.origin)), set_vector(0, 1, 0)));
+					rt.camera.origin)), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

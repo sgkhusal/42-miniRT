@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:17:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 12:20:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/26 14:38:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	cylinder_tests(void)
 	cylinder_intersection_test(cylinder,
 		set_ray(set_point(0, 0, -5), set_vector(0, 0, 1)), 4, 6);
 	cylinder_intersection_test(cylinder, set_ray(set_point(0.5, 0, -5),
-		normalize_vector(set_vector(0.1, 1, 1))), 6.80798, 7.08872);
+			normalize_vector(set_vector(0.1, 1, 1))), 6.80798, 7.08872);
 	cylinder_normal_test(cylinder, set_point(1, 0, 0), set_vector(1, 0, 0));
 	cylinder_normal_test(cylinder, set_point(0, 5, -1), set_vector(0, 0, -1));
 	cylinder_normal_test(cylinder, set_point(0, -2, 1), set_vector(0, 0, 1));
