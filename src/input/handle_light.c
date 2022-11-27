@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:59:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:39:111 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	handle_light(char *line, t_light *light)
 	else
 	{
 		light->position = transform_coordinates(infos[1], &status);
+		if (check_equal_points(light->position, set_point(0,0,0)))
+			light->position = set_point(0,0,0.0001);
 		brightness = transform_ratio(infos[2], &status);
 		color = transform_color(infos[3], &status);
 		light->intensity = multiply_vector_by_scalar(color, brightness);

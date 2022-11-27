@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 15:44:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:20:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int					handle_sphere(char *line, t_object **objs);
 int					handle_plane(char *line, t_object **objs);
 int					handle_cylinder(char *line, t_object **objs);
 void				set_ambient_light(t_object **objects, t_vector amb);
+t_vector	set_up(t_vector orientation);
 
 // rays
 t_ray				set_ray(t_point origin, t_vector direction);

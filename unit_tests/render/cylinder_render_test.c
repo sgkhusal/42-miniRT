@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 15:40:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:24:129 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static t_world	create_world(void)
 	t_world		world;
 
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 5);
+	transform_cylinder(c, 0);
 	c->shape.cylinder->min = -1;
 	c->shape.cylinder->max = 1;
 	c->material.color = set_vector(0.5, 0.2, 1);
@@ -99,8 +99,7 @@ void	cylinder_render_test(void)
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-			normalize_vector(subtract_points(set_point(0, 0, 0),
-					rt.camera.origin)), set_vector(0, 1, 0)));
+			rt.camera.orientation, set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

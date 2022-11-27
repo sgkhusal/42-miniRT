@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 21:54:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 14:23:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:09:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int			close_minirt(t_mlx *mlx);
 
 // utils
 t_bool		check_double_values(double a, double b);
+t_bool		check_equal_points(t_point a, t_point b);;
 t_bool		check_equal_vectors(t_vector a, t_vector b);
 
 // error

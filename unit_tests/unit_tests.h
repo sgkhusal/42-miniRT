@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 15:20:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:09:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	plane_scene_render_test(void);
 void	shadow_tests(void);
 
 // utils
-t_bool	check_equal_points(t_point a, t_point b);
+
 void	check_int_values(int result, int expected);
 
 // minirt functions
