@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:58:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 10:48:110 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ static int	validate_camera_chars(char **infos)
 	return (OK);
 }
 
+// When camera orientation vector is (0, 1, 0), which means identical to the
+// "standard" up vector, the cross product will be (0, 0, 0), which produces
+// a distortion while calculating the transformation matrix. To avoid this,
+// we add a small value to the x component of the orientation vector.
 t_vector	set_up(t_vector orientation)
 {
 	if (check_double_values(fabs(orientation.y), 1))
-		return (normalize_vector(set_vector(0.1, 1, 0))); /////
+		return (normalize_vector(set_vector(0.1, 1, 0)));
 	return (set_vector(0, 1, 0));
 }
 
