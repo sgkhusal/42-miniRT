@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 22:11:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 13:15:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 16:07:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 
 static double	check_hit_value(double hit, double t)
 {
-	if (hit < 0 && t < 0)
-		return (-1);
-	if (hit < 0)
-		return (t);
-	if (t < 0)
+	if (t <= 0 + EPSILON)
 		return (hit);
-	if (hit < t)
+	if (hit <= t && hit > 0)
 		return (hit);
 	return (t);
 }
