@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 15:22:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 18:23:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	transform_sphere(t_object *s, int type)
 	if (type == 0)
 		return ;
 	if (type == 1)
-		set_transform(s, translation_matrix(3, -1, 2));
+		set_transform(s, translation_matrix(0, 0, -5));
 	if (type == 2)
 		set_transform(s, scaling_matrix(0.5, 0.5, 0.5));
 	if (type == 3)
@@ -95,11 +95,10 @@ void	sphere_render_test(void)
 	canvas = create_canvas();
 	rt.world = create_world();
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
-	rt.camera.origin = set_point(0, 0, -5); // não está funcionando quando está
-	// dentro da esfera, na origem dela; no cilindro também
+	rt.camera.origin = set_point(0, 0, -5);
+	rt.camera.orientation = set_vector(0, 0, 1);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-			normalize_vector(subtract_points(set_point(0, 0, 0),
-					rt.camera.origin)), set_vector(0, 1, 0)));
+			rt.camera.orientation, set_up(rt.camera.orientation)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));
