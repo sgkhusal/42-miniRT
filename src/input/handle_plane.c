@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 00:22:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:38:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	create_and_append_plane(t_object **objs, char **infos, int *status)
 	xyz = transform_coordinates(infos[1], status);
 	orientation = transform_orientation(infos[2], status);
 	pl->material.color = transform_color(infos[3], status);
+	pl->material.specular = 0.2;
 	set_plane_matrixes(pl, xyz, orientation);
 	if (*status == ERROR)
 		free_objects(&pl);

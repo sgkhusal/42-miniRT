@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:25:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 11:03:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	transform_cylinder(t_object *c, int type)
 	else if (type == 5)
 		set_transform(c, rotation_x_matrix(M_PI / 2)); // vai para trás - não está computando a difusa
 	else if (type == 6)
-		set_transform(c, rotation_y_matrix(M_PI / 4)); // não tem efeito sozinha
+		set_transform(c, rotation_y_matrix(M_PI / 4));
 	else
 		cylinder_rotate(c, type);
 }
@@ -75,7 +75,7 @@ static t_world	create_world(void)
 	t_world		world;
 
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 9);
+	transform_cylinder(c, 5);
 	c->shape.cylinder->min = -1;
 	c->shape.cylinder->max = 6;
 	c->material.color = set_vector(0.5, 0.2, 1);

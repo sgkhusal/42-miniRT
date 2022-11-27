@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/26 13:15:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:41:220 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ t_intersection_list	intersect_world(t_world world, t_ray ray)
 		if (object->type == SPHERE)
 			xs = sphere_intersection(local_ray, object);
 		else if (object->type == PLANE)
+		{
+			/* printf("ray direction y: %f\n", ray.direction.y);
+			printf("local ray direction y: %f\n", local_ray.direction.y); */
 			xs = plane_intersection(local_ray, object);
+		}
 		else if (object->type == CYLINDER)
 			xs = cylinder_intersection(local_ray, object);
 		if (xs.count == 2)

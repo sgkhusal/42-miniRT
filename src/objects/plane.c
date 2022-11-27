@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:59:47 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/20 12:23:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 14:55:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_xs	plane_intersection(t_ray ray, t_object *p)
 	t_xs		xs;
 
 	(void)p;
-	if (fabs(ray.direction.y) < EPSILON)
+	if (fabs(ray.direction.y) < EPSILON
+		|| check_double_values(ray.origin.y, p->shape.plane->point.y))
 	{
 		xs.count = 0;
 		return (xs);

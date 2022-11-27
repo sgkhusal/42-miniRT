@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/23 18:47:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 10:29:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 // adjacent catet = 1, oposite catet = half_width (for an horizontal fov)
 // so half_width = tan(fov / 2)
 // we can calculate the half_height using the rule of three:
+// half_width -> hsize
+// half_height -> vsize
 // half_height = half_width * vsize / hsize
 // pixel_size is the size that each pixel represents in the units of real scene
 t_camera	set_camera(double fov, int hsize, int vsize)
