@@ -44,17 +44,15 @@ t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 	object_point = multiply_matrix_by_point(c->inverse, world_point);
 	dist = pow(object_point.x, 2) + pow(object_point.z, 2);
 	if (dist < 1 && object_point.y >= c->shape.cylinder->max - EPSILON)
-		return (set_vector(0, 1, 0));
+		object_normal = set_vector(0, 1, 0);
 	else if (dist < 1 && object_point.y <= c->shape.cylinder->min + EPSILON)
-		return (set_vector(0, -1, 0));
+		object_normal = set_vector(0, -1, 0);
 	else
-	{
 		object_normal = set_vector(object_point.x, 0, object_point.z);
-		world_normal = multiply_matrix_by_vector(
-				c->transpose_inverse, object_normal);
-		world_normal.w = 0;
-		return (normalize_vector(world_normal));
-	}
+	world_normal = multiply_matrix_by_vector(
+	c->transpose_inverse, object_normal);
+	world_normal.w = 0;
+	return (normalize_vector(world_normal));
 }
 
 t_vector	plane_normal_at(t_object *p, t_point world_point)

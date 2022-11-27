@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:59:47 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 14:55:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/27 15:25:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_plane	*create_plane(void)
 // coplanar with the plane and the ray direction is parallel to the plane, there
 // is no intersection because all points are intersections and the plane is
 // invisible
+// if the ray origin is in the plane the ray misses the plane
 t_xs	plane_intersection(t_ray ray, t_object *p)
 {
 	t_xs		xs;
