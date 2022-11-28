@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:51:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/28 16:03:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,13 @@ double	transform_double(char *str, int *status)
 
 	if (ft_strlen(str) > 11)
 	{
-		*status = print_error_msg2("invalid number range: [0,10000]", str);
+		*status = print_error_msg2("invalid number range: ", str);
 		return (0);
 	}
 	cpy = ft_strdup(str);
 	d = ft_atod(cpy);
 	free(cpy);
-	if (d < 0 || d > 1000)
-		*status = print_error_msg2("invalid number range: [0,10000]", str);
+	if (d <= 0 || d > 1000)//
+		*status = print_error_msg2("invalid number range: ", str);
 	return (d);
 }
