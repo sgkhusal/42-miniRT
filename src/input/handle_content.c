@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 19:02:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/28 20:14:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static int	check_elements_count(char **lines)
 	i = -1;
 	while (lines[++i])
 	{
-		if (lines[i][0] == 'A')
+		if (ft_strncmp(lines[i], "A ", 2) == 0)
 			ambient++;
-		else if (lines[i][0] == 'C')
+		else if (ft_strncmp(lines[i], "C ", 2) == 0)
 			camera++;
-		else if (lines[i][0] == 'L')
+		else if (ft_strncmp(lines[i], "L ", 2) == 0)
 			light++;
 	}
 	if (check_qty(ambient, "ambient light") == ERROR
@@ -64,11 +64,11 @@ static int	check_separator(char **lines)
 
 int	handle_line(char *line, t_rt *rt)
 {
-	if (line[0] == 'A')
+	if (ft_strncmp(line, "A ", 2) == 0)
 		return (handle_ambient_light(line, &rt->ambient));
-	if (line[0] == 'C')
+	if (ft_strncmp(line, "C ", 2) == 0)
 		return (handle_camera(line, &(rt->camera)));
-	if (line[0] == 'L')
+	if (ft_strncmp(line, "L ", 2) == 0)
 		return (handle_light(line, &rt->world.light));
 	if (ft_strncmp(line, "sp ", 3) == 0)
 		return (handle_sphere(line, &(rt->world.objects)));
