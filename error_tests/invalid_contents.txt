@@ -1,0 +1,16 @@
+
+empty.rt
+empty2.rt
+missing_ambient.rt
+missing_light.rt
+missing_camera.rt
+repeated_ambient.rt
+repeated_light.rt
+repeated_camera.rt
+anything.rt
+wrong_element_a0.rt
+wrong_element_cyl.rt
+wrong_element_plane.rt
+wrong_element_sl.rt
+wrong_element_sph.rt
+tabs.rt
