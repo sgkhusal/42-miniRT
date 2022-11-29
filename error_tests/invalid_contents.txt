@@ -1,4 +1,3 @@
-
 empty.rt
 empty2.rt
 missing_ambient.rt
@@ -14,3 +13,9 @@ wrong_element_plane.rt
 wrong_element_sl.rt
 wrong_element_sph.rt
 tabs.rt
+wrong_ambient_description.rt
+wrong_light_description.rt
+wrong_camera_description.rt
+wrong_sphere_description.rt
+wrong_plane_description.rt
+wrong_cylinder_description.rt

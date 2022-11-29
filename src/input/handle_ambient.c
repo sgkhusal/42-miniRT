@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:35 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 18:48:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:35:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ int	handle_ambient_light(char *line, t_vector *amb)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_ambient_light"));
 	if (total_infos(infos) != 3)
-		status = print_error_msg2("to many or few arguments for ambient light",
-				line);
+		status = print_error_msg2(
+				"to many or few arguments for ambient light A: ",
+				"[ambient lighting ratio] [rgb color]");
 	else if (validate_ambient_chars(infos) == ERROR)
 		status = ERROR;
 	else

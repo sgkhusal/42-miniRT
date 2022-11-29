@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 10:48:110 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:43:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	handle_camera(char *line, t_camera *cam)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_camera"));
 	if (total_infos(infos) != 4)
-		status = print_error_msg2("to many or few arguments for camera", line);
+		status = print_error_msg2("to many or few arguments for camera: ",
+				"[camera origin] [camera orientation] [FOV in degrees]");
 	else if (validate_camera_chars(infos) == ERROR)
 		status = ERROR;
 	else

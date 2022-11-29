@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/28 22:23:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:46:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_argc(int argc)
 	return (ERROR);
 }
 
-static char **get_lines(int fd)
+static char	**get_lines(int fd)
 {
 	char	*content;
 	char	**lines;
