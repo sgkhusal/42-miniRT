@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    test.sh                                            :+:      :+:    :+:    #
+#    error_test.sh                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 16:51:25 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/28 23:28:34 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/28 23:35:16 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ for scenelist in ${scene_lists[*]}; do
 			if [ i == 1 ]; then
 				$VALGRIND $MINIRT_PATH 2> ./valgrind_log/test$i
 			else
-				$VALGRIND $MINIRT_PATH $SCENES_PATH$test 2> ./valgrind_log/test$i
+				$VALGRIND $MINIRT_PATH $SCENES_PATH$test 2>./valgrind_log/test$i
 			fi
 			NO_LEAKS=$(cat ./valgrind_log/test$i | \
 			grep "All heap blocks were freed -- no leaks are possible" \
@@ -125,11 +125,11 @@ for scenelist in ${scene_lists[*]}; do
 					if [ "$ERROR_OK" ]; then
 						((ok++))
 						printf ✅
-						printf "$GREY $VALGRIND ./miniRT $SCENES_PATH$test \n$END"
+						printf "$GREY$VALGRIND ./miniRT $SCENES_PATH$test\n$END"
 						printf "$GREEN$NO_LEAKS\n$ERROR_OK\n$END"
 					else
 						printf ❌
-						printf "$GREY $VALGRIND ./miniRT $SCENES_PATH$test \n$END"
+						printf "$GREY$VALGRIND ./miniRT $SCENES_PATH$test\n$END"
 						printf "$RED check ERROR SUMMARY in valgrind's log\n$END"
 					fi
 				else
