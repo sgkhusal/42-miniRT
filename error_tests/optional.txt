@@ -1,0 +1,2 @@
+wrong_sphere_diameter_range2.rt
+wrong_coordinates_range.rt

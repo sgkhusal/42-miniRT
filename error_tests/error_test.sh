@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 16:51:25 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/28 23:35:16 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/29 17:46:10 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ VALGRIND="valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes"
 scene_lists=(
 	"invalid_scene_files.txt"
 	"invalid_contents.txt"
+	"optional.txt"
 )
 
 BOLD="\e[1m"

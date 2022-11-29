@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/29 16:43:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:29:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ void	fill_camera(t_camera *cam, char **infos, int *status)
 	cam->origin = transform_coordinates(infos[1], status);
 	cam->orientation = transform_orientation(infos[2], status);
 	if (*status == ERROR)
-	{
-		free_camera(cam);
 		return ;
-	}
 	transform = view_transform(cam->origin, cam->orientation,
 			set_up(cam->orientation));
 	set_camera_transform(cam, transform);
