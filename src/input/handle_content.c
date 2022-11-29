@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/28 20:14:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:26:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,17 @@ int	handle_content(char **lines, t_rt *rt)
 	int		i;
 
 	status = OK;
-	if (check_elements_count(lines) == ERROR)
-		status = ERROR;
 	if (check_separator(lines) == ERROR)
 		status = ERROR;
+	else if (check_elements_count(lines) == ERROR)
+		status = ERROR;
 	i = -1;
-	rt->world.objects = NULL;
 	while (lines[++i] && status == OK)
 	{
 		if (handle_line(lines[i], rt) == ERROR)
 		{
 			free_objects(&(rt->world.objects));
+			free_camera(&rt->camera);
 			status = ERROR;
 		}
 	}
