@@ -39,8 +39,13 @@ static int	validate_camera_chars(char **infos)
 	return (OK);
 }
 
-// When camera orientation vector is (0, 1, 0), the up vector is (0, 0, -1)
-// When camera orientation vector is (0, -1, 0), the up vector is (0, 0, 1)
+// When camera orientation vector is (0, 1, 0), which means identical to the
+// "standard" up vector, the cross product will be (0, 0, 0), which produces
+// a distortion while calculating the transformation matrix. To avoid this,
+// we set the "standard" up vector:
+// - as (0, 0, -1), when camera orientation vector is (0, 1, 0)
+// - as (0, 0, 1) when camera orientation vector is (0, -1, 0)
+// that should be the result for the true up vector for each case.
 t_vector	set_up(t_vector orientation)
 {
 	if (check_double_values(orientation.y, 1))
