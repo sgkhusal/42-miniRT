@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 17:00:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:03:16 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-/* The rotation will appear to be clockwise around the corresponding axis when
-viewed along that axis, toward the negative end. */
+/**
+ * @brief Creates a rotation matrix around the x axis. It will rotate a point
+ * or vector around the x axis by the given angle (in radians). The rotation
+ * will appear to be clockwise around the x axis when viewed along the x axis,
+ * toward the negative end. This is the left-hand rule.
+ *
+ * @param radians angle of rotation in radians
+ * @return t_matrix the resulting rotation matrix
+ */
 t_matrix	rotation_x_matrix(double radians)
 {
 	t_matrix	rotation;
@@ -26,6 +33,15 @@ t_matrix	rotation_x_matrix(double radians)
 	return (rotation);
 }
 
+/**
+ * @brief Creates a rotation matrix around the y axis. It will rotate a point
+ * or vector around the y axis by the given angle (in radians). The rotation
+ * will appear to be clockwise around the y axis when viewed along the y axis,
+ * toward the negative end. This is the left-hand rule.
+ *
+ * @param radians angle of rotation in radians
+ * @return t_matrix the resulting rotation matrix
+ */
 t_matrix	rotation_y_matrix(double radians)
 {
 	t_matrix	rotation;
@@ -38,6 +54,15 @@ t_matrix	rotation_y_matrix(double radians)
 	return (rotation);
 }
 
+/**
+ * @brief Creates a rotation matrix around the z axis. It will rotate a point
+ * or vector around the z axis by the given angle (in radians). The rotation
+ * will appear to be clockwise around the z axis when viewed along the z axis,
+ * toward the negative end. This is the left-hand rule.
+ *
+ * @param radians angle of rotation in radians
+ * @return t_matrix the resulting rotation matrix
+ */
 t_matrix	rotation_z_matrix(double radians)
 {
 	t_matrix	rotation;

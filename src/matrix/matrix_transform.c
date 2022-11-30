@@ -3,15 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_transform.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:29:57 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/08 16:17:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:11:15 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Translation is the process of moving an object by adding or
+ * subtracting a value from its coordinates. If, for example, we want to move
+ * and point (x, y, z) by (a, b, c), we can do it by adding (a, b, c) to
+ * (x, y, z). The translation matrix will take the identity matrix and add the
+ * point coordinates to the last column.
+ *
+ * @param x x coordinate of the point
+ * @param y y coordinate of the point
+ * @param z z coordinate of the point
+ * @return t_matrix resulting translation matrix
+ */
 t_matrix	translation_matrix(double x, double y, double z)
 {
 	t_matrix	translation;
@@ -23,6 +35,21 @@ t_matrix	translation_matrix(double x, double y, double z)
 	return (translation);
 }
 
+/**
+ * @brief Scaling is the process of changing the size of an object by
+ * moving its vertices away from or toward the origin (like a hoberman sphere).
+ * The scaling matrix will take the identity matrix and multiply the point
+ * coordinates to the diagonal elements. It also can be use to change the
+ * length of a vector.
+ * Obs: Reflection is a special case of scaling. If you multiply a vector by -1,
+ * you will get a vector with the same direction but with a magnitude of -1.
+ * This is called a reflection.
+ *
+ * @param x x coordinate of the point (or vector)
+ * @param y y coordinate of the point (or vector)
+ * @param z z coordinate of the point (or vector)
+ * @return t_matrix resulting scaling matrix
+ */
 t_matrix	scaling_matrix(double x, double y, double z)
 {
 	t_matrix	scaling;
@@ -34,6 +61,17 @@ t_matrix	scaling_matrix(double x, double y, double z)
 	return (scaling);
 }
 
+/**
+ * @brief Shearing has the effect of changing the shape of an object by
+ * moving its vertices along the x, y, or z axis. When applied to a tuple,
+ * it will move the x coordinate by the y and z coordinates, the y coordinate
+ * by the x and z coordinates, and the z coordinate by the x and y coordinates.
+ *
+ * @param s the shearing structure which contains the values of each coordinate
+ * in proportion to the other two coordinates (for example, x_y means that the
+ * x coordinate will be moved by the y coordinate).
+ * @return t_matrix resulting shearing matrix
+ */
 t_matrix	shearing_matrix(t_shearing s)
 {
 	t_matrix	shearing;

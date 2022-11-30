@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:05:52 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/13 15:56:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:57:21 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief This function will create a quadratic matrix of a given size by
+ * allocating memory for the matrix and its elements.
+ *
+ * @param size size of each side of the matrix
+ * @return t_matrix the resulting matrix
+ */
 t_matrix	create_matrix(int size)
 {
 	t_matrix	m;
@@ -32,6 +39,11 @@ t_matrix	create_matrix(int size)
 	return (m);
 }
 
+/**
+ * @brief This function will free the memory allocated for a matrix.
+ *
+ * @param m matrix to be freed
+ */
 void	free_matrix(t_matrix m)
 {
 	int	i;
@@ -45,6 +57,12 @@ void	free_matrix(t_matrix m)
 	free(m.matrix);
 }
 
+/**
+ * @brief This function is an auxiliary function to print a given matrix.
+ * It is used for debugging purposes.
+ *
+ * @param m matrix to be printed
+ */
 void	print_matrix(t_matrix m) /* remove */
 {
 	int	i;
@@ -64,10 +82,17 @@ void	print_matrix(t_matrix m) /* remove */
 	}
 }
 
-/* identity = 1 0 0 0
-              0 1 0 0
-              0 0 1 0
-              0 0 0 1 */
+/**
+ * @brief This function will create a matrix and then fill it with the
+ * identity matrix.
+ * identity = 1 0 0 0
+ *            0 1 0 0
+ *            0 0 1 0
+ *            0 0 0 1
+ *
+ * @param size size of each side of the matrix
+ * @return t_matrix the resulting matrix
+ */
 t_matrix	identity_matrix(int size)
 {
 	t_matrix	m;
@@ -92,6 +117,14 @@ t_matrix	identity_matrix(int size)
 	return (m);
 }
 
+/**
+ * @brief This function will compare two matrices and return 1 if they are
+ * identical and 0 if they are different. It is used for debugging purposes.
+ *
+ * @param m1 first matrix to be compared
+ * @param m2 second matrix to be compared
+ * @return int 1 if the matrices are identical and 0 if they are different
+ */
 int	check_equal_matrices(t_matrix m1, t_matrix m2)
 {
 	int	i;
