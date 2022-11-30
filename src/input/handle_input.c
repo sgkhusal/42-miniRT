@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/18 19:02:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:46:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	check_argc(int argc)
+static int	check_argc(int argc)
 {
 	if (argc == 2)
 		return (OK);
@@ -23,10 +23,32 @@ int	check_argc(int argc)
 	return (ERROR);
 }
 
+static char	**get_lines(int fd)
+{
+	char	*content;
+	char	**lines;
+
+	content = ft_strdup("");
+	if (read_file(fd, &content) == ERROR)
+	{
+		free(content);
+		return (NULL);
+	}
+	lines = ft_split(content, '\n');
+	free(content);
+	if (!lines || !*lines)
+	{
+		if (lines)
+			free_array(lines);
+		print_error_msg("empty file");
+		return (NULL);
+	}
+	return (lines);
+}
+
 int	handle_input(int argc, char *filename, t_rt	*rt)
 {
 	int		fd;
-	char	*content;
 	char	**lines;
 
 	if (check_argc(argc) == ERROR)
@@ -36,13 +58,9 @@ int	handle_input(int argc, char *filename, t_rt	*rt)
 	fd = open_file(filename);
 	if (fd == ERROR)
 		return (ERROR);
-	content = ft_strdup("");
-	if (read_file(fd, &content) == ERROR)
+	lines = get_lines(fd);
+	if (lines == NULL)
 		return (ERROR);
-	lines = ft_split(content, '\n');
-	free(content);
-	if (!lines || !*lines)
-		return (print_error_msg("empty file"));
 	if (handle_content(lines, rt) == ERROR)
 		return (ERROR);
 	return (OK);

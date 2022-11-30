@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 10:48:110 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:29:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,18 @@ static int	validate_camera_chars(char **infos)
 }
 
 // When camera orientation vector is (0, 1, 0), which means identical to the
-// "standard" up vector, the cross product will be (0, 0, 0), which produces
+// "standard" up vector, the cross product will be (0, 0, 0), which produces
 // a distortion while calculating the transformation matrix. To avoid this,
-// we add a small value to the x component of the orientation vector.
+// we set the "standard" up vector:
+// - as (0, 0, -1), when camera orientation vector is (0, 1, 0)
+// - as (0, 0, 1) when camera orientation vector is (0, -1, 0)
+// that should be the result for the true up vector for each case.
 t_vector	set_up(t_vector orientation)
 {
-	if (check_double_values(fabs(orientation.y), 1))
-		return (normalize_vector(set_vector(0.1, 1, 0)));
+	if (check_double_values(orientation.y, 1))
+		return (normalize_vector(set_vector(0, 0, -1)));
+	if (check_double_values(orientation.y, -1))
+		return (normalize_vector(set_vector(0, 0, 1)));
 	return (set_vector(0, 1, 0));
 }
 
@@ -60,10 +65,7 @@ void	fill_camera(t_camera *cam, char **infos, int *status)
 	cam->origin = transform_coordinates(infos[1], status);
 	cam->orientation = transform_orientation(infos[2], status);
 	if (*status == ERROR)
-	{
-		free_camera(cam);
 		return ;
-	}
 	transform = view_transform(cam->origin, cam->orientation,
 			set_up(cam->orientation));
 	set_camera_transform(cam, transform);
@@ -79,7 +81,8 @@ int	handle_camera(char *line, t_camera *cam)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_camera"));
 	if (total_infos(infos) != 4)
-		status = print_error_msg2("to many or few arguments for camera", line);
+		status = print_error_msg2("to many or few arguments for camera: ",
+				"[camera origin] [camera orientation] [FOV in degrees]");
 	else if (validate_camera_chars(infos) == ERROR)
 		status = ERROR;
 	else

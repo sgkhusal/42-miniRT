@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 14:38:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:54:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	handle_plane(char *line, t_object **objs)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_plane"));
 	if (total_infos(infos) != 4)
-		status = print_error_msg2("to many or few arguments for plane: ", line);
+		status = print_error_msg2("to many or few arguments for plane: \
+		[x,y,z coordinates] [orientation] [RGB color]: ", line);
 	else if (validate_plane_chars(infos) == ERROR)
 		status = ERROR;
 	else

@@ -16,3 +16,5 @@ log
 no_permission.rt
 normalize
 help
+outfiles
+valgrind_log

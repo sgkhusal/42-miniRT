@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/27 10:29:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:28:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_camera	set_camera(double fov, int hsize, int vsize)
 
 void	free_camera(t_camera *camera)
 {
-	free_matrix(camera->transform);
-	free_matrix(camera->inverse);
+	if (camera->transform.matrix)
+		free_matrix(camera->transform);
+	if (camera->inverse.matrix)
+		free_matrix(camera->inverse);
 }

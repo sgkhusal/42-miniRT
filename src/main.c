@@ -12,12 +12,20 @@
 
 #include "minirt.h"
 
+static void	init_minirt(t_rt *rt)
+{
+	rt->world.objects = NULL;
+	rt->camera.transform.matrix = NULL;
+	rt->camera.inverse.matrix = NULL;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx		mlx;
 	t_rt		rt;
 	t_vector	**canvas;
 
+	init_minirt(&rt);
 	if (handle_input(argc, argv[1], &rt) == ERROR)
 		exit (EXIT_FAILURE);
 	create_mlx_window(&mlx);
