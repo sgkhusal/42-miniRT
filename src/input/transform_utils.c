@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/29 16:42:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:55:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ t_vector	transform_color(char *color_str, int *status)
 	double	green;
 	double	blue;
 
+	if (*status == ERROR)
+		return (set_vector(0, 0, 0));
 	rgb = parse_input(color_str, ',', 3, status);
 	if (*status == ERROR)
 		return (set_vector(0, 0, 0));
 	if (ft_strlen(rgb[0]) > 3 || ft_strlen(rgb[1]) > 3 || ft_strlen(rgb[2]) > 3)
 	{
-		*status = print_error_msg2("invalid color range: ", color_str);
+		*status = print_error_msg2("invalid color range [0-255]: ", color_str);
 		free_array(rgb);
 		return (set_vector(0, 0, 0));
 	}
@@ -32,7 +34,7 @@ t_vector	transform_color(char *color_str, int *status)
 	green = ft_atoi(rgb[1]);
 	blue = ft_atoi(rgb[2]);
 	if (red > 255 || green > 255 || blue > 255)
-		*status = print_error_msg2("invalid color range: ", color_str);
+		*status = print_error_msg2("invalid color range [0-255]: ", color_str);
 	free_array(rgb);
 	return (normalize_color(red, green, blue));
 }
@@ -44,16 +46,18 @@ double	transform_ratio(char *ratio_str, int *status)
 	double	ratio;
 	char	*cpy;
 
+	if (*status == ERROR)
+		return (0);
 	if (ft_strlen(ratio_str) > 7)
 	{
-		*status = print_error_msg2("invalid ratio range: ", ratio_str);
+		*status = print_error_msg2("invalid ratio range [0.0,1]: ", ratio_str);
 		return (0);
 	}
 	cpy = ft_strdup(ratio_str);
 	ratio = ft_atod(cpy);
 	free(cpy);
 	if (ratio < 0 || ratio > 1)
-		*status = print_error_msg2("invalid ratio range: ", ratio_str);
+		*status = print_error_msg2("invalid ratio range [0.0,1]: ", ratio_str);
 	return (ratio);
 }
 
@@ -64,6 +68,8 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	double	y;
 	double	z;
 
+	if (*status == ERROR)
+		return (set_point(0, 0, 0));
 	xyz = parse_input(xyz_str, ',', 3, status);
 	if (*status == ERROR)
 		return (set_point(0, 0, 0));
@@ -93,13 +99,14 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	double	y;
 	double	z;
 
+	if (*status == ERROR)
+		return (set_vector(0, 0, 0));
 	xyz = parse_input(xyz_str, ',', 3, status);
 	if (*status == ERROR)
 		return (set_vector(0, 0, 0));
-	if (ft_strlen(xyz[0]) > 11 || ft_strlen(xyz[1]) > 11
-		|| ft_strlen(xyz[2]) > 11)
+	if (ft_strlen(xyz[0]) > 8 || ft_strlen(xyz[1]) > 8 || ft_strlen(xyz[2]) > 8)
 	{
-		*status = print_error_msg2("invalid orientation vector range: ",
+		*status = print_error_msg2("invalid orientation vector range or size: ",
 				xyz_str);
 		free_array(xyz);
 		return (set_vector(0, 0, 0));
@@ -121,6 +128,8 @@ double	transform_double(char *str, int *status)
 	double	d;
 	char	*cpy;
 
+	if (*status == ERROR)
+		return (0);
 	if (ft_strlen(str) > 11)
 	{
 		*status = print_error_msg2("invalid number range: ", str);
