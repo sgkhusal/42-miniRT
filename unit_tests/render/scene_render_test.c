@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:53:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 15:40:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:14:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,6 @@ void	scene_render_test(void)
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			normalize_vector(subtract_points(set_point(0, 1, 0),
 					rt.camera.origin)), set_vector(0, 1, 0)));
-	/* t_vector orientation = normalize_vector(subtract_points(
-		set_point(0, 1, 0), rt.camera.origin));
-	t_vector right = cross_product(set_vector(0, 1, 0), orientation);
-	t_vector up = cross_product(orientation, right);
-	printf("right: %f, %f, %f\n", right.x, right.y, right.z);
-	printf("up: %f, %f, %f\n", up.x, up.y, up.z);
-	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-		orientation, up)); */
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

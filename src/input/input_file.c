@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:44:45 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:55:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/28 22:08:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	read_file(int fd, char **content)
 			*content = tmp;
 		}
 	}
+	close(fd);
 	if (gnl == GNL_ERROR)
 		return (read_error(fd, content));
-	close(fd);
 	return (OK);
 }
