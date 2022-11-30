@@ -6,12 +6,18 @@
 /*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 21:17:34 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/07 11:49:55 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:20:17 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief This function will initialize the mlx structure and the mlx window
+ * given the HEIGHT and WIDTH of the window and the title of the window.
+ *
+ * @param mlx mlx structure
+ */
 void	create_mlx_window(t_mlx *mlx)
 {
 	mlx->ptr = NULL;
@@ -27,6 +33,12 @@ void	create_mlx_window(t_mlx *mlx)
 		minirt_error(mlx, "mlx error creating window");
 }
 
+/**
+ * @brief This function will create an image in the mlx window.
+ *
+ * @param img mlx image structure
+ * @param mlx mlx structure
+ */
 void	create_mlx_image(t_image *img, t_mlx *mlx)
 {
 	img->ptr = mlx_new_image(mlx->ptr, mlx->width, mlx->height);
@@ -36,6 +48,13 @@ void	create_mlx_image(t_image *img, t_mlx *mlx)
 			&img->line_size, &img->endian);
 }
 
+/**
+ * @brief This function will call mlx_put_image_to_window to render the image
+ * in the window. It will be used while handling the key press events.
+ *
+ * @param mlx mlx structure
+ * @return ** int 0 if success, 1 if error
+ */
 int	put_image_again(t_mlx *mlx)
 {
 	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->img.ptr, 0, 0);
@@ -57,6 +76,13 @@ static int	key_press(int key, t_mlx *mlx)
 	return (0);
 }
 
+/**
+ * @brief Will handle the red cross button press event and also the escape key
+ * event handled by the key_press function.
+ *
+ * @param mlx The mlx struct.
+ * @return int will close the window.
+ */
 void	set_mlx_hooks(t_mlx *mlx)
 {
 	mlx_expose_hook(mlx->window, put_image_again, mlx);

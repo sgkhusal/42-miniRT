@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 13:12:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:04:12 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Multiplication of two colors is a operation that is used to blend
+ * two colors together. For example, it can be used to get the color of a
+ * surface when it is hit by a light source of another color.
+ *
+ * @param a first color
+ * @param b second color
+ * @return t_vector resulting color
+ */
 t_vector	multiply_colors(t_vector a, t_vector b)
 {
 	t_vector	color;
@@ -22,6 +31,16 @@ t_vector	multiply_colors(t_vector a, t_vector b)
 	return (color);
 }
 
+/**
+ * @brief This function is used to normalize a color. It is used to limit the
+ * color values to the range of 0 to 1. Behaves just like the normalize_vector
+ * function but taking into account the rgb values.
+ *
+ * @param red red value
+ * @param green green value
+ * @param blue blue value
+ * @return t_vector normalized color
+ */
 t_vector	normalize_color(double red, double green, double blue)
 {
 	t_vector	normalized_color;
@@ -33,6 +52,14 @@ t_vector	normalize_color(double red, double green, double blue)
 	return (normalized_color);
 }
 
+/**
+ * @brief This function will convert an vector into a rgb color. It will be used
+ * to convert the color of a pixel into a color that can be displayed on the
+ * screen.
+ *
+ * @param color vector color
+ * @return t_color rgb color
+ */
 t_color	transform_vector_to_color(t_vector color)
 {
 	t_color	rgb;
@@ -43,6 +70,15 @@ t_color	transform_vector_to_color(t_vector color)
 	return (rgb);
 }
 
+/**
+ * @brief The color_at function will return the color in a intersection resulted
+ * from a ray intersecting the world. It will return the color black if there is
+ * no intersection.
+ *
+ * @param world the world struct
+ * @param ray the casted ray
+ * @return t_vector resulting color
+ */
 t_vector	color_at(t_world world, t_ray ray)
 {
 	t_intersection_list	list;
