@@ -97,12 +97,12 @@ static t_world	create_world(void)
 
 	world.objects = NULL;
 	p = create_object(PLANE, create_plane());
-	transform_plane(p, 1);
+	transform_plane(p, 0);
 	p->material.color = set_vector(0.4, 0.4, 1); //azul
 	p->material.specular = 0.2;
 	append_object(&world.objects, p);
 	p2 = create_object(PLANE, create_plane());
-	transform_plane(p2, 9);
+	transform_plane(p2, 0);
 	p2->material.color = set_vector(1, 0.4, 0.4); // rosa
 	append_object(&world.objects, p2);
 	world.light = set_point_light(set_point(0,8,-10),//buga: 0,10,-10; p-1, p2-6 - a luz está no plano p2
@@ -123,9 +123,9 @@ void	plane_render_test(void)
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -8); // não plota nada com 0, 0, 0
 	//set_point(0, 0, -0.0001)
+	rt.camera.orientation = set_vector(0, 0, 1);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-			normalize_vector(subtract_points(set_point(0, 0, 0),
-					rt.camera.origin)), set_vector(0, 1, 0)));
+			rt.camera.orientation, set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));

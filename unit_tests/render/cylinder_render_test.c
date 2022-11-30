@@ -98,6 +98,7 @@ void	cylinder_render_test(void)
 	rt.world = create_world();
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5);
+	rt.camera.orientation = set_vector(0, 0, 1);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			rt.camera.orientation, set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
