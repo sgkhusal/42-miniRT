@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:10:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:44:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:48:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	**parse_input(char *line, char c, int size_expected, int *status)
 {
 	char	**parsed;
 
+	parsed = NULL;
 	parsed = ft_split(line, c);
 	if (!parsed)
 		*status = print_error_msg2("malloc error on parse_input: ", line);

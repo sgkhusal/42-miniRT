@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 00:22:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:54:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	handle_sphere(char *line, t_object **objs)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_sphere"));
 	if (total_infos(infos) != 4)
-		status = print_error_msg2("to many or few arguments in sphere: ", line);
+		status = print_error_msg2("to many or few arguments in sphere: \
+		[center point] [diameter] [RGB color]: ", line);
 	else if (validate_sphere_chars(infos) == ERROR)
 		status = ERROR;
 	else

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 13:00:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/29 16:55:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	handle_cylinder(char *line, t_object **objs)
 	if (!infos)
 		return (print_error_msg("malloc error on handle_cylinder"));
 	if (total_infos(infos) != 6)
-		status = print_error_msg2("to many or few arguments for cylinder: ",
-				line);
+		status = print_error_msg2("to many or few arguments for cylinder: \
+		[center] [height orientation] [diameter] [height] [RGB color]: ", line);
 	else if (validate_cylinder_chars(infos) == ERROR)
 		status = ERROR;
 	else
