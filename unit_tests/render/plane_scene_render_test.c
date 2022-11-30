@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:02:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 15:28:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:12:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	plane_scene_render_test(void)
 	rt.world = create_world();
 	rt.camera = set_camera(M_PI / 2, mlx.width, mlx.height);
 	rt.camera.origin = set_point(0, 1.5, -5);
+	rt.camera.orientation = set_vector(0, 0, 1);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
-			normalize_vector(subtract_points(set_point(0, 1, 0),
-					rt.camera.origin)), set_vector(0, 1, 0)));
+			rt.camera.orientation, set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
 	free_canvas(canvas);
 	free_objects(&(rt.world.objects));
