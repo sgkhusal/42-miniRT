@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:58:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/29 16:46:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:10:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	check_argc(int argc)
+int	check_argc(int argc)
 {
 	if (argc == 2)
 		return (OK);

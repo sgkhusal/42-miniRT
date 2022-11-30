@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/29 17:29:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:56:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	transform_fov(char *fov_str, int *status)
 
 	if (ft_strlen(fov_str) > 3)
 	{
-		*status = print_error_msg2("invalid FOV range: ", fov_str);
+		*status = print_error_msg2("invalid FOV range [0-180]: ", fov_str);
 		return (0);
 	}
 	fov = ft_atoi(fov_str);
 	if (fov < 0 || fov > 180)
-		*status = print_error_msg2("invalid FOV range: ", fov_str);
+		*status = print_error_msg2("invalid FOV range [0-180]: ", fov_str);
 	return (fov);
 }
 
