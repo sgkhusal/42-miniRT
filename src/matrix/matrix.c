@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   matrix.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 12:05:52 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/13 15:56:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 16:40:25 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief This function will create a quadratic matrix of a given size by
+ * allocating memory for the matrix and its elements.
+ *
+ * @param size size of each side of the matrix
+ * @return t_matrix the resulting matrix
+ */
 t_matrix	create_matrix(int size)
 {
 	t_matrix	m;
@@ -32,6 +39,11 @@ t_matrix	create_matrix(int size)
 	return (m);
 }
 
+/**
+ * @brief This function will free the memory allocated for a matrix.
+ *
+ * @param m matrix to be freed
+ */
 void	free_matrix(t_matrix m)
 {
 	int	i;
@@ -45,29 +57,17 @@ void	free_matrix(t_matrix m)
 	free(m.matrix);
 }
 
-void	print_matrix(t_matrix m) /* remove */
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < m.size)
-	{
-		j = 0;
-		while (j < m.size)
-		{
-			printf("%f ", m.matrix[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-
-/* identity = 1 0 0 0
-              0 1 0 0
-              0 0 1 0
-              0 0 0 1 */
+/**
+ * @brief This function will create a matrix and then fill it with the
+ * identity matrix.
+ * identity = 1 0 0 0
+ *            0 1 0 0
+ *            0 0 1 0
+ *            0 0 0 1
+ *
+ * @param size size of each side of the matrix
+ * @return t_matrix the resulting matrix
+ */
 t_matrix	identity_matrix(int size)
 {
 	t_matrix	m;
@@ -90,26 +90,4 @@ t_matrix	identity_matrix(int size)
 		i++;
 	}
 	return (m);
-}
-
-int	check_equal_matrices(t_matrix m1, t_matrix m2)
-{
-	int	i;
-	int	j;
-
-	if (m1.size != m2.size)
-		return (FALSE);
-	i = 0;
-	while (i < m1.size)
-	{
-		j = 0;
-		while (j < m1.size)
-		{
-			if (!check_double_values(m1.matrix[i][j], m2.matrix[i][j]))
-				return (FALSE);
-			j++;
-		}
-		i++;
-	}
-	return (TRUE);
 }

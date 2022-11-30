@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_multiply.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/09 21:50:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:48:43 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /**
- * @brief This function will multiply two equal size square matrices.
+ * @brief This function will multiply two equal size square matrices to produce
+ * a third matrix. It is useful to apply multiple transformations to a matrix
+ * at a time like rotation and translation. In matrix multiplication, the scalar
+ * product of each row of the first matrix and each column of the second matrix.
  *
  * @param m1 The first matrix.
  * @param m2 The second matrix.
@@ -49,7 +52,8 @@ t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 
 /**
  * @brief This function will multiply a given 4x4 matrix by a given vector, and
- * return a vector.
+ * return a vector. It assumes that the vector is a one-dimensional matrix of
+ * size 4x1.
  *
  * @param m The matrix to be multiplied.
  * @param v The given vector
@@ -72,7 +76,8 @@ t_vector	multiply_matrix_by_vector(t_matrix m, t_vector v)
 
 /**
  * @brief This function will multiply a given 4x4 matrix by a given point, and
- * return a point.
+ * return a point. It assumes that the point is a one-dimensional matrix of
+ * size 4x1.
  *
  * @param m The matrix to be multiplied.
  * @param p The given point

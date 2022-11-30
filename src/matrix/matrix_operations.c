@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:21:54 by elraira-          #+#    #+#             */
-/*   Updated: 2022/10/10 20:40:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 15:43:53 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 /**
  * @brief Matrix transposition is a process of interchanging rows and columns
- * of a matrix. It will be used when translating normal vectors between objects
- * and the space. It is crucial when shading objects.
+ * of a matrix. Which means turning its rows into columns and vice versa.
+ * It will be used when translating normal vectors between object space and
+ * world space. It is crucial when shading objects.
  *
  * @param matrix The matrix to be transposed.
  * @return t_matrix The transposed matrix.
@@ -114,6 +115,18 @@ double	get_cofactor(t_matrix m, int row, int column)
 		return ((-1) * minor);
 }
 
+/**
+ * @brief Determinant is a scalar value that can be computed from the elements
+ * of a square matrix. It determines whether a matrix is invertible or not.
+ * In a 2x2 matrix, the determinant is the product of the diagonal elements
+ * minus the product of the off-diagonal elements.
+ * To calculate the determinant of a 4x4 matrix, we will need to work
+ * recursively, multiplying the elements of the first row by their cofactors,
+ * and summing the products.
+ *
+ * @param m The matrix from which the determinant will be obtained.
+ * @return double The determinant of the matrix.
+ */
 double	get_determinant(t_matrix m)
 {
 	double	det;
