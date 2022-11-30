@@ -12,6 +12,14 @@
 
 #include "minirt.h"
 
+/**
+ * @brief This function will check whether the hit occurs inside the object or
+ * outside of it. If the hit is inside the object, the normal vector will be
+ * inverted.
+ *
+ * @param comp computation structure from prepare_computations function
+ * @return t_bool true if the hit is inside the object, false otherwise
+ */
 t_bool	is_inside(t_comp *comp)
 {
 	if (scalar_product(comp->normalv, comp->eyev) < 0)
@@ -22,9 +30,17 @@ t_bool	is_inside(t_comp *comp)
 	return (FALSE);
 }
 
-/*
-ray, point, eyev and normalv are in the world space
-*/
+/**
+ * @brief This function will prepare the computation structure to be used in
+ * the shading functions. It will make things easier because these information
+ * can be reused in several functions.
+ * Ray, point, eyev and normalv are in the world space.
+ *
+ * @param ray ray that hit the object
+ * @param intersect intersect structure containing intersected object and t,
+ * which is the distance from the ray origin to the hit point
+ * @return t_comp computation structure
+ */
 t_comp	prepare_computations(t_ray ray, t_intersection *intersect)
 {
 	t_comp	comp;

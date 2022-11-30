@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 19:27:59 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/25 18:34:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:18:14 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Sets the corresponding transformation matrix to the given object.
+ * It will store the transformation matrix in the object's structure along with
+ * its inverse and transpose.
+ *
+ * @param o object to be transformed
+ * @param transform transformation matrix
+ */
 void	set_transform(t_object *o, t_matrix transform)
 {
 	free_matrix(o->transform);
@@ -22,6 +30,15 @@ void	set_transform(t_object *o, t_matrix transform)
 	o->transpose_inverse = transposed_matrix(o->inverse);
 }
 
+/**
+ * @brief This function will set, in the camera, the transformation matrix
+ * that will be used to transform the rays from the camera to the world
+ * coordinates. It will also set the inverse of the transformation matrix.
+ * This function is used while handling the camera input from the scene file.
+ *
+ * @param cam camera struct
+ * @param transform transformation matrix
+ */
 void	set_camera_transform(t_camera *cam, t_matrix transform)
 {
 	free_matrix(cam->transform);
@@ -30,15 +47,17 @@ void	set_camera_transform(t_camera *cam, t_matrix transform)
 	cam->inverse = inverse_matrix(cam->transform);
 }
 
-/*
-Simulates the eye movement
-from: the eye position - default: point(0, 0, 0)
-to: the point where the eye is looking at - default: point(0, 0, -1)
-forward = to - from -> the orientation vector of the camera
-up: a vector indicating which direction is up - default: vector(0, 1, 0)
-The up vector doesn't need to be normalized and it doesn't need to be
-perpendicular to the viewing direction. The function will take care of that.
-You only have to point vaguely in the direction you want
+/**
+ * @brief Simulates the eye movement. It is a matrix that orients the world
+ * relatively to the camera, allowing the camera to move.
+ *
+ * @param from the eye position - default: point(0, 0, 0)
+ * @param to the point where the eye is looking at - default: point(0, 0, -1)
+ * @param forward to - from -> the orientation vector of the camera
+ * @param up vector indicating which direction is up - default: vector(0, 1, 0)
+ * The up vector doesn't need to be normalized and it doesn't need to be
+ * perpendicular to the viewing direction. The function will take care of that.
+ * You only have to point vaguely in the direction you want
 */
 t_matrix	view_transform(t_point from, t_vector forward, t_vector up)
 {
