@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:11:30 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 23:38:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/01 00:45:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ static void	ultimate_transform_plane(t_object *p)
 	t_matrix	rotation_y;
 	t_matrix	rotation_z;
 	t_matrix	translation;
-	t_matrix	tmp;
+	t_matrix	rotation;
 
 	rotation_x = rotation_x_matrix(-M_PI / 4);
 	rotation_y = rotation_y_matrix(M_PI / 3);
 	rotation_z = rotation_z_matrix(-M_PI / 4);
 	translation = translation_matrix(0, -1, -1);
-	tmp = multiply_matrix(rotation_z, rotation_y);
+	rotation = multiply_matrix(rotation_z, rotation_y);
 	free_matrix(rotation_y);
 	free_matrix(rotation_z);
-	rotation_y = tmp;
-	tmp = multiply_matrix(rotation_y, rotation_x);
-	set_transform(p, multiply_matrix(tmp, translation));
+	rotation_y = rotation;
+	rotation = multiply_matrix(rotation_y, rotation_x);
 	free_matrix(rotation_x);
 	free_matrix(rotation_y);
+	set_transform(p, multiply_matrix(rotation, translation));
 	free_matrix(translation);
-	free_matrix(tmp);
+	free_matrix(rotation);
 }
 
 static void	combination_transform(t_object *p, int type)
@@ -58,6 +58,7 @@ static void	combination_transform(t_object *p, int type)
 	free_matrix(rotation_x);
 	free_matrix(rotation_y);
 	free_matrix(rotation_z);
+	free_matrix(translation);
 }
 
 /*

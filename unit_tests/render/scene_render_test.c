@@ -6,39 +6,66 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:53:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/01 00:15:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/01 01:13:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-static void	set_world(t_world *w)
+static void	put_left_wall(t_world *w)
 {
-	t_object	*floor;
 	t_object	*left_wall;
-	t_object	*right_wall;
+	t_matrix	translation;
+	t_matrix	rotation;
+	t_matrix	tmp;
+	t_matrix	scaling;
 
-	floor = create_object(SPHERE, create_sphere());
-	floor->material.color = set_vector(1, 0.9, 0.9);
-	floor->material.specular = 0;
-	set_transform(floor, scaling_matrix(10, 0.01, 10));
-	append_object(&(w->objects), floor);
 	left_wall = create_object(SPHERE, create_sphere());
 	left_wall->material.color = set_vector(1, 0.9, 0.9);
 	left_wall->material.specular = 0;
-	set_transform(left_wall, multiply_matrix(translation_matrix(0, 0, 5),
-			multiply_matrix(rotation_y_matrix(-M_PI / 4),
-				multiply_matrix(rotation_x_matrix(M_PI / 2),
-					scaling_matrix(10, 0.01, 10)))));
+	translation = translation_matrix(0, 0, 5);
+	rotation = rotation_x_matrix(M_PI / 2);
+	scaling = scaling_matrix(10, 0.01, 10);
+	tmp = multiply_matrix(rotation, scaling);
+	free_matrix(rotation);
+	free_matrix(scaling);
+	rotation = rotation_y_matrix(-M_PI / 4);
+	scaling = tmp;
+	tmp = multiply_matrix(rotation, tmp);
+	free_matrix(rotation);
+	free_matrix(scaling);
+	set_transform(left_wall, multiply_matrix(translation, tmp));
 	append_object(&(w->objects), left_wall);
+	free_matrix(tmp);
+	free_matrix(translation);
+}
+
+static void	put_right_wall(t_world *w)
+{
+	t_object	*right_wall;
+	t_matrix	translation;
+	t_matrix	rotation;
+	t_matrix	tmp;
+	t_matrix	scaling;
+
 	right_wall = create_object(SPHERE, create_sphere());
 	right_wall->material.color = set_vector(1, 0.9, 0.9);
 	right_wall->material.specular = 0;
-	set_transform(right_wall, multiply_matrix(translation_matrix(0, 0, 5),
-			multiply_matrix(rotation_y_matrix(M_PI / 4),
-				multiply_matrix(rotation_x_matrix(M_PI / 2),
-					scaling_matrix(10, 0.01, 10)))));
+	translation = translation_matrix(0, 0, 5);
+	rotation = rotation_x_matrix(M_PI / 2);
+	scaling = scaling_matrix(10, 0.01, 10);
+	tmp = multiply_matrix(rotation, scaling);
+	free_matrix(rotation);
+	free_matrix(scaling);
+	rotation = rotation_y_matrix(M_PI / 4);
+	scaling = tmp;
+	tmp = multiply_matrix(rotation, tmp);
+	free_matrix(rotation);
+	free_matrix(scaling);
+	set_transform(right_wall, multiply_matrix(translation, tmp));
 	append_object(&(w->objects), right_wall);
+	free_matrix(tmp);
+	free_matrix(translation);
 }
 
 static void	create_mlx_window2(t_mlx *mlx)
@@ -58,9 +85,16 @@ static t_world	create_world(void)
 {
 	t_object	*c;
 	t_world		world;
+	t_object	*floor;
 
 	world.objects = NULL;
-	set_world(&(world));
+	floor = create_object(SPHERE, create_sphere());
+	floor->material.color = set_vector(1, 0.9, 0.9);
+	floor->material.specular = 0;
+	set_transform(floor, scaling_matrix(10, 0.01, 10));
+	append_object(&(world.objects), floor);
+	put_left_wall(&(world));
+	put_right_wall(&(world));
 	put_elements(&(world));
 	world.light = set_point_light(set_point(-10, 10, -10), set_vector(1, 1, 1));
 	return (world);
