@@ -15,6 +15,9 @@
 
 # include "utils.h"
 
+/**
+ * @brief enum for each shape that can be rendered
+ */
 enum e_objects
 {
 	SPHERE,

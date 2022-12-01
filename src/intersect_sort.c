@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+/**
+ * @brief Swaps the values of two t_intersections in case the distance of the
+ * first is greater than the distance of the second.
+ * 
+ * @param a first t_intersection
+ */
 void	ft_swap(t_intersection **a)
 {
 	t_intersection	*b;
@@ -27,6 +33,12 @@ void	ft_swap(t_intersection **a)
 	b->object = object_tmp;
 }
 
+/**
+ * @brief Checks if the list of intersections is already sorted.
+ * 
+ * @param lst list of intersections
+ * @return int 1 if the list is sorted, 0 if not
+ */
 int	is_intersect_sorted(t_intersection_list *lst)
 {
 	t_intersection	*aux1;
@@ -44,6 +56,11 @@ int	is_intersect_sorted(t_intersection_list *lst)
 	return (TRUE);
 }
 
+/**
+ * @brief Sorts the intersection list by the distance of the ray to the object.
+ * 
+ * @param lst the intersection list to be sorted
+ */
 void	intersect_sort(t_intersection **head)
 {
 	t_intersection	*aux1;
