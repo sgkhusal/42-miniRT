@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 
+
 static int	validate_sphere_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)

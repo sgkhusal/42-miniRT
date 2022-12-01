@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+/**
+ * @brief the atod() function converts a string to a double.
+ * 
+ * @param nb string to be converted
+ * @return double converted string
+ */
 double	ft_atod(char *nb)
 {
 	double	n;
@@ -30,6 +36,16 @@ double	ft_atod(char *nb)
 	return (n);
 }
 
+/**
+ * @brief will parse the input file by splitting the string by the delimiter (',').
+ * Then, it will check if the file contains exactly the number of elements specified in the subject.
+ * 
+ * @param line line to be parsed
+ * @param c  delimiter
+ * @param size_expected number of elements expected
+ * @param status status of the parsing
+ * @return char** parsed string
+ */
 char	**parse_input(char *line, char c, int size_expected, int *status)
 {
 	char	**parsed;
