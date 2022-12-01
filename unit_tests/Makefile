@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/26 15:04:54 by sguilher         ###   ########.fr        #
+#    Updated: 2022/11/30 23:57:53 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ SRCS =			main.c \
 				camera_test.c \
 				ray_for_pixel_test.c \
 				scene_render_test.c \
+				scene_render_test_utils.c \
 				shadow_test.c \
 				plane_unit_test.c \
 				plane_render_test.c \

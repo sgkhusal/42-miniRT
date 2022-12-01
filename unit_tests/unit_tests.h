@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 19:21:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 23:56:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	ray_for_pixel_tests(void);
 void	scene_render_test(void);
 void	plane_render_test(void);
 void	plane_scene_render_test(void);
+void	put_elements(t_world *w);
 
 void	shadow_tests(void);
 
