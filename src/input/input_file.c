@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+/**
+ * @brief Checks if the file exists and if its extension is .rt.
+ * 
+ * @param file name of the file
+ * @return int 1 if the file extension is .rt, 0 if not
+ */
 int	check_file_extension(char *file)
 {
 	int	len;
@@ -30,6 +36,13 @@ int	check_file_extension(char *file)
 	return (OK);
 }
 
+/**
+ * @brief Opens the .rt input files. Returns an error if the file 
+ * can't be opened.
+ * 
+ * @param file name of the file to be opened
+ * @return int file descriptor or ERROR if the file can't be opened
+ */
 int	open_file(char *file)
 {
 	int	fd;
@@ -44,6 +57,15 @@ int	open_file(char *file)
 	return (fd);
 }
 
+/**
+ * @brief Returns an error if the file couldn't be read and
+ * frees the memory allocated for the file content. Then, closes the file
+ * descriptor.
+ * 
+ * @param fd file descriptor
+ * @param content file content
+ * @return int ERROR as the file couldn't be read
+ */
 static int	read_error(int fd, char **content)
 {
 	print_error_msg("error reading file");
@@ -54,6 +76,15 @@ static int	read_error(int fd, char **content)
 	return (ERROR);
 }
 
+/**
+ * @brief Reads the file content using get_next_line. Returns an error if the
+ * file couldn't be read. After reading the file, it closes the file descriptor
+ * and frees the memory allocated for the file content.
+ * 
+ * @param fd file descriptor
+ * @param content file content
+ * @return int OK if the file was read successfully, ERROR if not
+ */
 int	read_file(int fd, char **content)
 {
 	int		gnl;

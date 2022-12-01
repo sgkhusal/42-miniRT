@@ -39,6 +39,11 @@ t_camera	set_camera(double fov, int hsize, int vsize)
 	return (cam);
 }
 
+/**
+ * @brief frees the matrices stored in the camera struct
+ * 
+ * @param camera camera struct
+ */
 void	free_camera(t_camera *camera)
 {
 	if (camera->transform.matrix)
