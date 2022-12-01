@@ -12,7 +12,6 @@ wrong_element_cy.rt
 wrong_element_plane.rt
 wrong_element_sl.rt
 wrong_element_sph.rt
-tabs.rt
 wrong_ambient_description.rt
 wrong_light_description.rt
 wrong_camera_description.rt
@@ -26,6 +25,7 @@ wrong_ratio_range.rt
 wrong_sphere_diameter_range.rt
 wrong_color_character.rt
 wrong_color_separator.rt
+wrong_coordinates_char.rt
 orientation_not_normalized.rt
 negative_value.rt
 negative_value2.rt
