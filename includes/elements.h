@@ -16,7 +16,7 @@
 # include "utils.h"
 
 /**
- * @brief enum for each shape that can be rendered
+ * @brief enum for each shape that can be rendered 
  */
 enum e_objects
 {
@@ -47,7 +47,10 @@ typedef struct s_camera
 	double		half_height;
 }				t_camera;
 
-// intensity is the normalized(color in rgb) * brightness
+/**
+ * @brief struct which stores the position and intensity of the light
+ * @param intensity is the normalized(color in rgb) * brightness
+ */
 typedef struct s_light
 {
 	t_point		position;
@@ -55,12 +58,12 @@ typedef struct s_light
 }				t_light;
 
 /**
+ * @brief material struct which stores the material properties of the object
  * @param color normalized color with range [0-1]
  * @param diffuse diffuse color with range [0-1]
  * @param ambient ambient color with range [0-1]
  * @param specular specular color with range [0-1]
  * @param shininess shininess value with range [10-200]
- * (at least?)(very small highlight)
  */
 typedef struct s_material
 {
@@ -71,6 +74,10 @@ typedef struct s_material
 	double		shininess;
 }				t_material;
 
+/**
+ * @brief shading struct which stores the shading properties of the object 
+ * to calculate the shading in the lighting function
+ */
 typedef struct s_shading
 {
 	t_vector	diffuse;
@@ -78,18 +85,37 @@ typedef struct s_shading
 	t_vector	specular;
 }				t_shading;
 
+/**
+ * @brief struct which stores the properties of the sphere
+ * @param center is the center of the sphere
+ * @param radius is the radius of the sphere
+ */
 typedef struct s_sphere
 {
 	t_point		center;
 	double		radius;
 }				t_sphere;
 
+/**
+ * @brief struct which stores the properties of the plane
+ * @param point is a point on the plane
+ * @param orientation is the normal vector of the plane
+ */
 typedef struct s_plane
 {
 	t_point		point;
 	t_vector	orientation;
 }				t_plane;
 
+/**
+ * @brief struct which stores the properties of the cylinder
+ * @param center is the center of the cylinder
+ * @param radius is the radius of the cylinder
+ * @param orientation is the normal vector of the cylinder
+ * @param height is the height of the cylinder
+ * @param min used to handle the bottom cap of the cylinder
+ * @param max used to handle the top cap of the cylinder
+ */
 typedef struct s_cylinder
 {
 	t_point		center;
@@ -100,6 +126,10 @@ typedef struct s_cylinder
 	double		max;
 }				t_cylinder;
 
+/**
+ * @brief union which stores each possible shape's struct 
+ * carrying its specific properties.
+ */
 typedef union u_shape
 {
 	t_sphere	*sphere;
@@ -107,6 +137,16 @@ typedef union u_shape
 	t_cylinder	*cylinder;
 }				t_shape;
 
+/**
+ * @brief struct which stores the properties common to all shapes
+ * @param type is the type of the object (sphere, plane, cylinder)
+ * @param material is the material of the object
+ * @param shape is the shape union carrying the struct of the specific shape
+ * @param transform is the transformation matrix of the object
+ * @param inverse is the inverse of the transformation matrix of the object
+ * @param transpose_inverse is the transpose of the inverse of the transformation
+ * @param next is the pointer to the next object in the linked list
+ */
 typedef struct s_object
 {
 	enum e_objects	type;
@@ -118,32 +158,32 @@ typedef struct s_object
 	struct s_object	*next;
 }				t_object;
 
-// material
+/* material properties function */
 t_material	set_material(void);
 
-// light
+/* lighting functions */
 t_vector	reflect(t_vector incident, t_vector normal);
 t_light		set_point_light(t_point position, t_vector intensity);
 
-// objects
+/* object functions */
 t_object	*create_object(enum e_objects type, void *shape);
 void		set_transform(t_object *o, t_matrix transform);
 void		append_object(t_object **head, t_object *obj);
 void		free_objects(t_object **head);
 
-// sphere
+/* sphere functions */
 t_sphere	*create_sphere(void);
 t_vector	sphere_normal_at(t_object *s, t_point p);
 
-// plane
+/* plane functions */
 t_plane		*create_plane(void);
 t_vector	plane_normal_at(t_object *p, t_point world_point);
 
-// cylinder
+/* cylinder functions */
 t_cylinder	*create_cylinder(void);
 t_vector	cylinder_normal_at(t_object *c, t_point p);
 
-// camera
+/* camera functions */
 t_camera	set_camera(double fov, int hsize, int vsize);
 void		free_camera(t_camera *camera);
 

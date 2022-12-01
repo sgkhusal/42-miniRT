@@ -14,6 +14,7 @@
 # define TUPLES_H
 
 /**
+ * @brief vector struct
  * @param x x axis value (right)
  * @param y y axis value (up)
  * @param z z axis value (out of screen)
@@ -27,6 +28,13 @@ typedef struct s_vector
 	double	w;
 }				t_vector;
 
+/**
+ * @brief point struct
+ * @param x x axis value (right)
+ * @param y y axis value (up)
+ * @param z z axis value (out of screen)
+ * @param w type (1 = point, 0 = vector)
+ */
 typedef struct s_point
 {
 	double	x;
@@ -35,6 +43,7 @@ typedef struct s_point
 	double	w;
 }				t_point;
 
+/* tuple functions */
 t_point			set_point(double x, double y, double z);
 t_vector		set_vector(double x, double y, double z);
 double			vector_length(t_vector vector);

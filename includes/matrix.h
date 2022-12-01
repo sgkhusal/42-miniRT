@@ -15,6 +15,9 @@
 
 # include "tuples.h"
 
+/**
+ * @brief struct to store matrix values and dimensions 
+ */
 typedef struct s_matrix
 {
 	double	**matrix;
@@ -22,6 +25,10 @@ typedef struct s_matrix
 
 }				t_matrix;
 
+/**
+ * @brief struct which stores shearing matrix values (x in proportion to y, 
+ * z in proportion to y, etc.) 
+ */
 typedef struct s_shearing
 {
 	double	x_y;
@@ -32,13 +39,13 @@ typedef struct s_shearing
 	double	z_y;
 }				t_shearing;
 
-//matrix
+/* matrix functions */
 t_matrix	create_matrix(int size);
 void		free_matrix(t_matrix m);
 int			check_equal_matrices(t_matrix m1, t_matrix m2);
 t_matrix	identity_matrix(int size);
 
-// operations
+/* matrix operations functions */
 t_matrix	transposed_matrix(t_matrix matrix);
 t_matrix	multiply_matrix(t_matrix m1, t_matrix m2);
 t_vector	multiply_matrix_by_vector(t_matrix m, t_vector v);
@@ -49,14 +56,12 @@ double		get_minor(t_matrix m, int row, int column);
 double		get_cofactor(t_matrix m, int row, int column);
 t_matrix	inverse_matrix(t_matrix m);
 
-// transformations
+/* transformation matrix functions */
 t_matrix	translation_matrix(double x, double y, double z);
 t_matrix	scaling_matrix(double x, double y, double z);
 t_matrix	rotation_x_matrix(double radians);
 t_matrix	rotation_y_matrix(double radians);
 t_matrix	rotation_z_matrix(double radians);
 t_matrix	shearing_matrix(t_shearing s);
-
-void		print_matrix(t_matrix m); // remove
 
 #endif
