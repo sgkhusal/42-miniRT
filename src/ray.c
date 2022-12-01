@@ -20,7 +20,7 @@
  *
  * @param origin The origin of the ray.
  * @param direction The direction of the ray.
- * @return t_ray The t_ray struct containinf the point of the origin and the
+ * @return t_ray The t_ray struct containing the point of the origin and the
  * normalized direction vector.
  */
 
@@ -58,6 +58,16 @@ t_point	ray_position(t_ray ray, double distance)
 	return (position);
 }
 
+/**
+ * @brief To avoid changing the sphere's properties, which would make the calculations
+ * more complex, the transformation can be applied to the ray instead so that the
+ * sphere can be treated as if it were centered at the origin and had a radius of 1
+ * and by transforming the ray, the illusion of the sphere transforming is created.
+ * 
+ * @param ray ray to be transformed
+ * @param m transformation matrix
+ * @return t_ray transformed ray
+ */
 t_ray	transform_ray(t_ray ray, t_matrix m)
 {
 	t_ray	transformed_ray;
@@ -67,7 +77,17 @@ t_ray	transform_ray(t_ray ray, t_matrix m)
 	return (transformed_ray);
 }
 
-t_ray	ray_for_pixel(t_camera cam, double x, double y)
+/**
+ * @brief the ray_for_pixel function calculates the ray that passes through the
+ * center of a given pixel on the canvas. It does the job of calculating the
+ * location of the pixel on the canvas from the ray casted from the camera.
+ * 
+ * @param cam camera
+ * @param x pixel x coordinate
+ * @param y pixel y coordinate
+ * @return t_ray ray that passes through the center of a given pixel on the canvas
+ */
+t_ray	ray_for_pixel(t_camera cam, double x, double y) // up doc
 {
 	double	xoffset;
 	double	yoffset;

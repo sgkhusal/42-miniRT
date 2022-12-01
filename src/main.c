@@ -12,6 +12,11 @@
 
 #include "minirt.h"
 
+/**
+ * @brief Initializes the t_rt main struct.
+ * 
+ * @param rt t_rt struct to be initialized.
+ */
 static void	init_minirt(t_rt *rt)
 {
 	rt->world.objects = NULL;
@@ -19,6 +24,16 @@ static void	init_minirt(t_rt *rt)
 	rt->camera.inverse.matrix = NULL;
 }
 
+/**
+ * @brief The main function of the program. Initializes the t_rt struct and
+ * calls the functions to parse the scene file and render the image. Then,
+ * it frees the allocated memory and keeps the program running until the
+ * user closes the window.
+ * 
+ * @param argc number of arguments passed to the program.
+ * @param argv array of arguments passed to the program.
+ * @return int 0 if the program runs successfully.
+ */
 int	main(int argc, char *argv[])
 {
 	t_mlx		mlx;
