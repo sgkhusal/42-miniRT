@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/12 02:08:39 by sguilher          #+#    #+#              #
-#    Updated: 2022/10/17 23:45:58 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/02 15:24:13 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(NAME):	$(OBJS) $(OBJS_GNL)
 	ranlib $@
 
 clean:
-	$(RM_DIR) $(OBJ_PATH)
+	@$(RM_DIR) $(OBJ_PATH)
 
 fclean:		clean
 	$(RM) $(NAME)
