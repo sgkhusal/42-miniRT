@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   objects.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:09:00 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/09 18:06:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 11:43:40 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief This function will create a new object of a given type and allocate
+ * memory for it. It will also initialize the common attributes of all objects.
+ *
+ * @param type type of the object to be created
+ * @param shape void pointer to the shape of the object that will be casted to
+ * the correct type
+ * @return t_object* a pointer to the new object
+ */
 t_object	*create_object(enum e_objects type, void *shape)
 {
 	t_object	*obj;
@@ -34,6 +43,13 @@ t_object	*create_object(enum e_objects type, void *shape)
 	return (obj);
 }
 
+/**
+ * @brief This function will append a new object to the end of the list of
+ * objects in a world.
+ *
+ * @param head pointer to the head of the list of objects
+ * @param obj pointer to the object to be appended
+ */
 void	append_object(t_object **head, t_object *obj)
 {
 	t_object	*aux;
@@ -49,6 +65,12 @@ void	append_object(t_object **head, t_object *obj)
 	aux->next = obj;
 }
 
+/**
+ * @brief This function will free the memory allocated for a list of objects in
+ * a world.
+ *
+ * @param head pointer to the head of the list of objects
+ */
 void	free_objects(t_object **head)
 {
 	t_object	*aux;
