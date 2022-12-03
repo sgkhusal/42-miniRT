@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plot.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 18:59:31 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 14:32:40 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:15:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,6 @@ void	plot_image(t_image *img, t_mlx *mlx, t_vector **canvas)
 		{
 			color = transform_vector_to_color(canvas[y][x]);
 			put_pixel_color(img, x, y, color.color);
-			if (y == mlx->height / 2) /* remove if-else - red cross*/
-				put_pixel_color(img, x, y, 0xFF0000);
-			else if (x == mlx->width / 2)
-				put_pixel_color(img, x, y, 0xFF0000);
 			y++;
 		}
 		x++;

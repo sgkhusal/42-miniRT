@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/30 23:57:53 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/03 14:28:02 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c world.c \
 				transform_utils.c objects.c input_utils.c intersect_sort.c \
 				computations.c cylinder.c mlx_utils.c canvas.c plot.c plane.c \
-				camera.c get_rotation.c
+				camera.c get_rotation.c clean.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h

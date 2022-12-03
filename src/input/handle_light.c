@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 14:12:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:16:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static void	create_and_append_light(t_light *light, char **infos, int *status)
 	double		brightness;
 	t_vector	color;
 
-	light->position = transform_coordinates(infos[1], &status);
+	light->position = transform_coordinates(infos[1], status);
 	if (check_equal_points(light->position, set_point(0, 0, 0)))
 		light->position = set_point(0, 0, 0.0001);
-	brightness = transform_ratio(infos[2], &status);
-	color = transform_color(infos[3], &status);
+	brightness = transform_ratio(infos[2], status);
+	color = transform_color(infos[3], status);
 	color = set_vector(1, 1, 1);
 	light->intensity = multiply_vector_by_scalar(color, brightness);
 }
