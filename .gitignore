@@ -8,6 +8,7 @@ obj
 # Executables
 *.out
 miniRT
+miniRT_bonus
 unit_test
 
 # othes
