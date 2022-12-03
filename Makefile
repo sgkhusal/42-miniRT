@@ -22,9 +22,11 @@ UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c ray.c reflection.c material.c light.c camera.c \
-				intersection.c hit.c normal.c intersect_sort.c $(INPUT) \
-				$(INPUT_M) $(TUPLES) $(MATRICES) $(UTILS) $(SHAPES) $(WORLD)
+SRCS =			main.c $(WORLD) $(SHAPES) $(INTERSECT) $(INPUT) $(INPUT_M) \
+				$(TUPLES) $(MATRICES) $(UTILS)
+WORLD =			world.c transform.c computations.c camera.c light.c reflection.c
+SHAPES =		sphere.c cylinder.c objects.c plane.c normal.c material.c
+INTERSECT =		ray.c intersection.c hit.c intersect_sort.c
 INPUT =			handle_input.c input_file.c handle_ambient.c handle_camera.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c \
 				validate_utils.c transform_utils.c input_utils.c get_rotation.c
@@ -33,9 +35,7 @@ TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
 				matrix_inverse.c matrix_transform.c matrix_rotation.c
-SHAPES =		sphere.c cylinder.c objects.c plane.c
 UTILS =			utils.c error.c mlx_utils.c colors.c canvas.c plot.c clean.c
-WORLD =			world.c transform.c computations.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 
@@ -46,9 +46,8 @@ INCLUDE	=		-I./ -I./includes
 
 # bonus
 INPUT_B =		handle_content_bonus.c handle_light_bonus.c
-SRCS_BONUS =	main.c ray.c reflection.c material.c light.c camera.c \
-				intersection.c hit.c normal.c intersect_sort.c $(INPUT) \
-				$(INPUT_B) $(TUPLES) $(MATRICES) $(UTILS) $(SHAPES) $(WORLD)
+SRCS_BONUS =	main.c $(WORLD) $(SHAPES) $(INTERSECT) $(INPUT) $(INPUT_B) \
+				$(TUPLES) $(MATRICES) $(UTILS)
 OBJS_BONUS =	$(SRCS_BONUS:%.c=$(OBJS_DIR)/%.o)
 
 # compilation
@@ -69,6 +68,7 @@ RESET	=	\033[0m
 # rules
 
 all:	$(NAME)
+
 bonus:	$(NAME_BONUS)
 
 $(OBJS_DIR)/%.o:	%.c $(HEADERS)
