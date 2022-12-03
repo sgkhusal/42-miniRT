@@ -87,20 +87,20 @@ $(MLX):
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
-#test:	$(NAME)
-#	./$(NAME) scenes/scene.rt
+test:	$(NAME)
+	./$(NAME) scenes/composition.rt
 
 utest:
 		@$(MAKE) --no-print-directory -C $(UNIT_TESTS_PATH) test
 
 clean:
 		$(RM_DIR) $(OBJS_DIR)
-		@$(MAKE) -C $(LIBFT_PATH) clean
-		@$(MAKE) -C $(MLX_PATH) clean
+		@$(MAKE) --no-print-directory -C $(LIBFT_PATH) clean
 
 fclean:		clean
 		$(RM) $(NAME)
-		@$(MAKE) -C $(LIBFT_PATH) fclean
+		@$(MAKE) --no-print-directory -C $(LIBFT_PATH) fclean
+		@$(MAKE) --no-print-directory -C $(MLX_PATH) clean
 
 re:			fclean all
 

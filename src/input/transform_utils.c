@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 15:55:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/01 01:20:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	xyz = parse_input(xyz_str, ',', 3, status);
 	if (*status == ERROR)
 		return (set_vector(0, 0, 0));
-	if (ft_strlen(xyz[0]) > 8 || ft_strlen(xyz[1]) > 8 || ft_strlen(xyz[2]) > 8)
+	if (ft_strlen(xyz[0]) > 9 || ft_strlen(xyz[1]) > 9 || ft_strlen(xyz[2]) > 9)
 	{
 		*status = print_error_msg2("invalid orientation vector range or size: ",
 				xyz_str);
