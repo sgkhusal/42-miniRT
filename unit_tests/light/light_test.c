@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:26:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 15:19:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:18:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	lighting_test(t_light light, t_vector eye, t_vector expected)
 	comp.normalv = set_vector(0, 0, -1);
 	comp.eyev = eye;
 	result = lighting(material, light, comp, FALSE);
+	result = add_vectors(result, material.ambient);
 	if (check_equal_vectors(expected, result))
 		printf(GREEN "OK" END "\n");
 	else

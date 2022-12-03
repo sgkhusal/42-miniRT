@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 14:16:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:22:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,27 @@ static int	validate_light_chars(char **infos)
 	return (OK);
 }
 
-static void	create_and_append_light(t_light *light, char **infos, int *status)
+static void	create_and_append_light(t_light **head, char **infos, int *status)
 {
 	double		brightness;
 	t_vector	color;
+	t_light		*light;
+	t_point		position;
 
-	light->position = transform_coordinates(infos[1], status);
-	if (check_equal_points(light->position, set_point(0, 0, 0)))
-		light->position = set_point(0, 0, 0.0001);
+	position = transform_coordinates(infos[1], status);
+	if (check_equal_points(position, set_point(0, 0, 0)))
+		position = set_point(0, 0, 0.0001);
 	brightness = transform_ratio(infos[2], status);
 	color = transform_color(infos[3], status);
 	color = set_vector(1, 1, 1);
-	light->intensity = multiply_vector_by_scalar(color, brightness);
+	if (*status == ERROR)
+		return ;
+	light = create_point_light(position,
+		multiply_vector_by_scalar(color, brightness));
+	append_light(head, light);
 }
 
-int	handle_light(char *line, t_light *light)
+int	handle_light(char *line, t_light **head)
 {
 	char		**infos;
 	int			status;
@@ -52,7 +58,7 @@ int	handle_light(char *line, t_light *light)
 	else if (validate_light_chars(infos) == ERROR)
 		status = ERROR;
 	else
-		create_and_append_light(light, infos, &status);
+		create_and_append_light(head, infos, &status);
 	free_array(infos);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:11:30 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/01 00:45:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:34:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ static t_world	create_world(void)
 	t_world		world;
 
 	world.objects = NULL;
+	world.lights = NULL;
 	p = create_object(PLANE, create_plane());
 	transform_plane(p, 14);
 	p->material.color = set_vector(0.4, 0.4, 1);
@@ -110,7 +111,8 @@ static t_world	create_world(void)
 	transform_plane(p2, 13);
 	p2->material.color = set_vector(1, 0.4, 0.4);
 	append_object(&world.objects, p2);
-	world.light = set_point_light(set_point(0, 10, -10), set_vector(1, 1, 1));
+	world.lights = create_point_light(set_point(0, 10, -10),
+		set_vector(1, 1, 1));
 	return (world);
 }
 
@@ -130,9 +132,7 @@ void	plane_render_test(void)
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			rt.camera.orientation, set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
-	free_canvas(canvas);
-	free_objects(&(rt.world.objects));
-	free_camera(&rt.camera);
+	clean_minirt(&rt, canvas);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 }

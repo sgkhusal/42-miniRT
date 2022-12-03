@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:22:11 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 14:25:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:51:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,12 @@ void	free_array(char **arr)
 	}
 	free(arr);
 	arr = NULL;
+}
+
+void	clean_minirt(t_rt *rt, t_vector	**canvas)
+{
+	free_objects(&rt->world.objects);
+	free_lights(&rt->world.lights);
+	free_camera(&rt->camera);
+	free_canvas(canvas);
 }

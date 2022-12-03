@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_content.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 12:13:56 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:19:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,11 @@ static int	check_separator(char **lines)
 int	handle_line(char *line, t_rt *rt)
 {
 	if (ft_strncmp(line, "A ", 2) == 0)
-		return (handle_ambient_light(line, &rt->ambient));
+		return (handle_ambient_light(line, &rt->world.ambient));
 	if (ft_strncmp(line, "C ", 2) == 0)
 		return (handle_camera(line, &(rt->camera)));
 	if (ft_strncmp(line, "L ", 2) == 0)
-		return (handle_light(line, &rt->world.light));
+		return (handle_light(line, &(rt->world.lights)));
 	if (ft_strncmp(line, "sp ", 3) == 0)
 		return (handle_sphere(line, &(rt->world.objects)));
 	if (ft_strncmp(line, "pl ", 3) == 0)
@@ -147,11 +147,12 @@ int	handle_content(char **lines, t_rt *rt)
 		{
 			free_objects(&(rt->world.objects));
 			free_camera(&rt->camera);
+			free_lights(&(rt->world.lights));
 			status = ERROR;
 		}
 	}
 	if (status == OK)
-		set_ambient_light(&rt->world.objects, rt->ambient);
+		set_ambient_light(&rt->world.objects, rt->world.ambient);
 	free_array(lines);
 	return (status);
 }

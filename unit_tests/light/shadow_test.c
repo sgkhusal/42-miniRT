@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 20:13:33 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/26 15:19:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:16:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	shadow_test1(void)
 	comp.point = set_point(0, 0, 0);
 	light = set_point_light(set_point(0, 0, -10), set_vector(1, 1, 1));
 	color = lighting(set_material(), light, comp, TRUE);
-	if (check_equal_vectors(color, set_vector(0.1, 0.1, 0.1)))
+	if (check_equal_vectors(color, set_vector(0, 0, 0)))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
@@ -36,7 +36,7 @@ void	shadow_test2(t_world world, t_point point, t_bool expected)
 	t_bool		result;
 
 	printf(GREY "shadow_test %d: " END, n);
-	result = is_shadowed(world, point);
+	result = is_shadowed(world, point, *world.lights);
 	if (result == expected)
 		printf(GREEN "OK" END "\n");
 	else
@@ -54,7 +54,8 @@ void	shadow_test3(void)
 
 	printf(GREY "shadow_test 6: " END);
 	w.objects = NULL;
-	w.light = set_point_light(set_point(0, 0, -10), set_vector(1, 1, 1));
+	w.lights = NULL;
+	w.lights = create_point_light(set_point(0, 0, -10), set_vector(1, 1, 1));
 	append_object(&w.objects, create_object(SPHERE, create_sphere()));
 	s2 = create_object(SPHERE, create_sphere());
 	set_transform(s2, translation_matrix(0, 0, 10));
@@ -63,12 +64,13 @@ void	shadow_test3(void)
 	i.object = s2;
 	comp = prepare_computations(set_ray(set_point(0, 0, 5),
 				set_vector(0, 0, 1)), &i);
-	result = shade_hit(w, comp);
+	result = get_total_color(w, comp);
 	if (check_equal_vectors(result, set_vector(0.1, 0.1, 0.1)))
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 	free_objects(&w.objects);
+	free(w.lights);
 }
 
 // Test for over_point
@@ -107,4 +109,5 @@ void	shadow_tests(void)
 	shadow_test3();
 	over_point_test();
 	free_objects(&world.objects);
+	free(world.lights);
 }

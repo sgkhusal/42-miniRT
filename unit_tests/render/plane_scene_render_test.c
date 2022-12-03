@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_scene_render_test.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:02:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/01 01:17:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 155:330:01 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static t_world	create_world(void)
 	t_object	*floor;
 
 	world.objects = NULL;
+	world.lights = NULL;
 	floor = create_object(PLANE, create_plane());
 	floor->material.color = set_vector(1, 0.9, 0.9);
 	floor->material.specular = 0;
@@ -85,7 +86,8 @@ static t_world	create_world(void)
 	put_left_wall(&(world));
 	put_right_wall(&(world));
 	put_elements(&(world));
-	world.light = set_point_light(set_point(-10, 10, -10), set_vector(1, 1, 1));
+	world.lights = create_point_light(set_point(-10, 10, -10),
+		set_vector(1, 1, 1));
 	return (world);
 }
 
@@ -109,9 +111,7 @@ void	plane_scene_render_test(void)
 			normalize_vector(subtract_points(set_point(0, 1, 0),
 					rt.camera.origin)), set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);
-	free_canvas(canvas);
-	free_objects(&(rt.world.objects));
-	free_camera(&rt.camera);
+	clean_minirt(&rt, canvas);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 }
