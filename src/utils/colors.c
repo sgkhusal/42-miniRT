@@ -6,7 +6,7 @@
 /*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 20:48:28 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 14:04:12 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:00:221 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,24 @@ t_color	transform_vector_to_color(t_vector color)
 	return (rgb);
 }
 
+t_vector get_total_color(t_world world, t_comp comps)
+{
+	t_light		*light;
+	t_vector	total_color;
+	t_vector	color;
+
+	total_color = multiply_colors(comps.xs->object->material.color,
+		comps.xs->object->material.ambient);
+	light = world.lights;
+	while (light)
+	{
+		color = shade_hit(world, comps, *light);
+		total_color = add_vectors(total_color, color);
+		light = light->next;
+	}
+	return (total_color);
+}
+
 /**
  * @brief The color_at function will return the color in a intersection resulted
  * from a ray intersecting the world. It will return the color black if there is
@@ -96,7 +114,7 @@ t_vector	color_at(t_world world, t_ray ray)
 		return (set_vector(0, 0, 0));
 	}
 	comps = prepare_computations(ray, hit);
-	color = shade_hit(world, comps);
+	color = get_total_color(world, comps);
 	free_intersection_list(&list);
 	if (color.x > 1)
 		color.x = 1;

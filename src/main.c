@@ -14,12 +14,13 @@
 
 /**
  * @brief Initializes the t_rt main struct.
- * 
+ *
  * @param rt t_rt struct to be initialized.
  */
 static void	init_minirt(t_rt *rt)
 {
 	rt->world.objects = NULL;
+	rt->world.lights = NULL; //
 	rt->camera.transform.matrix = NULL;
 	rt->camera.inverse.matrix = NULL;
 }
@@ -29,7 +30,7 @@ static void	init_minirt(t_rt *rt)
  * calls the functions to parse the scene file and render the image. Then,
  * it frees the allocated memory and keeps the program running until the
  * user closes the window.
- * 
+ *
  * @param argc number of arguments passed to the program.
  * @param argv array of arguments passed to the program.
  * @return int 0 if the program runs successfully.
@@ -47,9 +48,7 @@ int	main(int argc, char *argv[])
 	create_mlx_image(&mlx.img, &mlx);
 	canvas = create_canvas();
 	render(rt.camera, rt.world, canvas, &mlx);
-	free_objects(&rt.world.objects);
-	free_canvas(canvas);
-	free_camera(&rt.camera);
+	clean_minirt(&rt, canvas);
 	set_mlx_hooks(&mlx);
 	mlx_loop(mlx.ptr);
 	return (0);

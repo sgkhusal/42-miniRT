@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 23:30:52 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 01:58:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:28:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <../libraries/minilibx_linux/mlx.h>
 
 /* defines windown size */
-# define HEIGHT 700
-# define WIDTH 1000
+# define HEIGHT 100
+# define WIDTH 100
 
 /* defines key codes for mlx_key_hook */
 # define DESTROY_NOTIFY 17

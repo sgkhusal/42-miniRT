@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:39:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 12:40:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:20:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "utils.h"
 
 /**
- * @brief enum for each shape that can be rendered 
+ * @brief enum for each shape that can be rendered
  */
 enum e_objects
 {
@@ -53,8 +53,9 @@ typedef struct s_camera
  */
 typedef struct s_light
 {
-	t_point		position;
-	t_vector	intensity;
+	t_point			position;
+	t_vector		intensity;
+	struct s_light	*next; //
 }				t_light;
 
 /**
@@ -75,7 +76,7 @@ typedef struct s_material
 }				t_material;
 
 /**
- * @brief shading struct which stores the shading properties of the object 
+ * @brief shading struct which stores the shading properties of the object
  * to calculate the shading in the lighting function
  */
 typedef struct s_shading
@@ -127,7 +128,7 @@ typedef struct s_cylinder
 }				t_cylinder;
 
 /**
- * @brief union which stores each possible shape's struct 
+ * @brief union which stores each possible shape's struct
  * carrying its specific properties.
  */
 typedef union u_shape
@@ -164,6 +165,9 @@ t_material	set_material(void);
 /* lighting functions */
 t_vector	reflect(t_vector incident, t_vector normal);
 t_light		set_point_light(t_point position, t_vector intensity);
+t_light		*create_point_light(t_point position, t_vector intensity);
+void		append_light(t_light **head, t_light *light);
+void		free_lights(t_light **head);
 
 /* object functions */
 t_object	*create_object(enum e_objects type, void *shape);
