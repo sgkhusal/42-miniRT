@@ -6,23 +6,22 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 16:17:06 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/11 01:28:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:15:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-static t_shearing	set_shearing(double xy, double xz, double yx, double yz,
-	double zx, double zy)
+static t_shearing	set_shearing(void)
 {
 	t_shearing	s;
 
-	s.x_y = xy;
-	s.y_x = yx;
-	s.x_z = xz;
-	s.z_x = zx;
-	s.y_z = yz;
-	s.z_y = zy;
+	s.x_y = 1;
+	s.x_z = 0;
+	s.y_x = 0;
+	s.y_z = 0;
+	s.z_x = 0;
+	s.z_y = 0;
 	return (s);
 }
 
@@ -48,25 +47,23 @@ static void	shearing_test(t_matrix s, t_point expected)
 
 void	shearing_tests(void)
 {
-	t_matrix	matrix;
 	t_shearing	shearing;
 
-	shearing = set_shearing(1, 0, 0, 0, 0, 0);
-	matrix = shearing_matrix(shearing);
-	shearing_test(matrix, set_point(5, 3, 4));
-	shearing = set_shearing(0, 1, 0, 0, 0, 0);
-	matrix = shearing_matrix(shearing);
-	shearing_test(matrix, set_point(6, 3, 4));
-	shearing = set_shearing(0, 0, 1, 0, 0, 0);
-	matrix = shearing_matrix(shearing);
-	shearing_test(matrix, set_point(2, 5, 4));
-	shearing = set_shearing(0, 0, 0, 1, 0, 0);
-	matrix = shearing_matrix(shearing);
-	shearing_test(matrix, set_point(2, 7, 4));
-	shearing = set_shearing(0, 0, 0, 0, 1, 0);
-	matrix = shearing_matrix(shearing);
-	shearing_test(matrix, set_point(2, 3, 6));
-	shearing = set_shearing(0, 0, 0, 0, 0, 1);
-	matrix = shearing_matrix(shearing);
-	shearing_test(matrix, set_point(2, 3, 7));
+	shearing = set_shearing();
+	shearing_test(shearing_matrix(shearing), set_point(5, 3, 4));
+	shearing.x_y = 0;
+	shearing.x_z = 1;
+	shearing_test(shearing_matrix(shearing), set_point(6, 3, 4));
+	shearing.x_z = 0;
+	shearing.y_x = 1;
+	shearing_test(shearing_matrix(shearing), set_point(2, 5, 4));
+	shearing.y_x = 0;
+	shearing.y_z = 1;
+	shearing_test(shearing_matrix(shearing), set_point(2, 7, 4));
+	shearing.y_z = 0;
+	shearing.z_x = 1;
+	shearing_test(shearing_matrix(shearing), set_point(2, 3, 6));
+	shearing.z_x = 0;
+	shearing.z_y = 1;
+	shearing_test(shearing_matrix(shearing), set_point(2, 3, 7));
 }

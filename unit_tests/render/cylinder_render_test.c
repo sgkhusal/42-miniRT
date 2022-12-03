@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 18:24:129 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 23:37:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static void	cylinder_rotate(t_object *c, int type)
 	t_matrix	rotation_z;
 
 	if (type == 7)
-		set_transform(c, rotation_z_matrix(M_PI / 4)); // sentido anti-horário
+		set_transform(c, rotation_z_matrix(M_PI / 4));
 	else if (type == 8)
-		set_transform(c, rotation_z_matrix(M_PI / 2)); // sentido anti-horário
+		set_transform(c, rotation_z_matrix(M_PI / 2));
 	else if (type == 9)
 	{
 		rotation_x = rotation_x_matrix(M_PI / 4);
 		rotation_z = rotation_z_matrix(M_PI / 4);
-		set_transform(c, multiply_matrix(rotation_x, rotation_z)); // dá diferença na ordem
+		set_transform(c, multiply_matrix(rotation_x, rotation_z));
 		free_matrix(rotation_x);
 		free_matrix(rotation_z);
 	}
@@ -48,21 +48,21 @@ static void	transform_cylinder(t_object *c, int type)
 	if (type == 0)
 		return ;
 	if (type == 1)
-		set_transform(c, translation_matrix(1, -3, 1));
+		set_transform(c, translation_matrix(1, -1.5, 1));
 	else if (type == 2)
 		set_transform(c, scaling_matrix(0.25, 1, 0.25));
 	else if (type == 3)
 	{
-		translation = translation_matrix(1, -3, 1);
+		translation = translation_matrix(1, -1.5, 1);
 		scaling = scaling_matrix(0.25, 1, 0.25);
 		set_transform(c, multiply_matrix(translation, scaling));
 		free_matrix(translation);
 		free_matrix(scaling);
 	}
 	else if (type == 4)
-		set_transform(c, rotation_x_matrix(M_PI / 4)); // vai para trás
+		set_transform(c, rotation_x_matrix(M_PI / 4));
 	else if (type == 5)
-		set_transform(c, rotation_x_matrix(M_PI / 2)); // vai para trás - não está computando a difusa
+		set_transform(c, rotation_x_matrix(M_PI / 2));
 	else if (type == 6)
 		set_transform(c, rotation_y_matrix(M_PI / 4));
 	else
@@ -75,14 +75,13 @@ static t_world	create_world(void)
 	t_world		world;
 
 	c = create_object(CYLINDER, create_cylinder());
-	transform_cylinder(c, 0);
-	c->shape.cylinder->min = -1;
-	c->shape.cylinder->max = 1;
+	transform_cylinder(c, 9);
+	c->shape.cylinder->min = -2;
+	c->shape.cylinder->max = 2;
 	c->material.color = set_vector(0.5, 0.2, 1);
 	world.objects = NULL;
 	append_object(&world.objects, c);
-	world.light.position = set_point(-10, 10, -10);
-	world.light.intensity = set_vector(1, 1, 1);
+	world.light = set_point_light(set_point(-10, 10, -10), set_vector(1, 1, 1));
 	return (world);
 }
 
@@ -98,6 +97,7 @@ void	cylinder_render_test(void)
 	rt.world = create_world();
 	rt.camera = set_camera(70 * M_PI / 180, WIDTH, HEIGHT);
 	rt.camera.origin = set_point(0, 0, -5);
+	rt.camera.orientation = set_vector(0, 0, 1);
 	set_camera_transform(&rt.camera, view_transform(rt.camera.origin,
 			rt.camera.orientation, set_vector(0, 1, 0)));
 	render(rt.camera, rt.world, canvas, &mlx);

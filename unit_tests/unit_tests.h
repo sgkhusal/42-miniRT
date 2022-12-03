@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 18:09:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 23:56:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,14 @@ void	ray_for_pixel_tests(void);
 void	scene_render_test(void);
 void	plane_render_test(void);
 void	plane_scene_render_test(void);
+void	put_elements(t_world *w);
 
 void	shadow_tests(void);
 
 // utils
 
 void	check_int_values(int result, int expected);
+int		check_equal_matrices(t_matrix m1, t_matrix m2);
 
 // minirt functions
 int		check_argc(int argc);

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 15:58:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/10/28 22:29:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:21:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_shearing
 /* matrix functions */
 t_matrix	create_matrix(int size);
 void		free_matrix(t_matrix m);
-int			check_equal_matrices(t_matrix m1, t_matrix m2);
 t_matrix	identity_matrix(int size);
 
 /* matrix operations functions */
