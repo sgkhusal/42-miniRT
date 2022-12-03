@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+/**
+ * @brief Set the default material properties to be used in most scenarios.
+ *
+ * @return t_material t_material struct containing the default material
+ * properties.
+ */
 t_material	set_material(void)
 {
 	t_material	material;

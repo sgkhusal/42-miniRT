@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/27 18:08:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 11:34:11 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 /**
- * @brief Will create a new sphere by allocating memory and setting the given
- * values to the struct.
+ * @brief Will create a new sphere by allocating memory to it. To make things
+ * easier, it is assumed that the sphere is centered at the origin of the
+ * world coordinate system and that its radius is 1.0.
  *
  * @param color The color of the sphere.
  * @return t_sphere* The created sphere.
@@ -32,16 +33,19 @@ t_sphere	*create_sphere(void)
 }
 
 /**
- * @brief Gets the intersections between a ray and a sphere.
+ * @brief This function will get the t_xs struct containing the intersections
+ * between a ray and a sphere. For this, it will first check if the ray
+ * intersects with the sphere by calculating the discriminant which is
+ * equivalent to the baskhara.delta. If the discriminant is negative, the ray
+ * doesn't intersect with the sphere. Then, it will calculate the t1 and t2
+ * values and return a t_xs struct containing the intersections and the count
+ * of intersections. If the ray is tangent to the sphere, the count variable
+ * will be 2 and t1 and t2 will have the same value.
  *
  * @param ray is the ray that will intersect the sphere.
- * @param sphere is the sphere that will be intersected by the ray.
- * @param projected_center sphere center projection into the ray direction.
- * @param projected_vector vector from ray origin to sphere's projected center.
- * @return t_xs a struct containing all intersections of the ray with the
- * sphere. If the ray doesn't intersect with any point of the sphere,the count
- * variable of t_xs struct will be 0. If the ray is tangent to the sphere, the
- * count variable will be 2 andt1 and t2 willhave the same value.
+ * @param o the object that will be intersected by the ray, in this case a
+ * sphere.
+ * @return t_xs the t_xs struct.
  */
 t_xs	sphere_intersection(t_ray ray, t_object *o)
 {
