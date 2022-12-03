@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 21:54:24 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 18:09:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:25:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # define FILE_SPHERE 'sp'
 # define FILE_CYLINDER 'cy'
 
-/* EPSILON is the minimum value for a double to be considered different from 0 */
+/*EPSILON is the minimum value for a double to be considered different from 0 */
 # define EPSILON 0.00001
 
 /**
- * @brief enum to check whether the function was successful or 
+ * @brief enum to check whether the function was successful or
  * encountered an error
  */
 enum e_status
@@ -50,8 +50,8 @@ typedef enum e_bool
 	TRUE
 }			t_bool;
 
-/** 
- * @brief auxiliary struct to store each element of the 
+/**
+ * @brief auxiliary struct to store each element of the
  * bhaskara formula
  */
 typedef struct s_bhaskara
@@ -111,6 +111,6 @@ void		minirt_malloc_error(char *function);
 
 /* clean functions */
 void		free_array(char **arr);
-void		clean_minirt(t_mlx *mlx);
+void		clean_mlx(t_mlx *mlx);
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/29 16:54:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:18:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
 
 static int	validate_sphere_chars(char **infos)
 {

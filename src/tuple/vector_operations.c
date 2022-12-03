@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_operations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 21:59:33 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 13:48:09 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:29:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_vector	add_vectors(t_vector a, t_vector b)
 }
 
 /**
- * @brief This function is used to subtract two vectors. It's like adding a vector
- * with the opposite direction.
+ * @brief This function is used to subtract two vectors. It's like adding a
+ * vector with the opposite direction.
  *
  * @param a first vector
  * @param b vector to be subtracted from the first vector

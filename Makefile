@@ -33,7 +33,7 @@ TUPLES =		point.c vector.c vector_and_point_operations.c \
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
 				matrix_inverse.c matrix_transform.c matrix_rotation.c
 SHAPES =		sphere.c cylinder.c objects.c plane.c
-UTILS =			utils.c error.c mlx_utils.c colors.c canvas.c plot.c
+UTILS =			utils.c error.c mlx_utils.c colors.c canvas.c plot.c clean.c
 WORLD =			world.c transform.c computations.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)

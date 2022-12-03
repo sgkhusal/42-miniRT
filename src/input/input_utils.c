@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:10:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/29 17:48:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:19:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief the atod() function converts a string to a double.
- * 
+ *
  * @param nb string to be converted
  * @return double converted string
  */
@@ -37,9 +37,10 @@ double	ft_atod(char *nb)
 }
 
 /**
- * @brief will parse the input file by splitting the string by the delimiter (',').
- * Then, it will check if the file contains exactly the number of elements specified in the subject.
- * 
+ * @brief will parse the input file by splitting the string by the delimiter
+ * (','). Then, it will check if the file contains exactly the number of
+ * elements specified in the subject.
+ *
  * @param line line to be parsed
  * @param c  delimiter
  * @param size_expected number of elements expected

@@ -49,8 +49,8 @@ t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 		object_normal = set_vector(0, -1, 0);
 	else
 		object_normal = set_vector(object_point.x, 0, object_point.z);
-	world_normal = multiply_matrix_by_vector(
-	c->transpose_inverse, object_normal);
+	world_normal = multiply_matrix_by_vector(c->transpose_inverse,
+			object_normal);
 	world_normal.w = 0;
 	return (normalize_vector(world_normal));
 }
