@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 17:35:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 10:59:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 /**
  * @brief Checks the quantity of the mandatory elements in the scene file.
  * There can be only one of each element. It will print an error message if
- * there is more than one of each element or if there is no element.
+ * there is more than one of each element or if there is no element. The light
+ * is added for bonus as we can have more than one light in the scene in this
+ * version.
  *
  * @param qty quantity of each element
  * @param element element name
+ * @param light whether there's more than one light in the scene
  * @return int OK if the quantity is valid, otherwise ERROR and the
  * corresponding error message will be printed.
  */

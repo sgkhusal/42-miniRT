@@ -22,9 +22,9 @@ UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
 
-SRCS =			main.c $(WORLD) $(SHAPES) $(INTERSECT) $(INPUT) $(INPUT_M) \
+SRCS =			minirt.c $(WORLD) $(SHAPES) $(INTERSECT) $(INPUT) $(INPUT_M) \
 				$(TUPLES) $(MATRICES) $(UTILS)
-WORLD =			world.c transform.c computations.c camera.c light.c reflection.c
+WORLD =			world.c transform.c computations.c camera.c light.c lighting.c
 SHAPES =		sphere.c cylinder.c objects.c plane.c  material.c normal.c
 INTERSECT =		ray.c intersection.c hit.c  intersect_sort.c
 INPUT =			handle_input.c input_file.c handle_ambient.c handle_camera.c \
@@ -41,12 +41,12 @@ OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 HEADERS	=		minirt.h matrix.h tuples.h mlx_utils.h elements.h utils.h
 VPATH	=		includes src src/tuple src/matrix src/input src/objects \
-				src/utils src/world
+				src/utils src/world src/intersect
 INCLUDE	=		-I./ -I./includes
 
 # bonus
 INPUT_B =		handle_content_bonus.c handle_light_bonus.c
-SRCS_BONUS =	main.c $(WORLD) $(SHAPES) $(INTERSECT) $(INPUT) $(INPUT_B) \
+SRCS_BONUS =	minirt.c $(WORLD) $(SHAPES) $(INTERSECT) $(INPUT) $(INPUT_B) \
 				$(TUPLES) $(MATRICES) $(UTILS)
 OBJS_BONUS =	$(SRCS_BONUS:%.c=$(OBJS_DIR)/%.o)
 

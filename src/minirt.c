@@ -20,7 +20,7 @@
 static void	init_minirt(t_rt *rt)
 {
 	rt->world.objects = NULL;
-	rt->world.lights = NULL; //
+	rt->world.lights = NULL;
 	rt->camera.transform.matrix = NULL;
 	rt->camera.inverse.matrix = NULL;
 }

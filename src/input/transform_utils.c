@@ -6,12 +6,24 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:28:01 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/01 01:20:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:52:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief This function will take the color string received as a parameter from
+ * the scene file and will convert it to a t_vector coordinate. First, it will
+ * separate the string into three substrings, each one representing a color
+ * value. Then, it will convert each substring to an integer and store it in a
+ * t_vector coordinate after normalizing it. If the color value is not between
+ * 0 and 255, it will return an error.
+ *
+ * @param color_str string with the color values
+ * @param status pointer to the status variable
+ * @return t_vector coordinate with the color values
+ */
 t_vector	transform_color(char *color_str, int *status)
 {
 	char	**rgb;
@@ -39,8 +51,16 @@ t_vector	transform_color(char *color_str, int *status)
 	return (normalize_color(red, green, blue));
 }
 
-// ambient lighting ratio in range [0.0,1.0]
-// the light brightness ratio in range [0.0,1.0]
+/**
+ * @brief This function will take the ambient light ratio and transform it to a
+ * double value. If the ratio is not between 0 and 1, it will return an error.
+ * If the total number of characters (including points and commas) is greater
+ * than 7, it will return an error also.
+
+ * @param ratio_str string with the ambient light ratio
+ * @param status pointer to the status variable
+ * @return double value with the ambient light ratio converted to a double value
+ */
 double	transform_ratio(char *ratio_str, int *status)
 {
 	double	ratio;
@@ -61,6 +81,18 @@ double	transform_ratio(char *ratio_str, int *status)
 	return (ratio);
 }
 
+/**
+ * @brief This function will take the string with the coordinates and transform
+ * it to a t_point coordinate. First, it will separate the string into three
+ * substrings, each one representing a coordinate. Then, it will convert each
+ * substring to a double and store it in a t_point point coordinate. If the
+ * number of characters (including points and commas) is greater than 11, it
+ * will return an error also.
+ *
+ * @param xyz_str string with the coordinates
+ * @param status pointer to the status variable
+ * @return t_point point with the coordinates
+ */
 t_point	transform_coordinates(char *xyz_str, int *status)
 {
 	char	**xyz;
@@ -90,8 +122,17 @@ t_point	transform_coordinates(char *xyz_str, int *status)
 	return (set_point(x, y, z));
 }
 
-// ∗ 3d normalized orientation vector.
-// In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
+/**
+ * @brief This function will take the string with the orientation vector and
+ * transform it to a t_vector coordinate. First, it will separate the string
+ * into three substrings, each one representing a coordinate. Then, it will
+ * convert each substring to a double and store it in a t_vector coordinate.
+ * Must be whitin the range [-1,1] for each x,y,z axis (0.0,0.0,1.0).
+ *
+ * @param xyz_str string with the orientation vector
+ * @param status pointer to the status variable
+ * @return t_vector coordinate with the orientation vector
+ */
 t_vector	transform_orientation(char *xyz_str, int *status)
 {
 	char	**xyz;
@@ -121,8 +162,17 @@ t_vector	transform_orientation(char *xyz_str, int *status)
 	return (set_vector(x, y, z));
 }
 
-// sphere diameter
-// cylinder diameter and height
+/**
+ * @brief This function will take the string with the diameter of the sphere or
+ * cylinder and also the cylinder's height and transform it to a double value.
+ * We chose to not allow values greater than 1000 for the diameter and height
+ * to limit the size of the object. If the total number of characters (including
+ * points and commas) is greater than 11, it will return an error also.
+ *
+ * @param str string with the diameter or height
+ * @param status pointer to the status variable
+ * @return double value with the diameter or height converted to a double value
+ */
 double	transform_double(char *str, int *status)
 {
 	double	d;
@@ -138,7 +188,7 @@ double	transform_double(char *str, int *status)
 	cpy = ft_strdup(str);
 	d = ft_atod(cpy);
 	free(cpy);
-	if (d <= 0 || d > 1000) //
+	if (d <= 0 || d > 1000)
 		*status = print_error_msg2("invalid number range: ", str);
 	return (d);
 }

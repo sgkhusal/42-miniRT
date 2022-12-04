@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_scene_render_test.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 15:02:16 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 155:330:01 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:54:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static t_world	create_world(void)
 	put_right_wall(&(world));
 	put_elements(&(world));
 	world.lights = create_point_light(set_point(-10, 10, -10),
-		set_vector(1, 1, 1));
+			set_vector(1, 1, 1));
 	return (world);
 }
 

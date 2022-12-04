@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_ambient.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:35 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/04 08:57:52 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:00:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	handle_ambient_light(char *line, t_vector *amb)
 }
 
 /**
- * @brief Set the ambient light variables to each object in the scene.
+ * @brief Set the ambient light to each object in the scene.
  *
  * @param objects the t_objects list
  * @param amb the ambient light

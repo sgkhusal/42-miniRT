@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:24:39 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 11:26:12 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:52:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_ray	transform_ray(t_ray ray, t_matrix m)
  * @return t_ray ray that passes through the center of a given pixel on the
  * canvas
  */
-t_ray	ray_for_pixel(t_camera cam, double x, double y) // up doc
+t_ray	ray_for_pixel(t_camera cam, double x, double y)
 {
 	double	xoffset;
 	double	yoffset;

@@ -6,24 +6,30 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:24:11 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/28 22:28:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:31:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// fov should be in radians
-// we receive in the input file a fov in degrees and we need to convert it:
-// fov = input_fov * M_PI / 180
-// to calculate the true width and height that are seen by the camera, we use
-// the fov: tan(fov / 2) = oposite catet / adjacent catet,
-// adjacent catet = 1, oposite catet = half_width (for an horizontal fov)
-// so half_width = tan(fov / 2)
-// we can calculate the half_height using the rule of three:
-// half_width -> hsize
-// half_height -> vsize
-// half_height = half_width * vsize / hsize
-// pixel_size is the size that each pixel represents in the units of real scene
+/**
+ * @brief This function will define the camera's properties.
+ *
+ * @param transform The camera's transformation matrix (which will default
+ * to the identity matrix).
+ * @param pixel_size The size that each pixel represents in the units of real
+ * scene.
+ * @param half_width The half width of the camera.
+ * @param half_height The half height of the camera.
+
+ * @param fov An angle that describes how much the camera can see. When the
+ * field of view is small, the view will be “zoomed in,” magnifying a smaller
+ * area of the scene. FOV will be converted from degrees from the input file to
+ * radians (fov = input_fov * M_PI / 180).
+ * @param hsize The width of the canvas
+ * @param vsize The height of the canvas
+ * @return t_camera The created camera.
+ */
 t_camera	set_camera(double fov, int hsize, int vsize)
 {
 	t_camera	cam;
@@ -41,7 +47,7 @@ t_camera	set_camera(double fov, int hsize, int vsize)
 
 /**
  * @brief frees the matrices stored in the camera struct
- * 
+ *
  * @param camera camera struct
  */
 void	free_camera(t_camera *camera)

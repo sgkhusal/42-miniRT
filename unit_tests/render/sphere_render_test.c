@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:06:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 15:34:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:55:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_world	create_world(void)
 	world.lights = NULL;
 	append_object(&world.objects, s);
 	world.lights = create_point_light(set_point(-10, 10, -10),
-		set_vector(1, 1, 1));
+			set_vector(1, 1, 1));
 	return (world);
 }
 

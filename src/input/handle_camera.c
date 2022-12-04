@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/04 09:03:43 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:00:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// FOV : Horizontal field of view in degrees in range [0,180]
+/**
+ * @brief This function will handle the field of view of the camera given
+ * in the scene file. It will check its validity and transform it from string
+ * to integer.
+ *
+ * @param fov_str field of view in string format
+ * @param status status of the parsing
+ * @return int field of view in integer format
+ */
 int	transform_fov(char *fov_str, int *status)
 {
 	int	fov;
@@ -28,6 +36,16 @@ int	transform_fov(char *fov_str, int *status)
 	return (fov);
 }
 
+/**
+ * @brief This function will take the string containing the camera information
+ * from the scene file and go through each of them to check if they are valid.
+ * Camera will receive a x,y,z coordinate of the view point, a 3d normalized
+ * vector indicating the orientation of the camera, and a horizontal field of
+ * view in degrees in range [0,180].
+ *
+ * @param infos the string containing the camera information
+ * @return int OK if the camera is valid, ERROR if not
+ */
 static int	validate_camera_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
@@ -62,7 +80,7 @@ t_vector	set_up(t_vector orientation)
 }
 
 /**
- * @brief This function ill set the variables values of the camera struct by
+ * @brief This function will set the variables values of the camera struct by
  * transforming each received information from the file into the correct type.
  *
  * @param cam the camera struct

@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/12/03 14:28:02 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/04 14:30:55 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ MINIRT_SRCS =	point.c vector.c vector_operations.c utils.c ray.c error.c \
 				vector_and_point_operations.c sphere.c colors.c matrix.c \
 				matrix_multiply.c matrix_operations.c matrix_inverse.c \
 				matrix_transform.c matrix_rotation.c intersection.c hit.c \
-				transform.c normal.c reflection.c material.c light.c \
+				transform.c normal.c lighting.c material.c light.c \
 				handle_input.c input_file.c handle_content.c  validate_utils.c \
 				handle_ambient.c handle_camera.c handle_light.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c world.c \
@@ -92,7 +92,7 @@ OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
 HEADERS	=		unit_tests.h
 VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix ../src/input ../src/objects \
-				../src/utils ../src/world
+				../src/utils ../src/world ../src/intersect
 VPATH	=		$(VPATH_MINIRT) input tuples elements ray matrix light world \
 				render camera
 INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
