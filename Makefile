@@ -16,8 +16,6 @@ NAME_BONUS =			miniRT_bonus
 # **************************************************************************** #
 LIBFT_PATH =		./libraries/libft
 LIBFT =				$(LIBFT_PATH)/libft.a
-MLX_PATH =			./libraries/minilibx_linux
-MLX		 =			$(MLX_PATH)/libmlx.a
 UNIT_TESTS_PATH =	./unit_tests
 # **************************************************************************** #
 # INPUTS
@@ -53,7 +51,7 @@ OBJS_BONUS =	$(SRCS_BONUS:%.c=$(OBJS_DIR)/%.o)
 # compilation
 CC =		gcc
 CFLAGS =	-Wall -Werror -Wextra -g -O3 #-fsanitize=leak
-MLXFLAGS =	-lm -lXext -lX11
+MLXFLAGS =	-lm -lmlx -lXext -lX11
 
 # clean
 RM =		-rm -f
@@ -73,16 +71,16 @@ bonus:	$(NAME_BONUS)
 $(OBJS_DIR)/%.o:	%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
-$(NAME):	$(OBJS_DIR) $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
+$(NAME):	$(OBJS_DIR) $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "           miniRT created"
 	@echo "************************************"
 	@echo "$(RESET)"
 
-$(NAME_BONUS):	$(OBJS_DIR) $(LIBFT) $(MLX) $(OBJS_BONUS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(LIBFT) $(MLX) $(MLXFLAGS)
+$(NAME_BONUS):	$(OBJS_DIR) $(LIBFT) $(OBJS_BONUS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(LIBFT) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "        miniRT_bonus created"
@@ -93,12 +91,6 @@ $(LIBFT):
 	@echo "$(YELLOW)making libft....$(RESET)"
 	$(MAKE) --no-print-directory -C $(LIBFT_PATH)
 	@echo "$(YELLOW)libft.a created$(RESET)"
-	@echo "------------------------------------------------------------------"
-
-$(MLX):
-	@echo "$(YELLOW)making minilibx....$(RESET)"
-	$(MAKE) --no-print-directory -C $(MLX_PATH)
-	@echo "$(YELLOW)libmlx.a created$(RESET)"
 	@echo "------------------------------------------------------------------"
 
 $(OBJS_DIR):
@@ -117,7 +109,6 @@ clean:
 fclean:		clean
 		$(RM) $(NAME)
 		@$(MAKE) --no-print-directory -C $(LIBFT_PATH) fclean
-		@$(MAKE) --no-print-directory -C $(MLX_PATH) clean
 
 re:			fclean all
 

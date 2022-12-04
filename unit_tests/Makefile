@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: elraira- <elraira-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/04 21:14:15 by sguilher          #+#    #+#              #
-#    Updated: 2022/12/04 14:30:55 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/04 19:54:26 by elraira-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,6 @@ MINIRT_PATH =	../
 # **************************************************************************** #
 LIBFT_PATH =	../libraries/libft
 LIBFT =			$(LIBFT_PATH)/libft.a
-MLX_PATH =		../libraries/minilibx_linux
-MLX		 =		$(MLX_PATH)/libmlx.a
 # **************************************************************************** #
 # INPUTS
 
@@ -95,12 +93,12 @@ VPATH_MINIRT =	../src/ ../src/tuple ../src/matrix ../src/input ../src/objects \
 				../src/utils ../src/world ../src/intersect
 VPATH	=		$(VPATH_MINIRT) input tuples elements ray matrix light world \
 				render camera
-INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH) -I $(MLX_PATH)
+INCLUDE	=		-I ./ -I ../ -I ../includes -I $(LIBFT_PATH)
 
 # compilation
 CC =		gcc
 CFLAGS =	-Werror -Wextra -g -O3 #-fsanitize=leak
-MLXFLAGS =	-lm -lXext -lX11
+MLXFLAGS =	-lm -lmlx -lXext -lX11
 
 # clean
 RM =		-rm -f
@@ -120,7 +118,7 @@ $(OBJS_DIR)/%.o:	%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 $(NAME):	$(MINIRT) $(OBJS_DIR) $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) $(MLXFLAGS)
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "         unit_tests created"

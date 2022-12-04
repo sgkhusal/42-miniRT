@@ -13,7 +13,7 @@
 #ifndef MLX_UTILS_H
 # define MLX_UTILS_H
 
-# include <../libraries/minilibx_linux/mlx.h>
+# include <mlx.h>
 
 /* defines windown size */
 # define HEIGHT 700
