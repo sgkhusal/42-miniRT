@@ -6,12 +6,21 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:10:50 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 13:04:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:29:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief Create a new cylinder object by allocating memory and setting its
+ * default values. It is assumed, to make calculations easier, that the
+ * cylinder's radius is always 1 and that it will be centered at the origin
+ * (0, 0, 0). By default, the cylinder is oriented along the y axis and
+ * the height is positive infinity
+ *
+ * @return t_cylinder* pointer to the new cylinder object
+ */
 t_cylinder	*create_cylinder(void)
 {
 	t_cylinder	*cylinder;
@@ -28,6 +37,17 @@ t_cylinder	*create_cylinder(void)
 	return (cylinder);
 }
 
+/**
+ * @brief Calculates the intersection between a ray and a cylinder considering
+ * the cylinder without caps.
+ *
+ * @param ray ray that will be used to calculate the intersection
+ * @param c cylinder that will be used to calculate the intersection
+ * @param bhaskara bhaskara struct that will be used to calculate the
+ * intersection
+ * @param xs t intersection values and total number of intersections
+ * @return t_intersection* pointer to the intersection object
+ */
 static void	calculate_cylinder_intersection(t_cylinder *c, t_ray ray,
 											t_bhaskara bhaskara, t_xs *xs)
 {
@@ -57,6 +77,17 @@ static void	calculate_cylinder_intersection(t_cylinder *c, t_ray ray,
 	}
 }
 
+/**
+ * @brief the check_cap function checks if the intersection point is inside
+ * a radius of 1 . If so, it returns true, otherwise it returns false. This will
+ * avoid the problem of duplicate intersections when the ray intersects the
+ * end caps
+ *
+ * @param ray ray that will be used to calculate the intersection
+ * @param t intersection value
+ * @return t_bool true if the intersection point is inside the radius of 1,
+ * otherwise it returns false
+ */
 t_bool	check_cap(t_ray ray, double t)
 {
 	double	x;
@@ -67,6 +98,15 @@ t_bool	check_cap(t_ray ray, double t)
 	return (x * x + z * z <= 1);
 }
 
+/**
+ * @brief It checks to see if the given ray intersects the end caps of the
+ * given cylinder, and adds the points of intersection (if any) to the xs
+ * collection.
+ *
+ * @param ray ray that will be used to calculate the intersection
+ * @param c cylinder that will be used to calculate the intersection
+ * @param xs t intersection values and total number of intersections
+ */
 void	cylinder_intersect_caps(t_ray ray, t_cylinder *c, t_xs *xs)
 {
 	double	t;
@@ -91,6 +131,18 @@ void	cylinder_intersect_caps(t_ray ray, t_cylinder *c, t_xs *xs)
 	}
 }
 
+/**
+ * @brief This function will return the cylinder's intersections. It will
+ * first check if there are any intersections in the "sides" of the cylinder.
+ * If there aren't, it will check if there are any intersections within the end
+ * caps of the cylinder using the cylinder_intersect_caps function. If there
+ * are intersections to the sides, it will calculate first the intersections of
+ * the sides and then the intersections of the end caps (if any).
+ *
+ * @param ray ray that will be used to calculate the intersection
+ * @param c cylinder to be intersected
+ * @return t_xs t intersection values and total number of intersections
+ */
 t_xs	cylinder_intersection(t_ray ray, t_object *c)
 {
 	t_xs		xs;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:48:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 16:43:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:15:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	normal_tests(void);
 void	reflection_tests(void);
 void	material_tests(void);
 void	light_tests(void);
+t_light	set_point_light(t_point position, t_vector intensity);
 
 void	cylinder_tests(void);
 void	truncate_cylinder_test_cases(void);

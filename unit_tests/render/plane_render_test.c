@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 14:11:30 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 15:34:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:54:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static t_world	create_world(void)
 	p2->material.color = set_vector(1, 0.4, 0.4);
 	append_object(&world.objects, p2);
 	world.lights = create_point_light(set_point(0, 10, -10),
-		set_vector(1, 1, 1));
+			set_vector(1, 1, 1));
 	return (world);
 }
 

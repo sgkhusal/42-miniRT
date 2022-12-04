@@ -6,11 +6,20 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:26:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 17:18:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:08:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
+
+t_light	set_point_light(t_point position, t_vector intensity)
+{
+	t_light	light;
+
+	light.position = position;
+	light.intensity = intensity;
+	return (light);
+}
 
 void	set_light_test(t_point point, t_vector intesity)
 {

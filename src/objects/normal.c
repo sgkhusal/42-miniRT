@@ -12,13 +12,15 @@
 
 #include "minirt.h"
 
-/*
-We receive the point p in the world space
-To calculate the normal, we need to transform the point p to the object space
-After the calculation, we transform the normal in the object space to the world
-space
-world_normal.w = 0 to avoid translation transformations affecting the normal.
-*/
+/**
+ * @brief This funciton will calculate the normal of a sphere. To calculate the
+ * normal, we need to transform the point p to the object space. After the
+ * calculation, we transform the normal in the object space to the world space.
+ *
+ * @param s the sphere
+ * @param world_point the point in the world space
+ * @return t_vector the normal vector of the sphere
+ */
 t_vector	sphere_normal_at(t_object *s, t_point world_point)
 {
 	t_point		object_point;
@@ -33,7 +35,21 @@ t_vector	sphere_normal_at(t_object *s, t_point world_point)
 	return (normalize_vector(world_normal));
 }
 
-// os pontos estão sendo passados em relação ao mundo e não ao objeto
+/**
+ * @brief Calculates the normal of a plane. First, checks if the point is in
+ * one of the end caps or or if it lies on the cylinder itself.
+ * If it is in one of the end caps, they are planes, which means an end cap has
+ * the same normal at every point on it
+ * If it is on the cylinder itself, the normal is calculated by taking the
+ * point in question and removing the y component
+ * To calculate the normal, we need to transform the point p to the object
+ * space. After the calculation, we transform the normal in the object space
+ * to the world space.
+ *
+ * @param c the cylinder
+ * @param world_point the point in the world space
+ * @return t_vector the normal vector of the cylinder
+ */
 t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 {
 	t_point		object_point;
@@ -55,6 +71,16 @@ t_vector	cylinder_normal_at(t_object *c, t_point world_point)
 	return (normalize_vector(world_normal));
 }
 
+/**
+ * @brief Calculates the normal of a plane. Because the plane has no curvature
+ * the normal is constant everywhere. To calculate the normal, we need to
+ * transform the point p to the object space. After the calculation, we
+ * transform the normal in the object space to the world space.
+ *
+ * @param p The plane.
+ * @param world_point The point in the world space.
+ * @return t_vector The normal vector of the plane.
+ */
 t_vector	plane_normal_at(t_object *p, t_point world_point)
 {
 	t_vector	object_normal;

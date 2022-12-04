@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:39:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 15:20:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 12:36:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ enum e_objects
 };
 
 /**
+ * @brief struct which contains propertiesofa camera and for calculating the
+ * the scene it will render
  * @param origin is the origin of the camera
  * @param orientation is the direction of the ray
  * @param hsize is the horizontal size of the canvas
@@ -50,12 +52,14 @@ typedef struct s_camera
 /**
  * @brief struct which stores the position and intensity of the light
  * @param intensity is the normalized(color in rgb) * brightness
+ * @param position is the position of the light
+ * @param next is the next light in the list
  */
 typedef struct s_light
 {
 	t_point			position;
 	t_vector		intensity;
-	struct s_light	*next; //
+	struct s_light	*next;
 }				t_light;
 
 /**
@@ -164,7 +168,6 @@ t_material	set_material(void);
 
 /* lighting functions */
 t_vector	reflect(t_vector incident, t_vector normal);
-t_light		set_point_light(t_point position, t_vector intensity);
 t_light		*create_point_light(t_point position, t_vector intensity);
 void		append_light(t_light **head, t_light *light);
 void		free_lights(t_light **head);
@@ -190,5 +193,7 @@ t_vector	cylinder_normal_at(t_object *c, t_point p);
 /* camera functions */
 t_camera	set_camera(double fov, int hsize, int vsize);
 void		free_camera(t_camera *camera);
+t_matrix	view_transform(t_point from, t_vector forward, t_vector up);
+void		set_camera_transform(t_camera *cam, t_matrix transform);
 
 #endif

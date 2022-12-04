@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:38:41 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 17:13:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:53:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,23 @@ void	color_at_test(t_world w, t_ray ray, t_vector expected)
 	n++;
 }
 
+void	color_at_tests(void)
+{
+	t_world			w;
+	t_ray			ray;
+	t_vector		expected;
+
+	w = default_world();
+	ray = set_ray(set_point(0, 0, -5), set_vector(0, 1, 0));
+	expected = set_vector(0, 0, 0);
+	color_at_test(w, ray, expected);
+	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
+	expected = set_vector(0.38066, 0.47583, 0.2855);
+	color_at_test(w, ray, expected);
+	free_objects(&(w.objects));
+	free(w.lights);
+}
+
 void	shade_hit_tests(void)
 {
 	t_world			w;
@@ -64,13 +81,5 @@ void	shade_hit_tests(void)
 	shade_hit_test(w, ray, xs, expected);
 	free_objects(&(w.objects));
 	free(w.lights);
-	w = default_world();
-	ray = set_ray(set_point(0, 0, -5), set_vector(0, 1, 0));
-	expected = set_vector(0, 0, 0);
-	color_at_test(w, ray, expected);
-	ray = set_ray(set_point(0, 0, -5), set_vector(0, 0, 1));
-	expected = set_vector(0.38066, 0.47583, 0.2855);
-	color_at_test(w, ray, expected);
-	free_objects(&(w.objects));
-	free(w.lights);
+	color_at_tests();
 }

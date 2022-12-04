@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:24:56 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/04 09:48:52 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/04 11:46:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int	validate_coordinates_chars(char *str)
 }
 
 /**
- * @brief This function is an auxiliary function to validate information that
- * must be given in number format. It will check if the string is a valid number
- * and if it is positive.
+ * @brief This function is an auxiliary function to validate the field of view,
+ * that must be given in number format. It will check if the string is a valid
+ * number and if it is positive.
  *
  * @param str the string to be validated
  * @return int OK if the string is valid, ERROR otherwise
