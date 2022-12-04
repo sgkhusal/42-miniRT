@@ -20,3 +20,4 @@ help
 outfiles
 valgrind_log
 vgcore.*
+.nfs*
