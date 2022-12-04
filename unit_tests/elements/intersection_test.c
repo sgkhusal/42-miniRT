@@ -6,26 +6,27 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/26 14:45:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 18:15:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "unit_tests.h"
 
-static void	create_intersection_test(void)
+static void	create_intersection_test(t_object *object)
 {
 	t_intersection	*intersection;
 
 	printf(GREY "create_intersection_test 1: " END);
-	intersection = create_intersection(3.5, SPHERE);
-	if (intersection->t == 3.5 && intersection->object == SPHERE)
+	intersection = create_intersection(3.5, object);
+	if (intersection->t == 3.5 && intersection->object == object)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
 	free(intersection);
 }
 
-static void	get_hit_test(double t1, double t2, double expected)
+static void	get_hit_test(double t1, double t2, double expected,
+				t_object *object)
 {
 	t_intersection_list	list;
 	t_intersection		*hit;
@@ -34,8 +35,8 @@ static void	get_hit_test(double t1, double t2, double expected)
 	printf(GREY "get_hit_test %d: " END, n);
 	list.head = NULL;
 	list.last = NULL;
-	add_intersection_node(create_intersection(t1, SPHERE), &list);
-	add_intersection_node(create_intersection(t2, SPHERE), &list);
+	add_intersection_node(create_intersection(t1, object), &list);
+	add_intersection_node(create_intersection(t2, object), &list);
 	hit = get_hit_intersection(list);
 	if (hit == NULL && expected == -1)
 		printf(GREEN"OK" END "\n");
@@ -47,7 +48,7 @@ static void	get_hit_test(double t1, double t2, double expected)
 	free_intersection_list(&list);
 }
 
-static void	get_hit_test2(void)
+static void	get_hit_test2(t_object *object)
 {
 	t_intersection_list	list;
 	t_intersection		*hit;
@@ -55,10 +56,10 @@ static void	get_hit_test2(void)
 	printf(GREY "last_get_hit_test: " END);
 	list.head = NULL;
 	list.last = NULL;
-	add_intersection_node(create_intersection(5, SPHERE), &list);
-	add_intersection_node(create_intersection(7, SPHERE), &list);
-	add_intersection_node(create_intersection(-3, SPHERE), &list);
-	add_intersection_node(create_intersection(2, SPHERE), &list);
+	add_intersection_node(create_intersection(5, object), &list);
+	add_intersection_node(create_intersection(7, object), &list);
+	add_intersection_node(create_intersection(-3, object), &list);
+	add_intersection_node(create_intersection(2, object), &list);
 	hit = get_hit_intersection(list);
 	if (hit && hit->t == 2.0)
 		printf(GREEN "OK" END "\n");
@@ -67,18 +68,18 @@ static void	get_hit_test2(void)
 	free_intersection_list(&list);
 }
 
-static void	agregate_intersection_test(void)
+static void	agregate_intersection_test(t_object *object)
 {
 	t_intersection_list	list;
 
 	printf(GREY "agregate_intersection_test 1: " END);
 	list.head = NULL;
 	list.last = NULL;
-	add_intersection_node(create_intersection(1, SPHERE), &list);
-	add_intersection_node(create_intersection(2, SPHERE), &list);
+	add_intersection_node(create_intersection(1, object), &list);
+	add_intersection_node(create_intersection(2, object), &list);
 	if (list.head->t == 1 && list.head->next->t == 2 && list.last->t == 2
-		&& list.total == 2 && list.head->object == SPHERE
-		&& list.last->object == SPHERE)
+		&& list.total == 2 && list.head->object->type == SPHERE
+		&& list.last->object->type == SPHERE)
 		printf(GREEN "OK" END "\n");
 	else
 		printf(RED "KO" END "\n");
@@ -87,11 +88,15 @@ static void	agregate_intersection_test(void)
 
 void	intersection_tests(void)
 {
+	t_object		*object;
+
 	printf(YELLOW "Intersection tests: " END "\n");
-	create_intersection_test();
-	agregate_intersection_test();
-	get_hit_test(1, 2, 1);
-	get_hit_test(-1, 1, 1);
-	get_hit_test(-2, -1, -1);
-	get_hit_test2();
+	object = create_object(SPHERE, create_sphere());
+	create_intersection_test(object);
+	agregate_intersection_test(object);
+	get_hit_test(1, 2, 1, object);
+	get_hit_test(-1, 1, 1, object);
+	get_hit_test(-2, -1, -1, object);
+	get_hit_test2(object);
+	free_objects(&object);
 }

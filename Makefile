@@ -116,6 +116,7 @@ clean:
 
 fclean:		clean
 		$(RM) $(NAME)
+		$(RM) $(NAME_BONUS)
 		@$(MAKE) --no-print-directory -C $(LIBFT_PATH) fclean
 		@$(MAKE) --no-print-directory -C $(MLX_PATH) clean
 
