@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   handle_sphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 18:53:58 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 14:18:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 09:41:46 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
+/**
+ * @brief This function will take the string containing the information of the
+ * sphere and go through it, validating the information. Sphere will receive
+ * a x, y, z coordinate, a diameter and a color. The x, y, z coordinate must be
+ * a valid coordinate, the diameter must be a positive double and the color
+ * must be a valid RGB coordinate from 0 to 255.
+ *
+ * @param infos the information of the sphere
+ * @return int 0 if the information is valid, 1 otherwise
+ */
 static int	validate_sphere_chars(char **infos)
 {
 	if (validate_coordinates_chars(infos[1]) == ERROR)
@@ -23,6 +33,17 @@ static int	validate_sphere_chars(char **infos)
 	return (OK);
 }
 
+/**
+ * @brief This function will set the transformation matrices for the sphere.
+ * It will set the translation matrix and the scaling matrix. Using the
+ * set_transform function, it will apply the result of the multiplication of
+ * the matrices to the transformation matrix of the sphere. After that, it will
+ * free the matrices.
+ *
+ * @param o the object sphere
+ * @param center the center of the sphere
+ * @param radius the radius of the sphere
+ */
 static void	set_sphere_matrixes(t_object *o, t_point center, double radius)
 {
 	t_matrix	translation;
@@ -35,6 +56,17 @@ static void	set_sphere_matrixes(t_object *o, t_point center, double radius)
 	free_matrix(scaling);
 }
 
+/**
+ * @brief This function will create the sphere object. It will allocate memory
+ * for the sphere and transform the information from the scene file into the
+ * sphere properties. It will also set the transformation matrix for the sphere.
+ * If any error occurs, it will free the memory allocated for the sphere. If the
+ * information is valid, it will append the sphere to the list of objects.
+ *
+ * @param objs the list of objects
+ * @param infos the information of the sphere from the scene file
+ * @param status the status of the parsing
+ */
 static void	create_and_append_sphere(t_object **objs, char **infos, int *status)
 {
 	t_object	*s;
@@ -52,6 +84,16 @@ static void	create_and_append_sphere(t_object **objs, char **infos, int *status)
 		append_object(objs, s);
 }
 
+/**
+ * @brief This is the main handle function for the sphere. It will split the
+ * line containing the information of the sphere from the scene file and check
+ * if the information is valid. If it is, it will create the sphere and append
+ * it to the list of objects. If it is not, it will set the status to ERROR.
+ *
+ * @param line the line containing the information of the sphere
+ * @param objs the list of objects
+ * @return int 0 if the parsing is successful, 1 otherwise
+ */
 int	handle_sphere(char *line, t_object **objs)
 {
 	char		**infos;

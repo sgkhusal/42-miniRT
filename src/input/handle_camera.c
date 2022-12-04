@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:53:55 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 15:56:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/04 09:03:43 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ static int	validate_camera_chars(char **infos)
 	return (OK);
 }
 
-// When camera orientation vector is (0, 1, 0), which means identical to the
-// "standard" up vector, the cross product will be (0, 0, 0), which produces
-// a distortion while calculating the transformation matrix. To avoid this,
-// we set the "standard" up vector:
-// - as (0, 0, -1), when camera orientation vector is (0, 1, 0)
-// - as (0, 0, 1) when camera orientation vector is (0, -1, 0)
-// that should be the result for the true up vector for each case.
+/**
+ * @brief This function will set the up vector depending on the orientation
+ * vector. This is done to prevent a distortion while calculating the
+ * transformation matrix when the cross product of the orientation vector and
+ * the up vector is (0, 0, 0) (which is the case when the orientation vector is
+ * (0, 1, 0) or (0, -1, 0)). The up vector is set as (0, 0, -1) when the
+ * orientation vector is (0, 1, 0) and as (0, 0, 1) when the orientation vector
+ * is (0, -1, 0).
+ * That should be the result for the true up vector for each case.
+ *
+ * @param orientation the orientation vector
+ * @return t_vector the up vector
+ */
 t_vector	set_up(t_vector orientation)
 {
 	if (check_double_values(orientation.y, 1))
@@ -55,6 +61,14 @@ t_vector	set_up(t_vector orientation)
 	return (set_vector(0, 1, 0));
 }
 
+/**
+ * @brief This function ill set the variables values of the camera struct by
+ * transforming each received information from the file into the correct type.
+ *
+ * @param cam the camera struct
+ * @param infos the array of strings with the information of the camera
+ * @param status the status of the parsing, returns ERROR if any error occurs
+ */
 void	fill_camera(t_camera *cam, char **infos, int *status)
 {
 	double		fov;
@@ -71,6 +85,16 @@ void	fill_camera(t_camera *cam, char **infos, int *status)
 	set_camera_transform(cam, transform);
 }
 
+/**
+ * @brief This function in the handler of the camera. It will receive the
+ * information of the camera, split it by the separator space and call the
+ * validation function to check if the information is valid. If it is valid, it
+ * will call the function to fill the camera struct.
+ *
+ * @param line the line of the file with the information of the camera
+ * @param cam the camera struct
+ * @return int the status of the parsing, returns ERROR if any error occurs
+ */
 int	handle_camera(char *line, t_camera *cam)
 {
 	char	**infos;
