@@ -2,10 +2,8 @@ name: norminette
 
 on:
   push:
-    paths-ignore: './libraries/minilibx_linux/**'
     branches: [ main ]
   pull_request:
-    paths-ignore: './libraries/minilibx_linux/**'
     branches: [ main ]
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
       - name: Run norminette
         run: |
           LOGS=$(mktemp)
-          norminette $(find -regex '.*/.*\.\(c\|h\)$' -not -path '*/test/*' '*/unit_test/*' '*/minilibx_linux/*') | tee $LOGS
+          norminette $(find -regex '.*/.*\.\(c\|h\)$' -not -path '*/minilibx_linux/**') | tee $LOGS
           echo "ERRORS=$(grep -E 'Error|Warning|KO!' $LOGS | wc -l)" >> $GITHUB_ENV
       - name: Checks norminette linter result
         run: |
