@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_light.c                                     :+:      :+:    :+:   */
+/*   handle_light_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:53 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 15:22:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:37:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	create_and_append_light(t_light **head, char **infos, int *status)
 		position = set_point(0, 0, 0.0001);
 	brightness = transform_ratio(infos[2], status);
 	color = transform_color(infos[3], status);
-	color = set_vector(1, 1, 1);
 	if (*status == ERROR)
 		return ;
 	light = create_point_light(position,

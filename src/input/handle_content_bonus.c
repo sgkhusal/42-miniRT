@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_content.c                                   :+:      :+:    :+:   */
+/*   handle_content_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 20:00:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/03 15:19:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:35:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
  * @return int OK if the quantity is valid, otherwise ERROR and the
  * corresponding error message will be printed.
  */
-static int	check_qty(int qty, char *element)
+static int	check_qty(int qty, char *element, int light)
 {
 	if (qty == 0)
 		return (print_error_msg2("missing ", element));
-	if (qty > 1)
+	if (qty > 1 && !light)
 		return (print_error_msg2(element, " declare more than once"));
 	return (OK);
 }
@@ -59,9 +59,9 @@ static int	check_elements_count(char **lines)
 		else if (ft_strncmp(lines[i], "L ", 2) == 0)
 			light++;
 	}
-	if (check_qty(ambient, "ambient light") == ERROR
-		|| check_qty(camera, "camera") == ERROR
-		|| check_qty(light, "light") == ERROR)
+	if (check_qty(ambient, "ambient light", FALSE) == ERROR
+		|| check_qty(camera, "camera", FALSE) == ERROR
+		|| check_qty(light, "light", TRUE) == ERROR)
 		return (ERROR);
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:59:26 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/01 02:36:34 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:19:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,17 @@ typedef struct s_comp
 	enum e_bool		inside;
 }				t_comp;
 
-typedef struct s_world
-{
-	t_light		light;
-	t_object	*objects;
-}				t_world;
 
 // ambient is the normalized(ambient color) * ambient ratio
+typedef struct s_world
+{
+	t_light		*lights; //
+	t_object	*objects;
+	t_vector	ambient; //
+}				t_world;
+
 typedef struct s_rt
 {
-	t_vector	ambient;
 	t_camera	camera;
 	t_vector	**canvas;
 	t_world		world;
@@ -93,7 +94,7 @@ int					handle_content(char **lines, t_rt	*rt);
 int					handle_line(char *line, t_rt *rt);
 int					handle_ambient_light(char *line, t_vector *amb);
 int					handle_camera(char *line, t_camera *cam);
-int					handle_light(char *line, t_light *light);
+int					handle_light(char *line, t_light **head);
 int					handle_sphere(char *line, t_object **objs);
 int					handle_plane(char *line, t_object **objs);
 int					handle_cylinder(char *line, t_object **objs);
@@ -122,6 +123,7 @@ void				add_intersections(t_xs xs, t_object *object,
 // color
 t_vector			lighting(t_material material, t_light light, t_comp comp,
 						t_bool shadow);
+t_vector 			get_total_color(t_world world, t_comp comps);
 
 //intersect_sort
 void				intersect_sort(t_intersection **head);
@@ -130,7 +132,7 @@ void				intersect_sort(t_intersection **head);
 t_comp				prepare_computations(t_ray ray, t_intersection *intersect);
 
 //shade hit
-t_vector			shade_hit(t_world world, t_comp comps);
+t_vector			shade_hit(t_world world, t_comp comps, t_light light);
 t_vector			color_at(t_world world, t_ray ray);
 
 //view transform
@@ -142,6 +144,9 @@ void				render(t_camera camera, t_world w, t_vector **canvas,
 						t_mlx *mlx);
 
 //is_shadowed
-t_bool				is_shadowed(t_world w, t_point point);
+t_bool				is_shadowed(t_world w, t_point point, t_light light);
+
+// clean
+void				clean_minirt(t_rt *rt, t_vector	**canvas);
 
 #endif

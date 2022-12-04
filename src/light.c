@@ -6,19 +6,60 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:21:36 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/27 17:52:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:13:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_light	set_point_light(t_point position, t_vector intensity)
+t_light	set_point_light(t_point position, t_vector intensity) //
 {
 	t_light	light;
 
 	light.position = position;
 	light.intensity = intensity;
 	return (light);
+}
+
+t_light	*create_point_light(t_point position, t_vector intensity)
+{
+	t_light	*light;
+
+	light = NULL;
+	light = malloc(sizeof(t_light));
+	if (!light)
+		minirt_malloc_error("create_light");
+	light->position = position;
+	light->intensity = intensity;
+	light->next = NULL;
+	return (light);
+}
+
+void	append_light(t_light **head, t_light *light)
+{
+	t_light	*aux;
+
+	if (*head == NULL)
+	{
+		*head = light;
+		return ;
+	}
+	aux = *head;
+	while (aux->next)
+		aux = aux->next;
+	aux->next = light;
+}
+
+void	free_lights(t_light **head)
+{
+	t_light	*aux;
+
+	while (*head)
+	{
+		aux = (*head)->next;
+		free(*head);
+		*head = aux;
+	}
 }
 
 /*
@@ -55,19 +96,18 @@ t_vector	lighting(t_material m, t_light light, t_comp comp, t_bool shadow)
 	t_shading	sh;
 	double		light_dot_normal;
 
-	sh.ambient = multiply_colors(m.color, m.ambient);
 	eff_color = multiply_colors(m.color, light.intensity);
 	light_vect = normalize_vector(subtract_points(light.position, comp.point));
 	light_dot_normal = scalar_product(light_vect, comp.normalv);
 	if (light_dot_normal < 0 || shadow == TRUE)
-		return (sh.ambient);
+		return (set_vector(0, 0, 0));
 	sh.diffuse = multiply_vector_by_scalar(eff_color,
 			m.diffuse * light_dot_normal);
 	sh.specular = get_specular(m, light, comp, light_vect);
-	return (add_vectors(add_vectors(sh.ambient, sh.diffuse), sh.specular));
+	return (add_vectors(sh.diffuse, sh.specular));
 }
 
-t_bool	is_shadowed(t_world w, t_point point)
+t_bool	is_shadowed(t_world w, t_point point, t_light light)
 {
 	t_vector			v;
 	double				distance;
@@ -75,7 +115,7 @@ t_bool	is_shadowed(t_world w, t_point point)
 	t_intersection_list	list;
 	t_intersection		*hit;
 
-	v = subtract_points(w.light.position, point);
+	v = subtract_points(light.position, point);
 	distance = vector_length(v);
 	r = set_ray(point, normalize_vector(v));
 	list = intersect_world(w, r);
@@ -91,10 +131,10 @@ t_bool	is_shadowed(t_world w, t_point point)
 	return (FALSE);
 }
 
-t_vector	shade_hit(t_world world, t_comp comps)
+t_vector	shade_hit(t_world world, t_comp comps, t_light light)
 {
 	t_bool	shadow;
 
-	shadow = is_shadowed(world, comps.over_point);
-	return (lighting(comps.xs->object->material, world.light, comps, shadow));
+	shadow = is_shadowed(world, comps.over_point, light);
+	return (lighting(comps.xs->object->material, light, comps, shadow));
 }

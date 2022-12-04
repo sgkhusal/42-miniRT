@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/28 16:51:25 by sguilher          #+#    #+#              #
-#    Updated: 2022/11/29 17:46:10 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/03 18:28:24 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -119,23 +119,23 @@ for scenelist in ${scene_lists[*]}; do
 			SEGFAULT=$(cat ./valgrind_log/test$i | grep "SIGSEGV")
 			if [ "$SEGFAULT" ]; then
 				printf ❌
-				printf "$GREY $VALGRIND ./miniRT $SCENES_PATH$test \n$END"
+				printf "$GREY $VALGRIND $MINIRT_PATH $SCENES_PATH$test \n$END"
 				printf "$RED Segfault\n$END"
 			else
 				if [ "$NO_LEAKS" ]; then
 					if [ "$ERROR_OK" ]; then
 						((ok++))
 						printf ✅
-						printf "$GREY$VALGRIND ./miniRT $SCENES_PATH$test\n$END"
+						printf "$GREY$VALGRIND $MINIRT_PATH $SCENES_PATH$test\n$END"
 						printf "$GREEN$NO_LEAKS\n$ERROR_OK\n$END"
 					else
 						printf ❌
-						printf "$GREY$VALGRIND ./miniRT $SCENES_PATH$test\n$END"
+						printf "$GREY$VALGRIND $MINIRT_PATH $SCENES_PATH$test\n$END"
 						printf "$RED check ERROR SUMMARY in valgrind's log\n$END"
 					fi
 				else
 					printf ❌
-					printf "$GREY $VALGRIND ./miniRT $SCENES_PATH$test \n$END"
+					printf "$GREY $VALGRIND $MINIRT_PATH $SCENES_PATH$test \n$END"
 					printf "$RED possible leaks - check valgrind's log\n$END"
 				fi
 			fi
@@ -150,11 +150,11 @@ for scenelist in ${scene_lists[*]}; do
 			if [ "$ERROR" ]; then
 				((ok++))
 				printf ✅
-				printf "$GREY ./miniRT $test \n$END"
+				printf "$GREY $MINIRT_PATH $test \n$END"
 				printf "error message:\n$MESSAGE\n"
 			else
 				printf ❌
-				printf "$GREY ./miniRT $test \n$END"
+				printf "$GREY $MINIRT_PATH $test \n$END"
 				printf "$RED Missing error message\n$END"
 			fi
 		fi

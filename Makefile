@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME =			miniRT
+NAME_BONUS =			miniRT_bonus
 
 # **************************************************************************** #
 LIBFT_PATH =		./libraries/libft
@@ -22,25 +23,33 @@ UNIT_TESTS_PATH =	./unit_tests
 # INPUTS
 
 SRCS =			main.c ray.c reflection.c material.c light.c camera.c \
-				intersection.c hit.c normal.c intersect_sort.c \
-				$(INPUT) $(TUPLES) $(MATRICES) $(UTILS) $(SHAPES) $(WORLD)
-INPUT =			handle_input.c input_file.c handle_content.c \
-				handle_ambient.c handle_camera.c handle_light.c \
+				intersection.c hit.c normal.c intersect_sort.c $(INPUT) \
+				$(INPUT_M) $(TUPLES) $(MATRICES) $(UTILS) $(SHAPES) $(WORLD)
+INPUT =			handle_input.c input_file.c handle_ambient.c handle_camera.c \
 				handle_sphere.c handle_plane.c handle_cylinder.c \
 				validate_utils.c transform_utils.c input_utils.c get_rotation.c
+INPUT_M =		handle_content.c handle_light.c
 TUPLES =		point.c vector.c vector_and_point_operations.c \
 				vector_operations.c
 MATRICES =		matrix.c matrix_multiply.c matrix_operations.c \
 				matrix_inverse.c matrix_transform.c matrix_rotation.c
 SHAPES =		sphere.c cylinder.c objects.c plane.c
-UTILS =			utils.c error.c mlx_utils.c colors.c canvas.c plot.c
+UTILS =			utils.c error.c mlx_utils.c colors.c canvas.c plot.c clean.c
 WORLD =			world.c transform.c computations.c
 OBJS_DIR =		./obj
 OBJS	=		$(SRCS:%.c=$(OBJS_DIR)/%.o)
+
 HEADERS	=		minirt.h matrix.h tuples.h mlx_utils.h elements.h utils.h
 VPATH	=		includes src src/tuple src/matrix src/input src/objects \
 				src/utils src/world
 INCLUDE	=		-I./ -I./includes
+
+# bonus
+INPUT_B =		handle_content_bonus.c handle_light_bonus.c
+SRCS_BONUS =	main.c ray.c reflection.c material.c light.c camera.c \
+				intersection.c hit.c normal.c intersect_sort.c $(INPUT) \
+				$(INPUT_B) $(TUPLES) $(MATRICES) $(UTILS) $(SHAPES) $(WORLD)
+OBJS_BONUS =	$(SRCS_BONUS:%.c=$(OBJS_DIR)/%.o)
 
 # compilation
 CC =		gcc
@@ -60,6 +69,7 @@ RESET	=	\033[0m
 # rules
 
 all:	$(NAME)
+bonus:	$(NAME_BONUS)
 
 $(OBJS_DIR)/%.o:	%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
@@ -69,6 +79,14 @@ $(NAME):	$(OBJS_DIR) $(LIBFT) $(MLX) $(OBJS)
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "           miniRT created"
+	@echo "************************************"
+	@echo "$(RESET)"
+
+$(NAME_BONUS):	$(OBJS_DIR) $(LIBFT) $(MLX) $(OBJS_BONUS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS_BONUS) $(LIBFT) $(MLX) $(MLXFLAGS)
+	@echo "$(GREEN)"
+	@echo "************************************"
+	@echo "        miniRT_bonus created"
 	@echo "************************************"
 	@echo "$(RESET)"
 

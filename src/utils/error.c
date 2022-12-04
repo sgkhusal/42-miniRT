@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elraira- <elraira-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 22:39:09 by sguilher          #+#    #+#             */
-/*   Updated: 2022/11/30 14:10:08 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:25:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	print_error_msg2(char *msg, char *str)
 int	minirt_error(t_mlx *mlx, char *msg)
 {
 	print_error_msg(msg);
-	clean_minirt(mlx);
+	clean_mlx(mlx);
 	exit(EXIT_FAILURE);
 }
 
