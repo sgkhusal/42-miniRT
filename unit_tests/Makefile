@@ -64,7 +64,6 @@ SRCS =			main.c \
 				cylinder_unit_test1.c \
 				cylinder_unit_test2.c \
 				cylinder_render_test.c \
-				shade_hit_test.c \
 				transformation_test.c \
 				camera_test.c \
 				ray_for_pixel_test.c \

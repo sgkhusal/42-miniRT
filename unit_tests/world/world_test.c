@@ -63,6 +63,5 @@ void	world_tests(void)
 	printf(YELLOW "World tests: " END "\n");
 	intersect_world_test();
 	computations_tests();
-	shade_hit_tests();
 	transformation_tests();
 }
