@@ -2,8 +2,10 @@ name: norminette
 
 on:
   push:
+    paths-ignore: './libraries/minilibx_linux/**'
     branches: [ main ]
   pull_request:
+    paths-ignore: './libraries/minilibx_linux/**'
     branches: [ main ]
 
 jobs:
