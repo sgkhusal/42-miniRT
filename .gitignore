@@ -19,3 +19,4 @@ normalize
 help
 outfiles
 valgrind_log
+vgcore.*

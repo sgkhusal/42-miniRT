@@ -6,7 +6,7 @@
 /*   By: elraira- <elraira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 20:15:25 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/04 20:09:01 by elraira-         ###   ########.fr       */
+/*   Updated: 2022/12/04 21:11:23 by elraira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	create_intersection_test(void)
 {
 	t_intersection	*intersection;
-	t_object 		*object;
+	t_object		*object;
 
 	object = create_object(SPHERE, create_sphere());
 	printf(GREY "create_intersection_test 1: " END);
